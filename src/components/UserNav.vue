@@ -52,7 +52,7 @@ export default {
   methods: {
     getData() {
       // To Do
-      // this.user = localStorage.getItem("currentUser")
+      // this.user = JSON.parse(localStorage.getItem("currentUser"))
       this.role = this.user.role
 
       if (this.role == "student" || this.role == "teacher") {
