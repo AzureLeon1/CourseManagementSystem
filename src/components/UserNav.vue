@@ -69,7 +69,7 @@ export default {
         },{
           index: 3,
           title: "我的消息",
-          routeName: "",
+          routeName: "MessageHome",
           icon: "el-icon-message"
         },{
           index: 4,

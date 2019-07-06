@@ -21,7 +21,7 @@ export default new Router({
       component: Template
     },
     {
-      path:'/MessageHome',
+      path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
     },
