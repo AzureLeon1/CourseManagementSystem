@@ -17,7 +17,7 @@
     </el-row>
     <ul>
       <li
-        v-for="item in menu" 
+        v-for="item in menu"
         :key="item.index"
         :class="item.index == activeIndex ? 'active' : ''"
         @click="routeTo(item.routeName)">
@@ -52,8 +52,10 @@ export default {
   methods: {
     getData() {
       // To Do
-      // this.user = localStorage.getItem("currentUser")
+      this.user = JSON.parse(localStorage.getItem("currentUser"))
+      console.log(this.user);
       this.role = this.user.role
+      console.log(this.role);
 
       if (this.role == "student" || this.role == "teacher") {
         this.menu.push({
@@ -96,7 +98,7 @@ export default {
       })
     },
     logout() {
-      this.removeItem("currentUser")
+      localStorage.removeItem("currentUser")
       this.$router.push("/login")
     }
   },

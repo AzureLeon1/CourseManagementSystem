@@ -112,8 +112,25 @@ export default {
             user_ID: this.ruleForm.name,
             password: this.ruleForm.password
           };
-          // this.$store.dispatch("profile/getAuthority", form);
-          // TODO: 提交登录请求，本地保存
+          // TODO: 改成真实的api
+          // TODO: 确定响应中字段的名称
+          this.$api.getMockAuthority().then(data => {
+            localStorage.setItem(
+              "currentUser",
+              JSON.stringify({
+                user_ID: data.user_ID,
+                token: data.token,
+                role: data.role,
+                phone_number: data.phone_number,
+                username: data.name,
+                college: data.college,
+                avatar: data.avatar,
+                following: data.following,
+                follower: data.follower
+              })
+            );
+            this.routeTo("Homepage")
+          });
         } else {
           console.log("error submit!!");
           return false;
