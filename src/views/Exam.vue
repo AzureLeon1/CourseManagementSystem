@@ -14,11 +14,13 @@ import UserNav from "../components/UserNav"
 import ExamList from "../components/ExamList"
 
 export default {
-  name: 'Homepage',
+  name: 'Exam',
+
   components: {
     UserNav,
     ExamList
   },
+  
   data () {
     return {
       
