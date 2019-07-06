@@ -6,6 +6,7 @@ import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Exam from '@/views/Exam'
+import AnswerExam from '@/views/AnswerExam'
 
 Vue.use(Router)
 
@@ -19,7 +20,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: Exam
+      component: AnswerExam
     },
     {
       path:'/messageHome',
