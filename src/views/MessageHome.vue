@@ -1,9 +1,10 @@
 <template>
-    <el-container style="min-height: 500px; width: 80%; margin:20px auto 20px auto;">
+<div id="MessageHome">
+    <el-container style="min-height: 500px; width: 70%; margin:20px auto 20px auto;">
         <el-head></el-head>
         <el-main style="padding: 15px; border: 1px solid #eee">
-            <el-table :data="tableData" >
-                <el-table-column prop="message" label="消息" min-width="200px;">
+            <el-table :data="tableData" @row-click="readDetail">
+                <el-table-column prop="message" label="广播消息" min-width="200px;">
                     <template slot-scope="scope">
                         <p class="message">{{scope.row.message}}</p>
                     </template>
@@ -28,26 +29,59 @@
             </el-pagination>
         </el-footer>
     </el-container>
-    
+
+    <div class="addbutton-wrapper formanager">
+        <el-button style="height: 50px; width:50px; text-align: center; border-radius:50%; padding: 17px 0;">
+            <i class="el-icon-plus"></i>
+        </el-button>
+    </div>
+
+    <el-dialog 
+    :visible.sync="messageVisible"
+    width="60%">
+    <div id="messageDetail">
+        
+    </div>
+    <div slot="footer" class="dialog-footer" style="text-align: center;">
+        <el-button style="font-size: 70%; padding: 8px 12px;" type="primary" @click="messageVisible = false">我 知 道 了</el-button>
+    </div>
+    </el-dialog>
+</div>
 </template>
 
 <script>
-import MessageShortcut from '@/components/MessageShortcut';
+import Message from '@/components/Message';
 export default {
     name: 'MessageHome',
     components: {
-        MessageShortcut
+        Message,
     },
     data() {
         const simData={
+            id:123123,  //广播的ID
             message:"我是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的广播",
             from:"计算机系统结构",
             time:"2019-6-19"
         };
         return {
+            message: "",
+            from: "",
+            time: "",
+            messageVisible: false,
             tableData: Array(3).fill(simData)
         }
     },
+    methods: {
+        readDetail(row){
+            this.messageVisible = true;
+            //update content
+            this.message=row.message;
+            this.from=row.from;
+            this.time=row.time;
+        }
+
+        
+    }
 }
 </script>
 
@@ -60,4 +94,9 @@ export default {
     overflow: hidden;
 }
 
+.addbutton-wrapper{
+    position: absolute;
+    right: 12%;
+    bottom: 25%;
+}
 </style>
