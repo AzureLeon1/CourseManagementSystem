@@ -4,6 +4,7 @@ import Homepage from '@/views/Homepage'
 import Template from '@/views/Template'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Discussion from '@/views/Discussion'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path:'/discussion',
+      name:'Disscussion',
+      component:Discussion
     }
   ]
 })
