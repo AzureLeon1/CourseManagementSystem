@@ -29,7 +29,7 @@
               ></el-button>
             </el-form-item>
             <div class="btns">
-              <el-button type="primary" style="flex: 2" @click="login">登录</el-button>
+              <el-button type="primary" style="flex: 1" @click="login">登录</el-button>
               <el-button style="flex: 1" @click="routeTo('Register')">注册</el-button>
             </div>
           </el-form>
@@ -112,7 +112,8 @@ export default {
             user_ID: this.ruleForm.name,
             password: this.ruleForm.password
           };
-          this.$store.dispatch("profile/getAuthority", form);
+          // this.$store.dispatch("profile/getAuthority", form);
+          // TODO: 提交登录请求，本地保存
         } else {
           console.log("error submit!!");
           return false;
