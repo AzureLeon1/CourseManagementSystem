@@ -11,7 +11,6 @@ const DELETE = 'DELETE'
 
 export default {
   request,
-  logout,
   register,
   getAuthority,
   getMockAuthority,
@@ -81,10 +80,8 @@ async function register(form) {
   return res.data
 }
 
-async function logout() {
-  await request(DELETE, '/api/logout')
-}
 
+// =============== Mock Data ====================
 async function getMockAuthority() {
   const data = {
     "user_ID": 100001,

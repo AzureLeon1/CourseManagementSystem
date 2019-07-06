@@ -6,19 +6,45 @@ import router from './router'
 import http from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import api from './api/index.js'
+import store from './store'
 
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = http
 Vue.use(ElementUI)
 
-Vue.prototype.$api = api
+const {
+  token,
+  name,
+  role,
+  avatar,
+  id,
+  college,
+  follower,
+  following,
+  email,
+  phone_number
+} = window.localStorage
+store.commit('profile/setUser', {
+  token,
+  name,
+  role,
+  avatar,
+  id,
+  college,
+  follower,
+  following,
+  email,
+  phone_number
+})
 
 /* eslint-disable no-new */
-new Vue({
+window.vm = new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {
+    App
+  },
   template: '<App/>'
 })
