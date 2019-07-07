@@ -29,6 +29,7 @@ async function request(method, url, data) {
     const headers = token ? {
       Authorization: `Bearer ${token}`
     } : {}
+    // TODO: 验证GET请求的参数形式
     if (method in {
         GET
       }) {
