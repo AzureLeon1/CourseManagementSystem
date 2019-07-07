@@ -8,6 +8,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
+import AllClass from '@/views/AllClass'
 
 
 
@@ -54,6 +55,12 @@ export default new Router({
     path: '/coursetable',
     name: 'CourseTable',
     component: CourseTable
+  },
+  {
+    path: '/allclass',
+    name: 'AllClass',
+    component: AllClass
+
   }
   ]
 })
