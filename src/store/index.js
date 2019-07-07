@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import profile from './modules/profile.js'
 import personinfo from './modules/personinfo.js'
 import allpatch from './modules/allpatch.js'
+import classlistitem from './modules/classlistitem.js'
 
 Vue.use(Vuex)
 
