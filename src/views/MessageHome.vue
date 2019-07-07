@@ -37,7 +37,7 @@
 
         <!-- float: Add button -->
         <div class="addbutton-wrapper formanager">
-          <el-button
+          <el-button @click="createMsg"
             style="height: 50px; width:50px; text-align: center; border-radius:50%; padding: 17px 0;"
           >
             <i class="el-icon-plus"></i>
@@ -45,7 +45,9 @@
         </div>
 
         <!-- float: Add popover -->
-        <MessageCreate></MessageCreate>
+        <transition name="el-fade-in-linear">
+            <MessageCreate ref="msc" v-on:hideCreateMsg="hideCreateMsg"></MessageCreate>
+        </transition>
 
 
       </div>
@@ -87,14 +89,22 @@ export default {
   },
   methods: {
     readDetail(row) {
-      this.msd = this.$refs.msd;
-      this.msd.messageVisible = true;
-      this.msd.broadcast_id = row.broadcast_id;
-      this.msd.content = row.content;
-      this.msd.from = row.from;
-      this.msd.publish_time = row.publish_time;
-      this.msd.start_time = row.start_time;
-      this.msd.end_time = row.end_time;
+        this.msd = this.$refs.msd;
+        this.msd.messageVisible = true;
+        this.msd.broadcast_id = row.broadcast_id;
+        this.msd.content = row.content;
+        this.msd.from = row.from;
+        this.msd.publish_time = row.publish_time;
+        this.msd.start_time = row.start_time;
+        this.msd.end_time = row.end_time;
+    },
+    createMsg(){
+        this.msc = this.$refs.msc;
+        this.msc.invisible=false;
+    },
+    hideCreateMsg(){
+        this.msc = this.$refs.msc;
+        this.msc.invisible=true;
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
-<div class="wrapper" >
-    <div class="title"> 创建广播</div>
+<div v-bind:class="{wrapper:flag_true, hidden:invisible}" >
+    <div class="title">创建广播</div>
     <el-form ref="form" :model="form" label-width="70px" label-position="left">
         <el-form-item label="广播范围">
             <el-select v-model="form.region" placeholder="请选择活动区域">
@@ -37,17 +37,17 @@
         </el-form-item>
         <el-form-item>
             <el-col :span="11" style="text-align: center;">
-                <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                <el-button type="primary" @click="createMsg">立即创建</el-button>
             </el-col>
             <el-col :span="7" style="text-align: center;">
-                <el-button>取消</el-button>
+                <el-button @click="cancelWindow">取消</el-button>
             </el-col>
         </el-form-item>
     </el-form>
 
     <!-- float element: close button -->
     <div class="close-btn">
-        <el-button icon="el-icon-close" size="small" circle></el-button>
+        <el-button icon="el-icon-close" size="small" circle @click="cancelWindow"></el-button>
     </div>
 </div>
 </template>
@@ -56,9 +56,13 @@
 export default {
     name: 'MessageCreate',
     props:{
+        invisible:{
+            default: true
+        }
     },
     data() {
       return {
+        flag_true: true,
         form: {
           name: '',
           region: '',
@@ -71,6 +75,19 @@ export default {
         }
       }
     },
+    watch:{
+        invisible(val){
+            this._invisible=val;
+        }
+    },
+    methods: {
+        cancelWindow(){
+            this.$emit('hideCreateMsg');
+        },
+        createMsg(){
+            this.$emit("hideCreateMsg");
+        }
+    }
 }
 </script>
 
@@ -90,6 +107,9 @@ export default {
         background: #fff;
         border-radius: 10px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        /* transition */
+        transition-property: display;
+        transition-duration: 1s;
     }
 
     .title{
@@ -104,5 +124,9 @@ export default {
         position: absolute;
         right: 10px;
         top: 10px;
+    }
+
+    .hidden{
+        display: none;
     }
 </style>
