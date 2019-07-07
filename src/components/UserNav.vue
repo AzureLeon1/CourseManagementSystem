@@ -50,36 +50,40 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      console.log(this.user);
-
       if (this.user.role == "student" || this.user.role == "teacher") {
-        this.menu.push({
-          index: 1,
-          title: "我的班级",
-          routeName: "MyClass",
-          icon: "el-icon-school"
-        },{
-          index: 2,
-          title: "好友动态",
-          routeName: "",
-          icon: "el-icon-chat-line-square"
-        },{
-          index: 3,
-          title: "我的消息",
-          routeName: "",
-          icon: "el-icon-message"
-        },{
-          index: 4,
-          title: "课程表",
-          routeName: "",
-          icon: "el-icon-date"
-        },{
-          index: 5,
-          title: "期末总结",
-          routeName: "",
-          icon: "el-icon-data-analysis"
-        })
-      } else if (this.role == "jwteacher") {
+        this.menu.push(
+          {
+            index: 1,
+            title: "我的班级",
+            routeName: "MyClass",
+            icon: "el-icon-school"
+          },
+          {
+            index: 2,
+            title: "好友动态",
+            routeName: "",
+            icon: "el-icon-chat-line-square"
+          },
+          {
+            index: 3,
+            title: "我的消息",
+            routeName: "MessageHome",
+            icon: "el-icon-message"
+          },
+          {
+            index: 4,
+            title: "课程表",
+            routeName: "",
+            icon: "el-icon-date"
+          },
+          {
+            index: 5,
+            title: "期末总结",
+            routeName: "",
+            icon: "el-icon-data-analysis"
+          }
+        );
+      } else if (this.user.role == "jwteacher") {
         this.menu.push({
           index: 1,
           title: "发布动态",
@@ -135,7 +139,7 @@ export default {
   height: 60px;
   line-height: 60px;
   color: #303133;
-  font-size: 18px;
+  font-size: 17px;
   cursor: pointer;
 }
 
