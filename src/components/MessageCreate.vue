@@ -1,52 +1,108 @@
 <template>
-    <div class="MessageCreate" :display="display">
-        <div style="display: flex; flex-direction: column; align-items: center; ">
-            <el-container class="wrapper">
-                <el-header style="padding: 20px; font-size: 14px; color: #888; vertical-align: middle;">
-                    <span style="vertical-align: middle; padding: 5px;">创建广播</span>
-                    <button type="button" aria-label="Close" class="el-dialog__headerbtn" style="float: right;position: relative;top: 0;right: 0;" @click="close">
-                        <i class="el-dialog__close el-icon el-icon-close"></i>
-                    </button>
-                </el-header>
-                <el-main>
-                    <div style="width: 800px; padding: 0 10px; display: flex; flex-direction: column;">
-                        <el-form label-position="left" label-width="80px">
-                            <el-form-item label="内容">
-                                <el-input></el-input>
-                            </el-form-item>
-                        </el-form>
-                    </div>
-                </el-main>
-                <el-footer>
-                </el-footer>
-            </el-container>
-        </div>
+<div class="wrapper" >
+    <div class="title"> 创建广播</div>
+    <el-form ref="form" :model="form" label-width="70px" label-position="left">
+        <el-form-item label="广播范围">
+            <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="全局广播" value="beijing"></el-option>
+            <el-option label="计算机系统结构" value="shanghai"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="起始时间">
+            <el-col :span="11">
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+            </el-col>
+            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
+            <el-col :span="11">
+            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="结束时间">
+            <el-col :span="11">
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+            </el-col>
+            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
+            <el-col :span="11">
+            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="广播类型">
+            <el-radio-group v-model="form.resource">
+            <el-radio label="作业广播"></el-radio>
+            <el-radio label="活动广播"></el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="广播内容">
+            <el-input type="textarea" maxlength="200" :rows="6" show-word-limit v-model="form.desc"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-col :span="11" style="text-align: center;">
+                <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            </el-col>
+            <el-col :span="7" style="text-align: center;">
+                <el-button>取消</el-button>
+            </el-col>
+        </el-form-item>
+    </el-form>
+
+    <!-- float element: close button -->
+    <div class="close-btn">
+        <el-button icon="el-icon-close" size="small" circle></el-button>
     </div>
+</div>
 </template>
 
 <script>
 export default {
     name: 'MessageCreate',
     props:{
-        //set visibility
-        display:{
-            default: "block"
+    },
+    data() {
+      return {
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         }
-
-    }
+      }
+    },
 }
 </script>
 
 <style scoped>
-    .MessageCreate{
-        position: absolute;
-        top: 50%;
-        width: 100%;
-    }
-    
     .wrapper{
+        /* position-center */
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        /* children element */
+        display: flex;
+        flex-direction: column;
+        padding: 20px 40px 40px 40px;
+        /* display */
         background: #fff;
         border-radius: 10px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .title{
+        height: 60px;
+        text-align: center;
+        font-size: 14px;
+        letter-spacing: .2em;
+        color: #888;
+    }
+
+    .close-btn{
+        position: absolute;
+        right: 10px;
+        top: 10px;
     }
 </style>
