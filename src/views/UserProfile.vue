@@ -59,6 +59,7 @@
       </el-main>
     </el-container>
 
+    <!-- FIXME: 点击表单周围让表单消失时无法重置userinfo -->
     <el-dialog :visible.sync="dialogVisible" width="50%">
       <el-form label-width="80px">
         <el-form-item label="头像">
@@ -77,14 +78,14 @@
             </el-upload>
           </div>
         </el-form-item>
-        <el-form-item label="名字">
-          <el-input v-model="userinfo.name"></el-input>
-        </el-form-item>
         <el-form-item label="学号">
-          <el-input v-model="userinfo.id"></el-input>
+          <el-input v-model="userinfo.id" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="身份">
           <el-input v-model="identity_zh" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="名字">
+          <el-input v-model="userinfo.name"></el-input>
         </el-form-item>
         <el-form-item label="学院">
           <el-input v-model="userinfo.college"></el-input>
@@ -115,6 +116,15 @@ export default {
   props: ["person_id"],
   data() {
     return {
+      userinfo: {
+        id: null,
+        email: "",
+        phone_number: null,
+        name: "",
+        avatar: "",
+        college: "",
+        role: ""
+      },
       dialogVisible: false,
       token,
       action,
@@ -152,25 +162,39 @@ export default {
       });
     },
     changeInfo() {
-      console.log(this.user);
+      // TODO: 测试更新用户信息的接口
       this.$store.dispatch("allput/changeUserInfo", {
-        user_ID: this.userinfo.id,
-        name: this.userinfo.username,
-        email: this.userinfo.email,
-        college: this.userinfo.college,
-        phone_number: this.userinfo.phone,
-        avatar: this.userinfo.avatar,
-        role: this.userinfo.role
+        id: this.userinfo.id,
+        form: {
+          name: this.userinfo.name,
+          email: this.userinfo.email,
+          college: this.userinfo.college,
+          phone_number: this.userinfo.phone_number,
+          avatar: this.userinfo.avatar
+        }
       });
       this.dialogVisible = false;
     },
     cancel() {
       this.dialogVisible = false;
+      // 撤销表单中的修改，重置 userinfo
       this.syncUser(this.user);
+    },
+    // 把本页面中的userinfo重置为vuex.store中的personinfo.personinfo
+    syncUser(user) {
+      this.userinfo.id = user.id;
+      this.userinfo.email = user.email;
+      this.userinfo.phone_number = user.phone_number;
+      this.userinfo.name = user.name;
+      this.userinfo.avatar = user.avatar;
+      this.userinfo.college = user.college;
+      this.userinfo.role = user.role;
+      this.userinfo = Object.assign({}, this.userinfo);
     }
   },
   mounted() {
     this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
+    this.syncUser(this.user);
   },
   computed: {
     style() {
@@ -182,7 +206,7 @@ export default {
         height: `${size}px`
       };
     },
-    userinfo() {
+    user() {
       return this.$store.state.personinfo.personinfo;
     },
     isCurrentUser() {
@@ -192,7 +216,14 @@ export default {
       return this.identityZh();
     }
   },
-  watch: {}
+  watch: {
+    user: {
+      deep: true,
+      handler (user) {
+        this.syncUser(user)
+      }
+    }
+  }
 };
 </script>
 
