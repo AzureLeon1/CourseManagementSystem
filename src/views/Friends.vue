@@ -50,15 +50,22 @@
 
 <script>
 import UserNav from "../components/UserNav";
+import Avatar from '../components/Avatar'
 export default {
   name: "Friends",
   components: {
-    UserNav
+    UserNav,
+    Avatar
   },
   data() {
     return {
-      followings: {},
-      followers: {}
+      followings: [
+        {
+          name: '姜华',
+          avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png'
+        },
+      ],
+      followers: []
     };
   },
   methods: {},
