@@ -69,6 +69,7 @@ export default {
             from: "",
             publish_time: "",
             messageVisible: false,
+            
             tableData: Array(3).fill(simData)
         }
     },
