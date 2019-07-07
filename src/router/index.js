@@ -6,14 +6,11 @@ import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
-<<<<<<< HEAD
 import Discussion from '@/views/Discussion'
-=======
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import MyClass from '@/views/MyClass'
->>>>>>> master
 
 Vue.use(Router)
 
@@ -49,23 +46,22 @@ export default new Router({
       name: 'Register',
       component: Register
     },
-<<<<<<< HEAD
     {
       path:'/discussion',
       name:'Disscussion',
       component:Discussion
-=======
-  {
-    path: '/courseview',
-    name: 'courseview',
-    component: Courseview
-  },
-  {
-    path: '/coursetable',
-    name: 'CourseTable',
-    component: CourseTable
-  },
-  {
+    },
+    {
+      path: '/courseview',
+      name: 'courseview',
+      component: Courseview
+    },
+    {
+      path: '/coursetable',
+      name: 'CourseTable',
+      component: CourseTable
+    },
+    {
       path: '/user_profile/:person_id',
       name: 'UserProfile',
       component: UserProfile,
@@ -75,7 +71,6 @@ export default new Router({
       path: '/myclass',
       name: 'MyClass',
       component: MyClass
->>>>>>> master
     }
   ]
 })
