@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: AnswerExam
+      component: NewExam
     },
     {
       path:'/messageHome',

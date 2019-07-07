@@ -34,25 +34,31 @@ export default {
       // To Do: get all questions
       this.questionList = [{
         question_id: "000",
-        content: "1 + 1 = ____",
+        index: 3,
+        content: "1 + 3 = ____",
         answer: "0_1_2_3"
       },{
         question_id: "111",
-        content: "1 + 1 = ____",
+        index: 2,
+        content: "1 + 2 = ____",
         answer: "0_1_2_3"
       },{
         question_id: "222",
+        index: 1,
         content: "1 + 1 = ____",
         answer: "0_1_2_3"
       },{
         question_id: "333",
-        content: "1 + 1 = ____",
+        index: 4,
+        content: "1 + 4 = ____",
         answer: "0_1_2_3"
       }]
-      for (let i = 0; i < this.questionList.length; ++i) {
-        this.questionList[i].content = (i+1) + ".\xa0\xa0" +
-          this.questionList[i].content
+      for (let q of this.questionList) {
+        q.content = q.index + ".\xa0\xa0" + q.content
       }
+      this.questionList.sort(function(a, b){
+        return a.index - b.index
+      })
     },
 
     submit() {

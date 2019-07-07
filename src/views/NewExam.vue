@@ -9,7 +9,7 @@
         v-on:submitForm="submitForm"
         ref="newExamForm"></new-exam-form>
 
-      
+      <select-question v-else></select-question>
     </el-main>
   </el-container>
 </template>
@@ -17,13 +17,15 @@
 <script>
 import UserNav from "../components/UserNav"
 import NewExamForm from "../components/NewExamForm"
+import SelectQuestion from "../components/SelectQuestion"
 
 export default {
   name: 'NewExam',
 
   components: {
     UserNav,
-    NewExamForm
+    NewExamForm,
+    SelectQuestion
   },
   
   data() {
