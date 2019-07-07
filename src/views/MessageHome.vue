@@ -40,19 +40,21 @@
         </el-button>
     </div>
 
+    <!-- float: Add popover -->
+    <MessageCreate></MessageCreate>
 
 
 </div>
 </template>
 
 <script>
-import Message from '@/components/Message';
 import MessageDetailed from '@/components/MessageDetailed';
+import MessageCreate from '@/components/MessageCreate';
 export default {
     name: 'MessageHome',
     components: {
-        Message,
-        MessageDetailed
+        MessageDetailed,
+        MessageCreate
     },
     data() {
         const simData={
@@ -69,8 +71,8 @@ export default {
             from: "",
             publish_time: "",
             messageVisible: false,
-            
-            tableData: Array(3).fill(simData)
+
+            tableData: Array(7).fill(simData)
         }
     },
     methods: {
