@@ -9,6 +9,7 @@ import Register from '@/views/Register'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
+import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
 
 Vue.use(Router)
@@ -60,6 +61,11 @@ export default new Router({
       name: 'UserProfile',
       component: UserProfile,
       props: true
+    },
+    {
+      path: '/frineds',
+      name: 'Friends',
+      component: Friends
     },
     {
       path: '/myclass',
