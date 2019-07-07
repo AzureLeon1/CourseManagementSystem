@@ -3,6 +3,7 @@
     <div class="attendance form">
       <div></div>
       <div>
+        <!-- <AttendanceReference /> -->
         <AttendanceTable />
       </div>
     </div>
@@ -11,11 +12,14 @@
 </template>
 
 <script>
+import AttendanceReference from "../components/AttendanceReference"
+
 import AttendanceTable from "../components/AttendanceTable"
 export default {
   name: 'Attendance',
   components: {
-    AttendanceTable
+    AttendanceTable,
+    AttendanceReference
   },
   data() {
     return {

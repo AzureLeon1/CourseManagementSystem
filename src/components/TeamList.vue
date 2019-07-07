@@ -1,7 +1,7 @@
 <template>
   <div class="teamlist">
     <div class="classteams">
-      <el-card style="width: 850px; margin:20px auto auto auto">
+      <el-card style="width: 850px; margin:20px auto 20px auto">
         <div slot="header" class="clearfix">
           <span>班级队伍</span>
         </div>
@@ -27,9 +27,9 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column prop="team_id" ></el-table-column>
-            <el-table-column prop="team_name" ></el-table-column>
-            <el-table-column prop="team_btn" >
+            <el-table-column prop="team_id" width="300px"></el-table-column>
+            <el-table-column prop="team_name" width="350px"></el-table-column>
+            <el-table-column prop="team_btn" width="100px">
               <template slot-scope="scope">
                 <el-button @click="JoinClick(scope.row)" type="text" size="small">加入</el-button>
               </template>
@@ -38,7 +38,7 @@
         </div>
       </el-card>
     </div>
-    <!--老师不显示-->
+    <!-- 老师不显示-->
     <div class="myteams">
       <Myteam />
     </div>
@@ -94,8 +94,8 @@ export default {
       const h = this.$createElement;
       this.$msgbox({
         message: h("p", null, [
-          h("span", null, "内容可以是 "),
-          h("i", { style: "color: teal" }, "VNode")
+          h("span", null, "确定加入？"),
+          // h("i", { style: "color: teal" }, "VNode")
         ]),
         showCancelButton: true,
         confirmButtonText: "加入",
@@ -127,11 +127,5 @@ export default {
 
 
 <style>
-/* .el-card.box-card {
-   width: 480px;
- }
-.el-table.center
-{
-    align-items:center;
-} */
+
 </style>
