@@ -139,13 +139,13 @@ export default {
 			console.log(this.form);
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
-					const { student_id: user_ID, username: name, email: mail, pass: password,
+					const { student_id: user_ID, username: name, email, pass: password,
           phone: phone_number, college,role,avatar } = this.form
           // TODO: 提交注册请求，本地保存
 					// this.$store.dispatch('profile/register', {
 					// 	user_ID,
 					// 	name,
-					// 	mail,
+					// 	email,
 					// 	password,
 					// 	phone_number,
 					// 	college,

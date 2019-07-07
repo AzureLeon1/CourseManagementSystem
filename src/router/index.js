@@ -8,9 +8,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
-
-
-
+import UserProfile from '@/views/UserProfile'
 
 Vue.use(Router)
 
@@ -55,6 +53,12 @@ export default new Router({
     path: '/coursetable',
     name: 'CourseTable',
     component: CourseTable
-  }
+  },
+  {
+      path: '/user_profile/:person_id',
+      name: 'UserProfile',
+      component: UserProfile,
+      props: true
+    }
   ]
 })

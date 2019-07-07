@@ -112,8 +112,8 @@ export default {
             user_ID: this.ruleForm.name,
             password: this.ruleForm.password
           };
-          // this.$store.dispatch("profile/getAuthority", form);
-          // TODO: 提交登录请求，本地保存
+          this.$store.dispatch('profile/getAuthority', form)
+
         } else {
           console.log("error submit!!");
           return false;
