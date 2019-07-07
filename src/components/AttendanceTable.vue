@@ -1,10 +1,10 @@
 <template>
   <div class="table">
-    <el-card  style="width: 500px; margin:20px 100px auto auto"><!--上右下左-->
-        <el-table :data="tableData" stripe style="width: 500px" :row-class-name="tableRowAttendance">
-        <el-table-column prop="LessonNum" label="课时" width="180px"></el-table-column>
-        <el-table-column prop="sum" label="统计" width="180px"></el-table-column>
-        <el-table-column prop="detail" label="具体信息" width="100px"></el-table-column>
+    <el-card  style="width: 850px; margin:50px 150px auto auto"><!--上右下左-->
+        <el-table :data="tableData" stripe style="width: 800px" :row-class-name="tableRowAttendance">
+        <el-table-column prop="LessonNum" label="课时" width="310px"></el-table-column>
+        <el-table-column prop="sum" label="统计" width="310px"></el-table-column>
+        <el-table-column prop="detail" label="具体信息" width="180px"></el-table-column>
       </el-table>
     </el-card>
   </div>

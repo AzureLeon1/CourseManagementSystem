@@ -1,16 +1,24 @@
 <template>
   <div id="team">
-    
-    Team Page
-
+      <div class="team lists">
+        <div>
+        </div>
+        <div>
+            <TeamList />
+        </div>
+        
+      </div>
   </div>
 </template>
 
 <script>
+
+import TeamList from "../components/TeamList"
+
 export default {
   name: 'Team',
   components: {
-
+      TeamList
   },
   data() {
     return {
@@ -27,8 +35,5 @@ export default {
 </script>
 
 <style>
-.Team-container{
-    background: lightgreen;
-    flex: 1;
-}
+
 </style>
