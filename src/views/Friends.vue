@@ -5,6 +5,11 @@
         <user-nav :activeIndex="0"></user-nav>
       </el-aside>
       <el-main>
+        <div style="margin-left: 70px; margin-top: 10px;">
+          <el-button type="text" @click="routeTo('SearchUser')">
+            <i class="el-icon-search">搜索用户</i>
+          </el-button>
+        </div>
         <div class="container">
           <div class="followings">
             <div class="title">我的关注</div>
@@ -19,7 +24,7 @@
                   <el-row>
                     <el-col :span="6">
                       <div class="grid-content bg-purple">
-                        <Avatar :src="item.avatar" :size="60" :border="false"  />
+                        <Avatar :src="item.avatar" :size="60" :border="false" />
                       </div>
                     </el-col>
                     <el-col :span="18">
@@ -43,7 +48,7 @@
                 class="friend"
                 @click="$router.push({name: 'UserProfile', params: {person_id: 100001}})"
               >
-              <div class="person_info">
+                <div class="person_info">
                   <el-row>
                     <el-col :span="6">
                       <div class="grid-content bg-purple">
@@ -145,20 +150,22 @@ export default {
     };
   },
   methods: {
-
- identityZh(role) {
-  switch (role) {
-    case "student":
-      return "学生";
-      break;
-    case "teacher_edu":
-      return "任课教师";
-      break;
-    case "teacher_manage":
-      return "教务教师";
-      break;
-  }
-}
+    identityZh(role) {
+      switch (role) {
+        case "student":
+          return "学生";
+          break;
+        case "teacher_edu":
+          return "任课教师";
+          break;
+        case "teacher_manage":
+          return "教务教师";
+          break;
+      }
+    },
+    routeTo(name, params) {
+      this.$router.push({ name, params });
+    },
   },
   computed: {}
 };
@@ -167,7 +174,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   display: flex;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .followings {
@@ -214,10 +221,11 @@ export default {
 .name {
   margin-top: 8px;
   margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .info {
-
+  font-size: 12px;
 }
 </style>
 

@@ -11,6 +11,7 @@ import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
+import SearchUser from '@/views/SearchUser'
 
 Vue.use(Router)
 
@@ -71,6 +72,11 @@ export default new Router({
       path: '/myclass',
       name: 'MyClass',
       component: MyClass
+    },
+    {
+      path: '/searchUser',
+      name: 'SearchUser',
+      component: SearchUser
     }
   ]
 })
