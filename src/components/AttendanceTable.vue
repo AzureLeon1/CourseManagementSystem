@@ -8,7 +8,8 @@
         <el-table-column prop="detail" label="具体信息" width="100px">
           <template slot-scope="scope">
             <el-popover placement="left" width="550px" trigger="click">
-              <el-table :data="scope.row.student_ids" height="500px" @cell-dblclick="tableDbEdit">
+              <el-table :data="scope.row.student_ids" height="500px" @cell-dbclick="celledit">
+                <!-- @cell-dblclick="tableDbEdit" @cell-click="cellClick"-->
                 <el-table-column width="225px" prop="student_id" label="学生ID" sortable>
                   <template slot-scope="scope">
                     <span>{{scope.row.student_id}}</span>
@@ -21,8 +22,21 @@
                 </el-table-column>
                 <el-table-column width="100px" prop="attendance_status" label="出席状态">
                   <template slot-scope="scope">
-                    <span>{{scope.row.attendance_status}}</span>
-                    <!-- <el-input v-model="scope.row.attendance_status"></el-input> -->
+                    <!-- <el-input size="small" style="width=10px height=5px"
+                    v-model="scope.row.attendance_status"
+                    v-if="scope.row.seen"
+                    @blur="loseFcous(scope.$index,scope.row)">            
+                    </el-input>
+                    <span v-else>
+                    {{scope.row.attendance_status}}</span>-->
+                    <el-input
+                      v-if="scope.row.attendance_status.edit"
+                      ref="name"
+                      v-model="scope.row.attendance_status.value"
+                      style="width: 100%"
+                      @blur="scope.row.attendance_status.edit = false"
+                    ></el-input>
+                    <span v-else>{{ scope.row.attendance_status.value }}</span>
                   </template>
                 </el-table-column>
               </el-table>
@@ -61,82 +75,98 @@ export default {
             {
               student_id: "123",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "089",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_status: "check",
+              seen: false
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_status: "null",
+              seen: false
             }
           ]
         },
@@ -330,6 +360,10 @@ export default {
       ]
     };
   },
+  //!
+  created(){
+      this.formatData()
+    },
 
   methods: {
     InsertAttendance() {
@@ -353,31 +387,52 @@ export default {
           });
         });
     },
-    edit (val) {
-        this.initUpdateVal = val.attendance_status
-        val.isEdit = true
+    loseFcous(index, row) {
+      debugger;
+      row.seen = false;
     },
-    handleEdit(index, row) {
-      console.log(index, row);
+    cellClick(row, column) {
+      debugger;
+      row.seen = true;
     },
-     tableDbEdit(row, column, cell, event) {
-        console.log(row, column, cell, event);
-        if (column.label != "学生姓名"&&column.label!="学生ID") {
-            event.target.innerHTML = ""
-            let cellInput = document.createElement("input")
-            cellInput.value = ""
-            cellInput.setAttribute("type", "text")
-            cellInput.style.width = "80%"
-            cell.appendChild(cellInput)
-            cellInput.onblur = function() {
-              cell.removeChild(cellInput)
-              event.target.innerHTML = cellInput.value
+    //!
+    formatData(){
+          this.tableData.forEach(item => {
+            for(key in item) {
+              item[key] = {
+                value: item[key],
+                edit: false
+              }
             }
-          }
+          })
+          console.log(this.tableData)
+        },
+    celledit(row, column, cell, event){
+      if(row[column.property]){
+        row[column.property].edit = true
+        setTimeout(() => {
+          this.$refs[column.property].focus()
+        }, 20)
+      }
 
-     }
+
+    // tableDbEdit(row, column, cell, event) {
+    //   console.log(row, column, cell, event);
+    //   if (column.label != "学生姓名" && column.label != "学生ID") {
+    //     event.target.innerHTML = "";
+    //     let cellInput = document.createElement("input");
+    //     cellInput.value = "";
+    //     cellInput.setAttribute("type", "text");
+    //     cellInput.style.width = "80%";
+    //     cell.appendChild(cellInput);
+    //     cellInput.onblur = function() {
+    //       cell.removeChild(cellInput);
+    //       event.target.innerHTML = cellInput.value;
+    //     };
+      }
+    }
   }
-}
+
 </script>
 
 <style>

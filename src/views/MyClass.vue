@@ -1,25 +1,30 @@
 <template>
   <el-container class="home">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <user-nav :activeIndex="1"></user-nav>
     </el-aside>
     <el-main>
-      <h1 style="text-align: center">{{ msg }}</h1>
+        <AllClass>
+
+        </AllClass>
+     
     </el-main>
   </el-container>
 </template>
 
 <script>
 import UserNav from "../components/UserNav"
+import AllClass from "../components/AllClass"
 
 export default {
-  name: 'Homepage',
+  name: 'MyClass',
   components: {
-    UserNav
+    UserNav,
+    AllClass
   },
   data () {
     return {
-      msg: 'Welcome to CCMS'
+    
     }
   }
 }

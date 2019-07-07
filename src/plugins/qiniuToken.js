@@ -10,21 +10,20 @@ import CryptoJS from 'crypto-js'
 let action = "https://upload.qiniup.com"
 
 // 空间名
-
-let bucketName = 'nickelback';
+let bucketName = 'ccms';
 
 //	AccessKey
 
-let AK = 'ZDlYPzgcB_u-HOlDCexoHRu65tCK7cktZkKUjpA1';
+let AK = '5tR_6aNZcQGdG2-btButscIW-tVtdjCTkOhZvejB';
 
 //  SecretKey
 
-let SK = 'xy1QlwLnCKbEqS8zOA_IypJ7ef0wN6VK7hsS8mGi';
+let SK = 'pqG9mMf2VxmjzQtef_jvQv9fEz9TmhxnI4ewKtQa';
 
 
 //空间绑定域名
 
-let domain = 'http://p3d12u2wq.bkt.clouddn.com/'
+let domain = 'http://pu9bnvlst.bkt.clouddn.com/'
 
 
 /* utf.js - UTF-8 <=> UTF-16 convertion

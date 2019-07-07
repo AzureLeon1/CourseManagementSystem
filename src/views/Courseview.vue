@@ -1,25 +1,29 @@
 <template>
   <el-container class="home">
-    <el-aside width="260px">
+    <!-- <el-aside width="260px">
       <user-nav :activeIndex="0"></user-nav>
-    </el-aside>
+    </el-aside> -->
     <el-main>
-      <h1 style="text-align: center">{{ msg }}</h1>
+     <CourseTable>
+
+     </CourseTable>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import UserNav from "../components/UserNav"
+import CourseTable from "../components/CourseTable"
 
 export default {
-  name: 'Homepage',
+  name: 'courseview',
   components: {
-    UserNav
+    UserNav,
+    CourseTable
   },
   data () {
     return {
-      msg: 'Welcome to CCMS'
+     
     }
   }
 }

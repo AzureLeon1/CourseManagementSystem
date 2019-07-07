@@ -7,7 +7,6 @@
         <AttendanceTable />
       </div>
     </div>
-
   </div>
 </template>
 
