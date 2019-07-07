@@ -1,5 +1,5 @@
 <template>
-<el-container class="examBox">
+  <el-container class="examBox">
     <el-aside width="260px">
       <user-nav :activeIndex="0"></user-nav>
     </el-aside>
@@ -9,7 +9,10 @@
         v-on:submitForm="submitForm"
         ref="newExamForm"></new-exam-form>
 
-      <select-question v-else></select-question>
+      <select-question
+        v-else
+        v-on:submit="submit"
+        ref="questionList"></select-question>
     </el-main>
   </el-container>
 </template>
@@ -31,7 +34,8 @@ export default {
   data() {
     return {
       newFormVisible: true,
-      newExamForm: {}
+      newExamForm: {},
+      questions: []
     };
   },
 
@@ -42,6 +46,9 @@ export default {
     submitForm() {
       this.newFormVisible = false
       this.newExamForm = this.$refs.newExamForm.examForm
+    },
+    submit() {
+      this.questions = this.$refs.questionList.questions
     }
   },
   
