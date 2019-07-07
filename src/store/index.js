@@ -12,6 +12,7 @@ export default new Vuex.Store({
   modules: {
     profile,
     personinfo,
+    classlistitem,
     allpatch
   },
   strict: debug

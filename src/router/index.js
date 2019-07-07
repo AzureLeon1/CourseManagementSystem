@@ -2,11 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Homepage from '@/views/Homepage'
 import Template from '@/views/Template'
+import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Courseview from '@/views/Courseview'
+import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
+import MyClass from '@/views/MyClass'
 
 Vue.use(Router)
 
@@ -23,6 +27,11 @@ export default new Router({
       component: Template
     },
     {
+      path: '/courseware',
+      name: 'Courseware',
+      component: Courseware
+    },
+    {
       path:'/MessageHome',
       name:'MessageHome',
       component: MessageHome
@@ -37,7 +46,17 @@ export default new Router({
       name: 'Register',
       component: Register
     },
-    {
+  {
+    path: '/courseview',
+    name: 'courseview',
+    component: Courseview
+  },
+  {
+    path: '/coursetable',
+    name: 'CourseTable',
+    component: CourseTable
+  },
+  {
       path: '/user_profile/:person_id',
       name: 'UserProfile',
       component: UserProfile,
@@ -47,6 +66,11 @@ export default new Router({
       path: '/frineds',
       name: 'Friends',
       component: Friends
+    },
+    {
+      path: '/myclass',
+      name: 'MyClass',
+      component: MyClass
     }
   ]
 })

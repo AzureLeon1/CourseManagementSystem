@@ -16,6 +16,7 @@ export default {
   getAuthority,
   getPersonInfo,
   getPersonFollowFans,
+  getClassListItems,
   changeUserInfo
 }
 
@@ -125,6 +126,11 @@ async function getPersonFollowFans(id){
   return data
 }
 
+async function getClassListItems(){
+  const res = await request(GET, '/api/club_info');
+  return res.data.class_es
+
+}
  //all patch start from here
  //============================================================
  async function changeUserInfo(id, form){
