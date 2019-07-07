@@ -3,18 +3,18 @@
     <el-card style="width: 850px; margin:20px auto 20px auto">
       <!--上右下左-->
       <el-table :data="tableData" stripe style="width: 800px" :row-class-name="tableRowAttendance">
-        <el-table-column prop="LessonNum" label="课时" width="310px"></el-table-column>
+        <el-table-column prop="LessonNum" label="课时" width="390px"></el-table-column>
         <el-table-column prop="sum" label="统计" width="310px"></el-table-column>
-        <el-table-column prop="detail" label="具体信息" width="180px">
+        <el-table-column prop="detail" label="具体信息" width="100px">
           <template slot-scope="scope">
-            <el-popover placement="left" width="500px" trigger="click">
+            <el-popover placement="left" width="550px" trigger="click">
               <el-table :data="scope.row.student_ids" height="500px">
-                <el-table-column width="200px" prop="student_id" label="学生ID" sortable>
+                <el-table-column width="225px" prop="student_id" label="学生ID" sortable>
                   <template slot-scope="scope">
                     <span>{{scope.row.student_id}}</span>
                   </template>
                 </el-table-column>
-                <el-table-column width="200px" prop="student_name" label="学生姓名">
+                <el-table-column width="225px" prop="student_name" label="学生姓名">
                   <template slot-scope="scope">
                     <span>{{scope.row.student_name}}</span>
                   </template>
