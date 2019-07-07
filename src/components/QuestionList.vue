@@ -3,7 +3,8 @@
     <question-card 
       v-for="question in questionList"
       :key="question.question_id"
-      :questionInfo="question"></question-card>
+      :questionInfo="question"
+      ref="questions"></question-card>
     
     <div class="submitBtn">
       <el-button 
@@ -19,7 +20,8 @@ import QuestionCard from "./QuestionCard"
 export default {
   data() {
     return {
-      questionList: []
+      questionList: [],
+      hasSubmit: false
     }
   },
 
@@ -54,7 +56,22 @@ export default {
     },
 
     submit() {
-      // To Do
+      for (let q of this.$refs.questions){
+        // To Do
+        console.log(q.select)
+        if (q.select === "") {
+          this.$confirm('题目未全部完成,是否提交', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            
+          }).catch(() => {
+            
+          })
+        }
+      }
+      this.hasSubmit = true
     }
   },
 

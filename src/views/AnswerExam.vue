@@ -4,7 +4,7 @@
       <user-nav :activeIndex="0"></user-nav>
     </el-aside>
     <el-main>
-      <question-list></question-list>
+      <question-list ref="questionList"></question-list>
     </el-main>
   </el-container>
 </template>
@@ -23,7 +23,7 @@ export default {
 
   data () {
     return {
-      hasSubmit: false
+      
     }
   },
 
@@ -42,29 +42,20 @@ export default {
     };
   },
 
-  destroyed() {
-    if (!this.hasSubmit) {
-      console.log("?")
-    }
-  },
-
   beforeRouteLeave(to, from, next) {
-    this.$confirm('退出此页面将自动提交,是否退出', '提示', {
+    this.$confirm('退出此页面将不会保存你的答案,是否退出', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'warning'
     }).then(() => {
-      if (!this.hasSubmit) {
-
-      }
       next()
     }).catch(() => {
       
-    });
+    })
   }
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

@@ -7,6 +7,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Exam from '@/views/Exam'
 import AnswerExam from '@/views/AnswerExam'
+import NewExam from '@/views/NewExam'
 import UserProfile from '@/views/UserProfile'
 
 Vue.use(Router)

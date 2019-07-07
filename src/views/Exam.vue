@@ -1,10 +1,18 @@
 <template>
-  <el-container class="home">
+  <el-container class="examBox">
     <el-aside width="260px">
       <user-nav :activeIndex="0"></user-nav>
     </el-aside>
     <el-main>
       <exam-list></exam-list>
+
+      <div class="createExamBtn" v-if="user.role=='teacher'">
+        <el-button 
+          @click="createExam" 
+          type="primary" 
+          icon="el-icon-plus" 
+          circle></el-button>
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -25,10 +33,30 @@ export default {
     return {
       
     }
+  },
+
+  methods: {
+    createExam() {
+      this.$route.push({
+        name: "NewExam"
+      })
+    }
   }
 }
 </script>
 
-<style scoped>
+<style>
+.examBox .createExamBtn {
+  position: fixed;
+  z-index: 2;
+  bottom: 30px;
+  right: 30px;
+  font-size: 16px;
+}
 
+.examBox .createExamBtn .el-button {
+  width: 66px;
+  height: 66px;
+  font-size: 25px;
+}
 </style>

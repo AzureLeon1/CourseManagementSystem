@@ -139,7 +139,7 @@ export default {
   height: 60px;
   line-height: 60px;
   color: #303133;
-  font-size: 18px;
+  font-size: 17px;
   cursor: pointer;
 }
 
