@@ -245,10 +245,10 @@ export default {
 .title {
   position: absolute;
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
-  left: 50%;
-  top: -18px;
+  left: 10%;
+  top: -25px;
   transform: translate3d(-50%, 50%, 0);
   background: white;
   padding: 0 15px;
