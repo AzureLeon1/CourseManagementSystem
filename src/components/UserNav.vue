@@ -1,27 +1,25 @@
 <template>
   <div class="userNav">
     <el-row style="text-align: center">
-      <img :src="user.avatar" class="avatar" @click="routeTo('userProfile')">
+      <img :src="user.avatar" class="avatar" @click="routeTo('UserProfile', {person_id: user.id})" />
     </el-row>
     <el-row style="margin-bottom: 10px">
       <el-col :span="7" :offset="4">
-        <el-button type="primary" size="mini" @click="routeTo('following')">
-          关注: {{user.following}}
-        </el-button>
+        <el-button type="primary" size="mini" @click="routeTo('following')">关注: {{user.following}}</el-button>
       </el-col>
       <el-col :span="7" :offset="2">
-        <el-button type="primary" size="mini" @click="routeTo('follower')">
-          粉丝: {{user.follower}}
-        </el-button>
+        <el-button type="primary" size="mini" @click="routeTo('follower')">粉丝: {{user.follower}}</el-button>
       </el-col>
     </el-row>
     <ul>
       <li
-        v-for="item in menu" 
+        v-for="item in menu"
         :key="item.index"
         :class="item.index == activeIndex ? 'active' : ''"
-        @click="routeTo(item.routeName)">
-        <i :class="item.icon"></i>&nbsp;&nbsp;{{item.title}}
+        @click="routeTo(item.routeName)"
+      >
+        <i :class="item.icon"></i>
+        &nbsp;&nbsp;{{item.title}}
       </li>
     </ul>
     <el-row style="text-align: center">
@@ -42,7 +40,7 @@ export default {
         following: 0,
         follower: 0
       }
-    }
+    };
   },
 
   props: {
@@ -51,60 +49,63 @@ export default {
 
   methods: {
     getData() {
-      // To Do
-      // this.user = JSON.parse(localStorage.getItem("currentUser"))
-      this.role = this.user.role
-
-      if (this.role == "student" || this.role == "teacher") {
-        this.menu.push({
-          index: 1,
-          title: "我的班级",
-          routeName: "",
-          icon: "el-icon-school"
-        },{
-          index: 2,
-          title: "好友动态",
-          routeName: "",
-          icon: "el-icon-chat-line-square"
-        },{
-          index: 3,
-          title: "我的消息",
-          routeName: "MessageHome",
-          icon: "el-icon-message"
-        },{
-          index: 4,
-          title: "课程表",
-          routeName: "",
-          icon: "el-icon-date"
-        },{
-          index: 5,
-          title: "期末总结",
-          routeName: "",
-          icon: "el-icon-data-analysis"
-        })
-      } else if (this.role == "jwteacher") {
+      this.user = this.$store.state.profile.user;
+      if (this.user.role == "student" || this.user.role == "teacher") {
+        this.menu.push(
+          {
+            index: 1,
+            title: "我的班级",
+            routeName: "",
+            icon: "el-icon-school"
+          },
+          {
+            index: 2,
+            title: "好友动态",
+            routeName: "",
+            icon: "el-icon-chat-line-square"
+          },
+          {
+            index: 3,
+            title: "我的消息",
+            routeName: "MessageHome",
+            icon: "el-icon-message"
+          },
+          {
+            index: 4,
+            title: "课程表",
+            routeName: "",
+            icon: "el-icon-date"
+          },
+          {
+            index: 5,
+            title: "期末总结",
+            routeName: "",
+            icon: "el-icon-data-analysis"
+          }
+        );
+      } else if (this.user.role == "jwteacher") {
         this.menu.push({
           index: 1,
           title: "发布动态",
           routeName: ""
-        })
+        });
       }
     },
-    routeTo(rname) {
-      this.$router.push({
-        name: rname
-      })
+    routeTo(name, params) {
+      this.$router.push({ name, params });
     },
     logout() {
-      this.removeItem("currentUser")
-      this.$router.push("/login")
+      this.$store.dispatch('profile/logout')
     }
   },
 
-  mounted(){
-    this.getData()
+  mounted() {
+    this.getData();
+  },
+
+  computed: {
   }
-}
+};
 </script>
 
 

@@ -7,6 +7,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Exam from '@/views/Exam'
 import AnswerExam from '@/views/AnswerExam'
+import UserProfile from '@/views/UserProfile'
 
 Vue.use(Router)
 
@@ -36,6 +37,12 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/user_profile/:person_id',
+      name: 'UserProfile',
+      component: UserProfile,
+      props: true
     }
   ]
 })
