@@ -6,6 +6,7 @@ import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import UserProfile from '@/views/UserProfile'
+import Friends from '@/views/Friends'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       name: 'UserProfile',
       component: UserProfile,
       props: true
+    },
+    {
+      path: '/frineds',
+      name: 'Friends',
+      component: Friends
     }
   ]
 })
