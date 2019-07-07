@@ -195,6 +195,9 @@ export default {
   mounted() {
     this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
     this.syncUser(this.user);
+    console.log(this.$store.state.profile.user.id);
+    console.log(this.person_id);
+    console.log(this.isCurrentUser);
   },
   computed: {
     style() {
@@ -210,7 +213,7 @@ export default {
       return this.$store.state.personinfo.personinfo;
     },
     isCurrentUser() {
-      return this.$store.state.profile.user.id === this.person_id;
+      return this.$store.state.profile.user.id == this.person_id;
     },
     identity_zh() {
       return this.identityZh();
