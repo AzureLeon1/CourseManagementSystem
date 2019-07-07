@@ -11,6 +11,8 @@
         :label="s.label"
         class="optionRadio">{{s.content}}</el-radio>
     </el-radio-group>
+
+    <el-divider></el-divider>
   </div>
 </template>
 
@@ -47,8 +49,7 @@ export default {
 
 <style>
 .questionCardBox {
-  margin-bottom: 15px;
-  border-bottom: thin dashed #409eff;
+  margin-bottom: 5px;
 }
 
 .questionCardBox .title {
