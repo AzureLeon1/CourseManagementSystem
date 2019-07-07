@@ -1,7 +1,7 @@
 <template>
   <div class="userNav">
     <el-row style="text-align: center">
-      <img :src="user.avatar" class="avatar" @click="routeTo('userProfile')" />
+      <img :src="user.avatar" class="avatar" @click="routeTo('UserProfile', {person_id: user.id})" />
     </el-row>
     <el-row style="margin-bottom: 10px">
       <el-col :span="7" :offset="4">
@@ -50,6 +50,7 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
+      console.log(this.user);
 
       if (this.user.role == "student" || this.user.role == "teacher") {
         this.menu.push(
@@ -92,10 +93,8 @@ export default {
         });
       }
     },
-    routeTo(rname) {
-      this.$router.push({
-        name: rname
-      });
+    routeTo(name, params) {
+      this.$router.push({ name, params });
     },
     logout() {
       this.$store.dispatch('profile/logout')

@@ -13,8 +13,8 @@ export default {
   request,
   register,
   getAuthority,
-  getMockAuthority,
-
+  getPersonInfo,
+  getPersonFollowFans
 }
 
 function param(a) {
@@ -71,18 +71,6 @@ async function request(method, url, data) {
 }
 
 async function getAuthority(form) {
-  const res = await request(POST, '/api/login', form)
-  return res.data.data
-}
-
-async function register(form) {
-  const res = await request(POST, '/api/register', form)
-  return res.data
-}
-
-
-// =============== Mock Data ====================
-async function getMockAuthority() {
   const data = {
     "user_ID": 100001,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
@@ -90,9 +78,45 @@ async function getMockAuthority() {
     "role": "student",
     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
     "phone_number": "18916083381",
-    "college": "软件",
+    "college": "软件学院",
     "following": 0,
-    "follower": 0
+    "follower": 0,
+    "email" : "leonwangchn@163.com"
+  }
+  await delay(1000)
+  return data
+  // const res = await request(POST, '/api/login', form)
+  // return res.data.data
+}
+
+async function register(form) {
+  const res = await request(POST, '/api/register', form)
+  return res.data
+}
+
+async function getPersonInfo(id){
+  const data={
+    "user_ID": 100001,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+    "name": "王亮",
+    "role": "student",
+    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+    "phone_number": "18916083381",
+    "college": "软件学院",
+    "following": 0,
+    "follower": 0,
+    "email" : "leonwangchn@163.com"
+  }
+  await delay(1000)
+  return data
+  // const res = await request(GET, `/api/users/${id}`)
+  // return res.data
+}
+
+async function getPersonFollowFans(id){
+  const data = {
+    follow:11,
+    fans:12
   }
   await delay(1000)
   return data
