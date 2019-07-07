@@ -13,7 +13,7 @@
                 v-for="(item, index) in followings"
                 :key="index"
                 class="friend"
-                @click="$router.push({name: 'UserProfile', params: {person_id: 100001}})"
+                @click="$router.push({name: 'UserProfile', params: {person_id: item.user_id}})"
               >
                 <div class="person_info">
                   <el-row>
@@ -81,31 +81,31 @@ export default {
       followings: [
         {
           role: "student",
-          user_id: "11111",
+          user_id: "100002",
           name: "施程航",
           department: "软件学院",
           phone_number: 13365445687,
-          mail: "chenghang shi@gmail",
+          mail: "chenghang_shi@gmail.com",
           avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
           grade: 2017
         },
         {
           role: "student",
-          user_id: "11111",
+          user_id: "100002",
           name: "施程航",
           department: "软件学院",
           phone_number: 13365445687,
-          mail: "chenghang shi@gmail",
+          mail: "chenghang_shi@gmail.com",
           avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
           grade: 2017
         },
         {
           role: "student",
-          user_id: "11111",
+          user_id: "100002",
           name: "施程航",
           department: "软件学院",
           phone_number: 13365445687,
-          mail: "chenghang shi@gmail",
+          mail: "chenghang_shi@gmail.com",
           avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
           grade: 2017
         }
@@ -113,31 +113,31 @@ export default {
       followers: [
         {
           role: "student",
-          user_id: "11111",
+          user_id: "100002",
           name: "施程航",
           department: "软件学院",
           phone_number: 13365445687,
-          mail: "chenghang shi@gmail",
+          mail: "chenghang_shi@gmail.com",
           avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
           grade: 2017
         },
         {
           role: "student",
-          user_id: "11111",
+          user_id: "100002",
           name: "施程航",
           department: "软件学院",
           phone_number: 13365445687,
-          mail: "chenghang shi@gmail",
+          mail: "chenghang_shi@gmail.com",
           avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
           grade: 2017
         },
         {
           role: "student",
-          user_id: "11111",
+          user_id: "100002",
           name: "施程航",
           department: "软件学院",
           phone_number: 13365445687,
-          mail: "chenghang shi@gmail",
+          mail: "chenghang_shi@gmail.com",
           avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
           grade: 2017
         }

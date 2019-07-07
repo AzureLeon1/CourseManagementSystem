@@ -198,6 +198,7 @@ export default {
     console.log(this.$store.state.profile.user.id);
     console.log(this.person_id);
     console.log(this.isCurrentUser);
+    console.log(this.$store.state.personinfo.personinfo);
   },
   computed: {
     style() {
@@ -224,6 +225,12 @@ export default {
       deep: true,
       handler (user) {
         this.syncUser(user)
+      }
+    },
+    person_id: {
+      handler (person_id) {
+        this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
+        this.syncUser(this.user)
       }
     }
   }
