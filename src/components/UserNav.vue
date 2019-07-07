@@ -56,7 +56,7 @@ export default {
         this.menu.push({
           index: 1,
           title: "我的班级",
-          routeName: "AllClass",
+          routeName: "MyClass",
           icon: "el-icon-school"
         },{
           index: 2,

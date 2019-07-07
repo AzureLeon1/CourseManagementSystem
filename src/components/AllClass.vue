@@ -5,19 +5,29 @@
             <div v-if="isCurrentUser">
                 <div class="title">我的班级</div>
                 <div class="class_es">
-                    <div v-for="(item, index) in classes" :key="index" class="a_class"
-                    @click="$router.push({name: 'CorpInfo', params: {corp_id: 1}})">
-                    <Avatar :src="item.avatar" :size="40" :border="false"/>
-                    <div>{{item.name}}</div>
-            </div>
-            <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="class unaudit">
-                <Avatar :src="item.avatar" :size="40" :border="false"/>
-                <div>{{item.name}}</div>
-            </div>
-        </div>
+                    <div v-for="(item, index) in claes" :key="index" class="a_class"
+                        @click="$router.push({name: 'CorpInfo', params: {corp_id: 1}})">
+                        <Avatar :src="item.avatar" :size="40" :border="false"/>
+                        <div>{{item.name}}</div>
+                    
+                     </div>
+                     <div class="a_class" @click="$router.push({name: 'AddClass'})">
+                        <Avatar :src="addimg" :size="40" :border="false"/>
 
-    </div>
+                     </div>
+
+
+                    <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="class unaudit">
+                        <Avatar :src="item.avatar" :size="40" :border="false"/>
+
+                    <div>{{item.name}}</div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+           
+  
     </div>
 
 
@@ -32,16 +42,22 @@ export default {
     },
     props: ['person_id'],
     data(){
+       return{
+           addimg : '../static/add.png'
+          
+       }
 
     },
     computed: {
-        classes(){
+        claes(){
+            return [{name: '同济大学谷歌俱乐部', avatar: '../static/defaultAvatar.jpg'}]
 
         },
         unauditClasses() {
 
         },
         isCurrentUser() {
+            return true
 
         },
         user() {

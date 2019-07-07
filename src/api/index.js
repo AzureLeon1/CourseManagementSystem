@@ -14,7 +14,8 @@ export default {
   register,
   getAuthority,
   getPersonInfo,
-  getPersonFollowFans
+  getPersonFollowFans,
+  getClassListItems
 }
 
 function param(a) {
@@ -120,4 +121,9 @@ async function getPersonFollowFans(id){
   }
   await delay(1000)
   return data
+}
+
+async function getClassListItems(){
+  const res = await request(GET, '/api/club_info');
+  return res.data.class_es
 }
