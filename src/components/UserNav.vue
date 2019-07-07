@@ -53,38 +53,32 @@ export default {
       console.log(this.user);
 
       if (this.user.role == "student" || this.user.role == "teacher") {
-        this.menu.push(
-          {
-            index: 1,
-            title: "我的班级",
-            routeName: "",
-            icon: "el-icon-school"
-          },
-          {
-            index: 2,
-            title: "好友动态",
-            routeName: "",
-            icon: "el-icon-chat-line-square"
-          },
-          {
-            index: 3,
-            title: "我的消息",
-            routeName: "",
-            icon: "el-icon-message"
-          },
-          {
-            index: 4,
-            title: "课程表",
-            routeName: "",
-            icon: "el-icon-date"
-          },
-          {
-            index: 5,
-            title: "期末总结",
-            routeName: "",
-            icon: "el-icon-data-analysis"
-          }
-        );
+        this.menu.push({
+          index: 1,
+          title: "我的班级",
+          routeName: "MyClass",
+          icon: "el-icon-school"
+        },{
+          index: 2,
+          title: "好友动态",
+          routeName: "",
+          icon: "el-icon-chat-line-square"
+        },{
+          index: 3,
+          title: "我的消息",
+          routeName: "",
+          icon: "el-icon-message"
+        },{
+          index: 4,
+          title: "课程表",
+          routeName: "",
+          icon: "el-icon-date"
+        },{
+          index: 5,
+          title: "期末总结",
+          routeName: "",
+          icon: "el-icon-data-analysis"
+        })
       } else if (this.role == "jwteacher") {
         this.menu.push({
           index: 1,

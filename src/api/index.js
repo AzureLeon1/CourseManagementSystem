@@ -8,13 +8,16 @@ const GET = 'GET'
 const POST = 'POST'
 const PUT = 'PUT'
 const DELETE = 'DELETE'
+const PATCH = 'PATCH'
 
 export default {
   request,
   register,
   getAuthority,
   getPersonInfo,
-  getPersonFollowFans
+  getPersonFollowFans,
+  getClassListItems,
+  changeUserInfo
 }
 
 function param(a) {
@@ -27,6 +30,7 @@ async function request(method, url, data) {
     const headers = token ? {
       Authorization: `Bearer ${token}`
     } : {}
+    // TODO: 验证GET请求的参数形式
     if (method in {
         GET
       }) {
@@ -120,4 +124,16 @@ async function getPersonFollowFans(id){
   }
   await delay(1000)
   return data
+}
+
+async function getClassListItems(){
+  const res = await request(GET, '/api/club_info');
+  return res.data.class_es
+
+}
+ //all patch start from here
+ //============================================================
+ async function changeUserInfo(id, form){
+  const res = await request(PATCH, '/api/users/${id}', form)
+  return res
 }
