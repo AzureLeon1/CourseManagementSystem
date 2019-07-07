@@ -15,6 +15,21 @@ export function parseAuth (auth) {
         'AUTHORITY_MANAGE'
     ]
 }
+
+export function identityZh(role) {
+  switch (role) {
+    case "student":
+      return "学生";
+      break;
+    case "teacher_edu":
+      return "任课教师";
+      break;
+    case "teacher_manage":
+      return "教务教师";
+      break;
+  }
+}
+
 export function delay (t) {
     return new Promise(r => setTimeout(r, t))
 }
