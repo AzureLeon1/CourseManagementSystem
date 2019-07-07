@@ -5,10 +5,10 @@
     </el-row>
     <el-row style="margin-bottom: 10px">
       <el-col :span="7" :offset="4">
-        <el-button type="primary" size="mini" @click="routeTo('following')">关注: {{user.following}}</el-button>
+        <el-button type="primary" size="mini" @click="routeTo('Friends')">关注: {{user.following}}</el-button>
       </el-col>
       <el-col :span="7" :offset="2">
-        <el-button type="primary" size="mini" @click="routeTo('follower')">粉丝: {{user.follower}}</el-button>
+        <el-button type="primary" size="mini" @click="routeTo('Friends')">粉丝: {{user.follower}}</el-button>
       </el-col>
     </el-row>
     <ul>
@@ -55,7 +55,7 @@ export default {
           {
             index: 1,
             title: "我的班级",
-            routeName: "",
+            routeName: "MyClass",
             icon: "el-icon-school"
           },
           {

@@ -46,23 +46,68 @@
               <div class="value">{{ userinfo.email }}</div>
             </div>
           </div>
-          <div class="btns">
-            <el-button
-              type="primary"
-              size="small"
-              class="edit"
-              v-if="isCurrentUser"
-              @click="dialogVisible = true"
-            >修改</el-button>
-          </div>
+        </div>
+        <div class="btns">
+          <el-button
+            type="primary"
+            size="small"
+            class="edit"
+            v-if="isCurrentUser"
+            @click="dialogVisible = true"
+          >修改</el-button>
         </div>
       </el-main>
     </el-container>
+
+    <!-- FIXME: 点击表单周围让表单消失时无法重置userinfo -->
+    <el-dialog :visible.sync="dialogVisible" width="50%">
+      <el-form label-width="80px">
+        <el-form-item label="头像">
+          <div style="display: flex; align-items: center;">
+            <i class="avatar" :style="style" />
+            <span v-if="progress && progress - 100">上传进度 {{progress}}%</span>
+            <el-upload
+              v-else
+              :show-file-list="false"
+              :action="action"
+              :data="{ token: token() }"
+              :on-success="handleSuccess"
+              :on-progress="handleProgress"
+            >
+              <el-button size="small">上传头像</el-button>
+            </el-upload>
+          </div>
+        </el-form-item>
+        <el-form-item label="学号">
+          <el-input v-model="userinfo.id" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="身份">
+          <el-input v-model="identity_zh" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="名字">
+          <el-input v-model="userinfo.name"></el-input>
+        </el-form-item>
+        <el-form-item label="学院">
+          <el-input v-model="userinfo.college"></el-input>
+        </el-form-item>
+        <el-form-item label="电话">
+          <el-input v-model="userinfo.phone_number"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱">
+          <el-input v-model="userinfo.email"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="changeInfo">确认修改</el-button>
+          <el-button @click="cancel">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import UserNav from "../components/UserNav";
+import { token, action, domain } from "../plugins/qiniuToken";
 export default {
   name: "UserProfile",
   components: {
@@ -70,7 +115,22 @@ export default {
   },
   props: ["person_id"],
   data() {
-    return {};
+    return {
+      userinfo: {
+        id: null,
+        email: "",
+        phone_number: null,
+        name: "",
+        avatar: "",
+        college: "",
+        role: ""
+      },
+      dialogVisible: false,
+      token,
+      action,
+      domain,
+      progress: 0
+    };
   },
   methods: {
     identityZh() {
@@ -85,13 +145,68 @@ export default {
           return "教务教师";
           break;
       }
+    },
+    handleProgress(event, file, fileList) {
+      this.progress = parseInt(event.percent);
+    },
+    handleSuccess(response, file, fileList) {
+      // console.log(response, file, fileList)
+      this.progress = 100;
+      console.log(this.userinfo);
+      this.userinfo.avatar = this.domain + response.hash;
+      console.log(this.domain);
+      console.log(this.userinfo);
+      this.$message({
+        message: "图片上传成功~",
+        type: "success"
+      });
+    },
+    changeInfo() {
+      // TODO: 测试更新用户信息的接口
+      this.$store.dispatch("allput/changeUserInfo", {
+        id: this.userinfo.id,
+        form: {
+          name: this.userinfo.name,
+          email: this.userinfo.email,
+          college: this.userinfo.college,
+          phone_number: this.userinfo.phone_number,
+          avatar: this.userinfo.avatar
+        }
+      });
+      this.dialogVisible = false;
+    },
+    cancel() {
+      this.dialogVisible = false;
+      // 撤销表单中的修改，重置 userinfo
+      this.syncUser(this.user);
+    },
+    // 把本页面中的userinfo重置为vuex.store中的personinfo.personinfo
+    syncUser(user) {
+      this.userinfo.id = user.id;
+      this.userinfo.email = user.email;
+      this.userinfo.phone_number = user.phone_number;
+      this.userinfo.name = user.name;
+      this.userinfo.avatar = user.avatar;
+      this.userinfo.college = user.college;
+      this.userinfo.role = user.role;
+      this.userinfo = Object.assign({}, this.userinfo);
     }
   },
   mounted() {
     this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
+    this.syncUser(this.user);
   },
   computed: {
-    userinfo() {
+    style() {
+      const src = this.userinfo.avatar;
+      const size = "40";
+      return {
+        backgroundImage: src && `url(${src})`,
+        width: `${size}px`,
+        height: `${size}px`
+      };
+    },
+    user() {
       return this.$store.state.personinfo.personinfo;
     },
     isCurrentUser() {
@@ -101,7 +216,14 @@ export default {
       return this.identityZh();
     }
   },
-  watch: {}
+  watch: {
+    user: {
+      deep: true,
+      handler (user) {
+        this.syncUser(user)
+      }
+    }
+  }
 };
 </script>
 
@@ -123,16 +245,19 @@ export default {
 .title {
   position: absolute;
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
-  left: 50%;
-  top: -18px;
+  left: 10%;
+  top: -25px;
   transform: translate3d(-50%, 50%, 0);
   background: white;
   padding: 0 15px;
 }
 .btns {
-  width: 180px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 100px;
   display: flex;
   .el-button {
     flex: 1;
@@ -168,6 +293,25 @@ export default {
     margin-left: -25%;
     text-align: center;
   }
+}
+
+.avatar {
+  $w: 40px;
+  width: $w;
+  height: $w;
+
+  display: inline-block;
+  background: url("../../static/defaultAvatar.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.el-select {
+  width: 100%;
 }
 </style>
 
