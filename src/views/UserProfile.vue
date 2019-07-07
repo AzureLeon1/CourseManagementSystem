@@ -9,6 +9,9 @@
           <div class="title">个人信息</div>
 
           <div class="items">
+            <div style="margin-left:50%; transform: translate(-30%, 0); margin-bottom: 30px; margin-top: 20px;">
+              <Avatar :src="userinfo.avatar" :size="120" :border="true" />
+            </div>
             <div class="item">
               <div class="key">
                 <i class="el-icon-user"></i> &nbsp; 姓名
@@ -108,10 +111,12 @@
 <script>
 import UserNav from "../components/UserNav";
 import { token, action, domain } from "../plugins/qiniuToken";
+import Avatar from "../components/Avatar"
 export default {
   name: "UserProfile",
   components: {
-    UserNav
+    UserNav,
+    Avatar
   },
   props: ["person_id"],
   data() {
@@ -291,8 +296,10 @@ export default {
   letter-spacing: 1px;
   font-weight: 300;
   .item {
+
     display: flex;
     margin: 15px 0;
+    margin-left: 20%;
   }
   .key {
     flex: 1;
