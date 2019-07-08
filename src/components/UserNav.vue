@@ -85,7 +85,7 @@ export default {
             icon: "el-icon-data-analysis"
           }
         );
-      } else if (this.user.role == "tearcher_edu") {
+      } else if (this.user.role == "teacher_manage") {
         this.menu.push({
           index: 1,
           title: "发布动态",
