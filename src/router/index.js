@@ -16,6 +16,8 @@ import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
+import SearchUser from '@/views/SearchUser'
+import Twitter from '@/views/Twitter'
 
 Vue.use(Router)
 
@@ -86,6 +88,16 @@ export default new Router({
       path: '/myclass',
       name: 'MyClass',
       component: MyClass
+    },
+    {
+      path: '/searchUser',
+      name: 'SearchUser',
+      component: SearchUser
+    },
+    {
+      path: '/twitter',
+      name: 'Twitter',
+      component: Twitter
     }
   ]
 })
