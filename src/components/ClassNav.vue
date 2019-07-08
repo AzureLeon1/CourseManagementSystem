@@ -13,7 +13,8 @@
         v-for="item in menu"
         :key="item.index"
         :class="item.index == activeIndex ? 'active' : ''"
-        @click="routeTo(item.routeName)"
+        @click="routeTo(item.routeName, 
+          {class_id: '1'})"
       >
         <i :class="item.icon"></i>
         &nbsp;&nbsp;{{item.title}}
@@ -59,7 +60,7 @@ export default {
           {
             index: 3,
             title: "我的考试",
-            routeName: "",
+            routeName: "Exam",
             icon: "el-icon-edit-outline"
           },
           {
@@ -79,51 +80,51 @@ export default {
         this.menu.push(
           {
             index: 1,
-            title: "成员审核",
-            routeName: "",
-            icon: "el-icon-s-claim"
-          },
-          {
-            index: 2,
             title: "班级消息",
             routeName: "",
             icon: "el-icon-chat-line-square"
           },
           {
-            index: 3,
+            index: 2,
             title: "课件上传",
             routeName: "",
             icon: "el-icon-folder-opened"
           },
           {
-            index: 4,
-            title: "发布考试",
-            routeName: "",
+            index: 3,
+            title: "查看考试",
+            routeName: "Exam",
             icon: "el-icon-edit-outline"
           },
           {
-            index: 5,
+            index: 4,
             title: "项目组队",
             routeName: "Team",
             icon: "el-icon-user"
           },
           {
+            index: 5,
+            title: "讨论区",
+            routeName: "Discussion",
+            icon: "el-icon-microphone"
+          },
+          {
             index: 6,
+            title: "成员审核",
+            routeName: "",
+            icon: "el-icon-s-claim"
+          },
+          {
+            index: 7,
             title: "考勤管理",
             routeName: "Attendance",
             icon: "el-icon-postcard"
           },
           {
-            index: 7,
-            title: "题库管理",
-            routeName: "",
-            icon: "el-icon-document-copy"
-          },
-          {
             index: 8,
-            title: "讨论区",
-            routeName: "Discussion",
-            icon: "el-icon-microphone"
+            title: "题库管理",
+            routeName: "QuestionBank",
+            icon: "el-icon-document-copy"
           }
         );
       }
