@@ -2,8 +2,8 @@
     <div class="container">
       <div id="title" @click="routeTo('Homepage')">课程班级管理系统</div>
 
-      <div id="home_btn">
-        <el-button class="btn" @click="routeTo('Homepage')" circle> <i class="fas fa-home"></i> </el-button>
+      <div class="btn" @click="routeTo('Homepage')">
+        <i class="fas fa-home"></i>
       </div>
 
 
@@ -36,9 +36,13 @@ export default {
 <style lang="scss" scoped>
   .container {
     position: absolute;
-    z-index: 2;
+    top: 0;
+
+    display: flex;
+    align-items: center;
 
     margin: 0;
+    padding: 0 10px;
     width: 100%;
     max-width: 100%;
     min-width: 100%;
@@ -46,27 +50,43 @@ export default {
 
     box-shadow: 0 2px 20px -11px black;
     background: #292961;
+    color: #ffffff;
   }
 
   #title {
-    font-size: 1.2em;
-    margin-right: 20px;
+    font-size: 1em;
+    // font-weight: bold;
+    letter-spacing: .2em;
+    margin-left: 40px;
   }
 
-  #home_btn {
+  .btn {
     position: absolute;
-    right: 10%;
+    right: 2%;
+    
+    text-align: center;
+    height: 70%;
+    line-height: 33px;
+    width: 45px;
+    border-radius: 4px;
+    color: #dddddd;
+
+    transition: .2s;
   }
 
-  .btn:focus {
-    background: white;
-    color: #606266;
-    border-color: #dcdfe6;
+  // .btn:focus {
+  //   background: white;
+  //   color: #606266;
+  //   border-color: #dcdfe6;
+  // }
+
+  .btn:hover {
+    background: #ffffff28;
+    color: #f3f3f3;
   }
 
   .btn:active {
-    background: #edf5ff;
-    color: #559ffd;
-    border-color: #559ffd;
+    background: #ffffff56;
+    color: #ffffff;
   }
 </style>
