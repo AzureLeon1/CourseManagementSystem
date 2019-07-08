@@ -5,10 +5,10 @@
                 <div class="title">我的班级</div>
                 <div class="class_es">
                     <div v-for="(item, index) in claes" :key="index" class="a_class"
-                        @click="$router.push({name: 'ClassDetail', params: {corp_id: 1}})">
+                        @click="$router.push({name: 'ClassHome', params: {class_id: item.id}})">
                         <Avatar :src="item.avatar" :size="40" :border="false"/>
                         <div>{{item.name}}</div>
-                    
+
                      </div>
                      <div class="a_class" @click="jump()">
                         <Avatar :src="addimg" :size="40" :border="false"/>
@@ -28,8 +28,8 @@
                 </div>
             </div>
         </div>
-           
-  
+
+
     </div>
 
 
@@ -49,7 +49,7 @@ export default {
     data(){
        return{
            addimg : '../static/add.png'
-          
+
        }
 
     },

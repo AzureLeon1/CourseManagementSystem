@@ -15,21 +15,24 @@ import NewExam from '@/views/NewExam'
 import ExamDetail from '@/views/ExamDetail'
 import QuestionBank from '@/views/QuestionBank'
 import Courseview from '@/views/Courseview'
-import CourseTable from '@/components/CourseTable'
+import CourseTable from '@/views/CourseTable'
+// import TimeTable from '@/components/TimeTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
+import Discussion from '@/views/Discussion'
 import SearchUser from '@/views/SearchUser'
 import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
-import CreateForm from '@/components/CreateForm'
-
+import ClassHome from '@/views/ClassHome'
 
 
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -39,7 +42,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: QuestionBank
+      component: Template
     },
     {
       path: '/courseview',
@@ -65,16 +68,6 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
-    },
-    {
-      path: '/team',
-      name: 'Team',
-      component: Team,
-    },
-    {
-      path: '/attendance',
-      name: 'Attendance',
-      component: Attendance,
     },
     {
       path: '/coursetable',
@@ -121,7 +114,60 @@ export default new Router({
     {
       path: 'createform',
       name: 'CreateForm',
-      component: CreateForm
+      component: CreateForm,
+    },
+    {
+      path: '/class_home/:class_id',
+      name: 'ClassHome',
+      component: ClassHome,
+      props: true,
+    },
+    {
+      path: '/class_home/:class_id/exams',
+      name: 'Exam',
+      component: Exam,
+    },
+    {
+      path: '/class_home/:class_id/newExam',
+      name: 'NewExam',
+      component: NewExam,
+    },
+    {
+      path: '/class_home/:class_id/answerExam/:exam_id',
+      name: 'AnswerExam',
+      component: AnswerExam,
+      props: true
+    },
+    {
+      path: '/class_home/:class_id/checkExam/:exam_id',
+      name: 'CheckExam',
+      component: CheckExam,
+      props: true
+    },
+    {
+      path: '/class_home/:class_id/examDetail/:exam_id',
+      name: 'ExamDetail',
+      component: ExamDetail,
+    },
+    {
+      path: '/class_home/:class_id/questionBank',
+      name: 'QuestionBank',
+      component: QuestionBank
+    },
+    {
+      path: '/class_home/:class_id/team',
+      name: 'Team',
+      component: Team,
+    },
+    {
+      path: '/class_home/:class_id/discussion',
+      name: 'Discussion',
+      component: Discussion
+    },
+    {
+      path: '/class_home/:class_id/attendance',
+      name: 'Attendance',
+      component: Attendance,
     }
   ]
 })

@@ -27,7 +27,7 @@
             <el-button 
               type="text"
               size="mini"
-              @click="updateQuestion(scope.row)">修改</el-button>
+              @click="updateQuestion(scope.row, scope.$index)">修改</el-button>
             <el-button
               type="text"
               size="mini"
@@ -43,6 +43,69 @@
         @click="deleteSelectedQuestion()"
         style="color: #F56C6C; margin-top: 20px">删除所选</el-button>
     </el-col>
+
+    <div class="createQuestionBtn">
+      <el-button
+        @click="createQuestion" 
+        type="primary" 
+        icon="el-icon-plus" 
+        circle></el-button>
+    </div>
+
+    <el-dialog
+      :visible.sync="dialogVisible"
+      :title="dialogTitle">
+      <el-form
+        :model="questionForm"
+        label-width="70px"
+        ref="questionForm"
+        label-position="left"
+        class="updateQuestionFormBox">
+        <el-form-item
+          prop="content"
+          label="题目"
+          :rules="[
+            { required: true, message: '题目不能为空', trigger: 'blur' },
+            { max: 100, message: '输入过长', trigger: 'blur' }
+          ]">
+          <el-input v-model="questionForm.content"></el-input>
+        </el-form-item>
+        <el-form-item
+          prop="answer"
+          label="答案"
+          :rules="[
+            { required: true, message: '答案不能为空', trigger: 'blur' },
+            { max: 20, message: '输入过长', trigger: 'blur' }
+          ]">
+          <el-input v-model="questionForm.answer"></el-input>
+        </el-form-item>
+        <el-form-item
+          v-for="(option, index) in questionForm.options"
+          :label="'选项' + (index+1)"
+          :key="index"
+          :prop="'options[' + index + ']'"
+          :rules="[
+            {required: true, message: '选项不能为空', trigger: 'blur'}
+          ]">
+          <el-input v-model="questionForm.options[index]"></el-input>
+          <el-button
+            type="danger"
+            icon="el-icon-close"
+            @click="removeOption(option)"
+            circle
+            size="mini"></el-button>
+        </el-form-item>
+        <el-button
+          type="primary"
+          @click="addOption()"
+          size="mini">添加选项</el-button>
+      </el-form>
+
+      <span slot="footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitQuestionForm">确 定</el-button>
+      </span>
+    </el-dialog>
   </el-row>
 </template>
 
@@ -53,7 +116,16 @@ export default {
   data() {
     return {
       questions: [],
-      deleteVisible: false
+      deleteVisible: false,
+      dialogVisible: false,
+      questionForm: {
+        content: "",
+        options: [],
+        chapter: "",
+        answer: ""
+      },
+      updateQuestionIndex: -1,
+      dialogTitle: ""
     };
   },
 
@@ -82,8 +154,17 @@ export default {
         answer: "5"
       }]
     },
+    createQuestion() {
+      this.dialogVisible = true
+      this.dialogTitle = "新建题目"
+      this.questionForm = {
+        content: "",
+        options: [],
+        chapter: "",
+        answer: ""
+      }
+    },
     selectQuestion(qs) {
-      console.log(qs)
       if (qs.length > 0) {
         this.deleteVisible = true
       } else {
@@ -99,8 +180,63 @@ export default {
     newQuestion() {
       // To Do
     },
-    updateQuestion(r) {
-      // To Do
+    updateQuestion(r, i) {
+      this.dialogVisible = true
+      this.dialogTitle = "修改题目"
+      this.questionForm = {
+        content: "",
+        options: [],
+        chapter: "",
+        answer: ""
+      }
+      this.questionForm.content = r.content
+      this.questionForm.answer = r.answer
+      this.questionForm.chapter = r.chapter
+      for (let o of r.options.split('_')) {
+        this.questionForm.options.push(o)
+      }
+      this.updateQuestionIndex = i
+      this.dialogVisible = true
+    },
+    submitQuestionForm() {
+      this.$refs['questionForm'].validate((valid) => {
+        if (valid) {
+          if (this.questionForm.options.indexOf(this.questionForm.answer) == -1) {
+            this.$message.error("答案未在选项中")
+            return
+          }
+          this.questionForm.options = this.questionForm.options.join("_")
+          if (this.questionForm.options.length > 198) {
+            this.$message.error("选项总长过长")
+            return
+          }
+          console.log(this.questionForm)
+          // To Do : api
+          if (this.dialogTitle === "新建题目") {
+            this.$message.success("新建成功")
+          } else {
+            this.$message.success("修改成功")
+          }
+          this.dialogVisible = false
+        } else {
+          return
+        }
+      })
+    },
+    removeOption(o) {
+      if (this.questionForm.options.length <= 1) {
+        this.$message.error("选项不能少于一个")
+        return
+      }
+      var index = this.questionForm.options.indexOf(o)
+      if (index != -1) {
+        this.questionForm.options.splice(index,1)
+      } else {
+        this.$message.error("错误")
+      }
+    },
+    addOption() {
+      this.questionForm.options.push("")
     }
   },
 
@@ -111,5 +247,21 @@ export default {
 </script>
 
 <style>
+.updateQuestionFormBox .el-input {
+  width: 80%;
+}
 
+.questionTableBank .createQuestionBtn {
+  position: fixed;
+  z-index: 2;
+  bottom: 30px;
+  right: 30px;
+  font-size: 16px;
+}
+
+.questionTableBank .createQuestionBtn .el-button {
+  width: 66px;
+  height: 66px;
+  font-size: 25px;
+}
 </style>

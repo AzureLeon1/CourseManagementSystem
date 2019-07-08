@@ -7,8 +7,12 @@
         <AllClass>
 
         </AllClass>
+<<<<<<< HEAD
      
      
+=======
+
+>>>>>>> master
     </el-main>
   </el-container>
 </template>
@@ -27,7 +31,7 @@ export default {
   },
   data () {
     return {
-    
+
     }
   }
 }

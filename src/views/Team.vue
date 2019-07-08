@@ -1,39 +1,38 @@
 <template>
   <div id="team">
-      <div class="team lists">
-        <div>
-        </div>
-        <div>
+    <el-container class="home">
+      <el-aside width="260px">
+        <class-nav :activeIndex="4"></class-nav>
+      </el-aside>
+      <el-main>
+        <div class="team lists">
+          <div></div>
+          <div>
             <TeamList />
+          </div>
         </div>
-        
-      </div>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
-
-import TeamList from "../components/TeamList"
+import ClassNav from "../components/ClassNav"
+import TeamList from "../components/TeamList";
 
 export default {
-  name: 'Team',
+  name: "Team",
   components: {
-      TeamList
+    TeamList,
+    ClassNav
   },
   data() {
-    return {
-
-    }
+    return {};
   },
-  methods: {
-
-  },
-  computed() {
-
-  }
-}
+  methods: {},
+  computed() {}
+};
 </script>
 
 <style>
-
 </style>
