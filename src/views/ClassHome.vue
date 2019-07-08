@@ -17,6 +17,7 @@ export default {
   components: {
     ClassNav
   },
+  props: ["class_id"],
   data () {
     return {
 

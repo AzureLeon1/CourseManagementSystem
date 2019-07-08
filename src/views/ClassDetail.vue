@@ -1,7 +1,7 @@
 <template>
   <el-container class="home">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <class-nav :activeIndex="0"></class-nav>
     </el-aside>
     <el-main>
      <ClassInfo></ClassInfo>
@@ -10,18 +10,18 @@
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
+import ClassNav from "../components/ClassNav"
 import ClassInfo from "../components/ClassInfo"
 
 export default {
   name: 'ClassDetail',
   components: {
-    UserNav,
+    ClassNav,
     ClassInfo
   },
   data () {
     return {
-     
+
     }
   }
 }

@@ -30,6 +30,8 @@ import ClassHome from '@/views/ClassHome'
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -119,9 +121,10 @@ export default new Router({
       component: ClassDetail
     },
     {
-      path: '/classHome',
+      path: '/class_home/:class_id',
       name: 'ClassHome',
-      component: ClassHome
+      component: ClassHome,
+      props: true
     }
   ]
 })

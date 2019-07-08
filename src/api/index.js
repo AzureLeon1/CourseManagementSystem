@@ -252,8 +252,8 @@ async function getJoinStatus(form)
 async function getjoinedClassList(id)
 {
   return [
-    {name : "同济大学高数1班", avatar : "../static/logo.png"},
-    {name : "同济大学高数2班", avatar : "../static/defaultAvatar.jpg"}
+    {id: 1, name : "高等数学", avatar : "http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg"},
+    {id: 2, name : "C语言程序设计", avatar : "http://img.cdn.leonwang.top/Xnip2019-07-08_20-00-45.jpg"}
 ]
 }
 

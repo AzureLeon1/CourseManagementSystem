@@ -1,12 +1,12 @@
 <template>
   <div class="classNav">
     <el-row style="text-align: center">
-      <img :src="user.avatar" class="avatar" @click="routeTo('UserProfile', {person_id: user.id})" />
+      <img :src="user.avatar" class="avatar" @click="routeTo('ClassDetail', {corp_id: 1})" />
       <div style="margin-top: -15px; font-size: 14px; font-weight: 300; ">{{user.name}}</div>
     </el-row>
     <el-row style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 14px;">
       <!-- TODO: 跳转到班内学生 -->
-        学生人数：<el-button type="text" size="mini" @click="routeTo(UserProfile)">N/A</el-button>
+        学生人数：<el-button type="text" size="mini" @click="routeTo()">N/A</el-button>
     </el-row>
     <ul>
       <li
@@ -20,7 +20,7 @@
       </li>
     </ul>
     <el-row style="text-align: center;">
-      <el-button type="danger" size="small" class="logoutBtn" @click="exit"><i class="el-icon-back"></i> 返回</el-button>
+      <el-button type="danger" size="small" class="logoutBtn" @click="routeTo('MyClass')"><i class="el-icon-back"></i> 返回</el-button>
     </el-row>
   </div>
 </template>
@@ -135,9 +135,6 @@ export default {
     },
     routeTo(name, params) {
       this.$router.push({ name, params });
-    },
-    exit() {
-      this.$router.push('MyClass')
     }
   },
 
