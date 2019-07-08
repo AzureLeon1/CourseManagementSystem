@@ -4,6 +4,11 @@ import profile from './modules/profile.js'
 import personinfo from './modules/personinfo.js'
 import allpatch from './modules/allpatch.js'
 import classlistitem from './modules/classlistitem.js'
+import twitter from './modules/twitter.js'
+import alldelete from './modules/alldelete.js'
+import allpost from './modules/allpost.js'
+import exam from './modules/exam.js'
+import classinfo from './modules/classinfo.js'
 
 Vue.use(Vuex)
 
@@ -14,7 +19,12 @@ export default new Vuex.Store({
     profile,
     personinfo,
     classlistitem,
-    allpatch
+    allpatch,
+    twitter,
+    alldelete,
+    allpost,
+    exam,
+    classinfo
   },
   strict: debug
 })

@@ -5,7 +5,8 @@ import { parseAuth } from '@/utils/util.js'
 const state = {
     user: new User(),
     // corp: new CorpDetail(),
-    role: window.localStorage.role
+    role: window.localStorage.role,
+    joinedclasslist:[]
 }
 
 const getters = {
@@ -70,6 +71,13 @@ const actions = {
       commit('setUser',data.data)
     },
 
+    async getClassList({commit, state}, user_id)
+    {
+       const clubs = await api.getjoinedClassList(user_id)
+       commit('setjoinedClassList', clubs)
+
+    }
+
 }
 
 const mutations = {
@@ -85,6 +93,11 @@ const mutations = {
     // },
     setRole(state,props){
         state.role = props
+    },
+
+    setjoinedClassList(state, props){
+        state.joinedclasslist = []
+        state.joinedclasslist.push(...props)
     }
 }
 

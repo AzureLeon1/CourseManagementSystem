@@ -5,7 +5,8 @@ const state = {
     // TODO: 查看用户参与的课程班级
     personinfo: new User(),
     follow:null,
-    fans:null
+    fans:null,
+   
 }
 
 const getters = {
