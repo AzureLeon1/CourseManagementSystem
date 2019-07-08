@@ -289,7 +289,7 @@ async function getMessageWithID(id){
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"不就是瞎编吗？谁不会啊！",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -301,7 +301,7 @@ async function getMessageWithID(id){
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"发现了一个问题，这个content的内容存不了分行的。完蛋。",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -313,7 +313,7 @@ async function getMessageWithID(id){
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -325,7 +325,7 @@ async function getMessageWithID(id){
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"数据造假，从我做起。学术造假，从我做起。",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -348,4 +348,8 @@ async function getMessageWithID(id){
   return res.data;
   // const res = await request(GET, '/api/broadcasts', {'user': id});
   // return res;
+}
+
+async function createMessage(form){
+  
 }
