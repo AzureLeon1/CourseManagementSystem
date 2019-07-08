@@ -11,7 +11,7 @@
                         <div>{{item.name}}</div>
                     
                      </div>
-                     <div class="a_class" @click="$router.push({name: 'GlobalClass'})">
+                     <div class="a_class" @click="jump()">
                         <Avatar :src="addimg" :size="40" :border="false"/>
 
                      </div>
@@ -46,6 +46,17 @@ export default {
            addimg : '../static/add.png'
           
        }
+
+    },
+    methods: {
+        jump(){
+            if (this.$store.state.profile.user.role == 'student')
+               this.$router.push({name : 'GlobalClass'})
+
+            // else if (this.$store.state.profile.user.role == 'teacher')
+
+
+        }
 
     },
     computed: {
