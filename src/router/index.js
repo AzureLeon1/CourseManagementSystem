@@ -6,6 +6,11 @@ import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Team from '@/views/Team'
+import Attendance from '@/views/Attendance'
+import Exam from '@/views/Exam'
+import AnswerExam from '@/views/AnswerExam'
+import NewExam from '@/views/NewExam'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
@@ -26,7 +31,12 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: Template
+      component: NewExam
+    },
+    {
+      path: '/courseview',
+      name: 'Courseview',
+      component: Courseview
     },
     {
       path: '/courseware',
@@ -34,7 +44,7 @@ export default new Router({
       component: Courseware
     },
     {
-      path:'/MessageHome',
+      path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
     },
@@ -48,17 +58,22 @@ export default new Router({
       name: 'Register',
       component: Register
     },
-  {
-    path: '/courseview',
-    name: 'courseview',
-    component: Courseview
-  },
-  {
-    path: '/coursetable',
-    name: 'CourseTable',
-    component: CourseTable
-  },
-  {
+    {
+      path: '/team',
+      name: 'Team',
+      component: Team,
+    },
+    {
+      path: '/attendance',
+      name: 'Attendance',
+      component: Attendance,
+    },
+    {
+      path: '/coursetable',
+      name: 'CourseTable',
+      component: CourseTable
+    },
+    {
       path: '/user_profile/:person_id',
       name: 'UserProfile',
       component: UserProfile,
