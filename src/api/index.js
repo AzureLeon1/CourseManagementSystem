@@ -1,7 +1,8 @@
-import { delay } from '@/utils/util.js'
-import { ok } from 'assert';
+﻿import {
+  delay
+} from '@/utils/util.js'
 
-const server = 'http://192.168.1.15:8080/'
+const server = 'http://192.168.1.16:8080/'
 
 const headers = {}
 
@@ -19,6 +20,12 @@ export default {
   getPersonFollowFans,
   getClassListItems,
   changeUserInfo,
+  getUserTwitter,
+  broadcastStudent,
+  getClassInfo,
+  joinClass,
+  getJoinStatus,
+  getjoinedClassList,
   getMessageWithID
 }
 
@@ -50,8 +57,6 @@ async function request(method, url, data) {
       headers
     })
     var mes = res;
-    console.log("look");
-    console.log(mes);
     if (res.status < 400) {
       if (res.data.code && res.data.code < 400) {
         return res
@@ -73,6 +78,7 @@ async function request(method, url, data) {
         showClose: true,
       })
     }
+
     console.error(err)
   }
 }
@@ -88,7 +94,7 @@ async function getAuthority(form) {
     "college": "软件学院",
     "following": 0,
     "follower": 0,
-    "email" : "leonwangchn@163.com"
+    "email": "leonwangchn@163.com"
   }
   await delay(1000)
   return data
@@ -101,91 +107,245 @@ async function register(form) {
   return res.data
 }
 
-async function getPersonInfo(id){
-  const data={
-    "user_ID": 100001,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "王亮",
-    "role": "student",
-    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-    "phone_number": "18916083381",
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email" : "leonwangchn@163.com"
+async function getPersonInfo(id) {
+  var data = {}
+  if (id == 100002) {
+    data = {
+      "user_ID": 100002,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+      "name": "施程航",
+      "role": "student",
+      "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      "phone_number": 13365445687,
+      "college": "软件学院",
+      "following": 0,
+      "follower": 0,
+      "email": "chenghang_shi@gmail.com"
+    }
+  } else {
+    data = {
+      "user_ID": 100001,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+      "name": "王亮",
+      "role": "student",
+      "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+      "phone_number": "18916083381",
+      "college": "软件学院",
+      "following": 0,
+      "follower": 0,
+      "email": "leonwangchn@163.com"
+    }
   }
-  await delay(1000)
+  console.log(data);
+  // await delay(1000)
   return data
   // const res = await request(GET, `/api/users/${id}`)
   // return res.data
 }
 
-async function getPersonFollowFans(id){
+async function getPersonFollowFans(id) {
   const data = {
-    follow:11,
-    fans:12
+    follow: 11,
+    fans: 12
   }
   await delay(1000)
   return data
 }
 
-async function getClassListItems(){
+async function getClassListItems() {
   const res = await request(GET, '/api/club_info');
   return res.data.class_es
+}
+
+async function getClassListItems(){
+ // const res = await request(GET, '/api/club_info');
+ // return res.data.class_es
+ const data = [
+   {name: "高数1班", content : "张弢老师班", course_id : 1, sec_id : 1, semester : 'fall', year : 2019},
+   {name: "高数2班", content : "孙慧娟老师", course_id : 1, sec_id : 2, semester : 'fall', year : 2019}
+ ]
+
+ return data
 
 }
- //all patch start from here
- //============================================================
- async function changeUserInfo(id, form){
+
+async function getUserTwitter() {
+  const data = {
+    my_twitters: [{
+        twitter_id: 111,
+        user_id: 100001,
+        user_name: '王亮',
+        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+        content: '数据库什么都听不懂，呜呜呜～',
+        time: '2019.7.8 12:30',
+        image: 'http://img.cdn.leonwang.top/Qf9SNmS-best-pokemon-wallpapers.png'
+      },
+      {
+        twitter_id: 112,
+        user_id: 112,
+        user_name: '何立仁',
+        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+        content: '数据库只考了99分，呜呜呜～',
+        time: '2019.7.8 12:32'
+      }
+    ],
+    friend_twitters: [{
+        twitter_id: 113,
+        user_id: 113,
+        user_name: '周泓光',
+        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+        content: '哈哈哈哈哈哈',
+        time: '2019.7.8 12:31'
+      },
+      {
+        twitter_id: 114,
+        user_id: 100002,
+        user_name: '施程航',
+        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+        content: '哈哈哈哈哈哈',
+        time: '2019.7.8 12:34'
+      }
+    ]
+  }
+  // const data = await request(GET, `/api/twitter`)
+  return data
+}
+
+async function broadcastStudent(form){
+  const res = await request(POST,'/api/twitter',form)
+  console.log(res)
+}
+
+//all patch start from here
+//============================================================
+async function changeUserInfo(id, form) {
   const res = await request(PATCH, '/api/users/${id}', form)
   return res
 }
 
-//==========广播API===========
-//===========start===========
+
+ async function getClassInfo(form){
+  // const res = await request(GET, `/api/club_info/${id}`)
+  // console.log('corp_info of ', res)
+  // return res.data.data
+  const data = {
+    name : '高数1班',
+    teacher_name : '孙娟娟',
+    content : '这是同济大学2019年春季学期高数1班',
+    avatar : '../static/defaultAvatar.jpg'
+  }
+  return data
+
+}
+
+async function joinClass(form)
+{
+
+
+
+}
+
+async function getJoinStatus(form)
+{
+  return "已加入"
+
+}
+
+async function getjoinedClassList(id)
+{
+  return [
+    {name : "同济大学高数1班", avatar : "../static/logo.png"},
+    {name : "同济大学高数2班", avatar : "../static/defaultAvatar.jpg"}
+]
+}
+
 async function getMessageWithID(id){
   //fake message data;
   const res = {
     "data":{
       "broadcasts":[{
         "broadcast_id":"000001",
-        "content":"第一条广播",
+        "content":"这是一条很长的广播！第一条广播！",
         "type":1,
         "scope":1,
         "sec_id":111,
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997.12.11, 12.30", 
-        "start_time":"1997.12.11, 12.30",
-        "end_time":"1997.12.14, 12.30"
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11 12:30",
+        "end_time":"1997-12-14 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"第二条广播",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
         "type":1,
         "scope":1,
         "sec_id":111,
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997.12.11, 12.30", 
-        "start_time":"1997.12.11, 12.30",
-        "end_time":"1997.12.13, 12.30"
-      }],
-      "code":200,
-      "message":ok
-    }
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },
+    ]
+    },
+    "code":200,
+    "message":'ok'
   }
-  let data = res.data.broadcasts;
-  console.log("index.js===========");
+  const data = res.data.broadcasts;
   console.log(data);
+  console.log(typeof(data));
   await(delay(1000));
-  return data;
+  return res.data;
   // const res = await request(GET, '/api/broadcasts', {'user': id});
   // return res;
 }
-
-
-
-//=========== end ===========
-//==========广播API===========

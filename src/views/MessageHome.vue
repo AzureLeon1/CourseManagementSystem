@@ -5,7 +5,7 @@
     </el-aside>
     <el-main>
       <div id="MessageHome">
-        <el-container style="min-height: 500px; width: 70%; margin:20px auto 20px auto;">
+        <el-container style="min-height: 750px; width: 70%; margin:20px auto 20px auto;">
           <el-header name="el-head"></el-header>
           <el-main style="padding: 15px; border: 1px solid #eee">
             <el-table :data="tableData" @row-click="readMsg">
@@ -19,7 +19,7 @@
                   <el-link class="from">{{scope.row.from}}</el-link>
                 </template>
               </el-table-column>
-              <el-table-column prop="time" label="时间" width="150px">
+              <el-table-column prop="time" label="时间" width="160px">
                 <template slot-scope="scope">
                   <i class="el-icon-time"></i>
                   <span>{{scope.row.publish_time}}</span>
@@ -38,7 +38,7 @@
         <!-- float: Add button -->
         <div class="addbutton-wrapper formanager">
           <!-- <el-button @click="createMsg"-->
-          <el-button @click="getMessageWithID(111)"
+          <el-button @click="createMsg"
             style="height: 50px; width:50px; text-align: center; border-radius:50%; padding: 17px 0;"
           >
             <i class="el-icon-plus"></i>
@@ -61,6 +61,7 @@ import UserNav from "@/components/UserNav";
 import MessageDetailed from "@/components/MessageDetailed";
 import MessageCreate from "@/components/MessageCreate";
 import api from "@/store/modules/message.js";
+// import api from "@/api/index.js";
 
 export default {
   name: "MessageHome",
@@ -71,21 +72,22 @@ export default {
   },
   data() {
     const simData = {
-      broadcast_id: 123123, //广播的ID
-      type: 1,
-      content:
+      'broadcast_id': 123123, //广播的ID
+      'type': 1,
+      'content':
         "我是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的广播",
-      from: "计算机系统结构",
-      start_time: "2019-6-15 11:11",
-      end_time: "2019-6-23 12:22",
-      publish_time: "2019-6-19 12:24"
-    };
+      'from': "计算机系统结构",
+      'start_time': "2019-6-15 11:11",
+      'end_time': "2019-6-23 12:22",
+      'publish_time': "2019-6-19 12:24"
+    }
+    
     return {
       content: "",
       from: "",
       publish_time: "",
-
-      tableData: Array(7).fill(simData)
+      tableData: Array(0),
+      // tableData: Array(20).fill(simData);
     };
   },
   methods: {
@@ -114,15 +116,16 @@ export default {
     },
 
     //back-end
-    createMsg(){
-
-    },
-
     async getMessageWithID(id){
       var message = await api.getMessageWithID(id);
-      console.log("vue==================");
-      console.log(message);
+      this.tableData=Array(0);
+      for(let i=0;i<message.length;i++){
+        this.tableData.push(message[i]);
+      }
     }
+  },
+  mounted(){
+    this.getMessageWithID(111);
   }
 };
 </script>
