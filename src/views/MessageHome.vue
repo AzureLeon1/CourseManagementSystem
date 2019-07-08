@@ -100,11 +100,11 @@ export default {
     },
     createMsg(){
         this.msc = this.$refs.msc;
-        this.msc.invisible=false;
+        this.msc.showCreateMsg=true;
     },
     hideCreateMsg(){
         this.msc = this.$refs.msc;
-        this.msc.invisible=true;
+        this.msc.showCreateMsg=false;
     }
   }
 };
@@ -121,7 +121,7 @@ export default {
 
 .addbutton-wrapper {
   position: absolute;
-  right: 12%;
+  right: 100px;
   bottom: 25%;
 }
 </style>

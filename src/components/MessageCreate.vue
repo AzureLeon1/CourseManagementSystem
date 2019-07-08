@@ -1,62 +1,61 @@
 <template>
-<div v-bind:class="{wrapper:flag_true, hidden:invisible}" >
-    <div class="title">创建广播</div>
-    <el-form ref="form" :model="form" label-width="70px" label-position="left">
-        <el-form-item label="广播范围">
-            <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="全局广播" value="beijing"></el-option>
-            <el-option label="计算机系统结构" value="shanghai"></el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item label="起始时间">
-            <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-            </el-col>
-            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
-            <el-col :span="11">
-            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-            </el-col>
-        </el-form-item>
-        <el-form-item label="结束时间">
-            <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-            </el-col>
-            <el-col class="line" :span="2" style="text-align: center;">-</el-col>
-            <el-col :span="11">
-            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-            </el-col>
-        </el-form-item>
-        <el-form-item label="广播类型">
-            <el-radio-group v-model="form.resource">
-            <el-radio label="作业广播"></el-radio>
-            <el-radio label="活动广播"></el-radio>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item label="广播内容">
-            <el-input type="textarea" maxlength="200" :rows="6" show-word-limit v-model="form.desc"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <el-col :span="11" style="text-align: center;">
-                <el-button type="primary" @click="createMsg">立即创建</el-button>
-            </el-col>
-            <el-col :span="7" style="text-align: center;">
-                <el-button @click="cancelWindow">取消</el-button>
-            </el-col>
-        </el-form-item>
-    </el-form>
-
-    <!-- float element: close button -->
-    <div class="close-btn">
-        <el-button icon="el-icon-close" size="small" circle @click="cancelWindow"></el-button>
+<el-dialog 
+:visible.sync="showCreateMsg"
+width="400px;">
+    <div slot="title" class="title">创建广播</div>
+    <div class="body" style="padding: 0 15px;">
+        <el-form ref="form" :model="form" label-width="70px" label-position="left">
+            <el-form-item label="广播范围">
+                <el-select v-model="form.region" placeholder="请选择活动区域">
+                <el-option label="全局广播" value="beijing"></el-option>
+                <el-option label="计算机系统结构" value="shanghai"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="起始时间">
+                <el-col :span="11">
+                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+                </el-col>
+                <el-col class="line" :span="2" style="text-align: center;">-</el-col>
+                <el-col :span="11">
+                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                </el-col>
+            </el-form-item>
+            <el-form-item label="结束时间">
+                <el-col :span="11">
+                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+                </el-col>
+                <el-col class="line" :span="2" style="text-align: center;">-</el-col>
+                <el-col :span="11">
+                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                </el-col>
+            </el-form-item>
+            <el-form-item label="广播类型">
+                <el-radio-group v-model="form.resource">
+                <el-radio label="作业广播"></el-radio>
+                <el-radio label="活动广播"></el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="广播内容">
+                <el-input type="textarea" maxlength="200" :rows="6" show-word-limit v-model="form.desc"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-col :span="11" style="text-align: center;">
+                    <el-button type="primary" @click="createMsg">立即创建</el-button>
+                </el-col>
+                <el-col :span="7" style="text-align: center;">
+                    <el-button @click="cancelWindow">取消</el-button>
+                </el-col>
+            </el-form-item>
+        </el-form>
     </div>
-</div>
+</el-dialog>
 </template>
 
 <script>
 export default {
     name: 'MessageCreate',
     props:{
-        invisible:{
+        showCreateMsg:{
             default: true
         }
     },
@@ -74,11 +73,6 @@ export default {
           desc: ''
         }
       }
-    },
-    watch:{
-        invisible(val){
-            this._invisible=val;
-        }
     },
     methods: {
         cancelWindow(){
@@ -106,6 +100,7 @@ export default {
         /* display */
         background: #fff;
         border-radius: 10px;
+    
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         /* transition */
         transition-property: display;
@@ -113,7 +108,6 @@ export default {
     }
 
     .title{
-        height: 60px;
         text-align: center;
         font-size: 14px;
         letter-spacing: .2em;
