@@ -29,7 +29,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: CheckExam
+      component: NewExam
     },
     {
       path: '/courseware',

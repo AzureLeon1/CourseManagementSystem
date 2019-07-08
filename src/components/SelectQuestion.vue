@@ -30,7 +30,15 @@
             :index="index">
             <el-row v-if="q.content.length < 40">{{q.content}}</el-row>
             <el-row v-else>{{q.content.slice(0,40)}}......</el-row>
-            <el-divider></el-divider>
+            <span style="color: gray; font-size: 14px">分数</span>
+            <el-input-number
+              v-model="q.score"
+              :min="1"
+              label="分数"
+              controls-position="right"
+              size="mini"
+              style="margin-top:20px">分数</el-input-number>
+            <el-divider style="margin: 12px 0;"></el-divider>
           </SlickItem>
         </SlickList>
       </el-col>

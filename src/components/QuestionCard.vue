@@ -65,4 +65,8 @@ export default {
   display: block;
   margin: 5px 0;
 }
+
+.questionCardBox .el-divider--horizontal {
+  margin: 14px 0;
+}
 </style>
