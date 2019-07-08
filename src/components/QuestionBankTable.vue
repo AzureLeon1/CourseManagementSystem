@@ -27,7 +27,7 @@
             <el-button 
               type="text"
               size="mini"
-              @click="updateQuestion(scope.row)">修改</el-button>
+              @click="updateQuestion(scope.row, scope.$index)">修改</el-button>
             <el-button
               type="text"
               size="mini"
@@ -43,6 +43,61 @@
         @click="deleteSelectedQuestion()"
         style="color: #F56C6C; margin-top: 20px">删除所选</el-button>
     </el-col>
+
+    <el-dialog
+      :visible.sync="dialogVisible"
+      title="修改题目">
+      <el-form
+        :model="updateForm"
+        label-width="70px"
+        ref="updateForm"
+        label-position="left"
+        class="updateQuestionFormBox">
+        <el-form-item
+          prop="content"
+          label="题目"
+          :rules="[
+            { required: true, message: '题目不能为空', trigger: 'blur' },
+            { max: 100, message: '输入过长', trigger: 'blur' }
+          ]">
+          <el-input v-model="updateForm.content"></el-input>
+        </el-form-item>
+        <el-form-item
+          prop="answer"
+          label="答案"
+          :rules="[
+            { required: true, message: '答案不能为空', trigger: 'blur' },
+            { max: 20, message: '输入过长', trigger: 'blur' }
+          ]">
+          <el-input v-model="updateForm.answer"></el-input>
+        </el-form-item>
+        <el-form-item
+          v-for="(option, index) in updateForm.options"
+          :label="'选项' + (index+1)"
+          :key="index"
+          :prop="'options[' + index + ']'"
+          :rules="[
+            {required: true, message: '选项不能为空', trigger: 'blur'}
+          ]">
+          <el-input v-model="updateForm.options[index]"></el-input>
+          <el-button
+            type="danger"
+            icon="el-icon-close"
+            @click="removeOption(option)"
+            circle
+            size="mini"></el-button>
+        </el-form-item>
+        <el-button
+          type="primary"
+          @click="addOption()"
+          size="mini">添加选项</el-button>
+      </el-form>
+
+      <span slot="footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitUpdateQuestion">确 定</el-button>
+      </span>
+    </el-dialog>
   </el-row>
 </template>
 
@@ -53,7 +108,15 @@ export default {
   data() {
     return {
       questions: [],
-      deleteVisible: false
+      deleteVisible: false,
+      dialogVisible: false,
+      updateForm: {
+        content: "",
+        options: [],
+        chapter: "",
+        answer: ""
+      },
+      updateQuestionIndex: -1
     };
   },
 
@@ -83,7 +146,6 @@ export default {
       }]
     },
     selectQuestion(qs) {
-      console.log(qs)
       if (qs.length > 0) {
         this.deleteVisible = true
       } else {
@@ -99,8 +161,58 @@ export default {
     newQuestion() {
       // To Do
     },
-    updateQuestion(r) {
-      // To Do
+    updateQuestion(r, i) {
+      this.dialogVisible = true
+      this.updateForm = {
+        content: "",
+        options: [],
+        chapter: "",
+        answer: ""
+      }
+      this.updateForm.content = r.content
+      this.updateForm.answer = r.answer
+      this.updateForm.chapter = r.chapter
+      for (let o of r.options.split('_')) {
+        this.updateForm.options.push(o)
+      }
+      this.updateQuestionIndex = i
+      this.dialogVisible = true
+    },
+    submitUpdateQuestion() {
+      this.$refs['updateForm'].validate((valid) => {
+        if (valid) {
+          if (this.updateForm.options.indexOf(this.updateForm.answer) == -1) {
+            this.$message.error("答案未在选项中")
+            return
+          }
+          this.updateForm.options = this.updateForm.options.join("_")
+          if (this.updateForm.options.length > 198) {
+            this.$message.error("选项总长过长")
+            return
+          }
+          console.log(this.updateForm)
+          // To Do : api
+          this.$message.success("修改成功")
+          this.dialogVisible = false
+        } else {
+          return
+        }
+      })
+    },
+    removeOption(o) {
+      if (this.updateForm.options.length <= 1) {
+        this.$message.error("选项不能少于一个")
+        return
+      }
+      var index = this.updateForm.options.indexOf(o)
+      if (index != -1) {
+        this.updateForm.options.splice(index,1)
+      } else {
+        this.$message.error("错误")
+      }
+    },
+    addOption() {
+      this.updateForm.options.push("")
     }
   },
 
@@ -111,5 +223,7 @@ export default {
 </script>
 
 <style>
-
+.updateQuestionFormBox .el-input {
+  width: 80%;
+}
 </style>
