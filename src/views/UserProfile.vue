@@ -9,9 +9,28 @@
           <div class="title">个人信息</div>
 
           <div class="items">
-            <div style="margin-left:50%; transform: translate(-30%, 0); margin-bottom: 30px; margin-top: 20px;">
+            <div
+              style="margin-left:50%; transform: translate(-30%, 0); margin-bottom: 30px; margin-top: 20px;"
+            >
               <Avatar :src="userinfo.avatar" :size="120" :border="true" />
             </div>
+
+            <div style="margin-left: auto; margin-right: auto; display: table;">
+              <el-button
+              size="mini"
+              style="font-weight: 300; "
+              v-if="!isCurrentUser && !followed"
+              @click="follow"
+            >关 注</el-button>
+            <el-button
+              size="mini"
+              style="font-weight: 300"
+              v-if="!isCurrentUser && followed"
+              @click="unfollow"
+            >取 关</el-button>
+            </div>
+
+
             <div class="item">
               <div class="key">
                 <i class="el-icon-user"></i> &nbsp; 姓名
@@ -111,7 +130,7 @@
 <script>
 import UserNav from "../components/UserNav";
 import { token, action, domain } from "../plugins/qiniuToken";
-import Avatar from "../components/Avatar"
+import Avatar from "../components/Avatar";
 export default {
   name: "UserProfile",
   components: {
@@ -191,6 +210,18 @@ export default {
       this.userinfo.college = user.college;
       this.userinfo.role = user.role;
       this.userinfo = Object.assign({}, this.userinfo);
+    },
+    follow() {
+      this.$store.dispatch("twitter/followUser", {
+        id: this.person_id,
+        user: this.userId
+      });
+    },
+    unfollow() {
+      this.$store.dispatch("twitter/unfollowUser", {
+        id: this.person_id,
+        user: this.userId
+      });
     }
   },
   mounted() {
@@ -215,19 +246,27 @@ export default {
     },
     identity_zh() {
       return this.identityZh();
+    },
+    followed() {
+      const f = this.$store.state.twitter.followPeopleItems;
+      console.log(f, this.person_id);
+      return f.filter(x => x.student_ID == this.person_id).length === 1;
+    },
+    userId() {
+      return this.$store.state.profile.user.id;
     }
   },
   watch: {
     user: {
       deep: true,
-      handler (user) {
-        this.syncUser(user)
+      handler(user) {
+        this.syncUser(user);
       }
     },
     person_id: {
-      handler (person_id) {
+      handler(person_id) {
         this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
-        this.syncUser(this.user)
+        this.syncUser(this.user);
       }
     }
   }
@@ -288,7 +327,6 @@ export default {
   letter-spacing: 1px;
   font-weight: 300;
   .item {
-
     display: flex;
     margin: 15px 0;
     margin-left: 10%;
