@@ -1,5 +1,4 @@
 <template>
-  <el-header id="header">
     <div class="container">
       <div id="title" @click="routeTo('Homepage')">课程班级管理系统</div>
 
@@ -9,7 +8,6 @@
 
 
     </div>
-  </el-header>
 
 </template>
 
@@ -36,26 +34,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-  #header, .container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-  }
-  #header {
-    position: relative;
-    box-shadow: 0 2px 20px -11px black;
-  }
   .container {
-    max-width: 800px;
-    margin-left: 7%;
+    position: absolute;
+    z-index: 2;
 
-    & > #title {
-      cursor: pointer;
-    }
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: 50px;
 
+    box-shadow: 0 2px 20px -11px black;
+    background: #292961;
   }
+
   #title {
     font-size: 1.2em;
     margin-right: 20px;
