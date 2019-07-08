@@ -1,7 +1,7 @@
 <template>
   <el-container class="discussion">
-    <el-aside width="270px">
-      <h>班级导航栏</h>
+    <el-aside width="260px">
+      <class-nav :activeIndex="8"></class-nav>
     </el-aside>
     <el-container>
       <el-header >
@@ -25,12 +25,13 @@
 </template>
 
 <script>
+import ClassNav from "../components/ClassNav"
 import DiscussionHome from "../components/DiscussHome"
 export default {
   name: 'Discussion',
   components: {
-    DiscussionHome
-
+    DiscussionHome,
+    ClassNav
   },
   data() {
     return {
@@ -50,11 +51,6 @@ export default {
 </script>
 
 <style>
-.el-aside{
-    color: #333;
-    text-align: center;
-    line-height: 400px;
-}
 
 .search{
     margin-top:2%;

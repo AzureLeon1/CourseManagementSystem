@@ -68,13 +68,13 @@ export default {
           {
             index: 4,
             title: "项目组队",
-            routeName: "",
+            routeName: "Team",
             icon: "el-icon-user"
           },
           {
             index: 5,
             title: "讨论区",
-            routeName: "",
+            routeName: "Discussion",
             icon: "el-icon-microphone"
           }
         );
@@ -88,7 +88,7 @@ export default {
           },
           {
             index: 2,
-            title: "发布消息",
+            title: "班级消息",
             routeName: "",
             icon: "el-icon-chat-line-square"
           },
@@ -107,13 +107,13 @@ export default {
           {
             index: 5,
             title: "项目组队",
-            routeName: "",
+            routeName: "Team",
             icon: "el-icon-user"
           },
           {
             index: 6,
             title: "考勤管理",
-            routeName: "",
+            routeName: "Attendance",
             icon: "el-icon-postcard"
           },
           {
@@ -125,7 +125,7 @@ export default {
           {
             index: 8,
             title: "讨论区",
-            routeName: "",
+            routeName: "Discussion",
             icon: "el-icon-microphone"
           }
         );
@@ -152,6 +152,8 @@ export default {
   padding: 0;
   box-shadow: 2px 2px 20px -11px black;
   min-height: 630px;
+  /* height: 500px; */
+
 }
 
 .classNav img.avatar {

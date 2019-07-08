@@ -88,7 +88,7 @@ async function getAuthority(form) {
     "user_ID": 100001,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
     "name": "王亮",
-    "role": "student",
+    "role": "teacher_edu",
     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
     "phone_number": "18916083381",
     "college": "软件学院",
@@ -273,7 +273,7 @@ async function getMessageWithID(id){
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997-12-11 12:30", 
+        "publish_time":"1997-12-11 12:30",
         "start_time":"1997-12-11 12:30",
         "end_time":"1997-12-14 12:30"
       },{
@@ -285,7 +285,7 @@ async function getMessageWithID(id){
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997-12-11 12:30", 
+        "publish_time":"1997-12-11 12:30",
         "start_time":"1997-12-11- 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
@@ -297,7 +297,7 @@ async function getMessageWithID(id){
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997-12-11 12:30", 
+        "publish_time":"1997-12-11 12:30",
         "start_time":"1997-12-11- 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
@@ -309,7 +309,7 @@ async function getMessageWithID(id){
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997-12-11 12:30", 
+        "publish_time":"1997-12-11 12:30",
         "start_time":"1997-12-11- 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
@@ -321,7 +321,7 @@ async function getMessageWithID(id){
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997-12-11 12:30", 
+        "publish_time":"1997-12-11 12:30",
         "start_time":"1997-12-11- 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
@@ -333,7 +333,7 @@ async function getMessageWithID(id){
         "course_id": 1111,
         "semester": "spring",
         "year": 2019,
-        "publish_time":"1997-12-11 12:30", 
+        "publish_time":"1997-12-11 12:30",
         "start_time":"1997-12-11- 12:30",
         "end_time":"1997-12-13- 12:30"
       },

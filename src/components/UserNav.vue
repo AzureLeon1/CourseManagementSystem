@@ -52,7 +52,7 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      if (this.user.role == "student" || this.user.role == "teacher") {
+      if (this.user.role == "student" || this.user.role == "teacher_edu") {
         this.menu.push(
           {
             index: 1,
@@ -85,7 +85,7 @@ export default {
             icon: "el-icon-data-analysis"
           }
         );
-      } else if (this.user.role == "jwteacher") {
+      } else if (this.user.role == "tearcher_edu") {
         this.menu.push({
           index: 1,
           title: "发布动态",
