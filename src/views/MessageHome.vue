@@ -28,7 +28,7 @@
             </el-table>
           </el-main>
           <el-footer style="text-align: center; margin: 10px auto;">
-            <el-pagination layout="prev, pager, next" :total="1000"></el-pagination>
+            <el-pagination layout="prev, pager, next" :total="page_total" @current-change="onPageChange"></el-pagination>
           </el-footer>
         </el-container>
 
@@ -83,14 +83,24 @@ export default {
     }
     
     return {
+      //pagination
+      page_total: 10,
+      //detailed message
       content: "",
       from: "",
       publish_time: "",
+      //all messages
+      messages: null,
       tableData: Array(0),
       // tableData: Array(20).fill(simData);
     };
   },
   methods: {
+    //all
+    initial(){
+      this.getMessageWithID(111);
+      
+    },
     //front-end
     readMsg(row) {
         this.msr = this.$refs.msr;
@@ -114,18 +124,42 @@ export default {
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=false;
     },
+    //pagination
+    onPageChange(pagenum){
+      this.tableData=Array(0);
+      let start_item=(pagenum-1)*7;
+      let end_item=start_item+7;
+      end_item=this.messages.length<end_item?this.messages.length:end_item;
+      for(let i=start_item;i<end_item;i++){
+        this.tableData.push(this.messages[i]);
+      }
+    },
+
 
     //back-end
     async getMessageWithID(id){
-      var message = await api.getMessageWithID(id);
-      this.tableData=Array(0);
-      for(let i=0;i<message.length;i++){
-        this.tableData.push(message[i]);
+      //get data
+      var getMessage = await api.getMessageWithID(id);
+      this.messages=Array(0);
+      for(let i=0;i<getMessage.length;i++){
+        this.messages.push(getMessage[i]);
       }
+
+      //update page 1 content
+      let range=this.messages.length<7?this.messages.length:7;
+      console.log(range);
+      for(let i=0;i<range;i++){
+        this.tableData.push(this.messages[i]);
+      }
+
+      //update pagination page_total
+      this.page_total=Math.ceil(this.messages.length/7);
+      this.page_total=this.page_total*10;
+      // console.log(this.page_total);
     }
   },
   mounted(){
-    this.getMessageWithID(111);
+    this.initial();
   }
 };
 </script>

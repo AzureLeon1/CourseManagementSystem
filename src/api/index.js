@@ -342,8 +342,8 @@ async function getMessageWithID(id){
     "message":'ok'
   }
   const data = res.data.broadcasts;
-  console.log(data);
-  console.log(typeof(data));
+  // console.log(data);
+  // console.log(typeof(data));
   await(delay(1000));
   return res.data;
   // const res = await request(GET, '/api/broadcasts', {'user': id});
