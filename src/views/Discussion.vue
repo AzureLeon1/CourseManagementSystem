@@ -1,7 +1,7 @@
 <template>
   <el-container class="discussion">
     <el-aside width="260px">
-      <class-nav :activeIndex="8"></class-nav>
+      <class-nav :activeIndex="5"></class-nav>
     </el-aside>
     <el-container>
       <el-header >
