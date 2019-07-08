@@ -89,6 +89,7 @@ export default {
     // }
   },
   mounted() {
+    // console.log(this.$route.params.course_id);
     this.setValidate();
     // TODO: 已登录状态下直接跳转
     // if (this.userId) {

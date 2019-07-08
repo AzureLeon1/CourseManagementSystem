@@ -10,6 +10,7 @@ import allpost from './modules/allpost.js'
 import exam from './modules/exam.js'
 import team from './modules/team.js'
 import attendance from './modules/attendance.js'
+import classinfo from './modules/classinfo.js'
 
 Vue.use(Vuex)
 
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     allpost,
     exam,
     team,
-    attendance
+    attendance,
+    classinfo
   },
   strict: debug
 })

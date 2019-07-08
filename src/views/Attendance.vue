@@ -1,16 +1,25 @@
 <template>
   <div id="attendance">
-    <div class="attendance form">
+    <el-container class="home">
+    <el-aside width="260px">
+      <class-nav :activeIndex="6"></class-nav>
+    </el-aside>
+    <el-main>
+      <div class="attendance form">
       <div></div>
       <div>
         <!-- <AttendanceReference /> -->
         <AttendanceTable />
       </div>
     </div>
+    </el-main>
+  </el-container>
   </div>
 </template>
 
 <script>
+//import AttendanceReference from "../components/AttendanceReference"
+import ClassNav from "../components/ClassNav"
 //import AttendanceReference from "../components/AttendanceReference"
 
 import AttendanceTable from "../components/AttendanceTable"
@@ -19,6 +28,8 @@ export default {
   components: {
     AttendanceTable,
    // AttendanceReference
+    //AttendanceReference,
+    ClassNav
   },
   data() {
     return {
