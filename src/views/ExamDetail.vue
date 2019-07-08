@@ -1,7 +1,7 @@
 <template>
   <el-container class="examDetail">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <class-nav :activeIndex="3"></class-nav>
     </el-aside>
     <el-main>
       <exam-detail-box></exam-detail-box>
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
+import ClassNav from "../components/ClassNav"
 import ExamDetailBox from "../components/ExamDetailBox"
 
 export default {
   name: 'ExamDetail',
 
   components: {
-    UserNav,
+    ClassNav,
     ExamDetailBox
   },
   

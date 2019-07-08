@@ -2,7 +2,7 @@
   <div id="attendance">
     <el-container class="home">
     <el-aside width="260px">
-      <class-nav :activeIndex="6"></class-nav>
+      <class-nav :activeIndex="7"></class-nav>
     </el-aside>
     <el-main>
       <div class="attendance form">
