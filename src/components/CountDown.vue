@@ -1,20 +1,19 @@
 <template>
-  <div class="CountDownBox">
-    <span
-      v-for="(t, index) in countDownArr"
-      :key="index"
-      ><br v-if="index === 2"/></span>
+  <div class="countDownBox">
+    {{leftHours}}时{{leftMins}}分{{leftSeconds}}秒
   </div>
 </template>
 
 <script>
-import {getNowTime} from '../utils/util'
-
 export default {
   data() {
     return {
-      endTimeArr: [],
-      countDownArr: []
+      endHours: -1,
+      endMins: -1,
+      leftHours: -1,
+      leftMins: -1,
+      leftSeconds: -1,
+      leftTotalSeconds: -1
     }
   },
 
@@ -24,23 +23,31 @@ export default {
 
   methods: {
     getData() {
-      this.endTimeArr = this.parseTime(this.endTime)
-      this.countDownArr = this.endTimeArr - this.parseTime(getNowTime())
-    },
-
-    parseTime(time) {
-      var timeArr = new Array(5)
-      var date = time.split(" ")[0]
-      var clock = time.split(" ")[1]
-      var dateArr = date.split(".")
-      var clockArr = clock.split(":")
-      timeArr[0] = Number(dateArr[0])
-      timeArr[1] = Number(dateArr[1])
-      timeArr[2] = Number(dateArr[2])
-      timeArr[3] = Number(clockArr[0])
-      timeArr[4] = Number(clockArr[1])
-
-      return timeArr
+      var time = this.endTime.split(" ")[1]
+      this.endHours = Number(time.split(":")[0])
+      this.endMins = Number(time.split(":")[1])
+      var date = new Date()
+      this.leftHours = this.endHours - date.getHours()
+      this.leftMins = this.endMins - date.getMinutes()
+      this.leftSeconds = date.getSeconds()
+      if (date.getMinutes() > this.endMins) {
+        this.leftHours -= 1
+        this.leftMins += 60
+      }
+      this.leftTotalSeconds = this.leftHours*3600 + 
+        this.leftMins*60 + this.leftSeconds
+      // ser interval
+      let clock = window.setInterval(() => {
+        --this.leftTotalSeconds;
+        if (this.leftTotalSeconds == 0) {
+          window.clearInterval(clock)
+          this.$emit('timeOver')
+          return
+        }
+        this.leftHours = Math.floor(this.leftTotalSeconds / 3600)
+        this.leftMins = Math.floor(this.leftTotalSeconds % 3600 / 60)
+        this.leftSeconds = this.leftTotalSeconds % 60
+      }, 1000)
     }
   },
 
@@ -52,12 +59,15 @@ export default {
 
 <style>
 .countDownBox {
-  width: 100px;
-  padding: 10px;
-  border-radius: 5%;
+  width: 120px;
+  padding: 12px 10px;
+  border-radius: 5px;
   background: #409eff;
   color: white;
   font-size: 16px;
   font-weight: 600;
+  position: fixed;
+  right: 40px;
+  top: 100px;
 }
 </style>

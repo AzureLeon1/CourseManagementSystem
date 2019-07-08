@@ -7,6 +7,7 @@
     <div v-else>
       <count-down 
         :endTime="endTime"
+        v-on:timeOver="submit"
         v-if="!hasDone"></count-down>
 
       <question-card 
