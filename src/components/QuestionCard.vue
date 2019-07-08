@@ -1,14 +1,15 @@
 <template>
   <div class="questionCardBox">
     <div class="title">
-      {{questionInfo.content}}
+      {{questionInfo.content}}&nbsp;&nbsp;({{questionInfo.score}}分)
     </div>
 
     <el-radio-group v-model="select">
       <el-radio 
         v-for="s in selects"
         :key="s.label"
-        :label="s.label"
+        :label="s.content"
+        :disabled="showAnswer&&s.content!=questionInfo.answer"
         class="optionRadio">{{s.content}}</el-radio>
     </el-radio-group>
 
@@ -26,17 +27,21 @@ export default {
   },
 
   props: {
-    questionInfo: Object
+    questionInfo: Object,
+    showAnswer: Boolean
   },
 
   methods: {
     getData() {
-      var options = this.questionInfo.answer.split("_")
+      var options = this.questionInfo.options.split("_")
       for (let i = 0; i < options.length; ++i) {
         this.selects.push({
           label: i,
           content: options[i]
         })
+      }
+      if (this.showAnswer) {
+        this.select = this.questionInfo.answer
       }
     }
   },

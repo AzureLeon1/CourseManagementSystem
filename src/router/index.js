@@ -8,6 +8,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Exam from '@/views/Exam'
 import AnswerExam from '@/views/AnswerExam'
+import CheckExam from '@/views/CheckExam'
 import NewExam from '@/views/NewExam'
 import ExamDetail from '@/views/ExamDetail'
 import Courseview from '@/views/Courseview'
@@ -28,7 +29,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: ExamDetail
+      component: CheckExam
     },
     {
       path: '/courseware',
