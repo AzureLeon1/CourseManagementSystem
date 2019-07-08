@@ -37,7 +37,8 @@
 
         <!-- float: Add button -->
         <div class="addbutton-wrapper formanager">
-          <el-button @click="createMsg"
+          <!-- <el-button @click="createMsg"-->
+          <el-button @click="getMessageWithID(111)"
             style="height: 50px; width:50px; text-align: center; border-radius:50%; padding: 17px 0;"
           >
             <i class="el-icon-plus"></i>
@@ -59,6 +60,7 @@
 import UserNav from "@/components/UserNav";
 import MessageDetailed from "@/components/MessageDetailed";
 import MessageCreate from "@/components/MessageCreate";
+import api from "@/store/modules/message.js";
 
 export default {
   name: "MessageHome",
@@ -87,6 +89,7 @@ export default {
     };
   },
   methods: {
+    //front-end
     readMsg(row) {
         this.msr = this.$refs.msr;
         this.msr.showMessageDetailed = true;
@@ -108,6 +111,16 @@ export default {
     hideCreateMsg(){
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=false;
+    },
+
+    //back-end
+    createMsg(){
+
+    },
+
+    getMessageWithID(id){
+      var message = api.getMessageWithID(id);
+      // console.log(message);
     }
   }
 };

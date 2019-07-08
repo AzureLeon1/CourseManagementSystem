@@ -17,7 +17,8 @@ export default {
   getPersonInfo,
   getPersonFollowFans,
   getClassListItems,
-  changeUserInfo
+  changeUserInfo,
+  getMessageWithID
 }
 
 function param(a) {
@@ -48,6 +49,8 @@ async function request(method, url, data) {
       headers
     })
     var mes = res;
+    console.log("look");
+    console.log(mes);
     if (res.status < 400) {
       if (res.data.code && res.data.code < 400) {
         return res
@@ -69,7 +72,6 @@ async function request(method, url, data) {
         showClose: true,
       })
     }
-
     console.error(err)
   }
 }
@@ -137,3 +139,15 @@ async function getClassListItems(){
   const res = await request(PATCH, '/api/users/${id}', form)
   return res
 }
+
+//==========广播API===========
+//===========start===========
+async function getMessageWithID(id){
+  const res = await request(GET, '/api/broadcasts', {'user': id});
+  console.log(res);
+  return res;
+}
+
+
+//=========== end ===========
+//==========广播API===========
