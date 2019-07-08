@@ -37,7 +37,7 @@ export default {
 
   methods: {
     createExam() {
-      this.$route.push({
+      this.$router.push({
         name: "NewExam"
       })
     }

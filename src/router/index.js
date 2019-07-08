@@ -10,12 +10,17 @@ import Team from '@/views/Team'
 import Attendance from '@/views/Attendance'
 import Exam from '@/views/Exam'
 import AnswerExam from '@/views/AnswerExam'
+import CheckExam from '@/views/CheckExam'
 import NewExam from '@/views/NewExam'
+import ExamDetail from '@/views/ExamDetail'
+import QuestionBank from '@/views/QuestionBank'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
+import SearchUser from '@/views/SearchUser'
+import Twitter from '@/views/Twitter'
 
 Vue.use(Router)
 
@@ -29,7 +34,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: NewExam
+      component: QuestionBank
     },
     {
       path: '/courseview',
@@ -86,6 +91,16 @@ export default new Router({
       path: '/myclass',
       name: 'MyClass',
       component: MyClass
+    },
+    {
+      path: '/searchUser',
+      name: 'SearchUser',
+      component: SearchUser
+    },
+    {
+      path: '/twitter',
+      name: 'Twitter',
+      component: Twitter
     }
   ]
 })
