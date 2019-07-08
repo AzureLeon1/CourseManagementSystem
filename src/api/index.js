@@ -1,4 +1,4 @@
-import {
+﻿import {
   delay
 } from '@/utils/util.js'
 
@@ -21,7 +21,12 @@ export default {
   getClassListItems,
   changeUserInfo,
   getUserTwitter,
-  broadcastStudent
+  broadcastStudent,
+  getClassInfo,
+  joinClass,
+  getJoinStatus,
+  getjoinedClassList,
+  getMessageWithID
 }
 
 function param(a) {
@@ -150,6 +155,17 @@ async function getPersonFollowFans(id) {
 async function getClassListItems() {
   const res = await request(GET, '/api/club_info');
   return res.data.class_es
+}
+
+async function getClassListItems(){
+ // const res = await request(GET, '/api/club_info');
+ // return res.data.class_es
+ const data = [
+   {name: "高数1班", content : "张弢老师班", course_id : 1, sec_id : 1, semester : 'fall', year : 2019},
+   {name: "高数2班", content : "孙慧娟老师", course_id : 1, sec_id : 2, semester : 'fall', year : 2019}
+ ]
+
+ return data
 
 }
 
@@ -205,4 +221,132 @@ async function broadcastStudent(form){
 async function changeUserInfo(id, form) {
   const res = await request(PATCH, '/api/users/${id}', form)
   return res
+}
+
+
+ async function getClassInfo(form){
+  // const res = await request(GET, `/api/club_info/${id}`)
+  // console.log('corp_info of ', res)
+  // return res.data.data
+  const data = {
+    name : '高等数学',
+    teacher_name : '孙娟娟',
+    content : '这是同济大学2019年春季学期高数1班',
+    avatar : 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+    student_count: 54,
+  }
+  return data
+
+}
+
+async function joinClass(form)
+{
+
+
+
+}
+
+async function getJoinStatus(form)
+{
+  return "已加入"
+
+}
+
+async function getjoinedClassList(id)
+{
+  return [
+    {id: 1, name : "高等数学", avatar : "http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg"},
+    {id: 2, name : "C语言程序设计", avatar : "http://img.cdn.leonwang.top/Xnip2019-07-08_20-00-45.jpg"}
+]
+}
+
+async function getMessageWithID(id){
+  //fake message data;
+  const res = {
+    "data":{
+      "broadcasts":[{
+        "broadcast_id":"000001",
+        "content":"这是一条很长的广播！第一条广播！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11 12:30",
+        "end_time":"1997-12-14 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },
+    ]
+    },
+    "code":200,
+    "message":'ok'
+  }
+  const data = res.data.broadcasts;
+  // console.log(data);
+  // console.log(typeof(data));
+  await(delay(1000));
+  return res.data;
+  // const res = await request(GET, '/api/broadcasts', {'user': id});
+  // return res;
 }

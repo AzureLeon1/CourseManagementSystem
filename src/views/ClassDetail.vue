@@ -1,26 +1,23 @@
 <template>
   <el-container class="home">
     <el-aside width="260px">
-      <user-nav :activeIndex="1"></user-nav>
+      <class-nav :activeIndex="0"></class-nav>
     </el-aside>
     <el-main>
-        <AllClass>
-
-        </AllClass>
-
+     <ClassInfo></ClassInfo>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
-import AllClass from "../components/AllClass"
+import ClassNav from "../components/ClassNav"
+import ClassInfo from "../components/ClassInfo"
 
 export default {
-  name: 'MyClass',
+  name: 'ClassDetail',
   components: {
-    UserNav,
-    AllClass
+    ClassNav,
+    ClassInfo
   },
   data () {
     return {

@@ -2,7 +2,7 @@
 <div>
     <!-- float: Detailed Message -->
     <el-dialog 
-    :visible.sync="messageVisible"
+    :visible.sync="showMessageDetailed"
     width="50%;">
         <div id="messageDetail" style="padding-right: 15px;">
             <div class="message-part">
@@ -24,13 +24,13 @@
                 <div style="flex-grow: 1; padding: 5px;">{{content}}</div>
             </div>
             <div class="message-part">
-                <div class="publish-time"><i class="el-icon-time"></i>{{publish_time}}</div>
+                <div class="publish-time">发布于 <i class="el-icon-time"></i>{{publish_time}}</div>
             </div>
         </div>
 
         <div slot="footer" class="dialog-footer" style="text-align: center;">
             <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="readMore">查 看 详 情</el-button>
-            <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="messageVisible = false">我 知 道 了</el-button>
+            <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="hideReadMsg">我 知 道 了</el-button>
         </div>
     </el-dialog>
 </div>
@@ -40,7 +40,7 @@
 export default {
     name: 'MessageDetailed',
     props: {
-        messageVisible:{
+        showMessageDetailed:{
             default: false
         },
         broadcast_id:{
@@ -74,7 +74,10 @@ export default {
     },
     methods: {
         readMore(){
-            messageVisible=false;
+            this.$emit("hideReadMsg");
+        },
+        hideReadMsg(){
+            this.$emit("hideReadMsg");
         }
     }
 }
@@ -102,5 +105,6 @@ export default {
         padding: 0 20px;
         color: #aaa;
         font-size: small;
+        letter-spacing: .1em;
     }
 </style>

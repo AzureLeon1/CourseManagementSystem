@@ -19,12 +19,19 @@ import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
+import Discussion from '@/views/Discussion'
 import SearchUser from '@/views/SearchUser'
 import Twitter from '@/views/Twitter'
+import GlobalClass from '@/views/GlobalClass'
+import ClassDetail from '@/views/ClassDetail'
+import ClassHome from '@/views/ClassHome'
+
 
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -93,6 +100,11 @@ export default new Router({
       component: MyClass
     },
     {
+      path: '/discussion',
+      name: 'Discussion',
+      component: Discussion
+    },
+    {
       path: '/searchUser',
       name: 'SearchUser',
       component: SearchUser
@@ -101,6 +113,23 @@ export default new Router({
       path: '/twitter',
       name: 'Twitter',
       component: Twitter
+    },
+    {
+      path: '/globalclass',
+      name: 'GlobalClass',
+      component: GlobalClass
+
+    },
+    {
+      path: '/classdetail',
+      name: 'ClassDetail',
+      component: ClassDetail
+    },
+    {
+      path: '/class_home/:class_id',
+      name: 'ClassHome',
+      component: ClassHome,
+      props: true
     }
   ]
 })

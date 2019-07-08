@@ -8,6 +8,7 @@ import twitter from './modules/twitter.js'
 import alldelete from './modules/alldelete.js'
 import allpost from './modules/allpost.js'
 import exam from './modules/exam.js'
+import classinfo from './modules/classinfo.js'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ export default new Vuex.Store({
     twitter,
     alldelete,
     allpost,
-    exam
+    exam,
+    classinfo
   },
   strict: debug
 })

@@ -25,7 +25,7 @@
       </li>
     </ul>
     <el-row style="text-align: center">
-      <el-button type="danger" class="logoutBtn" @click="logout">登出</el-button>
+      <el-button size="small" type="danger" class="logoutBtn" @click="logout">登出</el-button>
     </el-row>
   </div>
 </template>
