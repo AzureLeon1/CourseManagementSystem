@@ -10,33 +10,37 @@
             <el-popover placement="left" width="550px" trigger="click">
               <el-table :data="scope.row.student_ids" height="500px" @cell-dbclick="celledit">
                 <!-- @cell-dblclick="tableDbEdit" @cell-click="cellClick"-->
-                <el-table-column width="225px" prop="student_id" label="学生ID" sortable>
+                <el-table-column width="180px" prop="student_id" label="学生ID" sortable>
                   <template slot-scope="scope">
                     <span>{{scope.row.student_id}}</span>
                   </template>
                 </el-table-column>
-                <el-table-column width="225px" prop="student_name" label="学生姓名">
+                <el-table-column width="130px" prop="student_name" label="学生姓名">
                   <template slot-scope="scope">
                     <span>{{scope.row.student_name}}</span>
                   </template>
                 </el-table-column>
-                <el-table-column width="100px" prop="attendance_status" label="出席状态">
+                <el-table-column width="270px" prop="attendance_states" label="出席状态">
                   <template slot-scope="scope">
                     <!-- <el-input size="small" style="width=10px height=5px"
-                    v-model="scope.row.attendance_status"
+                    v-model="scope.row.attendance_states"
                     v-if="scope.row.seen"
                     @blur="loseFcous(scope.$index,scope.row)">            
                     </el-input>
                     <span v-else>
-                    {{scope.row.attendance_status}}</span>-->
-                    <el-input
-                      v-if="scope.row.attendance_status.edit"
-                      ref="name"
-                      v-model="scope.row.attendance_status.value"
-                      style="width: 100%"
-                      @blur="scope.row.attendance_status.edit = false"
+                    {{scope.row.attendance_states}}</span>-->
+                    <el-radio v-model="scope.row.attendance_states" label="出席" size="small"> 出席</el-radio>                   
+                    <el-radio v-model="scope.row.attendance_states" label="缺席" size="small"> 缺席</el-radio>               
+                    <el-radio v-model="scope.row.attendance_states" label="请假" size="small"> 请假</el-radio>
+
+
+                    <!-- <el-input
+                      v-if="scope.row.attendance_states.edit"
+                      ref="attendane_states"
+                      v-model="scope.row.attendance_states.value"
+                      @blur="scope.row.attendance_states.edit = false"
                     ></el-input>
-                    <span v-else>{{ scope.row.attendance_status.value }}</span>
+                    <span v-else>{{ scope.row.attendance_states.value}}</span> -->
                   </template>
                 </el-table-column>
               </el-table>
@@ -75,98 +79,98 @@ export default {
             {
               student_id: "123",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "出席",
+
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "缺席",
+         
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "请假",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "缺席",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "出席",
+        
             },
             {
               student_id: "089",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "出席",
+           
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "出席",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "null",
+          
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "check",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "null",
+              
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "check",
+             
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "null",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "check",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "null",
+              
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check",
-              seen: false
+              attendance_states: "check",
+            
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null",
-              seen: false
+              attendance_states: "null",
+           
             }
           ]
         },
@@ -218,142 +222,142 @@ export default {
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "check"
+              attendance_states: "check"
             },
             {
               student_id: "asd",
               student_name: "一二三",
-              attendance_status: "null"
+              attendance_states: "null"
             }
           ]
         }
@@ -363,6 +367,8 @@ export default {
   //!
   created(){
       this.formatData()
+            console.log("!!!")
+      console.log(this.tableData[3].attendance_states[key])
     },
 
   methods: {
@@ -387,17 +393,17 @@ export default {
           });
         });
     },
-    loseFcous(index, row) {
-      debugger;
-      row.seen = false;
-    },
-    cellClick(row, column) {
-      debugger;
-      row.seen = true;
-    },
-    //!
+    // loseFcous(index, row) {
+    //   debugger;
+    //   row.seen = false;
+    // },
+    // cellClick(row, column) {
+    //   debugger;
+    //   row.seen = true;
+    // },
+    //表格数据格式化成我们想要的数据
     formatData(){
-          this.tableData.forEach(item => {
+          this.tableData[4].forEach(item => {
             for(key in item) {
               item[key] = {
                 value: item[key],
@@ -405,7 +411,8 @@ export default {
               }
             }
           })
-          console.log(this.tableData)
+          // this.tableData[3].attendance_states={value:key,edit:false}
+          console.log(this.tableData[4])
         },
     celledit(row, column, cell, event){
       if(row[column.property]){
