@@ -11,6 +11,7 @@ import AnswerExam from '@/views/AnswerExam'
 import CheckExam from '@/views/CheckExam'
 import NewExam from '@/views/NewExam'
 import ExamDetail from '@/views/ExamDetail'
+import QuestionBank from '@/views/QuestionBank'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
@@ -29,7 +30,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: NewExam
+      component: QuestionBank
     },
     {
       path: '/courseware',

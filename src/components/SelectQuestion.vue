@@ -13,9 +13,13 @@
               {{ scope.row.content }}
               <br/>
               <span
-                v-for="(item, index) in scope.row.answer.split('_')"
+                v-for="(item, index) in scope.row.options.split('_')"
                 :key="index">
                 {{item}}<el-divider direction="vertical"></el-divider>
+              </span>
+              <br/>
+              <span style="color: gray">
+                答案: {{scope.row.answer}}
               </span>
             </template>
           </el-table-column>
@@ -75,20 +79,24 @@ export default {
       // To Do : get all questions
       this.totalQuestions = [{
         question_id: "000",
-        content: "1 + 1 = ____",
-        answer: "0_1_2_3"
+        content: "1 + 3 = ____",
+        options: "1_2_3_4",
+        answer: "4"
       },{
         question_id: "111",
         content: "1 + 2 = ____",
-        answer: "0_1_2_3"
+        options: "0_1_2_3",
+        answer: "3"
       },{
         question_id: "222",
-        content: "1 + 3 = ____",
-        answer: "0_1_2_3"
+        content: "1 + 1 = ____",
+        options: "0_1_2_3",
+        answer: "2"
       },{
         question_id: "333",
         content: "1 + 4 = ____",
-        answer: "0_1_2_3"
+        options: "0_5_2_3",
+        answer: "5"
       }]
     },
     selectQuestion(s, r) {
