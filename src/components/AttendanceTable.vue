@@ -2,8 +2,17 @@
   <div class="table">
     <el-card style="width: 850px; margin:20px auto 20px auto">
       <!--上右下左-->
+      <div
+        class="add"
+        style=" vertical-align:middle; text-align:center;margin-left: auto;margin-right: auto;"
+      >
+        
+        <el-button icon="el-icon-plus" circle @click="InsertAttendance"></el-button>
+        <hr style="border:1 dashed #409eff " width="95%" color=#409eff size=1>
+      </div>
+      <div>
       <el-table :data="tableData" stripe style="width: 800px" :row-class-name="tableRowAttendance">
-        <el-table-column prop="LessonNum" label="课时" width="375px"></el-table-column>
+        <el-table-column prop="LessonNum" label="课时" width="375px" sortable></el-table-column>
         <el-table-column prop="sum" label="统计" width="325px"></el-table-column>
         <el-table-column prop="detail" label="具体信息" width="100px">
           <template slot-scope="scope">
@@ -50,14 +59,8 @@
           </template>
         </el-table-column>
       </el-table>
-
-      <div
-        class="add"
-        style=" vertical-align:middle; text-align:center;margin-left: auto;margin-right: auto;"
-      >
-        <br />
-        <el-button icon="el-icon-plus" circle @click="InsertAttendance"></el-button>
       </div>
+      
     </el-card>
   </div>
 </template>
