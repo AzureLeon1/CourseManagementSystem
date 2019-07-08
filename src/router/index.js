@@ -6,12 +6,25 @@ import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Team from '@/views/Team'
+import Attendance from '@/views/Attendance'
+import Exam from '@/views/Exam'
+import AnswerExam from '@/views/AnswerExam'
+import CheckExam from '@/views/CheckExam'
+import NewExam from '@/views/NewExam'
+import ExamDetail from '@/views/ExamDetail'
+import QuestionBank from '@/views/QuestionBank'
 import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
 import Discussion from '@/views/Discussion'
+import SearchUser from '@/views/SearchUser'
+import Twitter from '@/views/Twitter'
+import GlobalClass from '@/views/GlobalClass'
+import ClassDetail from '@/views/ClassDetail'
+
 
 Vue.use(Router)
 
@@ -25,7 +38,12 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: Template
+      component: QuestionBank
+    },
+    {
+      path: '/courseview',
+      name: 'Courseview',
+      component: Courseview
     },
     {
       path: '/courseware',
@@ -33,7 +51,7 @@ export default new Router({
       component: Courseware
     },
     {
-      path:'/MessageHome',
+      path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
     },
@@ -47,17 +65,22 @@ export default new Router({
       name: 'Register',
       component: Register
     },
-  {
-    path: '/courseview',
-    name: 'courseview',
-    component: Courseview
-  },
-  {
-    path: '/coursetable',
-    name: 'CourseTable',
-    component: CourseTable
-  },
-  {
+    {
+      path: '/team',
+      name: 'Team',
+      component: Team,
+    },
+    {
+      path: '/attendance',
+      name: 'Attendance',
+      component: Attendance,
+    },
+    {
+      path: '/coursetable',
+      name: 'CourseTable',
+      component: CourseTable
+    },
+    {
       path: '/user_profile/:person_id',
       name: 'UserProfile',
       component: UserProfile,
@@ -77,6 +100,27 @@ export default new Router({
       path: '/discussion',
       name: 'Discussion',
       component: Discussion
+    },
+    {
+      path: '/searchUser',
+      name: 'SearchUser',
+      component: SearchUser
+    },
+    {
+      path: '/twitter',
+      name: 'Twitter',
+      component: Twitter
+    },
+    {
+      path: '/globalclass',
+      name: 'GlobalClass',
+      component: GlobalClass
+
+    },
+    {
+      path: '/classdetail',
+      name: 'ClassDetail',
+      component: ClassDetail
     }
   ]
 })

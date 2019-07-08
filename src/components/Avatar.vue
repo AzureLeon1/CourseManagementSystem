@@ -36,7 +36,7 @@ export default {
     $w: 40px;
     width: $w;
     height: $w;
-
+    cursor: pointer;
     display: inline-block;
     background: url('../assets/logo.png');
     background-size: cover;
