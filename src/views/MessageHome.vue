@@ -8,7 +8,7 @@
         <el-container style="min-height: 500px; width: 70%; margin:20px auto 20px auto;">
           <el-head name="el-head"></el-head>
           <el-main style="padding: 15px; border: 1px solid #eee">
-            <el-table :data="tableData" @row-click="readDetail">
+            <el-table :data="tableData" @row-click="readMsg">
               <el-table-column prop="content" label="广播消息" min-width="200px;">
                 <template slot-scope="scope">
                   <p class="message">{{scope.row.content}}</p>
@@ -33,7 +33,7 @@
         </el-container>
 
         <!-- float: Detailed Message -->
-        <MessageDetailed ref="msd"></MessageDetailed>
+        <MessageDetailed ref="msr" v-on:hideReadMsg="hideReadMsg"></MessageDetailed>
 
         <!-- float: Add button -->
         <div class="addbutton-wrapper formanager">
@@ -82,21 +82,24 @@ export default {
       content: "",
       from: "",
       publish_time: "",
-      messageVisible: false,
 
       tableData: Array(7).fill(simData)
     };
   },
   methods: {
-    readDetail(row) {
-        this.msd = this.$refs.msd;
-        this.msd.messageVisible = true;
-        this.msd.broadcast_id = row.broadcast_id;
-        this.msd.content = row.content;
-        this.msd.from = row.from;
-        this.msd.publish_time = row.publish_time;
-        this.msd.start_time = row.start_time;
-        this.msd.end_time = row.end_time;
+    readMsg(row) {
+        this.msr = this.$refs.msr;
+        this.msr.showMessageDetailed = true;
+        this.msr.broadcast_id = row.broadcast_id;
+        this.msr.content = row.content;
+        this.msr.from = row.from;
+        this.msr.publish_time = row.publish_time;
+        this.msr.start_time = row.start_time;
+        this.msr.end_time = row.end_time;
+    },
+    hideReadMsg(){
+        this.msr=this.$refs.msr;
+        this.msr.showMessageDetailed=false;
     },
     createMsg(){
         this.msc = this.$refs.msc;
