@@ -5,18 +5,21 @@
         <user-nav :activeIndex="0"></user-nav>
       </el-aside>
       <el-main>
-        <h1 style="text-align: center">Search User Page (施工中...)</h1>
+        <SearchUserList />
+
       </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
+import SearchUserList from "../components/SearchUserList"
 import UserNav from "../components/UserNav";
 export default {
   name: "SearchUser",
   components: {
-    UserNav
+    UserNav,
+    SearchUserList
   },
   data() {
     return {};

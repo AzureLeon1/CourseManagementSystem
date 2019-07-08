@@ -26,7 +26,8 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  getMessageWithID
+  getMessageWithID,
+  getSearchResult
 }
 
 function param(a) {
@@ -40,12 +41,12 @@ async function request(method, url, data) {
       Authorization: `Bearer ${token}`
     } : {}
     // TODO: 验证GET请求的参数形式
-    if (method in {
-        GET
-      }) {
-      url += param(data)
-      data = null
-    }
+    // if (method in {
+    //     GET
+    //   }) {
+    //   url += param(data)
+    //   data = null
+    // }
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
@@ -88,7 +89,8 @@ async function getAuthority(form) {
     "user_ID": 100001,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
     "name": "王亮",
-    "role": "teacher_edu",
+    // "role": "teacher_edu",
+    "role": "student",
     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
     "phone_number": "18916083381",
     "college": "软件学院",
@@ -139,7 +141,7 @@ async function getPersonInfo(id) {
   console.log(data);
   // await delay(1000)
   return data
-  // const res = await request(GET, `/api/users/${id}`)
+  // const res = await request(GET, `/api/users`, {id: id})
   // return res.data
 }
 
@@ -260,6 +262,36 @@ async function getjoinedClassList(id)
 ]
 }
 
+async function getSearchResult(name) {
+  const res = {
+    data: [
+      {
+        user_id: 100001,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "student",
+        department: '物理学院'
+      },
+      {
+        user_id: 100002,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "teacher_edu",
+        department: '土木学院'
+      },
+      {
+        user_id: 100003,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "student",
+        department: '建筑与城市规划学院'
+      }
+    ]
+  }
+  // const res = await request(POST, '/api/users', {name: name})
+  return res.data;
+}
+
 async function getMessageWithID(id){
   //fake message data;
   const res = {
@@ -350,3 +382,4 @@ async function getMessageWithID(id){
   // const res = await request(GET, '/api/broadcasts', {'user': id});
   // return res;
 }
+
