@@ -103,7 +103,7 @@
 
       <span slot="footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitUpdateQuestion">确 定</el-button>
+        <el-button type="primary" @click="submitQuestionForm">确 定</el-button>
       </span>
     </el-dialog>
   </el-row>
@@ -198,7 +198,7 @@ export default {
       this.updateQuestionIndex = i
       this.dialogVisible = true
     },
-    submitUpdateQuestion() {
+    submitQuestionForm() {
       this.$refs['questionForm'].validate((valid) => {
         if (valid) {
           if (this.questionForm.options.indexOf(this.questionForm.answer) == -1) {
@@ -212,7 +212,11 @@ export default {
           }
           console.log(this.questionForm)
           // To Do : api
-          this.$message.success("修改成功")
+          if (this.dialogTitle === "新建题目") {
+            this.$message.success("新建成功")
+          } else {
+            this.$message.success("修改成功")
+          }
           this.dialogVisible = false
         } else {
           return
