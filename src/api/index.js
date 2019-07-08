@@ -21,7 +21,11 @@ export default {
   getClassListItems,
   changeUserInfo,
   getUserTwitter,
-  broadcastStudent
+  broadcastStudent,
+  getClassInfo,
+  joinClass,
+  getJoinStatus,
+  getjoinedClassList
 }
 
 function param(a) {
@@ -150,6 +154,17 @@ async function getPersonFollowFans(id) {
 async function getClassListItems() {
   const res = await request(GET, '/api/club_info');
   return res.data.class_es
+}
+
+async function getClassListItems(){
+ // const res = await request(GET, '/api/club_info');
+ // return res.data.class_es
+ const data = [
+   {name: "高数1班", content : "张弢老师班", course_id : 1, sec_id : 1, semester : 'fall', year : 2019},
+   {name: "高数2班", content : "孙慧娟老师", course_id : 1, sec_id : 2, semester : 'fall', year : 2019}
+ ]
+
+ return data
 
 }
 
@@ -206,3 +221,39 @@ async function changeUserInfo(id, form) {
   const res = await request(PATCH, '/api/users/${id}', form)
   return res
 }
+
+
+ async function getClassInfo(form){
+  // const res = await request(GET, `/api/club_info/${id}`)
+  // console.log('corp_info of ', res)
+  // return res.data.data
+  const data = {
+    name : '高数1班',
+    teacher_name : '孙娟娟',
+    content : '这是同济大学2019年春季学期高数1班',
+    avatar : '../static/defaultAvatar.jpg'
+  }
+  return data
+
+}
+
+async function joinClass(form)
+{
+
+
+
+}
+
+async function getJoinStatus(form)
+{
+  return "已加入"
+
+}
+async function getjoinedClassList(id)
+{
+  return [
+    {name : "同济大学高数1班", avatar : "../static/logo.png"},
+    {name : "同济大学高数2班", avatar : "../static/defaultAvatar.jpg"}
+]
+}
+

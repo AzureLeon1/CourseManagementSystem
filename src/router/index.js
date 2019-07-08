@@ -21,6 +21,10 @@ import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
 import SearchUser from '@/views/SearchUser'
 import Twitter from '@/views/Twitter'
+import GlobalClass from '@/views/GlobalClass'
+import ClassDetail from '@/views/ClassDetail'
+
+
 
 Vue.use(Router)
 
@@ -101,6 +105,17 @@ export default new Router({
       path: '/twitter',
       name: 'Twitter',
       component: Twitter
+    },
+    {
+      path: '/globalclass',
+      name: 'GlobalClass',
+      component: GlobalClass
+
+    },
+    {
+      path: '/classdetail',
+      name: 'ClassDetail',
+      component: ClassDetail
     }
   ]
 })
