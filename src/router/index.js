@@ -6,6 +6,8 @@ import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Team from '@/views/Team'
+import Attendance from '@/views/Attendance'
 import Exam from '@/views/Exam'
 import AnswerExam from '@/views/AnswerExam'
 import NewExam from '@/views/NewExam'
@@ -30,6 +32,11 @@ export default new Router({
       component: NewExam
     },
     {
+      path: '/courseview',
+      name: 'Courseview',
+      component: Courseview
+    },
+    {
       path: '/courseware',
       name: 'Courseware',
       component: Courseware
@@ -50,9 +57,14 @@ export default new Router({
       component: Register
     },
     {
-      path: '/courseview',
-      name: 'courseview',
-      component: Courseview
+      path: '/team',
+      name: 'Team',
+      component: Team,
+    },
+    {
+      path: '/attendance',
+      name: 'Attendance',
+      component: Attendance,
     },
     {
       path: '/coursetable',
