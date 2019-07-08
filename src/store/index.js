@@ -7,6 +7,7 @@ import classlistitem from './modules/classlistitem.js'
 import twitter from './modules/twitter.js'
 import alldelete from './modules/alldelete.js'
 import allpost from './modules/allpost.js'
+import exam from './modules/exam.js'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     allpatch,
     twitter,
     alldelete,
-    allpost
+    allpost,
+    exam
   },
   strict: debug
 })

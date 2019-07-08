@@ -5,15 +5,18 @@
       <el-button
         style="float: right; padding: 3px 0" 
         type="text"
-        v-if="examInfo.userRole=='teacher'">查看考试情况</el-button>
+        v-if="examInfo.userRole=='teacher'"
+        @click="checkDetail">查看考试情况</el-button>
       <el-button
         style="float: right; padding: 3px 0" 
         type="text"
-        v-else-if="examInfo.hasDone">查看成绩</el-button>
+        v-else-if="examInfo.hasDone"
+        @click="enterExam('CheckExam')">查看成绩</el-button>
       <el-button
         style="float: right; padding: 3px 0"
         type="text"
-        v-else-if="hasStart">参加考试</el-button>
+        v-else-if="hasStart"
+        @click="enterExam('AnswerExam')">参加考试</el-button>
       <el-button
         style="float: right; padding: 3px 0" 
         type="text"
@@ -58,6 +61,17 @@ export default {
       if (!this.examInfo.hasDone && strDate > this.examInfo.end_time) {
         this.examInfo.hasDone = true
       }
+    },
+    checkDetail() {
+      this.$router.push({
+        name: "ExamDetail"
+      })
+    },
+    enterExam(rName) {
+      this.$router.push({
+        name: rName,
+        params: this.examInfo.exam_id
+      })
     }
   },
 
