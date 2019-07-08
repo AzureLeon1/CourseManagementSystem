@@ -32,7 +32,6 @@ export default {
       menu: [],
       user: {
       },
-      classinfo: {},
     };
   },
 
@@ -43,8 +42,6 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      // TODO: 刷新后失效，computed属性？
-      this.classinfo = this.$store.state.classinfo.classinfo;
       if (this.user.role == "student") {
         this.menu.push(
           {
@@ -141,7 +138,11 @@ export default {
   },
 
   computed: {
-  }
+    classinfo() {
+      return this.$store.state.classinfo.classinfo;
+    }
+  },
+
 };
 </script>
 
