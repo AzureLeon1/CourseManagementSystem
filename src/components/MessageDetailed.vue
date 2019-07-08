@@ -5,43 +5,26 @@
     :visible.sync="messageVisible"
     width="50%;">
         <div id="messageDetail" style="padding-right: 15px;">
-            <div class="message-part" style="display: flex; flex-direction: row; margin-bottom: 15px;">
-                <div style="width: 80px; max-width:70px; min-width:70px; margin:0 10px; text-align: center;">
-                    <el-tag effect="dark" color="#62b1ff">内容</el-tag>
+            <div class="message-part">
+                <div class="label">
+                    来 自<i class="el-icon-caret-right"></i>
+                </div>
+                <div style="flex-grow: 1; padding: 5px;">{{from}}</div>
+            </div>
+            <div class="message-part">
+                <div class="label">
+                    时 间<i class="el-icon-caret-right"></i>
+                </div>
+                <div style="flex-grow: 1; padding: 5px;">{{start_time}} - {{end_time}}</div>
+            </div>
+            <div class="message-part">
+                <div class="label">
+                    广播内容<i class="el-icon-caret-right"></i>
                 </div>
                 <div style="flex-grow: 1; padding: 5px;">{{content}}</div>
             </div>
-            <div class="message-part" style="display: flex; flex-direction: row; margin-bottom: 15px;">
-                <div style="width: 80px; max-width:70px; min-width:70px; margin:0 10px; text-align: center;">
-                    <el-tag effect="dark" color="#62b1ff">类型</el-tag>
-                </div>
-                <div style="flex-grow: 1; padding: 5px;">
-                    <i class="el-icon-success" style="color: #98c379;"></i>
-                    {{type}}
-                </div>
-                <div style="flex-grow: 1; padding: 5px;">
-                    <i class="el-icon-error" style="color: #98c379;"></i>
-                    {{type}}
-                </div>
-            </div>
-            <div class="message-part" style="display: flex; flex-direction: row; margin-bottom: 15px;">
-                <div style="width: 80px; max-width:70px; min-width:70px; margin:0 10px; text-align: center;">
-                    <el-tag effect="dark" color="#62b1ff">开始时间</el-tag>
-                </div>
-                <div style="flex-grow: 1; padding: 5px;">{{start_time}}</div>
-                
-                <div style="width: 80px; max-width:70px; min-width:70px; margin:0 10px; text-align: center;">
-                    <el-tag effect="dark" color="#62b1ff">结束时间</el-tag>
-                </div>
-                <div style="flex-grow: 1; padding: 5px;">{{end_time}}</div>
-            </div>
-
-            <div class="message-part" style="display: flex; flex-direction: row-reverse; align-items: center; margin-bottom: 15px; font-size: small;">
-                <div style="margin: 0 10px; line-height: 100%; vertical-align: middle;color: #aaa;">
-                    <i class="el-icon-time"></i>
-                    {{publish_time}}
-                </div>
-                <div style="margin: 0 10px; line-height: 100%; vertical-align: middle;"><el-link href="#"  type="info" style="font-size: small">from：{{from}}</el-link></div>
+            <div class="message-part">
+                <div class="publish-time"><i class="el-icon-time"></i>{{publish_time}}</div>
             </div>
         </div>
 
@@ -98,5 +81,26 @@ export default {
 </script>
 
 <style scoped>
-    
+    .message-part{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+    }
+    .label{
+        padding: 3px;
+        color: #8d8d8d;
+        font-weight: bold;
+        font-size: 110%;
+        height: 100%;
+        min-width: 86px;
+        margin:0 10px;
+        /* text-align: center; */
+    }
+    .publish-time{
+        width: 100%;
+        text-align: right;
+        padding: 0 20px;
+        color: #aaa;
+        font-size: small;
+    }
 </style>

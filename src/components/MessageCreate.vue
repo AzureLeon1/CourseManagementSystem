@@ -56,7 +56,7 @@ export default {
     name: 'MessageCreate',
     props:{
         showCreateMsg:{
-            default: true
+            default: false
         }
     },
     data() {
