@@ -9,6 +9,9 @@
           <div class="title">个人信息</div>
 
           <div class="items">
+            <div style="margin-left:50%; transform: translate(-30%, 0); margin-bottom: 30px; margin-top: 20px;">
+              <Avatar :src="userinfo.avatar" :size="120" :border="true" />
+            </div>
             <div class="item">
               <div class="key">
                 <i class="el-icon-user"></i> &nbsp; 姓名
@@ -108,10 +111,12 @@
 <script>
 import UserNav from "../components/UserNav";
 import { token, action, domain } from "../plugins/qiniuToken";
+import Avatar from "../components/Avatar"
 export default {
   name: "UserProfile",
   components: {
-    UserNav
+    UserNav,
+    Avatar
   },
   props: ["person_id"],
   data() {
@@ -150,12 +155,8 @@ export default {
       this.progress = parseInt(event.percent);
     },
     handleSuccess(response, file, fileList) {
-      // console.log(response, file, fileList)
       this.progress = 100;
-      console.log(this.userinfo);
       this.userinfo.avatar = this.domain + response.hash;
-      console.log(this.domain);
-      console.log(this.userinfo);
       this.$message({
         message: "图片上传成功~",
         type: "success"
@@ -210,7 +211,7 @@ export default {
       return this.$store.state.personinfo.personinfo;
     },
     isCurrentUser() {
-      return this.$store.state.profile.user.id === this.person_id;
+      return this.$store.state.profile.user.id == this.person_id;
     },
     identity_zh() {
       return this.identityZh();
@@ -221,6 +222,12 @@ export default {
       deep: true,
       handler (user) {
         this.syncUser(user)
+      }
+    },
+    person_id: {
+      handler (person_id) {
+        this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
+        this.syncUser(this.user)
       }
     }
   }
@@ -245,10 +252,10 @@ export default {
 .title {
   position: absolute;
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
-  left: 50%;
-  top: -18px;
+  left: 10%;
+  top: -25px;
   transform: translate3d(-50%, 50%, 0);
   background: white;
   padding: 0 15px;
@@ -281,8 +288,10 @@ export default {
   letter-spacing: 1px;
   font-weight: 300;
   .item {
+
     display: flex;
     margin: 15px 0;
+    margin-left: 10%;
   }
   .key {
     flex: 1;

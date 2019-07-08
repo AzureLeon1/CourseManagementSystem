@@ -2,13 +2,15 @@
   <div class="userNav">
     <el-row style="text-align: center">
       <img :src="user.avatar" class="avatar" @click="routeTo('UserProfile', {person_id: user.id})" />
+      <div style="margin-top: -15px; font-size: 14px; font-weight: 300; ">{{user.name}}</div>
+      <div style="margin-bottom: 15px; font-size: 14px; font-weight: 300;">{{user.email}}</div>
     </el-row>
     <el-row style="margin-bottom: 10px">
       <el-col :span="7" :offset="4">
-        <el-button type="primary" size="mini" @click="routeTo('following')">关注: {{user.following}}</el-button>
+        <el-button type="primary" size="mini" @click="routeTo('Friends')">关注: {{user.following}}</el-button>
       </el-col>
       <el-col :span="7" :offset="2">
-        <el-button type="primary" size="mini" @click="routeTo('follower')">粉丝: {{user.follower}}</el-button>
+        <el-button type="primary" size="mini" @click="routeTo('Friends')">粉丝: {{user.follower}}</el-button>
       </el-col>
     </el-row>
     <ul>
@@ -50,36 +52,40 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      console.log(this.user);
-
       if (this.user.role == "student" || this.user.role == "teacher") {
-        this.menu.push({
-          index: 1,
-          title: "我的班级",
-          routeName: "MyClass",
-          icon: "el-icon-school"
-        },{
-          index: 2,
-          title: "好友动态",
-          routeName: "",
-          icon: "el-icon-chat-line-square"
-        },{
-          index: 3,
-          title: "我的消息",
-          routeName: "",
-          icon: "el-icon-message"
-        },{
-          index: 4,
-          title: "课程表",
-          routeName: "",
-          icon: "el-icon-date"
-        },{
-          index: 5,
-          title: "期末总结",
-          routeName: "",
-          icon: "el-icon-data-analysis"
-        })
-      } else if (this.role == "jwteacher") {
+        this.menu.push(
+          {
+            index: 1,
+            title: "我的班级",
+            routeName: "MyClass",
+            icon: "el-icon-school"
+          },
+          {
+            index: 2,
+            title: "好友动态",
+            routeName: "Twitter",
+            icon: "el-icon-chat-line-square"
+          },
+          {
+            index: 3,
+            title: "我的消息",
+            routeName: "MessageHome",
+            icon: "el-icon-message"
+          },
+          {
+            index: 4,
+            title: "课程表",
+            routeName: "",
+            icon: "el-icon-date"
+          },
+          {
+            index: 5,
+            title: "期末总结",
+            routeName: "",
+            icon: "el-icon-data-analysis"
+          }
+        );
+      } else if (this.user.role == "jwteacher") {
         this.menu.push({
           index: 1,
           title: "发布动态",
@@ -135,7 +141,7 @@ export default {
   height: 60px;
   line-height: 60px;
   color: #303133;
-  font-size: 18px;
+  font-size: 17px;
   cursor: pointer;
 }
 

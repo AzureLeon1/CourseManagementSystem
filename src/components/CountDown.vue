@@ -1,26 +1,27 @@
 <template>
-  <div id="template">
-    Template Page
-
+  <div class="CountDownBox">
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Template',
-  components: {
-
-  },
   data() {
     return {
-
+      
     }
   },
-  methods: {
 
+  props: {
+    endTime: String
   },
-  computed: {
 
+  methods: {
+   
+  },
+
+  mounted() {
+    
   }
 }
 </script>
@@ -28,7 +29,3 @@ export default {
 <style>
 
 </style>
-
-
-
-
