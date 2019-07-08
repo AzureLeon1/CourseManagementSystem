@@ -33,7 +33,7 @@ export default {
   
   data() {
     return {
-      newFormVisible: false,
+      newFormVisible: true,
       newExamForm: {},
       questions: []
     };
@@ -45,7 +45,7 @@ export default {
     },
     submitForm() {
       this.newFormVisible = false
-      this.newExamForm = this.$refs.newExamForm.examForm
+      this.newExamForm = this.$refs.newExamForm.newExam
     },
     submit() {
       this.questions = this.$refs.questionList.questions

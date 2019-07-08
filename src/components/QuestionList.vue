@@ -56,8 +56,8 @@ export default {
       // To Do: get all questions and state(hasDone and time)
       // if checkanswer get answer and score
       this.hasDone = false
-      this.startTime = "2019.07.08 10:00"
-      this.endTime = "2019.07.08 11:30"
+      this.startTime = "2019.07.09 02:00"
+      this.endTime = "2019.07.09 20:30"
       this.getState()
       this.score = 40
       this.questionList = [{
