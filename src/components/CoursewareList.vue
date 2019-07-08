@@ -26,21 +26,31 @@ export default {
     name: 'Coursewarelist',
     data(){
         return{
-            listdata: [
-                {name : '课件1', location : 'www.baidu.com'},
-                {name : '课件2', location : 'url2'},
-                {name : '课件3', location : 'url3'}
-            ],
+            // listdata: [
+            //     {name : '课件1', location : 'www.baidu.com'},
+            //     {name : '课件2', location : 'url2'},
+            //     {name : '课件3', location : 'url3'}
+            // ],
             searchkey: ""
         }
     },
+    mounted(){
+        this.$store.dispatch('classinfo/getCoursewareList', {course_id : this.$store.classinfo.state.course_id,
+        sec_id : this.$store.state.classinfo.sec_id, semester : this.$store.state.classinfo.semester,
+        year: this.$store.state.classinfo.semester})
+
+    },
     methods: {
+
         searchCourseware(){
             console.log(this.searchkey);
         },
         handledownload(row){
            
         }
+    },
+    computed: {
+
     }
 
 }

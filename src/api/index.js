@@ -25,7 +25,8 @@ export default {
   getClassInfo,
   joinClass,
   getJoinStatus,
-  getjoinedClassList
+  getjoinedClassList,
+  getCoursewareList
 }
 
 function param(a) {
@@ -241,6 +242,16 @@ async function joinClass(form)
 {
 
 
+
+}
+async function getCoursewareList(form)
+{
+
+  return  {listdata: [
+    {name : '课件1', location : 'www.baidu.com'},
+    {name : '课件2', location : 'www.google.com'},
+    {name : '课件3', location : '4m3.tongji.edu.cn'}
+],}
 
 }
 

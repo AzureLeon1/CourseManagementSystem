@@ -1,4 +1,3 @@
-
 <template>
     <div class="personal">
         <div class="left">
@@ -22,6 +21,9 @@
 
                     <div>{{item.name}}</div>
                     </div>
+                      <transition name="el-fade-in-linear">
+            <CreateForm ref="msc" ></CreateForm>
+        </transition>
 
                 </div>
             </div>
@@ -34,11 +36,14 @@
 
 </template>
 <script>
-import Avatar from '@/components/Avatar'
+import Avatar from '@/components/Avatar';
+import CreateForm from "@/components/CreateForm";
+
 export default {
     name: 'AllClass',
     components: {
-        Avatar
+        Avatar,
+        CreateForm
     },
     props: ['person_id'],
     data(){
@@ -53,11 +58,13 @@ export default {
             if (this.$store.state.profile.user.role == 'student')
                this.$router.push({name : 'GlobalClass'})
 
-            // else if (this.$store.state.profile.user.role == 'teacher')
+            else if(this.$store.state.profile.user.role == 'teacher_edu')
+                {
+                    this.msc = this.$refs.msc;
+                    this.msc.showCreateMsg=true;
 
-
+                }
         }
-
     },
     computed: {
         claes(){
@@ -72,7 +79,6 @@ export default {
 
         },
         user() {
-
 
         }
     },

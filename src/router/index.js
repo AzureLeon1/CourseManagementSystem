@@ -23,6 +23,7 @@ import SearchUser from '@/views/SearchUser'
 import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
+import CreateForm from '@/components/CreateForm'
 
 
 
@@ -116,6 +117,11 @@ export default new Router({
       path: '/classdetail',
       name: 'ClassDetail',
       component: ClassDetail
+    },
+    {
+      path: 'createform',
+      name: 'CreateForm',
+      component: CreateForm
     }
   ]
 })

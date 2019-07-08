@@ -48,7 +48,7 @@ export default {
 
     },
     mounted(){
-        this.$store.dispatch('classlistitem/getClassListItem')
+        this.$store.dispatch('classlistitem/getClassListItem', )
         this.syncItem(this.items)
         console.log(this.items)
 

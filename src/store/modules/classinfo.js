@@ -4,7 +4,8 @@ import {Class} from '@/utils/model.js'
 const state = {
     joinStatus: 0,
     teacherList: '',
-    classinfo: new Class()
+    classinfo: new Class(),
+    coursewarelist: []
 
 }
 const getters = {
@@ -40,6 +41,12 @@ const actions = {
 
 
 
+    },
+    getCoursewareList({commit, state}, form)
+    {
+        const data = await api.getCoursewareList(form)
+        commit('setCoursewareList', data)
+
     }
 }
 
@@ -57,6 +64,9 @@ const mutations = {
             "已加入": 2
         }
         state.joinStatus = rule[status]
+    },
+    setCoursewareList(state, status){
+        state.coursewarelist = status
     }
 }
 
