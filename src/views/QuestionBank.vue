@@ -1,7 +1,7 @@
 <template>
   <el-container class="questionBankBox">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <class-nav :activeIndex="8"></class-nav>
     </el-aside>
     <el-main>
       <question-bank-table></question-bank-table>
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
+import ClassNav from "../components/ClassNav"
 import QuestionBankTable from "../components/QuestionBankTable"
 
 export default {
   name: 'QuestionBank',
 
   components: {
-    UserNav,
+    ClassNav,
     QuestionBankTable
   },
 

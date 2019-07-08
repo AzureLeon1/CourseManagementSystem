@@ -41,7 +41,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: QuestionBank
+      component: Template
     },
     {
       path: '/courseview',
@@ -69,16 +69,6 @@ export default new Router({
       component: Register
     },
     {
-      path: '/team',
-      name: 'Team',
-      component: Team,
-    },
-    {
-      path: '/attendance',
-      name: 'Attendance',
-      component: Attendance,
-    },
-    {
       path: '/coursetable',
       name: 'CourseTable',
       component: CourseTable
@@ -98,11 +88,6 @@ export default new Router({
       path: '/myclass',
       name: 'MyClass',
       component: MyClass
-    },
-    {
-      path: '/discussion',
-      name: 'Discussion',
-      component: Discussion
     },
     {
       path: '/searchUser',
@@ -129,7 +114,54 @@ export default new Router({
       path: '/class_home/:class_id',
       name: 'ClassHome',
       component: ClassHome,
+      props: true,
+    },
+    {
+      path: '/class_home/:class_id/exams',
+      name: 'Exam',
+      component: Exam,
+    },
+    {
+      path: '/class_home/:class_id/newExam',
+      name: 'NewExam',
+      component: NewExam,
+    },
+    {
+      path: '/class_home/:class_id/answerExam/:exam_id',
+      name: 'AnswerExam',
+      component: AnswerExam,
       props: true
+    },
+    {
+      path: '/class_home/:class_id/checkExam/:exam_id',
+      name: 'CheckExam',
+      component: CheckExam,
+      props: true
+    },
+    {
+      path: '/class_home/:class_id/examDetail/:exam_id',
+      name: 'ExamDetail',
+      component: ExamDetail,
+    },
+    {
+      path: '/class_home/:class_id/questionBank',
+      name: 'QuestionBank',
+      component: QuestionBank
+    },
+    {
+      path: '/class_home/:class_id/team',
+      name: 'Team',
+      component: Team,
+    },
+    {
+      path: '/class_home/:class_id/discussion',
+      name: 'Discussion',
+      component: Discussion
+    },
+    {
+      path: '/class_home/:class_id/attendance',
+      name: 'Attendance',
+      component: Attendance,
     }
   ]
 })
