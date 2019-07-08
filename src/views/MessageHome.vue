@@ -6,7 +6,7 @@
     <el-main>
       <div id="MessageHome">
         <el-container style="min-height: 500px; width: 70%; margin:20px auto 20px auto;">
-          <el-head name="el-head"></el-head>
+          <el-header name="el-head"></el-header>
           <el-main style="padding: 15px; border: 1px solid #eee">
             <el-table :data="tableData" @row-click="readMsg">
               <el-table-column prop="content" label="广播消息" min-width="200px;">
@@ -118,9 +118,10 @@ export default {
 
     },
 
-    getMessageWithID(id){
-      var message = api.getMessageWithID(id);
-      // console.log(message);
+    async getMessageWithID(id){
+      var message = await api.getMessageWithID(id);
+      console.log("vue==================");
+      console.log(message);
     }
   }
 };

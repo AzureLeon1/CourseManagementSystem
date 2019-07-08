@@ -1,4 +1,5 @@
 import { delay } from '@/utils/util.js'
+import { ok } from 'assert';
 
 const server = 'http://192.168.1.15:8080/'
 
@@ -143,10 +144,47 @@ async function getClassListItems(){
 //==========广播API===========
 //===========start===========
 async function getMessageWithID(id){
-  const res = await request(GET, '/api/broadcasts', {'user': id});
-  console.log(res);
-  return res;
+  //fake message data;
+  const res = {
+    "data":{
+      "broadcasts":[{
+        "broadcast_id":"000001",
+        "content":"第一条广播",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997.12.11, 12.30", 
+        "start_time":"1997.12.11, 12.30",
+        "end_time":"1997.12.14, 12.30"
+      },{
+        "broadcast_id":"000002",
+        "content":"第二条广播",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997.12.11, 12.30", 
+        "start_time":"1997.12.11, 12.30",
+        "end_time":"1997.12.13, 12.30"
+      }],
+      "code":200,
+      "message":ok
+    }
+  }
+  let data = res.data.broadcasts;
+  console.log("index.js===========");
+  console.log(data);
+  await(delay(1000));
+  return data;
+  // const res = await request(GET, '/api/broadcasts', {'user': id});
+  // return res;
 }
+
 
 
 //=========== end ===========
