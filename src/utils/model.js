@@ -21,6 +21,6 @@ export class Class {
     this.avatar = props.avatar
     this.content = props.content
     this.status = props.status
-    
+    this.name = props.name
   }
 }
