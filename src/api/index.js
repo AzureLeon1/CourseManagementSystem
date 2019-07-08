@@ -228,10 +228,11 @@ async function changeUserInfo(id, form) {
   // console.log('corp_info of ', res)
   // return res.data.data
   const data = {
-    name : '高数1班',
+    name : '高等数学',
     teacher_name : '孙娟娟',
     content : '这是同济大学2019年春季学期高数1班',
-    avatar : '../static/defaultAvatar.jpg'
+    avatar : 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+    student_count: 54,
   }
   return data
 
@@ -252,8 +253,8 @@ async function getJoinStatus(form)
 async function getjoinedClassList(id)
 {
   return [
-    {name : "同济大学高数1班", avatar : "../static/logo.png"},
-    {name : "同济大学高数2班", avatar : "../static/defaultAvatar.jpg"}
+    {id: 1, name : "高等数学", avatar : "http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg"},
+    {id: 2, name : "C语言程序设计", avatar : "http://img.cdn.leonwang.top/Xnip2019-07-08_20-00-45.jpg"}
 ]
 }
 

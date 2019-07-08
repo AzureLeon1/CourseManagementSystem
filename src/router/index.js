@@ -23,12 +23,15 @@ import SearchUser from '@/views/SearchUser'
 import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
+import ClassHome from '@/views/ClassHome'
 
 
 
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -116,6 +119,12 @@ export default new Router({
       path: '/classdetail',
       name: 'ClassDetail',
       component: ClassDetail
+    },
+    {
+      path: '/class_home/:class_id',
+      name: 'ClassHome',
+      component: ClassHome,
+      props: true
     }
   ]
 })
