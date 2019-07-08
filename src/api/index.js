@@ -1,4 +1,4 @@
-import {
+﻿import {
   delay
 } from '@/utils/util.js'
 
@@ -25,7 +25,8 @@ export default {
   getClassInfo,
   joinClass,
   getJoinStatus,
-  getjoinedClassList
+  getjoinedClassList,
+  getMessageWithID
 }
 
 function param(a) {
@@ -250,6 +251,7 @@ async function getJoinStatus(form)
   return "已加入"
 
 }
+
 async function getjoinedClassList(id)
 {
   return [
@@ -258,3 +260,93 @@ async function getjoinedClassList(id)
 ]
 }
 
+async function getMessageWithID(id){
+  //fake message data;
+  const res = {
+    "data":{
+      "broadcasts":[{
+        "broadcast_id":"000001",
+        "content":"这是一条很长的广播！第一条广播！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11 12:30",
+        "end_time":"1997-12-14 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },{
+        "broadcast_id":"000002",
+        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "type":1,
+        "scope":1,
+        "sec_id":111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time":"1997-12-11 12:30", 
+        "start_time":"1997-12-11- 12:30",
+        "end_time":"1997-12-13- 12:30"
+      },
+    ]
+    },
+    "code":200,
+    "message":'ok'
+  }
+  const data = res.data.broadcasts;
+  // console.log(data);
+  // console.log(typeof(data));
+  await(delay(1000));
+  return res.data;
+  // const res = await request(GET, '/api/broadcasts', {'user': id});
+  // return res;
+}
