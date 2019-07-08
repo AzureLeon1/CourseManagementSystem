@@ -1,4 +1,6 @@
-import { delay } from '@/utils/util.js'
+import {
+  delay
+} from '@/utils/util.js'
 
 const server = 'http://192.168.1.15:8080/'
 
@@ -17,7 +19,8 @@ export default {
   getPersonInfo,
   getPersonFollowFans,
   getClassListItems,
-  changeUserInfo
+  changeUserInfo,
+  getUserTwitter
 }
 
 function param(a) {
@@ -85,7 +88,7 @@ async function getAuthority(form) {
     "college": "软件学院",
     "following": 0,
     "follower": 0,
-    "email" : "leonwangchn@163.com"
+    "email": "leonwangchn@163.com"
   }
   await delay(1000)
   return data
@@ -98,60 +101,103 @@ async function register(form) {
   return res.data
 }
 
-async function getPersonInfo(id){
+async function getPersonInfo(id) {
   var data = {}
-  if(id == 100002) {
-  data={
-    "user_ID": 100002,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "施程航",
-    "role": "student",
-    "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-    "phone_number": 13365445687,
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email" : "chenghang_shi@gmail.com"
+  if (id == 100002) {
+    data = {
+      "user_ID": 100002,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+      "name": "施程航",
+      "role": "student",
+      "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      "phone_number": 13365445687,
+      "college": "软件学院",
+      "following": 0,
+      "follower": 0,
+      "email": "chenghang_shi@gmail.com"
+    }
+  } else {
+    data = {
+      "user_ID": 100001,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+      "name": "王亮",
+      "role": "student",
+      "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+      "phone_number": "18916083381",
+      "college": "软件学院",
+      "following": 0,
+      "follower": 0,
+      "email": "leonwangchn@163.com"
+    }
   }
-}
-else {
-  data={
-    "user_ID": 100001,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "王亮",
-    "role": "student",
-    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-    "phone_number": "18916083381",
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email" : "leonwangchn@163.com"
-  }
-}
-console.log(data);
+  console.log(data);
   // await delay(1000)
   return data
   // const res = await request(GET, `/api/users/${id}`)
   // return res.data
 }
 
-async function getPersonFollowFans(id){
+async function getPersonFollowFans(id) {
   const data = {
-    follow:11,
-    fans:12
+    follow: 11,
+    fans: 12
   }
   await delay(1000)
   return data
 }
 
-async function getClassListItems(){
+async function getClassListItems() {
   const res = await request(GET, '/api/club_info');
   return res.data.class_es
 
 }
- //all patch start from here
- //============================================================
- async function changeUserInfo(id, form){
+
+async function getUserTwitter() {
+  // TODO: 动态分为“我”发的和“我关注的人”发的
+  const data = {
+    my_twitters: [{
+        twitter_id: 111,
+        user_id: 111,
+        user_name: '王亮',
+        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+        content: '数据库什么都听不懂，呜呜呜～',
+        time: '2019.7.8 12:30',
+        image: 'http://img.cdn.leonwang.top/Qf9SNmS-best-pokemon-wallpapers.png'
+      },
+      {
+        twitter_id: 112,
+        user_id: 112,
+        user_name: '何立仁',
+        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+        content: '数据库只考了99分，呜呜呜～',
+        time: '2019.7.8 12:32'
+      }
+    ],
+    friend_twitters: [{
+        twitter_id: 113,
+        user_id: 113,
+        user_name: '周泓光',
+        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+        content: '哈哈哈哈哈哈',
+        time: '2019.7.8 12:31'
+      },
+      {
+        twitter_id: 114,
+        user_id: 114,
+        user_name: '姜华',
+        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+        content: '哈哈哈哈哈哈',
+        time: '2019.7.8 12:34'
+      }
+    ]
+  }
+  // const data = await request(GET, `/api/twitter`)
+  return data
+}
+
+//all patch start from here
+//============================================================
+async function changeUserInfo(id, form) {
   const res = await request(PATCH, '/api/users/${id}', form)
   return res
 }

@@ -299,7 +299,7 @@ export default {
 
     display: flex;
     margin: 15px 0;
-    margin-left: 20%;
+    margin-left: 10%;
   }
   .key {
     flex: 1;
