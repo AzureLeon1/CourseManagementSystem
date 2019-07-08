@@ -155,12 +155,8 @@ export default {
       this.progress = parseInt(event.percent);
     },
     handleSuccess(response, file, fileList) {
-      // console.log(response, file, fileList)
       this.progress = 100;
-      console.log(this.userinfo);
       this.userinfo.avatar = this.domain + response.hash;
-      console.log(this.domain);
-      console.log(this.userinfo);
       this.$message({
         message: "图片上传成功~",
         type: "success"
@@ -200,10 +196,6 @@ export default {
   mounted() {
     this.$store.dispatch("personinfo/getPersonInfo", this.person_id);
     this.syncUser(this.user);
-    console.log(this.$store.state.profile.user.id);
-    console.log(this.person_id);
-    console.log(this.isCurrentUser);
-    console.log(this.$store.state.personinfo.personinfo);
   },
   computed: {
     style() {

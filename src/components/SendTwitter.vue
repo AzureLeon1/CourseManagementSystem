@@ -32,7 +32,7 @@
 <script>
 
 import {token,action,domain} from "../plugins/qiniuToken"
-
+import { getNowTime } from "../utils/util";
 export default {
   name: 'sendtwitter',
   data() {
@@ -59,9 +59,15 @@ export default {
       }
       this.$emit('send', Object.assign({},
         this.dialogImageUrl ? {
-          img: this.dialogImageUrl
+          image: this.dialogImageUrl
         } : {},
-        this.textarea ? {content: this.textarea} : {}))
+        this.textarea ? {content: this.textarea} : {},
+         {time: getNowTime()},
+         {user_id: this.$store.state.profile.user.id}
+        ))
+
+
+
       this.reset()
     },
     reset () {
@@ -121,7 +127,7 @@ export default {
     display: flex;
   }
   .preview {
-    width: 100%;
+    width: 18%;
     border: 1px solid #dcdfe6;
     border-top: 0;
     box-sizing: border-box;

@@ -52,7 +52,6 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      console.log(this.user);
 
       if (this.user.role == "student" || this.user.role == "teacher") {
         this.menu.push({

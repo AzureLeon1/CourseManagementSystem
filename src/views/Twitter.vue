@@ -36,7 +36,6 @@
 import TwitterCard from "@/components/Twittercard";
 import SendTwitter from "@/components/SendTwitter";
 import UserNav from "../components/UserNav";
-import { delay } from "../utils/util";
 export default {
   name: "Twitter",
   components: {
@@ -76,23 +75,15 @@ export default {
       console.log(`当前页: ${val}`);
       this.current = val;
     },
-    handleSend(form) {
-      this.$store.dispatch("allpost/broadcastStudent", {
-        form,
-        person_id: this.userId
-      });
-    },
     toUserPage(person_id) {
       if (person_id != this.userId) {
-        this.$router.push({ name: "PersonInfo", params: { person_id } });
+        this.$router.push({ name: "UserProfile", params: { person_id } });
       }
     }
   },
   computed: {
     twitterResult() {
       // TODO: 对mergedTwitters排序
-      console.log(this.MyTwitterItems);
-      console.log(this.FriendTwitterItems);
       console.log(this.MergedTwitterItems);
 
       // 当前页面的twitter内容

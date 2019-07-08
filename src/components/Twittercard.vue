@@ -1,21 +1,4 @@
 <template>
-    <!-- <el-card :body-style="{ padding: '0px'}" class="card" shadow="hover">
-        <table class="table" rules=cols cellpadding="10">
-            <tr>
-              <td>
-                <div class="person">
-                  <tr><img :src="icon" height=90 width=90/></tr>
-                  <tr><span>{{name}}</span></tr>
-                </div>
-              </td>
-              <td class="message">
-                <tr>{{message}}</tr>
-                <tr><img :src="image"></tr>
-              </td>
-            </tr>
-        </table>
-    </el-card> -->
-
   <el-card :body-style="{
     display: 'flex',
     flexDirection: 'column',
@@ -27,10 +10,6 @@
         <div class="name">{{name}}</div>
         <div class="time">{{new Date(time).toLocaleString()}}</div>
         <div class="content">{{message}}</div>
-
-        <!-- <div class="operate">
-          <el-button type="text" @click="enter">>>>详情</el-button>
-        </div> -->
       </div>
       <i class="el-icon-delete" @click="remove" v-if="showRemove"></i>
     </div>
