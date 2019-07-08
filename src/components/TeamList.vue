@@ -47,6 +47,7 @@
 
 <script>
 import Myteam from "../components/Myteam";
+import temp from "@/store/modules/team.js"
 export default {
   name: "TeamList",
   components: {
@@ -54,39 +55,7 @@ export default {
   },
   data() {
     return {
-      searchkey: "",
-      tableData: [
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_member:"sad  sdf asdf"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_member:"sad  sdf asdf"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_member:"sad  sdf asdf"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_member:"sad  sdf asdf"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_member:"sad  sdf asdf"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_member:"sad  sdf asdf"
-        }
-      ]
+      searchkey: "",     
     };
   },
   methods: {
@@ -121,7 +90,20 @@ export default {
         });
       });
     }
+  },
+
+  computed:{
+    tableData(){
+      return this.$store.state.team.classteamlist
+    },
+  },
+  mounted(){
+    this.$store.dispatch("team/getTeam")
+    
+    //this.$stor.dispatch(actionType,playload)
+    //要触发的action类型，所携带的数据
   }
+
 };
 </script>
 

@@ -11,18 +11,18 @@
 </template>
 
 <script>
-import AttendanceReference from "../components/AttendanceReference"
+//import AttendanceReference from "../components/AttendanceReference"
 
 import AttendanceTable from "../components/AttendanceTable"
 export default {
   name: 'Attendance',
   components: {
     AttendanceTable,
-    AttendanceReference
+   // AttendanceReference
   },
   data() {
     return {
-
+      
     }
   },
   methods: {
