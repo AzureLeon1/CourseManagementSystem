@@ -1,12 +1,12 @@
 <template>
   <div class="classNav">
     <el-row style="text-align: center">
-      <img :src="user.avatar" class="avatar" @click="routeTo('ClassDetail', {corp_id: 1})" />
-      <div style="margin-top: -15px; font-size: 14px; font-weight: 300; ">{{user.name}}</div>
+      <img :src="classinfo.avatar" class="avatar" @click="routeTo('ClassDetail', {corp_id: 1})" />
+      <div style="margin-top: -15px; font-size: 16px; font-weight: 300; ">{{classinfo.name}}</div>
     </el-row>
     <el-row style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 14px;">
       <!-- TODO: 跳转到班内学生 -->
-        学生人数：<el-button type="text" size="mini" @click="routeTo()">N/A</el-button>
+        学生人数：<el-button type="text" @click="routeTo()">{{classinfo.student_count}}</el-button>
     </el-row>
     <ul>
       <li
@@ -30,13 +30,9 @@ export default {
   data() {
     return {
       menu: [],
-      role: "",
       user: {
-        avatar: "static/defaultAvatar.jpg",
-        role: "student",
-        following: 0,
-        follower: 0
-      }
+      },
+      classinfo: {},
     };
   },
 
@@ -47,6 +43,8 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
+      // TODO: 刷新后失效，computed属性？
+      this.classinfo = this.$store.state.classinfo.classinfo;
       if (this.user.role == "student") {
         this.menu.push(
           {

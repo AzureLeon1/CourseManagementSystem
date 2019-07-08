@@ -228,10 +228,11 @@ async function changeUserInfo(id, form) {
   // console.log('corp_info of ', res)
   // return res.data.data
   const data = {
-    name : '高数1班',
+    name : '高等数学',
     teacher_name : '孙娟娟',
     content : '这是同济大学2019年春季学期高数1班',
-    avatar : '../static/defaultAvatar.jpg'
+    avatar : 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+    student_count: 54,
   }
   return data
 

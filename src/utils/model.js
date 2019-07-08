@@ -22,5 +22,6 @@ export class Class {
     this.content = props.content
     this.status = props.status
     this.name = props.name
+    this.student_count = props.student_count
   }
 }

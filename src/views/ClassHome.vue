@@ -22,6 +22,11 @@ export default {
     return {
 
     }
+  },
+  mounted() {
+    this.$store.dispatch('classinfo/getClassInfo', this.$route.params)
+    this.$store.dispatch('classinfo/getJoinStatus', this.$route.params)
+    console.log(this.$store.state.classinfo);
   }
 }
 </script>
