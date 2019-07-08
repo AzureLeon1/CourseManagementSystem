@@ -10,6 +10,10 @@ import Courseview from '@/views/Courseview'
 import CourseTable from '@/components/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import MyClass from '@/views/MyClass'
+import GlobalClass from '@/views/GlobalClass'
+import ClassDetail from '@/views/ClassDetail'
+
+
 
 Vue.use(Router)
 
@@ -65,6 +69,17 @@ export default new Router({
       path: '/myclass',
       name: 'MyClass',
       component: MyClass
+    },
+    {
+      path: '/globalclass',
+      name: 'GlobalClass',
+      component: GlobalClass
+      
+    },
+    {
+      path: '/classdetail',
+      name: 'ClassDetail',
+      component: ClassDetail
     }
   ]
 })
