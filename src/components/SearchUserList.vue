@@ -37,6 +37,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch("userlistitem/clearUserList")
     this.pageSize = 10;
     this.current = 1;
   },

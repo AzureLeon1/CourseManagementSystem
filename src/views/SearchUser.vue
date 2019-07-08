@@ -5,7 +5,7 @@
         <user-nav :activeIndex="0"></user-nav>
       </el-aside>
       <el-main>
-        <SearchUserList />
+        <SearchUserList style="margin-top: 20px;"/>
 
       </el-main>
     </el-container>
