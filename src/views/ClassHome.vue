@@ -4,25 +4,29 @@
       <class-nav :activeIndex="0"></class-nav>
     </el-aside>
     <el-main>
-     <ClassInfo></ClassInfo>
+      <h1 style="text-align: center">ClassHome Page</h1>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import ClassNav from "../components/ClassNav"
-import ClassInfo from "../components/ClassInfo"
 
 export default {
-  name: 'ClassDetail',
+  name: 'ClassHome',
   components: {
-    ClassNav,
-    ClassInfo
+    ClassNav
   },
+  props: ["class_id"],
   data () {
     return {
 
     }
+  },
+  mounted() {
+    this.$store.dispatch('classinfo/getClassInfo', this.$route.params)
+    this.$store.dispatch('classinfo/getJoinStatus', this.$route.params)
+    console.log(this.$store.state.classinfo);
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <div id="twitter">
     <el-container class="home">
       <el-aside width="260px">
-        <user-nav :activeIndex="0"></user-nav>
+        <user-nav :activeIndex="2"></user-nav>
       </el-aside>
       <el-main>
         <div class="twitter_list">

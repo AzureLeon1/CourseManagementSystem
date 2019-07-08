@@ -18,6 +18,7 @@ const actions = {
     async getClassInfo({commit, state}, form)
     {
         const data = await api.getClassInfo(form);
+        console.log(data);
             commit('setClassInfo', data)
 
 
@@ -33,7 +34,7 @@ const actions = {
 
     async getJoinStatus({commit, state}, form)
     {
-       
+
         const status = await api.getJoinStatus(form)
         commit('setJoinStatus', status)
         console.log(status)

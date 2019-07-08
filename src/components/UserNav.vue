@@ -25,7 +25,7 @@
       </li>
     </ul>
     <el-row style="text-align: center">
-      <el-button type="danger" class="logoutBtn" @click="logout">登出</el-button>
+      <el-button size="small" type="danger" class="logoutBtn" @click="logout">登出</el-button>
     </el-row>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      if (this.user.role == "student" || this.user.role == "teacher") {
+      if (this.user.role == "student" || this.user.role == "teacher_edu") {
         this.menu.push(
           {
             index: 1,
@@ -85,7 +85,7 @@ export default {
             icon: "el-icon-data-analysis"
           }
         );
-      } else if (this.user.role == "jwteacher") {
+      } else if (this.user.role == "teacher_manage") {
         this.menu.push({
           index: 1,
           title: "发布动态",
