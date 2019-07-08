@@ -64,13 +64,20 @@ export default {
     },
     checkDetail() {
       this.$router.push({
-        name: "ExamDetail"
+        name: "ExamDetail",
+        params: {
+          class_id: '1',
+          exam_id: this.examInfo.exam_id
+        }
       })
     },
     enterExam(rName) {
       this.$router.push({
         name: rName,
-        params: this.examInfo.exam_id
+        params: {
+          class_id: '1',
+          exam_id: this.examInfo.exam_id
+        }
       })
     }
   },
