@@ -63,7 +63,7 @@ export default {
           {
             index: 2,
             title: "好友动态",
-            routeName: "",
+            routeName: "Twitter",
             icon: "el-icon-chat-line-square"
           },
           {
