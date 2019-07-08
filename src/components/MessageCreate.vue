@@ -52,6 +52,7 @@ width="400px;">
 </template>
 
 <script>
+import api from "@/store/modules/message.js";
 export default {
     name: 'MessageCreate',
     props:{
@@ -75,13 +76,17 @@ export default {
     },
     methods: {
         cancelWindow(){
+            // console.log("click cancelwindow()");
             this.$emit('hideCreateMsg');
         },
         createMsg(){
+            // console.log("click createMsg()");
             //隐藏
             this.$emit("hideCreateMsg");
-            //create Message
-            // api.
+            //调用数据库
+            // console.log(api);
+            // console.log(this.form);
+            api.createMessage(this.form);
         }
     }
 }

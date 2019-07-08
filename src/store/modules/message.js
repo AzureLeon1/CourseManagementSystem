@@ -1,7 +1,8 @@
 import api from "@/api/index.js"
 
 export default{
-    getMessageWithID
+    getMessageWithID,
+    createMessage
 }
 
 async function getMessageWithID(id){
@@ -26,4 +27,16 @@ async function getMessageWithID(id){
     }
     
     return data;
+}
+
+async function createMessage(form){
+    console.log(form);
+    //deal with raw data from form.
+    let f={};
+    f['content']=form.content;
+    let date=new Date();
+    date=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
+    f['content']=form.content;
+    f['publish_time']=date;
+    console.log(f);
 }

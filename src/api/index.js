@@ -26,7 +26,8 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  getMessageWithID
+  getMessageWithID,
+  createMessage
 }
 
 function param(a) {
@@ -351,5 +352,6 @@ async function getMessageWithID(id){
 }
 
 async function createMessage(form){
-  
+  // const res = await request(POST, '/api/broadcasts', form);
+  // return res;
 }

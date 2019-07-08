@@ -37,8 +37,8 @@
 
         <!-- float: Add button -->
         <div class="addbutton-wrapper formanager">
-          <!-- <el-button @click="createMsg"-->
-          <el-button @click="createMsg"
+          <!-- <el-button @click="showCreateMsgPanel"-->
+          <el-button @click="showCreateMsgPanel"
             style="height: 50px; width:50px; text-align: center; border-radius:50%; padding: 17px 0;"
           >
             <i class="el-icon-plus"></i>
@@ -116,7 +116,7 @@ export default {
         this.msr=this.$refs.msr;
         this.msr.showMessageDetailed=false;
     },
-    createMsg(){
+    showCreateMsgPanel(){
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=true;
     },
