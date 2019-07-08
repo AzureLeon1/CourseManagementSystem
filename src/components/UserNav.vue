@@ -2,6 +2,8 @@
   <div class="userNav">
     <el-row style="text-align: center">
       <img :src="user.avatar" class="avatar" @click="routeTo('UserProfile', {person_id: user.id})" />
+      <div style="margin-top: -15px; font-size: 14px; font-weight: 300; ">{{user.name}}</div>
+      <div style="margin-bottom: 15px; font-size: 14px; font-weight: 300;">{{user.email}}</div>
     </el-row>
     <el-row style="margin-bottom: 10px">
       <el-col :span="7" :offset="4">
@@ -61,7 +63,7 @@ export default {
           {
             index: 2,
             title: "好友动态",
-            routeName: "",
+            routeName: "Twitter",
             icon: "el-icon-chat-line-square"
           },
           {

@@ -87,7 +87,7 @@ export default {
       });
     },
     cancel() {
-      this.$route.push({
+      this.$router.push({
         name: "Exam"
       })
     }

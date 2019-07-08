@@ -1,5 +1,5 @@
 <template>
-  <el-container class="home">
+  <el-container class="answerExamBox">
     <el-aside width="260px">
       <user-nav :activeIndex="0"></user-nav>
     </el-aside>
@@ -28,18 +28,18 @@ export default {
   },
 
   mounted() {
-    let _this = this
-    window.onbeforeunload = function (e) {
-      if (_this.$route.name == "Template") {
-        e = e || window.event;
-        if (e) {
-          e.returnValue = "离开页面试卷将自动提交,是否离开";
-        }
-        return '离开页面试卷将自动提交,是否离开';
-      } else {
-        window.onbeforeunload = null
-      }
-    };
+    // let _this = this
+    // window.onbeforeunload = function (e) {
+    //   if (_this.$route.name == "Template") {
+    //     e = e || window.event;
+    //     if (e) {
+    //       e.returnValue = "离开页面试卷将自动提交,是否离开";
+    //     }
+    //     return '离开页面试卷将自动提交,是否离开';
+    //   } else {
+    //     window.onbeforeunload = null
+    //   }
+    // };
   },
 
   beforeRouteLeave(to, from, next) {
