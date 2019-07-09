@@ -57,13 +57,15 @@ async function request(method, url, data) {
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
+    console.log(method);
+    console.log(url);
     console.log(token && `Bearer ${token}`, url)
     console.log(data);
     const res = await axios({
-      method,
-      url,
-      data,
-      headers
+      method:method,
+      url: url,
+      data: data,
+      hearders: headers
     })
     console.log(res);
     var mes = res;
@@ -414,17 +416,20 @@ async function getMessageWithID(id) {
 }
 
 async function getFollowing(id) {
-  const res = await request(GET, '/api/following', {
-    id: id
+  const res = await request(POST, '/api/followings', {
+    user_id: id
   });
+  console.log(res);
+  console.log(res.data);
   return res.data
 }
 
 async function getFollowers(id) {
-  const res = await request(GET, '/api/followers', {
-    id: id
+  const res = await request(POST, '/api/followers', {
+    user_id: id
   });
-  return res.data
+  console.log(res);
+  return res.data.data.users
 }
 
 async function followPerson(id) {
