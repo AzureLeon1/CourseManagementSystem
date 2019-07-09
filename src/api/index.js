@@ -94,23 +94,23 @@ async function request(method, url, data) {
 
 async function getAuthority(form) {
   console.log(form);
-  // const data = {
-  //   "user_ID": 100001,
-  //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-  //   "name": "王亮",
-  //   "role": "teacher_edu",
-  //   "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-  //   "phone_number": "18916083381",
-  //   "college": "软件学院",
-  //   "following": 0,
-  //   "follower": 0,
-  //   "email": "leonwangchn@163.com"
-  // }
-  // await delay(1000)
-  // return data
-  const res = await request(POST, '/api/login', form)
-  console.log(res);
-  return res.data
+  const data = {
+    "user_ID": 100001,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+    "name": "王亮",
+    "role": "student",
+    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+    "phone_number": "18916083381",
+    "college": "软件学院",
+    "following": 0,
+    "follower": 0,
+    "email": "leonwangchn@163.com"
+  }
+  await delay(1000)
+  return data
+  // const res = await request(POST, '/api/login', form)
+  // console.log(res);
+  // return res.data
 }
 
 async function register(form) {
@@ -438,12 +438,12 @@ async function deleteFollowPerson(id) {
 async function getCourseware(course_id, sec_id, semester, year) {
   const res = {
     data: [{
-        name: "课件1",
+        name: "课件1-pdf",
         location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
       },
       {
-        name: "课件2",
-        location: "url2"
+        name: "课件2-ppt",
+        location: "http://pu9bnvlst.bkt.clouddn.com/%E7%AC%AC1%E7%AB%A0%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5.ppt"
       },
       {
         name: "课件3",
