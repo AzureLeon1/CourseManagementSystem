@@ -4,6 +4,7 @@ import Homepage from '@/views/Homepage'
 import Template from '@/views/Template'
 import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
+import CourseMessage from '@/views/CourseMessage'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Team from '@/views/Team'
@@ -58,6 +59,11 @@ export default new Router({
       path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
+    },
+    {
+      path:'/coursemessage',
+      name:'CourseMessage',
+      component: CourseMessage
     },
     {
       path: '/login',
