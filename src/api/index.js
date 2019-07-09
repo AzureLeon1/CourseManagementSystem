@@ -420,8 +420,8 @@ async function getFollowing(id) {
     user_id: id
   });
   console.log(res);
-  console.log(res.data);
-  return res.data
+  console.log(res.data.data.users);
+  return res.data.data.users
 }
 
 async function getFollowers(id) {

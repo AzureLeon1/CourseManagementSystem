@@ -26,9 +26,7 @@ const actions = {
     commit,
     state
   }, id) { //获取我关注的用户
-    const {
-      followings
-    } = await api.getFollowing(id);
+    const followings = await api.getFollowing(id);
     console.log(followings);
     commit('setfollowPeopleItems', followings)
   },
@@ -36,9 +34,7 @@ const actions = {
     commit,
     state
   }, id) { //获取关注我的用户
-    const {
-      followers
-    } = await api.getFollowers(id);
+    const followers = await api.getFollowers(id);
     commit('setFollowerItems', followers)
   },
   // 关注用户
@@ -79,8 +75,6 @@ const mutations = {
   },
   setfollowPeopleItems(state, props) {
     state.followPeopleItems = []
-    console.log(props);
-
     state.followPeopleItems.push(...props)
   },
   setFollowerItems(state, props) {
