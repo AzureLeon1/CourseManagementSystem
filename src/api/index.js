@@ -1,4 +1,4 @@
-﻿import axios from 'axios'
+import axios from 'axios'
 import {
   delay
 } from '@/utils/util.js'
@@ -36,6 +36,9 @@ export default {
   getFollowers,
   followPerson,
   deleteFollowPerson,
+  getClassExams,
+  checkExamResult,
+  getExamQuestions,
   getCourseware,
   getAttendance,
   getTeam,
@@ -830,6 +833,21 @@ async function getAttendance() {
   }
   await delay(1000)
   return data
+}
+
+async function getClassExams(form) {
+  const res = await request(GET, '/api/exams', form)
+  return res.data
+}
+
+async function checkExamResult(form) {
+  const res = await request(GET, '/api/exam_results', form)
+  return res.data
+}
+
+async function getExamQuestions(form) {
+  const res = await request(GET, 'api/exam_questions', form)
+  return res.data
 }
 
 async function getCourseware(course_id, sec_id, semester, year) {
