@@ -53,7 +53,7 @@ export default {
     /* width: 100%;
     max-width: 100%;
     min-width: 100%; */
-    border: #ffffffff 1px solid;
+    border: rgba(255, 255, 255, 0) 1px solid;
     background: #292961;
     color: #ffffff;
   }

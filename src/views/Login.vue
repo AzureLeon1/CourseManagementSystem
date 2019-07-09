@@ -1,32 +1,38 @@
 <template>
   <div class="Login">
-    <div class="card-container">
-      <el-card>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
-          <el-form-item prop="name">
-            <el-input v-model="ruleForm.name" placeholder="账号"></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input type="password" placeholder="密码" v-model="ruleForm.password"></el-input>
-          </el-form-item>
-          <el-form-item prop="validate" class="validate-code">
-            <el-input v-model="ruleForm.validate" placeholder="验证码"></el-input>
-            <div class="code">
-              <s-identify :identifyCode="identifyCode"></s-identify>
+    <div class="container">
+      <div class="show-container">
+        <img class="logo" src="/static/img/logo.06ab52f.png">
+        <div class="ccms">CCMS</div>
+      </div>
+      <div class="card-container">
+        <el-card>
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
+            <el-form-item prop="name">
+              <el-input v-model="ruleForm.name" placeholder="账号"></el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input type="password" placeholder="密码" v-model="ruleForm.password"></el-input>
+            </el-form-item>
+            <el-form-item prop="validate" class="validate-code">
+              <el-input v-model="ruleForm.validate" placeholder="验证码"></el-input>
+              <div class="code" @click="setValidate">
+                <s-identify :identifyCode="identifyCode"></s-identify>
+              </div>
+              <el-button
+                icon="el-icon-refresh"
+                size="mini"
+                style="padding: 13px 0px;"
+                @click="setValidate"
+              ></el-button>
+            </el-form-item>
+            <div class="btns">
+              <el-button type="primary" style="flex: 1" @click="login">登录</el-button>
+              <el-button style="flex: 1" @click="routeTo('Register')">注册</el-button>
             </div>
-            <el-button
-              icon="el-icon-refresh"
-              size="mini"
-              style="padding: 13px 0px;"
-              @click="setValidate"
-            ></el-button>
-          </el-form-item>
-          <div class="btns">
-            <el-button type="primary" style="flex: 1" @click="login">登录</el-button>
-            <el-button style="flex: 1" @click="routeTo('Register')">注册</el-button>
-          </div>
-        </el-form>
-      </el-card>
+          </el-form>
+        </el-card>
+      </div>
     </div>
     <!-- <Footer id="footer" /> -->
   </div>
@@ -133,18 +139,25 @@ export default {
 </style>
 
 <style scoped>
-.Login {
-  height: calc(100vh - 60px);
-  display: flex;
-  flex-direction: column;
+.Login *{
+  box-sizing: border-box;
 }
 
+.Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 50px);
+  background-color: #292961;
+}
 
 .el-card {
-  width: 320px;
+  width: 100%;
 }
+
 .code {
   margin: 0 5px 0 10px;
+  cursor: pointer;
 }
 .s-canvas {
   overflow: hidden;
@@ -154,11 +167,27 @@ export default {
 .btns {
   display: flex;
 }
-.desc {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vh;
+}
+.show-container{
+  flex-grow: 1;
   text-align: center;
-  font-size: 20px;
-  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+.logo{
+  width: 200px;
+}
+.ccms{
+  font-size: 40px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: .2em;
+}
+.card-container{
+  width: 35%;
 }
 </style>
