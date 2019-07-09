@@ -12,6 +12,9 @@ import team from './modules/team.js'
 import attendance from './modules/attendance.js'
 import classinfo from './modules/classinfo.js'
 
+
+import userlistitem from './modules/userlistitem.js'
+
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -28,7 +31,8 @@ export default new Vuex.Store({
     exam,
     team,
     attendance,
-    classinfo
+    classinfo,
+    userlistitem
   },
   strict: debug
 })

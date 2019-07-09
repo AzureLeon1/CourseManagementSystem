@@ -15,7 +15,8 @@ import NewExam from '@/views/NewExam'
 import ExamDetail from '@/views/ExamDetail'
 import QuestionBank from '@/views/QuestionBank'
 import Courseview from '@/views/Courseview'
-import CourseTable from '@/components/CourseTable'
+import CourseTable from '@/views/CourseTable'
+// import TimeTable from '@/components/TimeTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
@@ -27,6 +28,7 @@ import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
 import Summary from '@/views/Summary'
 
+import MembershipAudit from '@/views/MembershipAudit'
 
 Vue.use(Router)
 
@@ -42,7 +44,7 @@ export default new Router({
     {
       path: '/template',
       name: 'Template',
-      component: QuestionBank
+      component: Template
     },
     {
       path: '/courseview',
@@ -68,16 +70,6 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
-    },
-    {
-      path: '/team',
-      name: 'Team',
-      component: Team,
-    },
-    {
-      path: '/attendance',
-      name: 'Attendance',
-      component: Attendance,
     },
     {
       path: '/coursetable',
@@ -136,6 +128,59 @@ export default new Router({
       path: '/summary',
       name: 'Summary',
       component: Summary,
+    },
+    {
+      path: '/class_home/:class_id/exams',
+      name: 'Exam',
+      component: Exam,
+    },
+    {
+      path: '/class_home/:class_id/newExam',
+      name: 'NewExam',
+      component: NewExam,
+    },
+    {
+      path: '/class_home/:class_id/answerExam/:exam_id',
+      name: 'AnswerExam',
+      component: AnswerExam,
+      props: true
+    },
+    {
+      path: '/class_home/:class_id/checkExam/:exam_id',
+      name: 'CheckExam',
+      component: CheckExam,
+      props: true
+    },
+    {
+      path: '/class_home/:class_id/examDetail/:exam_id',
+      name: 'ExamDetail',
+      component: ExamDetail,
+    },
+    {
+      path: '/class_home/:class_id/questionBank',
+      name: 'QuestionBank',
+      component: QuestionBank
+    },
+    {
+      path: '/class_home/:class_id/team',
+      name: 'Team',
+      component: Team,
+    },
+    {
+      path: '/class_home/:class_id/discussion',
+      name: 'Discussion',
+      component: Discussion
+    },
+    {
+      path: '/class_home/:class_id/attendance',
+      name: 'Attendance',
+      component: Attendance,
+    },
+    {
+      path: '/class_home/:class_id/membershipAudit',
+      name: 'MembershipAudit',
+      component: MembershipAudit,
+      props: true,
     },
   ]
 })

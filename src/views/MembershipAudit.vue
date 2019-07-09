@@ -1,40 +1,34 @@
 <template>
-  <el-container class="examDetail">
+  <el-container class="questionBankBox">
     <el-aside width="260px">
-      <class-nav :activeIndex="3"></class-nav>
+      <class-nav :activeIndex="6"></class-nav>
     </el-aside>
     <el-main>
-      <exam-detail-box></exam-detail-box>
+      <membership-audit-table></membership-audit-table>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import ClassNav from "../components/ClassNav"
-import ExamDetailBox from "../components/ExamDetailBox"
+import MembershipAuditTable from "../components/MembershipAuditTable"
 
 export default {
-  name: 'ExamDetail',
+  name: 'QuestionBank',
 
   components: {
     ClassNav,
-    ExamDetailBox
+    MembershipAuditTable
   },
-  
+
   data () {
     return {
       
     }
-  },
-
-  methods: {
-    
   }
 }
 </script>
 
 <style>
-.examDetail {
-  
-}
+
 </style>

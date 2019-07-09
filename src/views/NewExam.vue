@@ -1,7 +1,7 @@
 <template>
   <el-container class="examBox">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <class-nav :activeIndex="3"></class-nav>
     </el-aside>
     <el-main>
       <new-exam-form
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
+import ClassNav from "../components/ClassNav"
 import NewExamForm from "../components/NewExamForm"
 import SelectQuestion from "../components/SelectQuestion"
 
@@ -26,14 +26,14 @@ export default {
   name: 'NewExam',
 
   components: {
-    UserNav,
+    ClassNav,
     NewExamForm,
     SelectQuestion
   },
   
   data() {
     return {
-      newFormVisible: false,
+      newFormVisible: true,
       newExamForm: {},
       questions: []
     };
@@ -45,7 +45,7 @@ export default {
     },
     submitForm() {
       this.newFormVisible = false
-      this.newExamForm = this.$refs.newExamForm.examForm
+      this.newExamForm = this.$refs.newExamForm.newExam
     },
     submit() {
       this.questions = this.$refs.questionList.questions
