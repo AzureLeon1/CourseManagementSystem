@@ -1,8 +1,9 @@
-﻿import {
+﻿import axios from 'axios'
+import {
   delay
 } from '@/utils/util.js'
 
-const server = 'http://192.168.1.16:8080/'
+const server = 'http://192.168.1.15:8080'
 
 const headers = {}
 
@@ -56,12 +57,14 @@ async function request(method, url, data) {
       url = server + url
     }
     console.log(token && `Bearer ${token}`, url)
+    console.log(data);
     const res = await axios({
       method,
       url,
       data,
       headers
     })
+    console.log(res);
     var mes = res;
     if (res.status < 400) {
       if (res.data.code && res.data.code < 400) {
@@ -76,7 +79,7 @@ async function request(method, url, data) {
     }
   } catch (err) {
     console.log("get status")
-    console.log()
+    console.log(err)
     if (mes.data.code !== 402) {
       Message({
         message: err.message,
@@ -90,22 +93,24 @@ async function request(method, url, data) {
 }
 
 async function getAuthority(form) {
-  const data = {
-    "user_ID": 100001,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "王亮",
-    "role": "teacher_edu",
-    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-    "phone_number": "18916083381",
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email": "leonwangchn@163.com"
-  }
-  await delay(1000)
-  return data
-  // const res = await request(POST, '/api/login', form)
-  // return res.data.data
+  console.log(form);
+  // const data = {
+  //   "user_ID": 100001,
+  //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //   "name": "王亮",
+  //   "role": "teacher_edu",
+  //   "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //   "phone_number": "18916083381",
+  //   "college": "软件学院",
+  //   "following": 0,
+  //   "follower": 0,
+  //   "email": "leonwangchn@163.com"
+  // }
+  // await delay(1000)
+  // return data
+  const res = await request(POST, '/api/login', form)
+  console.log(res);
+  return res.data
 }
 
 async function register(form) {
