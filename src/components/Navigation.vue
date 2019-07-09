@@ -38,7 +38,7 @@ export default {
 
 <style scoped>
   .container {
-    position: absolute;
+    position: fixed;
     top: 0;
 
     display: flex;

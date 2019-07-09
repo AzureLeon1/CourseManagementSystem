@@ -102,7 +102,7 @@ export default {
 
 <style scoped>
 .userNav {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   height: 100vh;
   left: 0;
