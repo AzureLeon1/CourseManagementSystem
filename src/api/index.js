@@ -31,7 +31,10 @@ export default {
   getFollowing,
   getFollowers,
   followPerson,
-  deleteFollowPerson
+  deleteFollowPerson,
+  getClassExams,
+  checkExamResult,
+  getExamQuestions
 }
 
 function param(a) {
@@ -427,4 +430,19 @@ async function deleteFollowPerson(id) {
     user_id: id
   })
   console.log(res)
+}
+
+async function getClassExams(form) {
+  const res = await request(GET, '/api/exams', form)
+  return res.data
+}
+
+async function checkExamResult(form) {
+  const res = await request(GET, '/api/exam_results', form)
+  return res.data
+}
+
+async function getExamQuestions(form) {
+  const res = await request(GET, 'api/exam_questions', form)
+  return res.data
 }
