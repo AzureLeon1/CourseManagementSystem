@@ -25,6 +25,7 @@ import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
+import Summary from '@/views/Summary'
 
 
 Vue.use(Router)
@@ -130,6 +131,11 @@ export default new Router({
       name: 'ClassHome',
       component: ClassHome,
       props: true
-    }
+    },
+    {
+      path: '/summary',
+      name: 'Summary',
+      component: Summary,
+    },
   ]
 })

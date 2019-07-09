@@ -29,8 +29,8 @@
             </el-table-column>
             <el-table-column prop="team_id" width="300px"></el-table-column>
             <el-table-column prop="team_name" width="350px"></el-table-column>
-            <el-table-column prop="team_btn" width="100px">
-              <template slot-scope="scope">
+            <el-table-column prop="team_btn" width="100px"  >
+              <template slot-scope="scope" v-if="isShow">
                 <el-button @click="JoinClick(scope.row)" type="text" size="small">加入</el-button>
               </template>
             </el-table-column>
@@ -39,7 +39,7 @@
       </el-card>
     </div>
     <!-- 老师不显示-->
-    <div class="myteams">
+    <div class="myteams" v-if="isShow">
       <Myteam />
     </div>
   </div>
@@ -89,12 +89,18 @@ export default {
           message: "action" + action
         });
       });
-    }
+    },
   },
 
   computed:{
     tableData(){
       return this.$store.state.team.classteamlist
+    },
+    isShow(){
+      if (this.$store.state.profile.role=="student"){
+        return true
+      }
+      else{return false}
     },
   },
   mounted(){

@@ -31,13 +31,6 @@
                 </el-table-column>
                 <el-table-column width="240px" prop="attendance_status" label="出席状态">
                   <template slot-scope="scope">
-                    <!-- <el-input size="small" style="width=10px height=5px"
-                    v-model="scope.row.attendance_status"
-                    v-if="scope.row.seen"
-                    @blur="loseFcous(scope.$index,scope.row)">            
-                    </el-input>
-                    <span v-else>
-                    {{scope.row.attendance_status}}</span>-->
                     <el-radio v-model="scope.row.attendance_status" label="1" size="small"> 出席</el-radio>                   
                     <el-radio v-model="scope.row.attendance_status" label="2" size="small"> 无故缺席</el-radio>               
                     <el-radio v-model="scope.row.attendance_status" label="3" size="small"> 请假</el-radio>
@@ -57,11 +50,9 @@
 </template>
 
 <script>
-//import AttendanceReference from "../components/AttendanceReference";
 export default {
   name: "AttendanceTable",
   components: {
-    //AttendanceReference
   },
   data() {
     return {
@@ -74,14 +65,15 @@ export default {
       this.$prompt("请输入点名课时", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        inputPattern: /^[0-9]*$/,
-        // 输入格式要求？
+        inputPattern: /^[\S][0-9]*$/,
+        // 输入格式要求:数字
         inputErrorMessage: "格式不正确"
       })
         .then(({ value }) => {
           this.$message({
             type: "success",
-            message: value + "成功创建点名"
+            message: "成功发布"+value + "考勤"
+            //增加time_id=value的出席记录表
           });
         })
         .catch(() => {
