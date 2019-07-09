@@ -31,7 +31,8 @@ export default {
   getFollowing,
   getFollowers,
   followPerson,
-  deleteFollowPerson
+  deleteFollowPerson,
+  getCourseware
 }
 
 function param(a) {
@@ -416,15 +417,41 @@ async function getFollowers(id) {
 }
 
 async function followPerson(id) {
-  const res = await request(POST, '/api/following/', {
+  const res = await request(POST, '/api/following', {
     user_id: id
   })
   console.log(res)
 }
 
 async function deleteFollowPerson(id) {
-  const res = await request(DELETE, '/api/following/', {
+  const res = await request(DELETE, '/api/following', {
     user_id: id
   })
   console.log(res)
+}
+
+async function getCourseware(course_id, sec_id, semester, year) {
+  const res = {
+    data: [{
+        name: "课件1",
+        location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
+      },
+      {
+        name: "课件2",
+        location: "url2"
+      },
+      {
+        name: "课件3",
+        location: "url3"
+      }
+    ]
+  }
+  // const res = await request(GET, '/api/courseware', {
+  //   course_id: course_id,
+  //   sec_id: sec_id,
+  //   semester: semester,
+  //   year: year
+  // })
+  console.log(res);
+  return res.data
 }
