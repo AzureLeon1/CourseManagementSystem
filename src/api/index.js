@@ -2,6 +2,7 @@
 import {
   delay
 } from '@/utils/util.js'
+import { Message  } from 'element-ui';
 
 const server = 'http://192.168.1.15:8080'
 
@@ -80,15 +81,20 @@ async function request(method, url, data) {
   } catch (err) {
     console.log("get status")
     console.log(err)
-    if (mes.data.code !== 402) {
-      Message({
-        message: err.message,
-        type: 'error',
-        showClose: true,
-      })
-    }
 
-    console.error(err)
+    Message({
+      message: err.message,
+      type: 'error',
+      duration: 1000
+    });
+
+    // if (mes.data.code !== 402) {
+    //   Message({
+    //     message: err.message,
+    //     type: 'error',
+    //     showClose: true,
+    //   })
+    // }
   }
 }
 
@@ -115,7 +121,6 @@ async function getAuthority(form) {
 
 async function register(form) {
   const res = await request(POST, '/api/register', form)
-  console.log(res);
   return res.data
 }
 
