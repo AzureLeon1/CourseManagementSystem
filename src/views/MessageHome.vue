@@ -47,7 +47,7 @@
 
         <!-- float: Add popover -->
         <transition name="el-fade-in-linear">
-            <MessageCreate ref="msc" v-on:hideCreateMsg="hideCreateMsg"></MessageCreate>
+            <MessageCreate ref="msc" v-on:hideCreateMsg='hideCreateMsg' v-on:createMsg='createMsg'></MessageCreate>
         </transition>
 
 
@@ -98,7 +98,9 @@ export default {
   methods: {
     //all
     initial(){
-      this.getMessageWithID(111);
+        this.$refs.msc.$on['hide']=this.hideReadMsg;
+        console.log(this.$refs.msc.$on)
+        this.getMessageWithID(111);
       
     },
     //front-end
@@ -120,7 +122,14 @@ export default {
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=true;
     },
+    createMsg(form){
+        this.msc = this.$refs.msc;
+        this.msc.showCreateMsg=false;
+        // alert(form);
+        api.createMessage(form);
+    },
     hideCreateMsg(){
+        alert("cli")
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=false;
     },
@@ -147,7 +156,7 @@ export default {
 
       //update page 1 content
       let range=this.messages.length<7?this.messages.length:7;
-      console.log(range);
+      // console.log(range);
       for(let i=0;i<range;i++){
         this.tableData.push(this.messages[i]);
       }
