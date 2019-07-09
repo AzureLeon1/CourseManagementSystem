@@ -13,7 +13,7 @@
         <span>{{item.title}}</span>
       </div>
       <div class="logout-btn">
-        <el-button size="small" type="danger" @click="logout">登 出</el-button>
+        <el-button plain @click="logout">登 出</el-button>
       </div>
     </div>
     <div class="react-area"></div>

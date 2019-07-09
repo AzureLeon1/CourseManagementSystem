@@ -36,7 +36,7 @@
         <span>{{item.title}}</span>
       </div>
       <div class="logout-btn">
-        <el-button size="small" type="danger" @click="routeTo('MyClass')">
+        <el-button plain @click="routeTo('MyClass')">
           返 回
         </el-button>
       </div>
