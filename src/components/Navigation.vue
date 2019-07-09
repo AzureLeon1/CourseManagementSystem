@@ -1,8 +1,11 @@
 <template>
     <div class="container">
-      <div id="title" @click="routeTo('Homepage')">课程班级管理系统</div>
+      <div class="ccms item" @click="routeTo('Homepage')">
+        <img class="logo" style="height: 70%;" src="../assets/logo.png" alt="">
+        <img class="logo" style="height: 46%; margin-left: 4px;" src="../assets/CCMS.png" alt="">
+      </div>
 
-      <div class="btn" @click="routeTo('Homepage')">
+      <div class="btn item" @click="routeTo('Homepage')">
         <i class="fas fa-home"></i>
       </div>
 
@@ -45,20 +48,27 @@ export default {
     padding: 0 10px;
     z-index: 2;
     height: 50px;
-    width: 100%;
+    width: 100vw;
+    box-sizing: border-box;
+    /* width: 100%;
     max-width: 100%;
-    min-width: 100%;
+    min-width: 100%; */
     border: #ffffffff 1px solid;
     background: #292961;
     color: #ffffff;
   }
 
-  #title {
-    font-size: 1em;
-    /* font-weight: bold; */
-    letter-spacing: .2em;
-    margin-left: 40px;
+  .ccms {
+    height: 70%;
+    padding: 0 10px;
+    line-height: 33px;
+    margin-left: 10px;
     cursor: pointer;
+  }
+
+  .logo{
+    height: 100%;
+    vertical-align: middle;
   }
 
   .btn {
@@ -70,11 +80,7 @@ export default {
     height: 70%;
     line-height: 33px;
     width: 45px;
-    border-radius: 4px;
-    cursor: pointer;
     color: #dddddd;
-
-    transition: .2s;
   }
 
   /* .btn:focus {
@@ -83,12 +89,19 @@ export default {
      border-color: #dcdfe6;
   } */
 
-  .btn:hover {
+  .item{
+    border-radius: 4px;
+    cursor: pointer;
+    color: #dddddd;
+    transition: .2s;
+  }
+
+  .item:hover {
     background: #ffffff28;
     color: #f3f3f3;
   }
 
-  .btn:active {
+  .item:active {
     background: #ffffff56;
     color: #ffffff;
   }
