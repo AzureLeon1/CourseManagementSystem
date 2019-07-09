@@ -6,7 +6,6 @@
       </el-aside>
       <el-main>
         <div class="team lists">
-          <div></div>
           <div>
             <TeamList />
           </div>

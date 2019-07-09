@@ -1,8 +1,10 @@
-﻿import {
+import axios from 'axios'
+import {
   delay
 } from '@/utils/util.js'
+import { Message  } from 'element-ui';
 
-const server = 'http://192.168.1.16:8080/'
+const server = 'http://192.168.1.15:8080'
 
 const headers = {}
 
@@ -35,6 +37,7 @@ export default {
   getClassExams,
   checkExamResult,
   getExamQuestions,
+  getCourseware,
   getAttendance,
   getTeam,
   createMessage
@@ -60,13 +63,18 @@ async function request(method, url, data) {
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
-    console.log(token && `Bearer ${token}`, url)
+    console.log(method);
+    console.log(url);
+    console.log(headers)
+    console.log(token);
+    console.log(data);
     const res = await axios({
-      method,
-      url,
-      data,
-      headers
+      method:method,
+      url: url,
+      data: data,
+      headers: headers
     })
+    console.log(res);
     var mes = res;
     if (res.status < 400) {
       if (res.data.code && res.data.code < 400) {
@@ -81,36 +89,43 @@ async function request(method, url, data) {
     }
   } catch (err) {
     console.log("get status")
-    console.log()
-    if (mes.data.code !== 402) {
-      Message({
-        message: err.message,
-        type: 'error',
-        showClose: true,
-      })
-    }
+    console.log(err)
 
-    console.error(err)
+    Message({
+      message: err.message,
+      type: 'error',
+      duration: 1000
+    });
+
+    // if (mes.data.code !== 402) {
+    //   Message({
+    //     message: err.message,
+    //     type: 'error',
+    //     showClose: true,
+    //   })
+    // }
   }
 }
 
 async function getAuthority(form) {
-  const data = {
-    "user_ID": 100001,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "王亮",
-    "role": "teacher_edu",
-    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-    "phone_number": "18916083381",
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email": "leonwangchn@163.com"
-  }
-  await delay(1000)
-  return data
-  // const res = await request(POST, '/api/login', form)
-  // return res.data.data
+  console.log(form);
+  // const data = {
+  //   "user_ID": 100001,
+  //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //   "name": "王亮",
+  //   "role": "student",
+  //   "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //   "phone_number": "18916083381",
+  //   "college": "软件学院",
+  //   "following": 0,
+  //   "follower": 0,
+  //   "email": "leonwangchn@163.com"
+  // }
+  // await delay(1000)
+  // return data
+  const res = await request(POST, '/api/login', form)
+  console.log(res);
+  return res.data.data
 }
 
 async function register(form) {
@@ -119,39 +134,40 @@ async function register(form) {
 }
 
 async function getPersonInfo(id) {
-  var data = {}
-  if (id == 100002) {
-    data = {
-      "user_ID": 100002,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-      "name": "施程航",
-      "role": "student",
-      "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-      "phone_number": 13365445687,
-      "college": "软件学院",
-      "following": 0,
-      "follower": 0,
-      "email": "chenghang_shi@gmail.com"
-    }
-  } else {
-    data = {
-      "user_ID": 100001,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-      "name": "王亮",
-      "role": "student",
-      "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-      "phone_number": "18916083381",
-      "college": "软件学院",
-      "following": 0,
-      "follower": 0,
-      "email": "leonwangchn@163.com"
-    }
-  }
-  console.log(data);
+  // var data = {}
+  // if (id == 100002) {
+  //   data = {
+  //     "user_ID": 100002,
+  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //     "name": "施程航",
+  //     "role": "student",
+  //     "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+  //     "phone_number": 13365445687,
+  //     "college": "软件学院",
+  //     "following": 0,
+  //     "follower": 0,
+  //     "email": "chenghang_shi@gmail.com"
+  //   }
+  // } else {
+  //   data = {
+  //     "user_ID": 100001,
+  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //     "name": "王亮",
+  //     "role": "student",
+  //     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //     "phone_number": "18916083381",
+  //     "college": "软件学院",
+  //     "following": 0,
+  //     "follower": 0,
+  //     "email": "leonwangchn@163.com"
+  //   }
+  // }
+  // console.log(data);
   // await delay(1000)
-  return data
-  // const res = await request(GET, `/api/users/${id}`)
-  // return res.data
+  // return data
+  const res = await request(POST, `/api/users`, {user_id: id})
+  console.log(res.data.data);
+  return res.data.data
 }
 
 async function getPersonFollowFans(id) {
@@ -227,10 +243,11 @@ async function broadcastStudent(form){
   console.log(res)
 }
 
-//all patch start from here
 //============================================================
-async function changeUserInfo(id, form) {
-  const res = await request(PATCH, '/api/users/${id}', form)
+async function changeUserInfo(form) {
+  console.log(form);
+  const res = await request(POST, '/api/user_info', form)
+  console.log(res);
   return res
 }
 
@@ -361,6 +378,36 @@ async function getMessageWithID(id){
   // const res = await request(GET, '/api/broadcasts', {'user': id});
   // return res;
 }
+
+async function getFollowing(id) {
+  const res = await request(POST, '/api/followings', {
+    user_id: id
+  });
+  console.log(res);
+  console.log(res.data.data.users);
+  return res.data.data.users
+}
+
+async function getFollowers(id) {
+  const res = await request(POST, '/api/followers', {
+    user_id: id
+  });
+  console.log(res);
+  return res.data.data.users
+}
+
+async function followPerson(id) {
+  const res = await request(POST, '/api/following', {
+    user_id: id
+  })
+  console.log(res)
+}
+
+async function deleteFollowPerson(id) {
+  const res = await request(DELETE, '/api/following', {
+    user_id: id
+  })
+  console.log(res)
 
 async function createMessage(form){
   // const res = await request(POST, '/api/broadcasts', form);
@@ -754,5 +801,31 @@ async function checkExamResult(form) {
 
 async function getExamQuestions(form) {
   const res = await request(GET, 'api/exam_questions', form)
+  return res.data
+}
+
+async function getCourseware(course_id, sec_id, semester, year) {
+  const res = {
+    data: [{
+        name: "课件1-pdf",
+        location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
+      },
+      {
+        name: "课件2-ppt",
+        location: "http://pu9bnvlst.bkt.clouddn.com/%E7%AC%AC1%E7%AB%A0%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5.ppt"
+      },
+      {
+        name: "课件3",
+        location: "url3"
+      }
+    ]
+  }
+  // const res = await request(GET, '/api/courseware', {
+  //   course_id: course_id,
+  //   sec_id: sec_id,
+  //   semester: semester,
+  //   year: year
+  // })
+  console.log(res);
   return res.data
 }
