@@ -34,7 +34,5 @@ export default {
 </script>
 
 <style>
-.examDetail {
-  
-}
+
 </style>
