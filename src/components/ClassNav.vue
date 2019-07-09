@@ -13,7 +13,7 @@
         v-for="item in menu"
         :key="item.index"
         :class="item.index == activeIndex ? 'active' : ''"
-        @click="routeTo(item.routeName, 
+        @click="routeTo(item.routeName,
           {class_id: '1'})"
       >
         <i :class="item.icon"></i>
@@ -73,7 +73,7 @@ export default {
           {
             index: 2,
             title: "课件下载",
-            routeName: "",
+            routeName: "Courseware",
             icon: "el-icon-folder-opened"
           },
           {
@@ -106,7 +106,7 @@ export default {
           {
             index: 2,
             title: "课件上传",
-            routeName: "",
+            routeName: "Courseware",
             icon: "el-icon-folder-opened"
           },
           {

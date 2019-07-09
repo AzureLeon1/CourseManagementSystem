@@ -1,14 +1,14 @@
 <template>
   <div class="UserNavWrapper">
     <div class="userNav">
-      <img class="avatar" :src="user.avatar" @click="routeTo('UserProfile'+ {person_id:user.id})">
+      <img class="avatar" :src="user.avatar" @click="routeTo('UserProfile', {person_id:user.id})">
       <div class="name">{{user.name}}</div>
       <div class="email">{{user.email}}</div>
       <div class="btn-wrapper">
         <el-button type="primary" size="mini" @click="routeTo('Friends')">关注：{{user.following}}</el-button>
         <el-button type="primary" size="mini" @click="routeTo('Friends')">粉丝：{{user.follower}}</el-button>
       </div>
-      <div class="menu-item" v-for="item in menu" @click="routeTo(item.routeName)">
+      <div class="menu-item" v-for="item in menu" :key="item.index" @click="routeTo(item.routeName)">
         <i :class="item.icon"></i>
         <span>{{item.title}}</span>
       </div>
@@ -24,14 +24,7 @@
 export default {
   data() {
     return {
-      menu: [],
-      role: "",
-      user: {
-        avatar: "static/defaultAvatar.jpg",
-        role: "student",
-        following: 0,
-        follower: 0
-      }
+      menu: []
     };
   },
 
@@ -41,7 +34,6 @@ export default {
 
   methods: {
     getData() {
-      this.user = this.$store.state.profile.user;
       if (this.user.role == "student" || this.user.role == "teacher_edu") {
         this.menu.push(
           {
@@ -96,6 +88,10 @@ export default {
   },
 
   computed: {
+    user() {
+      console.log("fuck",this.$store.state.profile.user)
+      return this.$store.state.profile.user
+    }
   }
 };
 </script>

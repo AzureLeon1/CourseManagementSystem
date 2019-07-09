@@ -52,11 +52,6 @@ export default new Router({
       component: Courseview
     },
     {
-      path: '/courseware',
-      name: 'Courseware',
-      component: Courseware
-    },
-    {
       path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
@@ -123,6 +118,11 @@ export default new Router({
       name: 'ClassHome',
       component: ClassHome,
       props: true,
+    },
+    {
+      path: '/class_home/:class_id/courseware',
+      name: 'Courseware',
+      component: Courseware
     },
     {
       path: '/class_home/:class_id/exams',

@@ -29,8 +29,9 @@
                     </el-col>
                     <el-col :span="18">
                       <div class="grid-content bg-purple-light">
-                        <div class="name">{{item.name}}</div>
-                        <div class="info">{{identityZh(item.role)}} {{item.department}}</div>
+                        <div class="name">{{item.user_name}}</div>
+                        <div v-if="item.role == 'student'" class="info">{{identityZh(item.role)}} {{item.department}} {{item.grade+'级'}}</div>
+                        <div v-else class="info">{{identityZh(item.role)}} {{item.department}} {{item.job_title}}</div>
                       </div>
                     </el-col>
                   </el-row>
@@ -46,7 +47,7 @@
                 v-for="(item, index) in followers"
                 :key="index"
                 class="friend"
-                @click="$router.push({name: 'UserProfile', params: {person_id: 100001}})"
+                @click="$router.push({name: 'UserProfile', params: {person_id: item.user_id}})"
               >
                 <div class="person_info">
                   <el-row>
@@ -57,8 +58,9 @@
                     </el-col>
                     <el-col :span="18">
                       <div class="grid-content bg-purple-light">
-                        <div class="name">{{item.name}}</div>
-                        <div class="info">{{identityZh(item.role)}} {{item.department}}</div>
+                        <div class="name">{{item.user_name}}</div>
+                        <div v-if="item.role == 'student'" class="info">{{identityZh(item.role)}} {{item.department}} {{item.grade+'级'}}</div>
+                        <div v-else class="info">{{identityZh(item.role)}} {{item.department}} {{item.job_title}}</div>
                       </div>
                     </el-col>
                   </el-row>
@@ -83,70 +85,70 @@ export default {
   },
   data() {
     return {
-      followings: [
-        {
-          role: "student",
-          user_id: "100002",
-          name: "施程航",
-          department: "软件学院",
-          phone_number: 13365445687,
-          mail: "chenghang_shi@gmail.com",
-          avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-          grade: 2017
-        },
-        {
-          role: "student",
-          user_id: "100002",
-          name: "施程航",
-          department: "软件学院",
-          phone_number: 13365445687,
-          mail: "chenghang_shi@gmail.com",
-          avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-          grade: 2017
-        },
-        {
-          role: "student",
-          user_id: "100002",
-          name: "施程航",
-          department: "软件学院",
-          phone_number: 13365445687,
-          mail: "chenghang_shi@gmail.com",
-          avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-          grade: 2017
-        }
-      ],
-      followers: [
-        {
-          role: "student",
-          user_id: "100002",
-          name: "施程航",
-          department: "软件学院",
-          phone_number: 13365445687,
-          mail: "chenghang_shi@gmail.com",
-          avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-          grade: 2017
-        },
-        {
-          role: "student",
-          user_id: "100002",
-          name: "施程航",
-          department: "软件学院",
-          phone_number: 13365445687,
-          mail: "chenghang_shi@gmail.com",
-          avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-          grade: 2017
-        },
-        {
-          role: "student",
-          user_id: "100002",
-          name: "施程航",
-          department: "软件学院",
-          phone_number: 13365445687,
-          mail: "chenghang_shi@gmail.com",
-          avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-          grade: 2017
-        }
-      ]
+      // followings: [
+      //   {
+      //     role: "student",
+      //     user_id: "100002",
+      //     name: "施程航",
+      //     department: "软件学院",
+      //     phone_number: 13365445687,
+      //     mail: "chenghang_shi@gmail.com",
+      //     avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      //     grade: 2017
+      //   },
+      //   {
+      //     role: "student",
+      //     user_id: "100002",
+      //     name: "施程航",
+      //     department: "软件学院",
+      //     phone_number: 13365445687,
+      //     mail: "chenghang_shi@gmail.com",
+      //     avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      //     grade: 2017
+      //   },
+      //   {
+      //     role: "student",
+      //     user_id: "100002",
+      //     name: "施程航",
+      //     department: "软件学院",
+      //     phone_number: 13365445687,
+      //     mail: "chenghang_shi@gmail.com",
+      //     avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      //     grade: 2017
+      //   }
+      // ],
+      // followers: [
+      //   {
+      //     role: "student",
+      //     user_id: "100002",
+      //     name: "施程航",
+      //     department: "软件学院",
+      //     phone_number: 13365445687,
+      //     mail: "chenghang_shi@gmail.com",
+      //     avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      //     grade: 2017
+      //   },
+      //   {
+      //     role: "student",
+      //     user_id: "100002",
+      //     name: "施程航",
+      //     department: "软件学院",
+      //     phone_number: 13365445687,
+      //     mail: "chenghang_shi@gmail.com",
+      //     avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      //     grade: 2017
+      //   },
+      //   {
+      //     role: "student",
+      //     user_id: "100002",
+      //     name: "施程航",
+      //     department: "软件学院",
+      //     phone_number: 13365445687,
+      //     mail: "chenghang_shi@gmail.com",
+      //     avatar: "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+      //     grade: 2017
+      //   }
+      // ]
     };
   },
   methods: {
@@ -170,6 +172,12 @@ export default {
   computed: {
     user() {
       return this.$store.state.profile.user
+    },
+    followings() {
+      return this.$store.state.twitter.followPeopleItems
+    },
+    followers() {
+      return this.$store.state.twitter.followerItems
     }
   },
   mounted() {

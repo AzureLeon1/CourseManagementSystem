@@ -17,19 +17,18 @@
 
             <div style="margin-left: auto; margin-right: auto; display: table;">
               <el-button
-              size="mini"
-              style="font-weight: 300; "
-              v-if="!isCurrentUser && !followed"
-              @click="follow"
-            >关 注</el-button>
-            <el-button
-              size="mini"
-              style="font-weight: 300"
-              v-if="!isCurrentUser && followed"
-              @click="unfollow"
-            >取 关</el-button>
+                size="mini"
+                style="font-weight: 300; "
+                v-if="!isCurrentUser && !followed"
+                @click="follow"
+              >关 注</el-button>
+              <el-button
+                size="mini"
+                style="font-weight: 300"
+                v-if="!isCurrentUser && followed"
+                @click="unfollow"
+              >取 关</el-button>
             </div>
-
 
             <div class="item">
               <div class="key">
@@ -55,6 +54,26 @@
               </div>
               <div class="value">{{ userinfo.college }}</div>
             </div>
+
+            <div v-if="userinfo.role == 'student'" class="item">
+              <div class="key">
+                <i class="el-icon-guide"></i> &nbsp; 年级
+              </div>
+              <div class="value">{{ userinfo.grade + '级'}}</div>
+            </div>
+            <div v-if="userinfo.role == 'teacher_edu'" class="item">
+              <div class="key">
+                <i class="el-icon-guide"></i> &nbsp; 职称
+              </div>
+              <div class="value">{{ userinfo.job_title }}</div>
+            </div>
+            <div v-if="userinfo.role == 'teacher_manage'" class="item">
+              <div class="key">
+                <i class="el-icon-guide"></i> &nbsp; 职位
+              </div>
+              <div class="value">{{ userinfo.job_title }}</div>
+            </div>
+
             <div class="item">
               <div class="key">
                 <i class="el-icon-phone-outline"></i> &nbsp; 电话
@@ -112,6 +131,40 @@
         <el-form-item label="学院">
           <el-input v-model="userinfo.college"></el-input>
         </el-form-item>
+
+        <el-form-item v-if="isStudent()" label="年级">
+          <el-select v-model="userinfo.grade" placeholder="请选择">
+            <el-option
+              v-for="item in grades"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item v-if="isTeacherEdu()" label="职称">
+          <el-select v-model="userinfo.job_title" placeholder="请选择">
+            <el-option
+              v-for="item in jobs_edu"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item v-if="isTeacherManage()" label="职务">
+          <el-select v-model="userinfo.job_title" placeholder="请选择">
+            <el-option
+              v-for="item in jobs_manage"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="电话">
           <el-input v-model="userinfo.phone_number"></el-input>
         </el-form-item>
@@ -153,7 +206,57 @@ export default {
       token,
       action,
       domain,
-      progress: 0
+      progress: 0,
+      grades: [
+        {
+          value: "2015",
+          label: "2015级"
+        },
+        {
+          value: "2016",
+          label: "2016级"
+        },
+        {
+          value: "2017",
+          label: "2017级"
+        },
+        {
+          value: "2018",
+          label: "2018级"
+        },
+        {
+          value: "2019",
+          label: "2019级"
+        }
+      ],
+      jobs_edu: [
+        {
+          value: "讲师",
+          label: "讲师"
+        },
+        {
+          value: "助理教授",
+          label: "助理教授"
+        },
+        {
+          value: "副教授",
+          label: "副教授"
+        },
+        {
+          value: "教授",
+          label: "教授"
+        }
+      ],
+      jobs_manage: [
+        {
+          value: "教务员",
+          label: "教务员"
+        },
+        {
+          value: "教务处长",
+          label: "教务处长"
+        }
+      ]
     };
   },
   methods: {
@@ -182,16 +285,16 @@ export default {
       });
     },
     changeInfo() {
-      // TODO: 测试更新用户信息的接口
       this.$store.dispatch("allput/changeUserInfo", {
-        id: this.userinfo.id,
-        form: {
-          name: this.userinfo.name,
-          email: this.userinfo.email,
-          college: this.userinfo.college,
-          phone_number: this.userinfo.phone_number,
-          avatar: this.userinfo.avatar
-        }
+        user_name: this.userinfo.name,
+        email: this.userinfo.email,
+        department: this.userinfo.college,
+        phone_number: this.userinfo.phone_number,
+        avatar: this.userinfo.avatar,
+        user_id: this.userinfo.id,
+        role: this.userinfo.role,
+        grade: this.userinfo.grade,
+        job_title: this.userinfo.job_title
       });
       this.dialogVisible = false;
     },
@@ -209,6 +312,8 @@ export default {
       this.userinfo.avatar = user.avatar;
       this.userinfo.college = user.college;
       this.userinfo.role = user.role;
+      this.userinfo.grade = user.grade;
+      this.userinfo.job_title = user.job_title;
       this.userinfo = Object.assign({}, this.userinfo);
     },
     follow() {
@@ -222,6 +327,15 @@ export default {
         id: this.person_id,
         user: this.userId
       });
+    },
+    isStudent() {
+      return this.userinfo.role == "student";
+    },
+    isTeacherEdu() {
+      return this.userinfo.role == "teacher_edu";
+    },
+    isTeacherManage() {
+      return this.userinfo.role == "teacher_manage";
     }
   },
   mounted() {
@@ -250,7 +364,7 @@ export default {
     followed() {
       const f = this.$store.state.twitter.followPeopleItems;
       console.log(f, this.person_id);
-      return f.filter(x => x.student_ID == this.person_id).length === 1;
+      return f.filter(x => x.user_id == this.person_id).length === 1;
     },
     userId() {
       return this.$store.state.profile.user.id;
