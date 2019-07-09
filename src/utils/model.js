@@ -9,6 +9,8 @@ export class User {
     this.role = props.role
     this.follower = props.follower
     this.following = props.following
+    this.grade = props.grade
+    this.job_title = props.job_title
   }
 }
 
