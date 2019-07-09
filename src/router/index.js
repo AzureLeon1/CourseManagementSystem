@@ -113,7 +113,7 @@ export default new Router({
       props: true,
     },
     {
-      path: 'class_home/:class_id/courseware',
+      path: '/class_home/:class_id/courseware',
       name: 'Courseware',
       component: Courseware
     },
