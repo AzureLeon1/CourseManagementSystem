@@ -454,7 +454,7 @@ async function getTeam()//id?
         },
         {
           team_id: "1234",
-          team_name: "一二三四",
+          team_name: "一二三五",
           team_member:"sad  sdf asdf"
         },
         {
@@ -503,7 +503,7 @@ async function getTeam()//id?
     }
     
    //const data = await request(GET, ,form)
-    await delay(1000)
+    await delay(500)
     return data
 }
 //attendance api
