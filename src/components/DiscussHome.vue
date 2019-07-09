@@ -80,32 +80,8 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      
-      <div class="pagechange">
-        <el-pagination
-          layout="prev, pager, next"
-          :total="50">
-        </el-pagination>
-      </div>
-      <!-- Form 添加问题-->
-      <el-button type="primary" icon="el-icon-edit-outline" @click="addQuestionVisible = true"
-                 style="font-size: 18px;">添加问题</el-button>
-    </div>
-      
-      <el-dialog title="添加问题" :visible.sync="addQuestionVisible">
-        <el-form :model="form">
-          <el-form-item label="问题描述" :label-width="formLabelWidth">
-            <el-input type="textarea" :rows="6" placeholder="请输入具体的问题描述"
-                      style="font-size: 15px;" maxlength="180" @input="descInput" v-model="desc">
-            </el-input><br>
-            <span class="text" style="float:right;color:#909399;margin-right:8px;">输入{{180-remnant}}/180字</span>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="addQuestionVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addQuestionVisible = false">完 成</el-button>
-        </div>
-      </el-dialog>
+
+     </div> 
 
       <el-dialog title="添加评论" :visible.sync="addCommentVisible">
         <el-form :model="form">
@@ -161,6 +137,13 @@ export default {
       formLabelWidth: '100px'
       }
   },
+  props:content=[
+     content1['name1','role1','content1','time1','dis_id1'],
+     content2['name2','role2','content2','time2','dis_id2'],
+     content3['name3','role3','content3','time3','dis_id3'],
+     content4['name4','role4','content4','time4','dis_id4'],
+    ],
+
   methods: {
     //倒计数
     descInput(){
@@ -241,11 +224,6 @@ export default {
 .container{
     color:#333;
     text-align:center;
-}
-
-.pagechange{
-  margin-top:30px;
-  margin-bottom:20px;
 }
 
 </style>

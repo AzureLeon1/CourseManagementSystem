@@ -9,6 +9,7 @@ import alldelete from './modules/alldelete.js'
 import allpost from './modules/allpost.js'
 import exam from './modules/exam.js'
 import classinfo from './modules/classinfo.js'
+import discussion from './modules/discussion.js'
 
 Vue.use(Vuex)
 
@@ -24,7 +25,8 @@ export default new Vuex.Store({
     alldelete,
     allpost,
     exam,
-    classinfo
+    classinfo,
+    discussion
   },
   strict: debug
 })
