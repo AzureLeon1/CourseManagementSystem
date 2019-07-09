@@ -55,6 +55,26 @@
               </div>
               <div class="value">{{ userinfo.college }}</div>
             </div>
+
+            <div v-if="userinfo.role == 'student'" class="item">
+              <div class="key">
+                <i class="el-icon-guide"></i> &nbsp; 年级
+              </div>
+              <div class="value">{{ userinfo.grade + '级'}}</div>
+            </div>
+            <div v-if="userinfo.role == 'teacher_edu'" class="item">
+              <div class="key">
+                <i class="el-icon-guide"></i> &nbsp; 职称
+              </div>
+              <div class="value">{{ userinfo.job_title }}</div>
+            </div>
+            <div v-if="userinfo.role == 'teacher_manage'" class="item">
+              <div class="key">
+                <i class="el-icon-guide"></i> &nbsp; 职位
+              </div>
+              <div class="value">{{ userinfo.job_title }}</div>
+            </div>
+
             <div class="item">
               <div class="key">
                 <i class="el-icon-phone-outline"></i> &nbsp; 电话
@@ -211,6 +231,8 @@ export default {
       this.userinfo.avatar = user.avatar;
       this.userinfo.college = user.college;
       this.userinfo.role = user.role;
+      this.userinfo.grade = user.grade;
+      this.userinfo.job_title = user.job_title;
       this.userinfo = Object.assign({}, this.userinfo);
     },
     follow() {
