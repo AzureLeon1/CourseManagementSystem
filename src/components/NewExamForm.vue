@@ -23,13 +23,15 @@
       <el-date-picker 
         type="datetime" 
         placeholder="选择开始时间" 
-        v-model="examForm.startTime"></el-date-picker>
+        v-model="examForm.startTime"
+        format="yyyy.MM.dd  HH:mm"></el-date-picker>
     </el-form-item>
     <el-form-item label="结束时间" prop="endTime">
       <el-date-picker 
         type="datetime" 
         placeholder="选择结束时间" 
-        v-model="examForm.endTime"></el-date-picker>
+        v-model="examForm.endTime"
+        format="yyyy.MM.dd  HH:mm"></el-date-picker>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submit()">创建</el-button>
@@ -45,6 +47,13 @@ export default {
   data() {
     return {
       examForm: {
+        title: "",
+        type: "",
+        scope: "",
+        startTime: "",
+        endTime: ""
+      },
+      newExam: {
         title: "",
         type: "",
         scope: "",
@@ -77,9 +86,30 @@ export default {
     getData() {
       
     },
+    toTimeStr(date) {
+      var month = date.getMonth() + 1
+      var day = date.getDate()
+      var hours = date.getHours()
+      var minutes = date.getMinutes()
+      var strDate = "" + date.getFullYear() + "." + 
+        (month<10?"0"+month:month) + "." + (day<10?"0"+day:day) + " " + 
+        (hours<10?"0"+hours:hours) + ":" + (minutes<10?"0"+minutes:minutes)
+
+      return strDate
+    },
     submit() {
       this.$refs['examForm'].validate((valid) => {
         if (valid) {
+          this.newExam.startTime = this.toTimeStr(this.examForm.startTime)
+          this.newExam.endTime = this.toTimeStr(this.examForm.endTime)
+          if (this.newExam.startTime.split(" ")[0] != 
+              this.newExam.endTime.split(" ")[0]) {
+            this.$message.error("考试需在一天")
+            return false
+          }
+          this.newExam.title = this.examForm.title
+          this.newExam.type = this.examForm.type
+          this.newExam.scope = this.examForm.scope
           this.$emit("submitForm")
         } else {
           return false

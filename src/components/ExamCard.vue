@@ -5,7 +5,7 @@
       <el-button
         style="float: right; padding: 3px 0" 
         type="text"
-        v-if="examInfo.userRole=='teacher'"
+        v-if="examInfo.userRole=='teacher_edu'"
         @click="checkDetail">查看考试情况</el-button>
       <el-button
         style="float: right; padding: 3px 0" 
@@ -64,13 +64,20 @@ export default {
     },
     checkDetail() {
       this.$router.push({
-        name: "ExamDetail"
+        name: "ExamDetail",
+        params: {
+          class_id: '1',
+          exam_id: this.examInfo.exam_id
+        }
       })
     },
     enterExam(rName) {
       this.$router.push({
         name: rName,
-        params: this.examInfo.exam_id
+        params: {
+          class_id: '1',
+          exam_id: this.examInfo.exam_id
+        }
       })
     }
   },
@@ -82,6 +89,11 @@ export default {
 </script>
 
 <style>
+.examCardBox {
+  width: 60%;
+  margin: 20px auto;
+}
+
 .examCardBox .examCardContent .el-row {
   margin: 10px 0 10px 10px;
 }

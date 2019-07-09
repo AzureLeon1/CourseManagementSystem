@@ -2,7 +2,7 @@
   <div id="team">
     <el-container class="home">
       <el-aside width="260px">
-        <class-nav :activeIndex="5"></class-nav>
+        <class-nav :activeIndex="4"></class-nav>
       </el-aside>
       <el-main>
         <div class="team lists">
