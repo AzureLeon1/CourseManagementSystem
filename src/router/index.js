@@ -175,6 +175,6 @@ export default new Router({
       name: 'MembershipAudit',
       component: MembershipAudit,
       props: true,
-    },
+    }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navigation />
+    <Navigation></Navigation>
     <UserNav></UserNav>
     <router-view/>
   </div>
@@ -12,7 +12,8 @@ import UserNav from './components/UserNav.vue'
 export default {
   name: 'App',
   components: {
-    Navigation,
+    UserNav,
+    Navigation
   },
 }
 </script>
@@ -30,7 +31,7 @@ export default {
 }
 
 html{
-padding-top: 50px;
-height: 100%;
+  padding-top: 50px;
+  /* height: 100%; */
 }
 </style>
