@@ -115,6 +115,7 @@ async function getAuthority(form) {
 
 async function register(form) {
   const res = await request(POST, '/api/register', form)
+  console.log(res);
   return res.data
 }
 
