@@ -17,7 +17,7 @@
                 <el-form label-position="left" inline class="demo-table-expand">
                   <el-form-item label="队伍ID：">
                     <span>{{ props.row.team_id }}</span>
-                  </el-form-item><br>                  
+                  </el-form-item><br>
                   <el-form-item label="队伍名称：">
                     <span>{{ props.row.team_name }}</span>
                   </el-form-item><br>
