@@ -306,6 +306,36 @@ async function getjoinedClassList(id) {
   ]
 }
 
+
+async function getSearchResult(name) {
+  const res = {
+    data: [{
+        user_id: 100001,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "student",
+        department: '物理学院'
+      },
+      {
+        user_id: 100002,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "teacher_edu",
+        department: '土木学院'
+      },
+      {
+        user_id: 100003,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "student",
+        department: '建筑与城市规划学院'
+      }
+    ]
+  }
+  // const res = await request(POST, '/api/users', {name: name})
+  return res.data;
+}
+
 async function getMessageWithID(id) {
   //fake message data;
   const res = {

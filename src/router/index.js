@@ -94,11 +94,6 @@ export default new Router({
       component: MyClass
     },
     {
-      path: '/discussion',
-      name: 'Discussion',
-      component: Discussion
-    },
-    {
       path: '/searchUser',
       name: 'SearchUser',
       component: SearchUser
