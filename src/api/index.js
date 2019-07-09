@@ -127,39 +127,40 @@ async function register(form) {
 }
 
 async function getPersonInfo(id) {
-  var data = {}
-  if (id == 100002) {
-    data = {
-      "user_ID": 100002,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-      "name": "施程航",
-      "role": "student",
-      "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-      "phone_number": 13365445687,
-      "college": "软件学院",
-      "following": 0,
-      "follower": 0,
-      "email": "chenghang_shi@gmail.com"
-    }
-  } else {
-    data = {
-      "user_ID": 100001,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-      "name": "王亮",
-      "role": "student",
-      "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-      "phone_number": "18916083381",
-      "college": "软件学院",
-      "following": 0,
-      "follower": 0,
-      "email": "leonwangchn@163.com"
-    }
-  }
-  console.log(data);
+  // var data = {}
+  // if (id == 100002) {
+  //   data = {
+  //     "user_ID": 100002,
+  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //     "name": "施程航",
+  //     "role": "student",
+  //     "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+  //     "phone_number": 13365445687,
+  //     "college": "软件学院",
+  //     "following": 0,
+  //     "follower": 0,
+  //     "email": "chenghang_shi@gmail.com"
+  //   }
+  // } else {
+  //   data = {
+  //     "user_ID": 100001,
+  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //     "name": "王亮",
+  //     "role": "student",
+  //     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //     "phone_number": "18916083381",
+  //     "college": "软件学院",
+  //     "following": 0,
+  //     "follower": 0,
+  //     "email": "leonwangchn@163.com"
+  //   }
+  // }
+  // console.log(data);
   // await delay(1000)
-  return data
-  // const res = await request(GET, `/api/users`, {id: id})
-  // return res.data
+  // return data
+  const res = await request(POST, `/api/users`, {user_id: id})
+  console.log(res.data.data);
+  return res.data.data
 }
 
 async function getPersonFollowFans(id) {

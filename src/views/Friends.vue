@@ -47,7 +47,7 @@
                 v-for="(item, index) in followers"
                 :key="index"
                 class="friend"
-                @click="$router.push({name: 'UserProfile', params: {person_id: 100001}})"
+                @click="$router.push({name: 'UserProfile', params: {person_id: item.user_id}})"
               >
                 <div class="person_info">
                   <el-row>
