@@ -69,7 +69,10 @@ const actions = {
     async getPersonInfo({commit,state}){
       const data = await api.getPersonInfo(state.user.id);
       Object.assign(window.localStorage, data.data)
-      commit('setUser',data.data)
+      data.name = data.user_name
+      data.id = data.user_id
+      data.college = data.department
+      commit('setUser',data)
     },
 
     async getClassList({commit, state}, user_id)
@@ -85,6 +88,7 @@ const mutations = {
     // setCorpProfile (state, )
     setUser (state, props) {
         state.user = Object.assign({}, state.user, props)
+        console.log('wlnb',state.user)
     },
     clearUser (state) {
         state.user = new User()
