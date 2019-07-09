@@ -113,10 +113,13 @@ export default {
 
 <style>
 .userNav {
-  margin: 20px 10px 20px 0;
-  padding: 0;
-  box-shadow: 2px 2px 20px -11px black;
+  height: 100%;
   min-height: 630px;
+  /* margin: 20px 10px 20px 0; */
+  padding: 0;
+  background: #fafafa;
+  /* border: #303133 1px solid; */
+  /* box-shadow: 0px 0px 1px black; */
 }
 
 .userNav img.avatar {
@@ -146,12 +149,19 @@ export default {
 }
 
 .userNav ul li:hover {
-  background-color: #ecf5ff;
+  background-color: #ebebeb;
 }
 
-.userNav ul li.active {
-  color: #409eff;
+.userNav ul li:active {
+  color: #292961;
+  font-weight: bold;
 }
+
+/* .userNav ul li:active:before {
+  position: absolute;
+  color: #292961;
+  width: 5px;
+} */
 
 .userNav .logoutBtn {
   margin: 25px auto;

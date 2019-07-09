@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <Navigation />
+    <UserNav></UserNav>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation.vue'
+import UserNav from './components/UserNav.vue'
 export default {
   name: 'App',
   components: {
@@ -29,5 +31,6 @@ export default {
 
 html{
 padding-top: 50px;
+height: 100%;
 }
 </style>
