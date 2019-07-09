@@ -24,14 +24,7 @@
 export default {
   data() {
     return {
-      menu: [],
-      role: "",
-      user: {
-        avatar: "static/defaultAvatar.jpg",
-        role: "student",
-        following: 0,
-        follower: 0
-      }
+      menu: []
     };
   },
 
@@ -41,7 +34,6 @@ export default {
 
   methods: {
     getData() {
-      this.user = this.$store.state.profile.user;
       if (this.user.role == "student" || this.user.role == "teacher_edu") {
         this.menu.push(
           {
@@ -96,6 +88,10 @@ export default {
   },
 
   computed: {
+    user() {
+      console.log("fuck",this.$store.state.profile.user)
+      return this.$store.state.profile.user
+    }
   }
 };
 </script>
