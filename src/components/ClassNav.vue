@@ -1,11 +1,11 @@
 <template>
-  <div class="classNav">
+  <!-- <div class="classNav">
     <el-row style="text-align: center">
       <img :src="classinfo.avatar" class="avatar" @click="routeTo('ClassDetail', {corp_id: 1})" />
       <div style="margin-top: -15px; font-size: 16px; font-weight: 300; ">{{classinfo.name}}</div>
     </el-row>
     <el-row style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 14px;">
-      <!-- TODO: 跳转到班内学生 -->
+
         学生人数：<el-button type="text" @click="routeTo()">{{classinfo.student_count}}</el-button>
     </el-row>
     <ul>
@@ -23,6 +23,25 @@
     <el-row style="text-align: center;">
       <el-button type="danger" size="small" class="logoutBtn" @click="routeTo('MyClass')"><i class="el-icon-back"></i> 返回</el-button>
     </el-row>
+  </div> -->
+  <div class="ClassNavWrapper">
+    <div class="classNav">
+      <img class="avatar" :src="classinfo.avatar" @click="routeTo('ClassDetail', {corp_id: 1})">
+      
+      <div class="name">{{classinfo.name}}</div>
+      <div class="intro">学生人数：{{classinfo.student_count}}</div>
+
+      <div class="menu-item" v-for="item in menu" @click="routeTo(item.routeName)">
+        <i :class="item.icon"></i>
+        <span>{{item.title}}</span>
+      </div>
+      <div class="logout-btn">
+        <el-button size="small" type="danger" @click="routeTo('MyClass')">
+          返 回
+        </el-button>
+      </div>
+    </div>
+    <div class="react-area"></div>
   </div>
 </template>
 
@@ -148,51 +167,84 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .classNav {
-  margin: 20px 10px 20px 0;
-  padding: 0;
-  box-shadow: 2px 2px 20px -11px black;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding-top: 50px;
+  width: 238px;
   min-height: 630px;
-  /* height: 500px; */
+  background: #fafafa;
+  border: #d0d0d0 1px solid;
+  /* transform: translateX(-100%); */
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #666;
+  font-size: 15px;
 }
 
-.classNav img.avatar {
+
+/* 感应区 */
+.react-area{
+  position: absolute;
+  height: 100%;
+  width: 30px;
+  left: 0;
+  top: 0;
+  background-color: red;
+  opacity: 0.2;
+}
+
+.avatar {
+  display: block;
   background-size: cover;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 100%;
+  border: 1px #fff solid;
   cursor: pointer;
-  margin: 20px auto;
+  margin: 40px auto 20px auto;
 }
 
-.classNav ul {
-  text-decoration-style: none;
+.name{
+  font-size: 16px;
+  font-weight: bold;
+  color: #555555;
+  margin-bottom: 5px;
+}
+
+.intro{
+  font-size: 13px;
+  color:#888888;
+  margin-bottom: 25px;
+}
+
+.btn-wrapper{
+  margin-bottom: 20px;
+}
+
+.menu-item{
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
   text-align: center;
-  user-select: none;
-  margin: 0;
-  padding: 0;
 }
 
-.classNav ul li {
-  list-style: none;
-  height: 60px;
-  line-height: 60px;
-  color: #303133;
-  font-size: 17px;
-  cursor: pointer;
+.menu-item:hover{
+  box-sizing: border-box;
+  border-left: #292961 3px solid;
+  background-color: #ebebeb;
+  transition: .1s;
 }
 
-.classNav ul li:hover {
-  background-color: #ecf5ff;
+.logout-btn{
+  margin-top: 25px;
 }
 
-.classNav ul li.active {
-  color: #409eff;
-}
-
-.classNav .logoutBtn {
-  margin: 25px auto;
-}
 </style>

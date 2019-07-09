@@ -63,7 +63,8 @@ export default {
 
   .btn {
     position: absolute;
-    right: 2%;
+    right: 0;
+    transform: translateX(-70%);
     
     text-align: center;
     height: 70%;

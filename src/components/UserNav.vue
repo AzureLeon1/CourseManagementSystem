@@ -120,7 +120,6 @@ export default {
 
   color: #666;
   font-size: 15px;
-  
 }
 
 /* 感应区 */
@@ -140,12 +139,14 @@ export default {
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  border: 1px #fff solid;
   cursor: pointer;
   margin: 40px auto 15px auto;
 }
 
 .name{
   font-size: 16px;
+  font-weight: bold;
   color: #555555;
   margin-bottom: 5px;
 }
@@ -177,25 +178,4 @@ export default {
 .logout-btn{
   margin-top: 25px;
 }
-
-.userNav ul li:hover {
-  background-color: #ebebeb;
-}
-
-.userNav ul li:active {
-  color: #292961;
-  font-weight: bold;
-}
-
-/* .userNav ul li:active:before {
-  position: absolute;
-  color: #292961;
-  width: 5px;
-} */
-
-.userNav .logoutBtn {
-  margin: 25px auto;
-}
-
-
 </style>
