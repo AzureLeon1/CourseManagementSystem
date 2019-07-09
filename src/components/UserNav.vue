@@ -1,32 +1,22 @@
 <template>
-  <div class="userNav">
-    <el-row style="text-align: center">
-      <img :src="user.avatar" class="avatar" @click="routeTo('UserProfile', {person_id: user.id})" />
-      <div style="margin-top: -15px; font-size: 14px; font-weight: 300; ">{{user.name}}</div>
-      <div style="margin-bottom: 15px; font-size: 14px; font-weight: 300;">{{user.email}}</div>
-    </el-row>
-    <el-row style="margin-bottom: 10px">
-      <el-col :span="7" :offset="4">
-        <el-button type="primary" size="mini" @click="routeTo('Friends')">关注: {{user.following}}</el-button>
-      </el-col>
-      <el-col :span="7" :offset="2">
-        <el-button type="primary" size="mini" @click="routeTo('Friends')">粉丝: {{user.follower}}</el-button>
-      </el-col>
-    </el-row>
-    <ul>
-      <li
-        v-for="item in menu"
-        :key="item.index"
-        :class="item.index == activeIndex ? 'active' : ''"
-        @click="routeTo(item.routeName)"
-      >
+  <div class="UserNavWrapper">
+    <div class="userNav">
+      <img class="avatar" :src="user.avatar" @click="routeTo('UserProfile'+ {person_id:user.id})">
+      <div class="name">{{user.name}}</div>
+      <div class="email">{{user.email}}</div>
+      <div class="btn-wrapper">
+        <el-button type="primary" size="mini" @click="routeTo('Friends')">关注：{{user.following}}</el-button>
+        <el-button type="primary" size="mini" @click="routeTo('Friends')">粉丝：{{user.follower}}</el-button>
+      </div>
+      <div class="menu-item" v-for="item in menu" @click="routeTo(item.routeName)">
         <i :class="item.icon"></i>
-        &nbsp;&nbsp;{{item.title}}
-      </li>
-    </ul>
-    <el-row style="text-align: center">
-      <el-button size="small" type="danger" class="logoutBtn" @click="logout">登出</el-button>
-    </el-row>
+        <span>{{item.title}}</span>
+      </div>
+      <div class="logout-btn">
+        <el-button plain @click="logout">登 出</el-button>
+      </div>
+    </div>
+    <div class="react-area"></div>
   </div>
 </template>
 
@@ -110,50 +100,82 @@ export default {
 };
 </script>
 
-
-<style>
+<style scoped>
 .userNav {
-  margin: 20px 10px 20px 0;
-  padding: 0;
-  box-shadow: 2px 2px 20px -11px black;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding-top: 50px;
+  width: 238px;
   min-height: 630px;
+  background: #fafafa;
+  border: #d0d0d0 1px solid;
+  /* transform: translateX(-100%); */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #666;
+  font-size: 15px;
 }
 
-.userNav img.avatar {
+/* 感应区 */
+.react-area{
+  position: absolute;
+  height: 100%;
+  width: 30px;
+  left: 0;
+  top: 0;
+  background-color: red;
+  opacity: 0.2;
+}
+
+.avatar {
+  display: block;
   background-size: cover;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 100%;
+  border: 1px #fff solid;
   cursor: pointer;
-  margin: 20px auto;
+  margin: 40px auto 15px auto;
 }
 
-.userNav ul {
-  text-decoration-style: none;
+.name{
+  font-size: 16px;
+  font-weight: bold;
+  color: #555555;
+  margin-bottom: 5px;
+}
+
+.email{
+  font-size: 13px;
+  color:#888888;
+  margin-bottom: 15px;
+}
+
+.btn-wrapper{
+  margin-bottom: 20px;
+}
+
+.menu-item{
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
   text-align: center;
-  user-select: none;
-  margin: 0;
-  padding: 0;
 }
 
-.userNav ul li {
-  list-style: none;
-  height: 60px;
-  line-height: 60px;
-  color: #303133;
-  font-size: 17px;
-  cursor: pointer;
+.menu-item:hover{
+  box-sizing: border-box;
+  border-left: #292961 3px solid;
+  background-color: #ebebeb;
+  transition: .1s;
 }
 
-.userNav ul li:hover {
-  background-color: #ecf5ff;
-}
-
-.userNav ul li.active {
-  color: #409eff;
-}
-
-.userNav .logoutBtn {
-  margin: 25px auto;
+.logout-btn{
+  margin-top: 25px;
 }
 </style>
