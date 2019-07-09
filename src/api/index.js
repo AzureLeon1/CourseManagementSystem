@@ -27,14 +27,9 @@ export default {
   getJoinStatus,
   getjoinedClassList,
   getMessageWithID,
-  getSearchResult,
-  getFollowing,
-  getFollowers,
-  followPerson,
-  deleteFollowPerson,
+  createMessage,
   getAttendance,
-  getTeam,
-  createMessage
+  getTeam
 }
 
 function param(a) {
@@ -452,55 +447,55 @@ async function getAttendance()
           {
             student_id: "123",
             student_name: "一二三",
-            attendance_status: "1",
+            attendance_status: 1,
 
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
+            attendance_status: 2,
        
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "3",
+            attendance_status: 3,
           
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
+            attendance_status: 4,
           
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
+            attendance_status: 4,
       
           },
           {
             student_id: "089",
             student_name: "一二三",
-            attendance_status: "2",
+            attendance_status: 2,
          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
+            attendance_status: 2,
           
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
+            attendance_status: 1,
         
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
+            attendance_status: 1,
           
           },
           {
