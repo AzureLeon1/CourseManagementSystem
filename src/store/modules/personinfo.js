@@ -6,7 +6,7 @@ const state = {
     personinfo: new User(),
     follow:null,
     fans:null,
-   
+
 }
 
 const getters = {
@@ -33,14 +33,14 @@ const actions = {
 const mutations = {
     setPersonInfo(state,props) {
       state.personinfo.email = props.email
-      state.personinfo.id = props.user_ID
+      state.personinfo.id = props.user_id
       state.personinfo.avatar = props.avatar
-      state.personinfo.college = props.college
-      state.personinfo.name = props.name
+      state.personinfo.college = props.department
+      state.personinfo.name = props.user_name
       state.personinfo.phone_number = props.phone_number
       state.personinfo.role = props.role
-      state.personinfo.follower = props.follower
-      state.personinfo.following = props.following
+      state.personinfo.grade = props.grade
+      state.personinfo.job_title = props.job_title
     }
 
 

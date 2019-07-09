@@ -27,6 +27,8 @@ import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
+import Summary from '@/views/Summary'
+
 import MembershipAudit from '@/views/MembershipAudit'
 
 Vue.use(Router)
@@ -49,11 +51,6 @@ export default new Router({
       path: '/courseview',
       name: 'Courseview',
       component: Courseview
-    },
-    {
-      path: '/courseware',
-      name: 'Courseware',
-      component: Courseware
     },
     {
       path:'/messageHome',
@@ -121,7 +118,17 @@ export default new Router({
       path: '/class_home/:class_id',
       name: 'ClassHome',
       component: ClassHome,
-      props: true,
+      props: true
+    },
+    {
+      path: '/summary',
+      name: 'Summary',
+      component: Summary,
+    },
+    {
+      path: '/class_home/:class_id/courseware',
+      name: 'Courseware',
+      component: Courseware
     },
     {
       path: '/class_home/:class_id/exams',

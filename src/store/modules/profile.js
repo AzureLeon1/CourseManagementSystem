@@ -25,7 +25,8 @@ const actions = {
     async getAuthority ({ commit, state }, form) {
         console.log(form);
         // TODO: 使用真实的api
-        const {token, name, user_ID: id, role, avatar, college, follower, following, email, phone_number} = await api.getAuthority(form)
+        const {token, user_name: name, user_id: id, role, avatar, department: college, follower, following, email, phone_number} = await api.getAuthority(form)
+        console.log(name);
         Object.assign(window.localStorage, {
             token,
             name,

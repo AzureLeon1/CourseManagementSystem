@@ -102,7 +102,7 @@ export default {
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
           const form = {
-            user_ID: this.ruleForm.name,
+            user_id: this.ruleForm.name,
             password: this.ruleForm.password
           };
           this.$store.dispatch('profile/getAuthority', form)
