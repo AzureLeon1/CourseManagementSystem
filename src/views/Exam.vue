@@ -6,7 +6,7 @@
     <el-main>
       <exam-list></exam-list>
 
-      <div class="createExamBtn" v-if="user.role=='teacher'">
+      <div class="createExamBtn" v-if="user.role=='teacher_edu'">
         <el-button 
           @click="createExam" 
           type="primary" 

@@ -167,7 +167,15 @@ export default {
       this.$router.push({ name, params });
     },
   },
-  computed: {}
+  computed: {
+    user() {
+      return this.$store.state.profile.user
+    }
+  },
+  mounted() {
+    this.$store.dispatch('twitter/getFollowing', this.user.id)
+    this.$store.dispatch('twitter/getFollowers', this.user.id)
+  }
 };
 </script>
 

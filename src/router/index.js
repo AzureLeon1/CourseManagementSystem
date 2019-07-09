@@ -4,6 +4,7 @@ import Homepage from '@/views/Homepage'
 import Template from '@/views/Template'
 import Courseware from '@/views/Courseware'
 import MessageHome from '@/views/MessageHome'
+import CourseMessage from '@/views/CourseMessage'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Team from '@/views/Team'
@@ -26,7 +27,7 @@ import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
-
+import MembershipAudit from '@/views/MembershipAudit'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
+    },
+    {
+      path:'/coursemessage',
+      name:'CourseMessage',
+      component: CourseMessage
     },
     {
       path: '/login',
@@ -163,6 +169,12 @@ export default new Router({
       path: '/class_home/:class_id/attendance',
       name: 'Attendance',
       component: Attendance,
-    }
+    },
+    {
+      path: '/class_home/:class_id/membershipAudit',
+      name: 'MembershipAudit',
+      component: MembershipAudit,
+      props: true,
+    },
   ]
 })

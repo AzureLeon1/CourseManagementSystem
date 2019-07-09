@@ -33,7 +33,6 @@ export default {
       menu: [],
       user: {
       },
-      // classinfo: {},
     };
   },
 
@@ -44,8 +43,6 @@ export default {
   methods: {
     getData() {
       this.user = this.$store.state.profile.user;
-      // TODO: 刷新后失效，computed属性？
-      // this.classinfo = this.$store.state.classinfo.classinfo;
       if (this.user.role == "student") {
         this.menu.push(
           {
@@ -114,7 +111,7 @@ export default {
           {
             index: 6,
             title: "成员审核",
-            routeName: "",
+            routeName: "MembershipAudit",
             icon: "el-icon-s-claim"
           },
           {
@@ -143,10 +140,10 @@ export default {
 
   computed: {
     classinfo() {
-      console.log(this.$store.state.classinfo.classinfo)
-      return this.$store.state.classinfo.classinfo
+      return this.$store.state.classinfo.classinfo;
     }
-  }
+  },
+
 };
 </script>
 

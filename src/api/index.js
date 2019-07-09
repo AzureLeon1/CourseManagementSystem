@@ -26,7 +26,8 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  getMessageWithID
+  getMessageWithID,
+  createMessage
 }
 
 function param(a) {
@@ -88,7 +89,7 @@ async function getAuthority(form) {
     "user_ID": 100001,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
     "name": "王亮",
-    "role": "student",
+    "role": "teacher_edu",
     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
     "phone_number": "18916083381",
     "college": "软件学院",
@@ -286,11 +287,11 @@ async function getMessageWithID(id){
         "semester": "spring",
         "year": 2019,
         "publish_time":"1997-12-11 12:30",
-        "start_time":"1997-12-11- 12:30",
+        "start_time":"1997-12-11 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"不就是瞎编吗？谁不会啊！",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -298,11 +299,11 @@ async function getMessageWithID(id){
         "semester": "spring",
         "year": 2019,
         "publish_time":"1997-12-11 12:30",
-        "start_time":"1997-12-11- 12:30",
+        "start_time":"1997-12-11 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"发现了一个问题，这个content的内容存不了分行的。完蛋。",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -310,11 +311,11 @@ async function getMessageWithID(id){
         "semester": "spring",
         "year": 2019,
         "publish_time":"1997-12-11 12:30",
-        "start_time":"1997-12-11- 12:30",
+        "start_time":"1997-12-11 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -322,11 +323,11 @@ async function getMessageWithID(id){
         "semester": "spring",
         "year": 2019,
         "publish_time":"1997-12-11 12:30",
-        "start_time":"1997-12-11- 12:30",
+        "start_time":"1997-12-11 12:30",
         "end_time":"1997-12-13- 12:30"
       },{
         "broadcast_id":"000002",
-        "content":"这是第二条广播！来自（模拟）后端（的数据）！",
+        "content":"数据造假，从我做起。学术造假，从我做起。",
         "type":1,
         "scope":1,
         "sec_id":111,
@@ -334,7 +335,7 @@ async function getMessageWithID(id){
         "semester": "spring",
         "year": 2019,
         "publish_time":"1997-12-11 12:30",
-        "start_time":"1997-12-11- 12:30",
+        "start_time":"1997-12-11 12:30",
         "end_time":"1997-12-13- 12:30"
       },
     ]
@@ -348,5 +349,10 @@ async function getMessageWithID(id){
   await(delay(1000));
   return res.data;
   // const res = await request(GET, '/api/broadcasts', {'user': id});
+  // return res;
+}
+
+async function createMessage(form){
+  // const res = await request(POST, '/api/broadcasts', form);
   // return res;
 }
