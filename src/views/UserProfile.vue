@@ -184,13 +184,15 @@ export default {
     changeInfo() {
       // TODO: 测试更新用户信息的接口
       this.$store.dispatch("allput/changeUserInfo", {
-        id: this.userinfo.id,
+        user_id: this.userinfo.id,
         form: {
           name: this.userinfo.name,
           email: this.userinfo.email,
           college: this.userinfo.college,
           phone_number: this.userinfo.phone_number,
-          avatar: this.userinfo.avatar
+          avatar: this.userinfo.avatar,
+          user_id: this.userinfo.id,
+          role: this.userinfo.role,
         }
       });
       this.dialogVisible = false;

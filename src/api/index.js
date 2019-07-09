@@ -94,23 +94,23 @@ async function request(method, url, data) {
 
 async function getAuthority(form) {
   console.log(form);
-  const data = {
-    "user_ID": 100001,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "王亮",
-    "role": "student",
-    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-    "phone_number": "18916083381",
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email": "leonwangchn@163.com"
-  }
-  await delay(1000)
-  return data
-  // const res = await request(POST, '/api/login', form)
-  // console.log(res);
-  // return res.data
+  // const data = {
+  //   "user_ID": 100001,
+  //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //   "name": "王亮",
+  //   "role": "student",
+  //   "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //   "phone_number": "18916083381",
+  //   "college": "软件学院",
+  //   "following": 0,
+  //   "follower": 0,
+  //   "email": "leonwangchn@163.com"
+  // }
+  // await delay(1000)
+  // return data
+  const res = await request(POST, '/api/login', form)
+  console.log(res);
+  return res.data.data
 }
 
 async function register(form) {
@@ -243,7 +243,7 @@ async function broadcastStudent(form) {
 //all patch start from here
 //============================================================
 async function changeUserInfo(id, form) {
-  const res = await request(PATCH, '/api/users/${id}', form)
+  const res = await request(PUT, '/api/users/${id}', form)
   return res
 }
 
