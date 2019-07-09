@@ -61,7 +61,13 @@ const actions = {
     await api.deleteFollowPerson(id)
     dispatch('getUserFollow', user)
   },
-
+  async getUserFollow({
+    commit,
+    state
+  }, id) { //获取关注的用户
+    const following = await api.getFollowing(id);
+    commit('setfollowPeopleItems', following)
+  },
 }
 
 const mutations = {
@@ -81,6 +87,7 @@ const mutations = {
     state.followerItems = []
     state.followerItems.push(...props)
   },
+
 }
 
 export default {

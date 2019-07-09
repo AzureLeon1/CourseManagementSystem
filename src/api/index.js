@@ -59,13 +59,14 @@ async function request(method, url, data) {
     }
     console.log(method);
     console.log(url);
-    console.log(token && `Bearer ${token}`, url)
+    console.log(headers)
+    console.log(token);
     console.log(data);
     const res = await axios({
       method:method,
       url: url,
       data: data,
-      hearders: headers
+      headers: headers
     })
     console.log(res);
     var mes = res;

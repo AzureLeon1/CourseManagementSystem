@@ -252,7 +252,7 @@ export default {
     followed() {
       const f = this.$store.state.twitter.followPeopleItems;
       console.log(f, this.person_id);
-      return f.filter(x => x.student_ID == this.person_id).length === 1;
+      return f.filter(x => x.user_id == this.person_id).length === 1;
     },
     userId() {
       return this.$store.state.profile.user.id;
