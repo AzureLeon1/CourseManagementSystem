@@ -26,7 +26,7 @@ import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
-
+import MembershipAudit from '@/views/MembershipAudit'
 
 Vue.use(Router)
 
@@ -163,6 +163,12 @@ export default new Router({
       path: '/class_home/:class_id/attendance',
       name: 'Attendance',
       component: Attendance,
-    }
+    },
+    {
+      path: '/class_home/:class_id/membershipAudit',
+      name: 'MembershipAudit',
+      component: MembershipAudit,
+      props: true,
+    },
   ]
 })

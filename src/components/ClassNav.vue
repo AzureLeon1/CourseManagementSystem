@@ -114,7 +114,7 @@ export default {
           {
             index: 6,
             title: "成员审核",
-            routeName: "",
+            routeName: "MembershipAudit",
             icon: "el-icon-s-claim"
           },
           {
