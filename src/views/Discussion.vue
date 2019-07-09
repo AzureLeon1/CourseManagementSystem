@@ -17,9 +17,6 @@
         </div>
       </el-header>
       <el-main>
-          <div v-for=" (item) in DiscussionRes"
-               :key="item">
-          </div>
           <discussion-home>   
           </discussion-home> 
 
