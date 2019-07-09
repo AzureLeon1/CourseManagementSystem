@@ -31,6 +31,7 @@
               <el-radio v-model="form.role" label="teacher_manage">教务老师</el-radio>
             </template>
           </el-form-item>
+
           <el-form-item v-if="isStudent()" label="年级">
             <el-select v-model="form.grade" placeholder="请选择">
               <el-option
@@ -229,7 +230,6 @@ export default {
             grade,
             job_title
           } = this.form;
-          // TODO: 提交注册请求，本地保存
           this.$store.dispatch("profile/register", {
             user_id,
             user_name,

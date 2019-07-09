@@ -10,11 +10,10 @@ const getters = {
 }
 
 const actions = {
-    async changeUserInfo({commit,state, dispatch }, param){
-      const res = await api.changeUserInfo(param.id, param.form)
+    async changeUserInfo({commit,state, dispatch }, form){
+      const res = await api.changeUserInfo(form)
       dispatch('profile/getPersonInfo', null, {root: true})
       dispatch('personinfo/getPersonInfo', localStorage.id, {root: true})
-
     },
     // TODO: 修改广播信息？
     // async changeActivityInfo({commit,state},form){

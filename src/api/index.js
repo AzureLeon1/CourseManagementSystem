@@ -250,10 +250,11 @@ async function broadcastStudent(form) {
   console.log(res)
 }
 
-//all patch start from here
 //============================================================
-async function changeUserInfo(id, form) {
-  const res = await request(PUT, '/api/users/${id}', form)
+async function changeUserInfo(form) {
+  console.log(form);
+  const res = await request(POST, '/api/user_info', form)
+  console.log(res);
   return res
 }
 
