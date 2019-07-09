@@ -40,23 +40,23 @@ export default {
 </script>
 
 <style>
-@font-face {
+/* @font-face {
   font-family: "Sxihei";
   src: url("assets/font/Sxihei.ttf");
-}
+} */
 
-@font-face{
+/* @font-face{
   font-family:'Neon80s';
   src: url('//thenewcode.com/assets/fonts/neon-webfont.woff') format('woff'), 
   url('/assets/fonts/neon-webfont.ttf') format('truetype');
   font-weight:normal;
   font-style:normal;
-}
+} */
 
 *{
   margin: 0;
   padding: 0;
-  font-family: "Sxihei", "Microsoft YaHei";
+  font-family: "Tahoma", "Helvetica", "HwXihei", "Siyuan", "Microsoft YaHei", sans-serif;
 }
 
 html{

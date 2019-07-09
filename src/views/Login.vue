@@ -3,7 +3,8 @@
     <div class="container">
       <div class="show-container">
         <img class="logo" src="/static/img/logo.06ab52f.png">
-        <div class="ccms">CCMS</div>
+        <div class="ccms ccms-english">ccms</div>
+        <!-- <div class="ccms">同济大学课程班级管理系统</div> -->
       </div>
       <div class="card-container">
         <el-card>
@@ -176,16 +177,23 @@ export default {
 .show-container{
   flex-grow: 1;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .logo{
   width: 200px;
+  margin-bottom: 20px;
 }
 .ccms{
-  font-size: 40px;
+  font-size: 20px;
+  font-family: "HwXihei";
   color: #fff;
-  font-weight: bold;
+  /* font-weight: bold; */
   letter-spacing: .2em;
+  margin-bottom: 5px;
+}
+.ccms-english{
+  font-size: 40px;
+  font-weight: bold;
 }
 .card-container{
   width: 35%;
