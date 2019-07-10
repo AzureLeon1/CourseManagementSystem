@@ -57,18 +57,17 @@ async function request(method, url, data) {
       Authorization: `Bearer ${token}`
     } : {}
     // TODO: 验证GET请求的参数形式
-    if (method in {
-        GET
-      }) {
-      url += param(data)
-      data = null
-    }
+    // if (method in {
+    //     GET
+    //   }) {
+    //   url += param(data)
+    //   data = null
+    // }
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
     console.log(method);
     console.log(url);
-    console.log(headers)
     console.log(token);
     console.log(data);
     const res = await axios({
@@ -215,45 +214,46 @@ async function getClassListItems() {
 }
 
 async function getUserTwitter() {
-  const data = {
-    my_twitters: [{
-        twitter_id: 111,
-        user_id: 100001,
-        user_name: '王亮',
-        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
-        content: '数据库什么都听不懂，呜呜呜～',
-        time: '2019.7.8 12:30',
-        image: 'http://img.cdn.leonwang.top/Qf9SNmS-best-pokemon-wallpapers.png'
-      },
-      {
-        twitter_id: 112,
-        user_id: 112,
-        user_name: '何立仁',
-        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
-        content: '数据库只考了99分，呜呜呜～',
-        time: '2019.7.8 12:32'
-      }
-    ],
-    friend_twitters: [{
-        twitter_id: 113,
-        user_id: 113,
-        user_name: '周泓光',
-        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
-        content: '哈哈哈哈哈哈',
-        time: '2019.7.8 12:31'
-      },
-      {
-        twitter_id: 114,
-        user_id: 100002,
-        user_name: '施程航',
-        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
-        content: '哈哈哈哈哈哈',
-        time: '2019.7.8 12:34'
-      }
-    ]
-  }
-  // const data = await request(GET, `/api/twitter`)
-  return data
+  // const data = {
+  //   my_twitters: [{
+  //       twitter_id: 111,
+  //       user_id: 100001,
+  //       user_name: '王亮',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+  //       content: '数据库什么都听不懂，呜呜呜～',
+  //       time: '2019.7.8 12:30',
+  //       image: 'http://img.cdn.leonwang.top/Qf9SNmS-best-pokemon-wallpapers.png'
+  //     },
+  //     {
+  //       twitter_id: 112,
+  //       user_id: 112,
+  //       user_name: '何立仁',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+  //       content: '数据库只考了99分，呜呜呜～',
+  //       time: '2019.7.8 12:32'
+  //     }
+  //   ],
+  //   friend_twitters: [{
+  //       twitter_id: 113,
+  //       user_id: 113,
+  //       user_name: '周泓光',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+  //       content: '哈哈哈哈哈哈',
+  //       time: '2019.7.8 12:31'
+  //     },
+  //     {
+  //       twitter_id: 114,
+  //       user_id: 100002,
+  //       user_name: '施程航',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+  //       content: '哈哈哈哈哈哈',
+  //       time: '2019.7.8 12:34'
+  //     }
+  //   ]
+  // }
+  const res = await request(POST, `/api/twitters`)
+  console.log(res.data.data);
+  return res.data.data
 }
 
 async function broadcastStudent(form) {
