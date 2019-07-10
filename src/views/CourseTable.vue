@@ -10,7 +10,11 @@
             <!-- <div class="button-wrapper">
                 <el-button circle icon="el-icon-arrow-left"></el-button>
             </div> -->
-            <div class="timetable-title">第<span style="color: #292961; font-weight:bold;">{{nowWeek}}</span>周</div>
+            <!-- <cctitle></cctitle> -->
+            <!-- <div class="timetable-title">第<span style="color: #292961; font-weight:bold;">{{nowWeek}}</span>周</div> -->
+
+            <div class="timetable-title">第{{nowWeek}}周</div>
+
             <TimeTable ref="timetable"></TimeTable>
             <!-- <div class="button-wrapper">
                 <el-button circle icon="el-icon-arrow-right" @click='updateTimetable(nowWeek+1);'></el-button>
@@ -34,12 +38,14 @@ import api from "@/api/index.js";
 import UserNav from "../components/UserNav";
 import Header from '@/components/Header';
 import TimeTable from '@/components/TimeTable';
+import cctitle from '@/components/cctitle';
 export default {
   name: 'CourseTable',
   components: {
-      TimeTable,
-      UserNav,
-      Header
+    TimeTable,
+    UserNav,
+    Header,
+    // cctitle
   },
   data() {
     return {
@@ -94,16 +100,29 @@ export default {
         width: 100%;
     }
 
-    .timetable-title{
-        letter-spacing: .3em;
-        margin-bottom: 10px;
-    }
-
     .button-wrapper{
         margin: 0 40px;
     }
 
     .week-shower{
         margin: 15px 0 0 0;
+    }
+
+    .timetable-title {
+    margin:0;
+    height: 38px;
+    width: 100%;
+    line-height: 38px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    letter-spacing: .2em;
+    color: #444;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid #dcdfe6;
+    padding: 0px 6px 0 15px;;
     }
 </style>
