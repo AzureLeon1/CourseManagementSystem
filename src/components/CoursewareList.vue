@@ -1,4 +1,5 @@
 <template>
+  <div>
   <el-card shadow="never" style="width: 60%; margin-left: auto; margin-right: auto;">
     <div>
       <el-input v-model="searchkey" placeholder="请输入课件名称" class="input-with-select">
@@ -25,11 +26,36 @@
       </el-table>
     </div>
   </el-card>
+
+      <!-- float: Add button -->
+    <div class="addbutton-wrapper formanager">
+      <!-- <el-button @click="showCreateMsgPanel"-->
+      <el-button
+        @click="showUploadPanel"
+        type="primary"
+        icon="el-icon-upload2"
+        circle
+      >
+        <!-- <i class="el-icon-plus"></i> -->
+      </el-button>
+    </div>
+
+    <!-- float: Add popover -->
+    <transition name="el-fade-in-linear">
+      <CoursewareUpload ref="upload" v-on:hideUpload="hideUpload" v-on:upload="upload"></CoursewareUpload>
+    </transition>
+
+    </div>
+
 </template>
 <script>
+import CoursewareUpload from '@/components/CoursewareUpload'
 import api from '@/api/index.js'
 export default {
   name: "Coursewarelist",
+  components: {
+    CoursewareUpload
+  },
   data() {
     return {
       request_body: {},
@@ -67,25 +93,6 @@ export default {
           }
         })
     },
-    handleUpload() {
-      var form = {
-        course_id: this.course_id,
-        sec_id: this.sec_id,
-        semester: this.semester,
-        year: this.year,
-        // TODO: 更新name和location
-        name: null,
-        location: null,
-      }
-      api.uploadCourseware(form)
-        .then(res => {
-          // 上传成功，重新获取课件列表
-          if (res.status == 200) {
-
-          }
-
-        })
-      },
       filter() {
       if (this.searchkey == '') {
         this.filteredList = this.allCourseList
@@ -94,6 +101,37 @@ export default {
         // TODO: 过滤
       }
     },
+
+    showUploadPanel(){
+      this.upload = this.$refs.upload;
+      this.upload.form.name = ''
+      this.upload.form.location = ''
+      this.upload.showUpload=true;
+    },
+
+    upload(form) {
+      // 补充班级信息
+      form.course_id = this.course_id
+      form.sec_id = this.sec_id
+      form.semester = this.semester
+      form.year = this.year
+      console.log(form);
+      this.upload = this.$refs.upload;
+      this.upload.showUpload = false;
+      // api.uploadCourseware(form)
+      //   .then(res => {
+      //     // 上传成功，重新获取课件列表
+      //     if (res.status == 200) {
+
+      //     }
+
+      //   })
+    },
+
+    hideUpload() {
+      this.upload = this.$refs.upload;
+      this.upload.showUpload = false;
+    }
 
 
   },
@@ -122,4 +160,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+.addbutton-wrapper {
+  position: fixed;
+  z-index: 1;
+  right: 9%;
+  bottom: 25%;
+}
+
+</style>
 
