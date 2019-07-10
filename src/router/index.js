@@ -47,11 +47,6 @@ export default new Router({
       component: Template
     },
     {
-      path: '/courseview',
-      name: 'Courseview',
-      component: Courseview
-    },
-    {
       path:'/messageHome',
       name:'MessageHome',
       component: MessageHome

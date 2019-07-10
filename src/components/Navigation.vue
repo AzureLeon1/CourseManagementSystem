@@ -74,7 +74,7 @@ export default {
   .btn {
     position: absolute;
     right: 0;
-    transform: translateX(-70%);
+    transform: translateX(-50%);
     
     text-align: center;
     height: 70%;
@@ -90,6 +90,7 @@ export default {
   } */
 
   .item{
+    /* position: relative; */
     border-radius: 4px;
     cursor: pointer;
     color: #dddddd;
@@ -97,6 +98,7 @@ export default {
   }
 
   .item:hover {
+    /* position: relative; */
     background: #ffffff28;
     color: #f3f3f3;
   }
@@ -105,4 +107,18 @@ export default {
     background: #ffffff56;
     color: #ffffff;
   }
+
+  /* .item:hover::after{ 
+    content:'回到主页';
+    font-size: 13px;
+    float:right;
+    width: 80px;
+    height: 35px;
+    padding: 3px;
+    box-sizing: border-box;
+    background: #333333;
+    opacity: 0.9;
+    border-radius: 4px;
+    transform: translateX(-50%);
+  } */
 </style>

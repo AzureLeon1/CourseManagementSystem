@@ -97,7 +97,7 @@ export default {
     //all
     initial(){
         this.$refs.msc.$on['hide']=this.hideReadMsg;
-        console.log(this.$refs.msc.$on)
+        // console.log(this.$refs.msc.$on)
         this.getMessageWithID(111);
       
     },
