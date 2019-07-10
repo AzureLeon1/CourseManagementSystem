@@ -44,6 +44,10 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
+  getAllQuesiton,
+  newQuestion,
+  updateQuestion,
+  deleteQuestion,
   getClassExams,
   newExam,
   checkExamResult,
@@ -608,6 +612,30 @@ async function createClass(form){
   // const res = await request(POST, '/api/class', form)
   // console.log(res)
   console.log("提交成功")
+}
+
+async function getAllQuesiton(form) {
+  const res = await request(POST, '/api/course_questions', form)
+  console.log("allquestion", res.data.data)
+  return res.data.data
+}
+
+async function newQuestion(form) {
+  const res = await request(POST, '/api/questions', form)
+  console.log("newquesion", res.data)
+  return res.data
+}
+
+async function updateQuestion(form) {
+  const res = await request(PUT, '/api/questions', form)
+  console.log("updatequestion", res.data)
+  return res.data
+}
+
+async function deleteQuestion(form) {
+  const res = await request(PUT, '/api/questions', form)
+  console.log("updatequestion", res)
+  return res
 }
 
 async function createMessage(form) {

@@ -22,6 +22,8 @@ import ClassNav from "../components/ClassNav"
 import NewExamForm from "../components/NewExamForm"
 import SelectQuestion from "../components/SelectQuestion"
 
+import api from "../api"
+
 export default {
   name: 'NewExam',
 
