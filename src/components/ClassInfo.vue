@@ -1,291 +1,289 @@
 <template>
-      <div class="info-container">
-          
-          <div class="classinfo" ref="classInfo">
+  <div class="info">
+    <div class="title">班级详情</div>
 
-              <div class="right">
-                <div class="sticky">
-                    <el-row>
-                      <el-col :span="16">
-                          <div> <Avatar :size="200" :src="the_class.avatar" />    
-                          <div>{{the_class.name}}</div>
-                        <el-rate
-                            v-model="star"
-                            disabled>
-                        </el-rate></div>
-                      </el-col>
-                      <el-col :span="8">
-                            <div class="desc">
-                     
-                      
-                        <template>
-                            <el-button class="status_btn" size="primary" style="font-weight: 300; " v-if="joinStatus === 0" @click="join">申请加入</el-button>
-                            <el-button class="status_btn" size="primary" style="font-weight: 300; " v-if="joinStatus === 1" disabled>待审核</el-button>
-                            <el-button class="status_btn" size="primary" style="font-weight: 300; " v-if="joinStatus === 2" disabled>已加入</el-button>
-                        </template>
+    <div class="items">
 
-                    </div>
-                      </el-col>
-                    </el-row>
-                   
-                  
 
-                    <div class="info">
-                        <div class="title">班级简介</div>
-                        <div>{{the_class.content}}</div>
-                    </div>
-                </div>
-            </div>
-
-          </div>
+      <div
+        style="margin-left:50%; transform: translate(-30%, 0); margin-bottom: 30px; margin-top: 20px;"
+      >
+        <Avatar :src="the_class.avatar" :size="120" :border="true" />
       </div>
-</template>
-<script>
-import Avatar from '@/components/Avatar'
-export default {
-    name: 'ClassInfo',
-    components: {
-        Avatar
-    },
-    props: [],
-    data(){
-        return {
-            foldInfo: true,
-            current: 1,
-            pageSize: 10,
-            star: 0
-
-        }
-    },
-
-    computed: {
-        joinStatus(){
-            return this.$store.state.classinfo.joinStatus
-
-        },
-
-        the_class(){
-            return this.$store.state.classinfo.classinfo
-        }
-
-    },
-
-    methods: {
-        join() {
-            this.$store.dispatch('classinfo/join', this.$route.params)
-        }
-
-    },
-
-    mounted() {
-        this.$store.dispatch('classinfo/getClassInfo', this.$route.params)
-        this.$store.dispatch('classinfo/getJoinStatus', this.$route.params)
 
 
-    
+     
+ 
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-s-home"></i> &nbsp; 课程
+      </div>
+      <div class="value">{{ the_class.course_name }}</div>
+    </div>
 
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-user"></i> &nbsp; 教师
+      </div>
+      <div class="value">{{ the_class.teacher_name }}</div>
+    </div>
+
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-location"></i> &nbsp; 教室楼
+      </div>
+      <div class="value">F楼</div>
+     
+    </div>
+
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-location"></i> &nbsp; 教室
+      </div>
       
-    },
-    
-}
+      <div class="value">412</div>
+    </div>
 
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-date"></i> &nbsp; 学期
+      </div>
+       <div class="value">{{the_class.semester}}</div>
+    
+    
+    </div>
+
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-date"></i> &nbsp; 年份
+      </div>
+       <div class="value">{{the_class.year}}</div>
+    
+   
+    </div>
+
+  
+
+    <div class="item">
+      <div class="key">
+        <i class="el-icon-s-custom"></i> &nbsp; 人数
+      </div>
+      <div class="value">{{the_class.student_count}}</div>
+    </div>
+
+       <div class="item">
+      <div class="key">
+        <i class="el-icon-tickets"></i> &nbsp; 简介
+      </div>
+      <br/>
+      <div class="value2">{{the_class.content}}</div>
+    </div>
+
+
+    <div class="btns">
+      <template v-if="isStudent">
+        <el-button
+          class="status_btn"
+          size="primary"
+          style="font-weight: 300; "
+          v-if="joinStatus === 0"
+          @click="join"
+        >申请加入</el-button>
+        <el-button
+          class="status_btn"
+          size="primary"
+          style="font-weight: 300; "
+          v-if="joinStatus === 1"
+          disabled
+        >待审核</el-button>
+        <el-button
+          class="status_btn"
+          size="primary"
+          style="font-weight: 300; "
+          v-if="joinStatus === 2"
+          disabled
+        >已加入</el-button>
+      </template>
+
+      <template v-if="isTeacherEdu">
+        <el-button
+          type="primary"
+          size="small"
+          class="edit"
+          v-if="isCurrentUser"
+          @click="dialogVisible = true"
+        >修改</el-button>
+      </template>
+    </div>
+
+
+
+</div>
+  </div>
+
+  
+
+</template>
+
+
+
+<script>
+import Avatar from "@/components/Avatar";
+export default {
+  name: "ClassInfo",
+  components: {
+    Avatar
+  },
+  props: [],
+  data() {
+    return {
+      foldInfo: true,
+      current: 1,
+      pageSize: 10,
+      star: 0
+    };
+  },
+
+  computed: {
+    style() {
+      const src = this.userinfo.avatar;
+      const size = "40";
+      return {
+        backgroundImage: src && `url(${src})`,
+        width: `${size}px`,
+        height: `${size}px`
+      };
+    },
+    joinStatus() {
+      return this.$store.state.classinfo.joinStatus;
+    },
+
+    the_class() {
+      return this.$store.state.classinfo.classinfo;
+    },
+
+    isCurrentUser() {
+      return this.$store.state.profile.user.id == this.person_id;
+    }
+  },
+
+  methods: {
+    isStudent() {
+      return this.userinfo.role == "student";
+    },
+    isTeacherEdu() {
+      return this.userinfo.role == "teacher_edu";
+    },
+    isTeacherManage() {
+      return this.userinfo.role == "teacher_manage";
+    },
+    join() {
+      this.$store.dispatch("classinfo/join", this.$route.params);
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch("classinfo/getClassInfo", this.$route.params);
+    this.$store.dispatch("classinfo/getJoinStatus", this.$route.params);
+  }
+};
 </script>
 
-<style>
-.el-rate__icon {
-    font-size: 15px;
-    margin-right: 3px;
-}
-.el-carousel__container {
-    position: relative;
-    height: 265px;
-}
-</style>
 
 
 <style lang="scss" scoped>
-.info-container {
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
+.info {
+  display: flex;
+  justify-content: center;
+  // flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  padding: 10px 0 0;
+  position: relative;
+  margin-top: 50px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.poster {
-    width: 40%;
-    max-height: 80vh;
-    margin: 25px 0 0;
-    border-radius: 4px;
-    position: sticky;
-    z-index: -1;
-}
-.classinfo {
-    display: flex;
-    padding: 10px 0;
-    background: white;
-}
-.left {
-    flex: 2;
-    margin-right: 20px;
-    position: relative;
-
-    .el-input, .el-card {
-        margin: 15px 0;
-    }
-
-    .title {
-        position: relative;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 300;
-        transform: translate3d(0, 50%, 0);
-        background: white;
-        padding: 0 10px;
-        left: 6px;
-    }
-}
-.status_btn {
-    margin-top: 180px;
-    width: 180px;
-    height: 60px;
-    margin-right: 60px;
-}
-.right {
-    flex: 1;
-     text-align: center;
-    padding-top: 18px;
-    .desc {
-        font-size: 14px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        margin: 10px 0;
-        line-height: 1.5;
-    }
-
-
-    .info {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        border: 1px solid #dcdfe6;
-        border-radius: 4px;
-        padding: 20px 10px;
-        position: relative;
-        margin-top: 50px;
-        font-weight: 300;
-        word-break: break-word;
-    }
-    .follow-info {
-        text-align: left;
-        margin-top: 20px;
-    }
-    .title {
-        position: absolute;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 300;
-        left: 50%;
-        top: -18px;
-        transform: translate3d(-50%, 50%, 0);
-        background: white;
-        padding: 0 15px;
-    }
-    .btns {
-        display: flex;
-        .el-button {
-            flex: 1;
-            border-width: 1px 0 0 0;
-        }
-        .fold {
-            border-radius: 0 0 0 4px;
-        }
-        .edit {
-            border-radius: 0 0 4px 0;
-            margin: 0;
-        }
-    }
-}
-.sticky {
-    position: sticky;
-    top: 25px;
-}
-.clubs {
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
-    padding: 20px 15px 15px;
-  }
-.club {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin: 10px;
-}
-.club.unaudit .avatar {
-    opacity: .5;
-}
-
-.send-twitter {
-    margin: 40px 0px 20px;
-}
-.el-pagination {
-    text-align: center;
-}
-.btn-unfold {
-    width: 100%;
-    border: 0;
-    padding: 8px 0;
-}
-.el-rate {
-    margin: 20px 0 24px;
-}
-
-.list-complete-item {
-  transition: all .3s;
-}
-.list-complete-enter, .list-complete-leave-to
-/* .list-complete-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.list-complete-leave-active {
+.title {
   position: absolute;
-  opacity: 0;
-    width: 100%;
-    box-sizing: border-box;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 300;
+  left: 10%;
+  top: -25px;
+  transform: translate3d(-50%, 50%, 0);
+  background: white;
+  padding: 0 15px;
 }
-
-.attrs {
-    font-weight: 300;
+.btns {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 100px;
+  display: flex;
+  .el-button {
     flex: 1;
-    align-self: flex-end;
-    .attr {
-        line-height: 1.6;
-        display: flex;
-        font-size: 15px;
-        line-height: 1.2;
-        margin: 8px 0 0;
+    border-width: 1px 0 0 0;
 
-        .key {
-            width: 1.5em;
-            flex-shrink: 0;
-            color: #c0c4cc;
-        }
-        .value {
-            color: #606266;
-        }
+    &:first-child {
+      border-radius: 4px 4px 4px 4px;
     }
+
+    &:last-child {
+      border-radius: 4px 4px 4px 4px;
+      margin: 0;
+    }
+  }
 }
-.content {
-    flex: 2;
-    align-self: flex-start;
-    margin: 10px;
+.items {
+  width: 100%;
+  margin: 0 50px;
+  padding: 5px 35px;
+  text-align: left;
+  letter-spacing: 1px;
+  font-weight: 300;
+  .item {
+    display: flex;
+    margin: 15px 0;
+    margin-left: 10%;
+  }
+  .key {
+    flex: 1;
+    color: #c0c4cc;
+  }
+  .value {
+    flex: 4;
+    margin-left: -25%;
+    text-align: center;
+    text-overflow: ellipsis;
+  }
+  .value2{
+       flex: 4;
+    margin-left: -25%;
+    text-align: center;
+    text-overflow: ellipsis;
 
-    h2 {
-        font-weight: 400
-    }
-    p {
-        font-weight: 300
-    }
+  }
+}
+
+.avatar {
+  $w: 40px;
+  width: $w;
+  height: $w;
+
+  display: inline-block;
+  background: url("../../static/defaultAvatar.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.el-select {
+  width: 100%;
 }
 </style>

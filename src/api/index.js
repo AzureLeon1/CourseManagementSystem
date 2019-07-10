@@ -300,11 +300,19 @@ async function getClassInfo(form) {
   // console.log('corp_info of ', res)
   // return res.data.data
   const data = {
-    name: '高等数学',
+    // name: '高等数学',
     teacher_name: '孙娟娟',
-    content: '这是同济大学2019年春季学期高数1班',
+    content: '高等数学',
     avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
     student_count: 54,
+    course_name: '高等数学',
+    student_count: 34,
+    building: 'A',
+    room_number: '345',
+    semester: 'Fall',
+    year: 2019
+
+
   }
   return data
 

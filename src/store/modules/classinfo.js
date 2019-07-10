@@ -19,7 +19,9 @@ const actions = {
     async getClassInfo({commit, state}, form)
     {
         const data = await api.getClassInfo(form);
+        // Object.assign(window.localStorage, data.data)
         console.log(data);
+
         commit('setClassInfo', data)
 
 
