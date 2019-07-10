@@ -3,7 +3,7 @@
     <el-aside width="238px">
       <user-nav :activeIndex="1"></user-nav>
     </el-aside>
-    <el-main>
+    <el-main style="padding: 20px 15% 0 15%;">
       <Header></Header>
       <AllClass></AllClass>
     </el-main>
