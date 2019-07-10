@@ -1,6 +1,6 @@
 <template><!--有两个地方调用api送数据-->
   <div class="table">
-    <el-card style="width: 850px; margin:20px auto 20px auto">
+    <el-card style="width: 850px; margin:20px auto 20px auto" shadow="never">
       <!--上右下左-->
       <div
         class="add"

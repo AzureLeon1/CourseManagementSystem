@@ -42,7 +42,8 @@ export default {
   getExamQuestions,
   getCourseware,
   getAttendance,
-  getTeam
+  getTeam,
+  getCoursetable,
 }
 
 function param(a) {
@@ -268,7 +269,6 @@ async function changeUserInfo(form) {
   return res
 }
 
-
 async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
   // console.log('corp_info of ', res)
@@ -308,7 +308,6 @@ async function getjoinedClassList(id) {
     }
   ]
 }
-
 
 async function getSearchResult(name) {
   const res = {
@@ -835,7 +834,6 @@ async function getAttendance() {
   return data
 }
 
-
 async function getClassExams(form) {
   const res = await request(GET, '/api/exams', form)
   return res.data
@@ -875,4 +873,60 @@ async function getCourseware(course_id, sec_id, semester, year) {
   // })
   console.log(res);
   return res.data
+}
+
+async function getCoursetable(form){
+  const data={
+    courselist:[{      
+      day: 3,
+      course_name: "C++",
+      building: "济事楼",
+      room: "211",
+      start_section: 1,
+      length: 2,
+    },
+    {      
+      day: 2,
+      course_name: "数据库",
+      building: "b楼",
+      room: "301",
+      start_section: 5,
+      length: 2,
+    },
+    {      
+      day: 3,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 9,
+      length: 2
+    },
+    {      
+      day: 1,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 5,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 4,
+      course_name: "C--",
+      building: "济事楼",
+      room: "112",
+      start_section: 7,
+      length: 2,
+    },]
+  }
+
+  await delay(500)
+  return data
 }

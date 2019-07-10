@@ -1,7 +1,6 @@
 <template>
-  <div id="Message" style="width: 100%;">
-    <div style="display: flex; flex-direction: column; min-height: 750px;">
-      <el-header name="el-head"></el-header>
+  <div id="Message" style="width: 70%;">
+    <div style="display: flex; flex-direction: column; min-height: 450px;">
       <div style="padding: 15px; border: 1px solid #eee">
         <el-table :data="tableData" @row-click="readMsg">
           <el-table-column prop="content" label="广播消息" min-width="200px">
@@ -39,9 +38,11 @@
       <!-- <el-button @click="showCreateMsgPanel"-->
       <el-button
         @click="showCreateMsgPanel"
-        style="height: 50px; width:50px; text-align: center; border-radius:50%; padding: 17px 0;"
+        type="primary"
+        icon="el-icon-plus"
+        circle
       >
-        <i class="el-icon-plus"></i>
+        <!-- <i class="el-icon-plus"></i> -->
       </el-button>
     </div>
 
@@ -179,8 +180,9 @@ export default {
 }
 
 .addbutton-wrapper {
-  position: absolute;
-  right: 100px;
+  position: fixed;
+  z-index: 1;
+  right: 9%;
   bottom: 25%;
 }
 </style>

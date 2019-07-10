@@ -1,5 +1,15 @@
 <template>
-  <div class="register">
+  <div class="wrapper">
+    <!-- <div class="logo">
+      Course
+      <br>
+      Class
+      <br>
+      Manage
+      <br>
+      System
+      <br>
+    </div> -->
     <div class="container">
       <el-card>
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
@@ -72,14 +82,13 @@
           </el-form-item>
           <el-form-item>
             <div class="btns">
-              <el-button type="primary" @click="onSubmit('form')" style="flex: 2">注册</el-button>
-              <el-button @click="onCancle()" style="flex: 1">已注册？去登录</el-button>
+              <el-button type="primary" @click="onSubmit('form')" style="flex: 1 1 auto">注册</el-button>
+              <el-button @click="onCancle()" style="flex: 2 1 auto">已注册？去登录</el-button>
             </div>
           </el-form-item>
         </el-form>
       </el-card>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
@@ -276,34 +285,50 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.register {
-  position: relative;
-  &:before {
-    content: "";
-    position: absolute;
-    width: 100vw;
-    height: 100%;
-    background: lightcoral;
-    left: 0;
-    top: -40px;
-    z-index: -1;
-  }
+// .register {
+//   position: relative;
+//   &:before {
+//     content: "";
+//     position: absolute;
+//     width: 100vw;
+//     height: 100%;
+//     left: 0;
+//     top: -40px;
+//     z-index: -1;
+//   }
+// }
+.wrapper{
+  display: flex;
+  height: calc(100vh - 50px);
+  min-height: 900px;
+  // flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #454575;
 }
-
+.logo{
+  color: #fff;
+  font-family: "HwXihei";
+  font-size: 35px;
+  font-weight: bold;
+  text-align: right;
+  margin-right: 30px;
+  transform: translateY(-280px);
+}
 .container {
-  width: 100%;
+  // width: 100%;
   // max-width: 800px;
-  margin: 40px auto 80px;
+  // margin: 40px auto 40px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .el-card {
   width: 500px;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 .btns {
   display: flex;
-  width: 60%;
+  width: 95%;
 }
 </style>
