@@ -18,6 +18,9 @@ const getters = {
 const actions = {
     async getPersonInfo({commit,state},id){
         const data = await api.getPersonInfo(id);
+        data.name = data.user_name
+        data.id = data.user_id
+        data.college = data.student
         commit('setPersonInfo',data)
     },
     async getPersonFollow({commit,state},id){
