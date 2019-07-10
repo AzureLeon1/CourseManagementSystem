@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="never" style="width: 60%; margin-left: auto; margin-right: auto;">
+  <div class="card">
     <div>
       <el-input v-model="searchkey" placeholder="请输入课件名称" class="input-with-select">
         <el-button slot="append" icon="el-icon-search" @click="searchCourseware()"></el-button>
@@ -17,7 +17,7 @@
         </el-table-column>
       </el-table>
     </div>
-  </el-card>
+  </div>
 </template>
 <script>
 import api from '@/api/index.js'
@@ -84,3 +84,12 @@ export default {
 };
 </script>
 
+<style scoped>
+.card{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid #ebeef5;
+  border-radius: 4px; */
+}
+</style>

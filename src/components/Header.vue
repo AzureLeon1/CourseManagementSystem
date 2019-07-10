@@ -38,6 +38,14 @@ export default {
                 this.routeName="班级消息";
                 this.routeType="课程主页";
             }
+            else if(this.routeName.search('/courseware')!=-1){
+                this.routeName="课件下载";
+                this.routeType="课程主页";
+            }
+            else if(this.routeName.search('/team')!=-1){
+                this.routeName="项目组队";
+                this.routeType="课程主页";
+            }
         }
     },
     mounted(){
