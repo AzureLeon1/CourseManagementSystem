@@ -31,7 +31,6 @@ export default {
   getJoinStatus,
   getjoinedClassList,
   getMessageWithID,
-  createMessage,
   getSearchResult,
   getFollowing,
   getFollowers,
@@ -44,7 +43,7 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
-  getAllQuesiton,
+  getAllQuestion,
   newQuestion,
   updateQuestion,
   deleteQuestion,
@@ -617,7 +616,7 @@ async function createClass(form){
   console.log("提交成功")
 }
 
-async function getAllQuesiton(form) {
+async function getAllQuestion (form) {
   const res = await request(POST, '/api/course_questions', form)
   console.log("allquestion", res.data.data)
   return res.data.data
