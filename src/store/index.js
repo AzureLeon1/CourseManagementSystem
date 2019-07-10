@@ -10,6 +10,7 @@ import allpost from './modules/allpost.js'
 import exam from './modules/exam.js'
 import classinfo from './modules/classinfo.js'
 import userlistitem from './modules/userlistitem.js'
+import discussion from './modules/discussion.js'
 
 Vue.use(Vuex)
 
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     allpost,
     exam,
     classinfo,
-    userlistitem
+    userlistitem,
+    discussion
   },
   strict: debug
 })
