@@ -1,13 +1,14 @@
 <template>
   <div id="twitter">
     <el-container class="home">
-      <el-aside width="260px">
+      <el-aside width="238px">
         <user-nav :activeIndex="2"></user-nav>
       </el-aside>
-      <el-main>
+      <el-main style="padding: 20px 15% 0 15%;">
+        <Header></Header>
         <div class="twitter_list">
-        <transition-group name="list-complete" tag="div">
-          <SendTwitter @send="handleSend" v-if="!see" key="SendTwitter" class="list-complete-item" />
+        <div class="list-complete">
+          <SendTwitter @send="handleSend" v-if="!see" key="SendTwitter" style="margin-bottom:25px;" class="list-complete-item" />
           <div
             v-for="(item) in twitterResult"
             :key="item.twitter_id"
@@ -26,7 +27,9 @@
               :show-remove="item.user_id == userId"
             />
           </div>
-        </transition-group>
+        </div>
+        <!-- <transition-group name="list-complete" tag="div">
+        </transition-group> -->
         </div>
       </el-main>
     </el-container>
@@ -37,10 +40,12 @@
 import TwitterCard from "@/components/Twittercard";
 import SendTwitter from "@/components/SendTwitter";
 import UserNav from "../components/UserNav";
+import Header from "../components/Header"
 export default {
   name: "Twitter",
   components: {
     UserNav,
+    Header,
     TwitterCard,
     SendTwitter
   },
@@ -127,12 +132,12 @@ export default {
 <style lang="scss" <style lang="scss" scoped>
 .list-complete-item {
   transition: all 0.3s;
-  margin-bottom: 10px;
+  margin-bottom: 13px;
 }
 .twitter_list {
   margin-left: auto;
   margin-right: auto;
-  width: 600px;
+  // width: 600px;
 }
 </style>
 

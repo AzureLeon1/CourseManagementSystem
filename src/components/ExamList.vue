@@ -30,7 +30,7 @@ export default {
       api.getClassExams({
         course_id: classInfo.course_id,
         sec_id: classInfo.sec_id,
-        semester: clasInfo.semester,
+        semester: classInfo.semester,
         year: classInfo.year
       }).then(data => {
         this.examList = data

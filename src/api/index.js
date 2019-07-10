@@ -54,7 +54,8 @@ export default {
   getCoursetable,
   deleteCourseware,
   uploadCourseware,
-  createAttenRecords
+  createAttenRecords,
+  coursetableGetCoursetable
 }
 
 function param(a) {
@@ -1044,7 +1045,7 @@ async function deletePost(id) {
   return res.data
 }
 
-async function getCoursetable(form){
+async function coursetableGetCoursetable(form){
   const data={
     courselist:[{
       day: 3,
@@ -1053,6 +1054,7 @@ async function getCoursetable(form){
       room: "211",
       start_section: 1,
       length: 2,
+      single_or_double: 1
     },
     {
       day: 2,
@@ -1061,6 +1063,7 @@ async function getCoursetable(form){
       room: "301",
       start_section: 5,
       length: 2,
+      single_or_double: 2
     },
     {
       day: 3,
@@ -1068,7 +1071,8 @@ async function getCoursetable(form){
       building: "a楼",
       room: "421",
       start_section: 9,
-      length: 2
+      length: 2,
+      single_or_double: 1
     },
     {
       day: 1,
@@ -1076,15 +1080,17 @@ async function getCoursetable(form){
       building: "a楼",
       room: "421",
       start_section: 2,
-      length: 2
+      length: 2,
+      single_or_double: 2
     },
     {
       day: 5,
       course_name: "组合数学",
-      building: "a楼",
+      building: "b楼",
       room: "421",
       start_section: 2,
-      length: 2
+      length: 2,
+      single_or_double: 1
     },
     {
       day: 4,
@@ -1093,10 +1099,10 @@ async function getCoursetable(form){
       room: "112",
       start_section: 7,
       length: 2,
-    },]
+      single_or_double: 1
+    }]
   }
-
-  await delay(500)
+  await delay(1000);
   return data
 }
 

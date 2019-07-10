@@ -1,18 +1,18 @@
 <template>
   <el-container class="home">
-    <el-aside width="260px">
+    <el-aside width="238px">
       <user-nav :activeIndex="3"></user-nav>
     </el-aside>
-    <el-main>
-      <div class="set-middle">
+    <el-main style="padding: 20px 15% 0 15%;">
+        <Header></Header>
         <Message></Message>
-      </div>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import UserNav from "@/components/UserNav";
+import Header from "../components/Header"
 import Message from "@/components/Message";
 import api from "@/store/modules/message.js";
 // import api from "@/api/index.js";
@@ -21,7 +21,8 @@ export default {
   name: "MessageHome",
   components: {
     Message,
-    UserNav
+    UserNav,
+    Header
   }
 };
 </script>
