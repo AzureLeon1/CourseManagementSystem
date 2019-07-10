@@ -1,4 +1,4 @@
-import axios from 'axios'
+﻿import axios from 'axios'
 import {
   delay
 } from '@/utils/util.js'
@@ -31,6 +31,7 @@ export default {
   getJoinStatus,
   getjoinedClassList,
   getMessageWithID,
+  createMessage,
   getSearchResult,
   getFollowing,
   getFollowers,
@@ -42,7 +43,7 @@ export default {
   getCourseware,
   getAttendance,
   getTeam,
-  createMessage
+  getCoursetable,
 }
 
 function param(a) {
@@ -56,18 +57,17 @@ async function request(method, url, data) {
       Authorization: `Bearer ${token}`
     } : {}
     // TODO: 验证GET请求的参数形式
-    if (method in {
-        GET
-      }) {
-      url += param(data)
-      data = null
-    }
+    // if (method in {
+    //     GET
+    //   }) {
+    //   url += param(data)
+    //   data = null
+    // }
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
     console.log(method);
     console.log(url);
-    console.log(headers)
     console.log(token);
     console.log(data);
     const res = await axios({
@@ -214,45 +214,46 @@ async function getClassListItems() {
 }
 
 async function getUserTwitter() {
-  const data = {
-    my_twitters: [{
-        twitter_id: 111,
-        user_id: 100001,
-        user_name: '王亮',
-        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
-        content: '数据库什么都听不懂，呜呜呜～',
-        time: '2019.7.8 12:30',
-        image: 'http://img.cdn.leonwang.top/Qf9SNmS-best-pokemon-wallpapers.png'
-      },
-      {
-        twitter_id: 112,
-        user_id: 112,
-        user_name: '何立仁',
-        avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
-        content: '数据库只考了99分，呜呜呜～',
-        time: '2019.7.8 12:32'
-      }
-    ],
-    friend_twitters: [{
-        twitter_id: 113,
-        user_id: 113,
-        user_name: '周泓光',
-        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
-        content: '哈哈哈哈哈哈',
-        time: '2019.7.8 12:31'
-      },
-      {
-        twitter_id: 114,
-        user_id: 100002,
-        user_name: '施程航',
-        avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
-        content: '哈哈哈哈哈哈',
-        time: '2019.7.8 12:34'
-      }
-    ]
-  }
-  // const data = await request(GET, `/api/twitter`)
-  return data
+  // const data = {
+  //   my_twitters: [{
+  //       twitter_id: 111,
+  //       user_id: 100001,
+  //       user_name: '王亮',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+  //       content: '数据库什么都听不懂，呜呜呜～',
+  //       time: '2019.7.8 12:30',
+  //       image: 'http://img.cdn.leonwang.top/Qf9SNmS-best-pokemon-wallpapers.png'
+  //     },
+  //     {
+  //       twitter_id: 112,
+  //       user_id: 112,
+  //       user_name: '何立仁',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
+  //       content: '数据库只考了99分，呜呜呜～',
+  //       time: '2019.7.8 12:32'
+  //     }
+  //   ],
+  //   friend_twitters: [{
+  //       twitter_id: 113,
+  //       user_id: 113,
+  //       user_name: '周泓光',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+  //       content: '哈哈哈哈哈哈',
+  //       time: '2019.7.8 12:31'
+  //     },
+  //     {
+  //       twitter_id: 114,
+  //       user_id: 100002,
+  //       user_name: '施程航',
+  //       avatar: 'https://view.moezx.cc/images/2018/06/06/_35588639.md.png',
+  //       content: '哈哈哈哈哈哈',
+  //       time: '2019.7.8 12:34'
+  //     }
+  //   ]
+  // }
+  const res = await request(POST, `/api/twitters`)
+  console.log(res.data.data);
+  return res.data.data
 }
 
 async function broadcastStudent(form) {
@@ -267,7 +268,6 @@ async function changeUserInfo(form) {
   console.log(res);
   return res
 }
-
 
 async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
@@ -308,7 +308,6 @@ async function getjoinedClassList(id) {
     }
   ]
 }
-
 
 async function getSearchResult(name) {
   const res = {
@@ -548,56 +547,56 @@ async function getAttendance() {
         student_ids: [{
             student_id: "123",
             student_name: "一二三",
-            attendance_status: "1",
+            attendance_status: 1,
 
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+       
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "3",
-
+            attendance_status: 3,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
-
+            attendance_status: 4,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
-
+            attendance_status: 4,
+      
           },
           {
             student_id: "089",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+         
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
-
+            attendance_status: 1,
+        
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
-
+            attendance_status: 1,
+          
           },
           {
             student_id: "asd",
@@ -874,4 +873,60 @@ async function getCourseware(course_id, sec_id, semester, year) {
   // })
   console.log(res);
   return res.data
+}
+
+async function getCoursetable(form){
+  const data={
+    courselist:[{      
+      day: 3,
+      course_name: "C++",
+      building: "济事楼",
+      room: "211",
+      start_section: 1,
+      length: 2,
+    },
+    {      
+      day: 2,
+      course_name: "数据库",
+      building: "b楼",
+      room: "301",
+      start_section: 5,
+      length: 2,
+    },
+    {      
+      day: 3,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 9,
+      length: 2
+    },
+    {      
+      day: 1,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 5,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 4,
+      course_name: "C--",
+      building: "济事楼",
+      room: "112",
+      start_section: 7,
+      length: 2,
+    },]
+  }
+
+  await delay(500)
+  return data
 }

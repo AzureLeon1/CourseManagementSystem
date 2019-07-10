@@ -20,6 +20,7 @@ const actions = {
   }, id) {
     // 暂时没有用到id
     const data = await api.getUserTwitter()
+    console.log(data);
     commit('setuserTwitterItems', data)
   },
   async getFollowing({
@@ -72,12 +73,14 @@ const actions = {
 
 const mutations = {
   setuserTwitterItems(state, props) {
-    state.myTwitterItems = []
-    state.myTwitterItems.push(...props.my_twitters)
-    state.friendTwitterItems = []
-    state.friendTwitterItems.push(...props.friend_twitters)
+    // state.myTwitterItems = []
+    // state.myTwitterItems.push(...props.my_twitters)
+    // state.friendTwitterItems = []
+    // state.friendTwitterItems.push(...props.friend_twitters)
+    // state.mergedTwitterItems = []
+    // state.mergedTwitterItems = state.myTwitterItems.concat(state.friendTwitterItems)
     state.mergedTwitterItems = []
-    state.mergedTwitterItems = state.myTwitterItems.concat(state.friendTwitterItems)
+    state.mergedTwitterItems.push(...props)
   },
   setfollowPeopleItems(state, props) {
     state.followPeopleItems = []

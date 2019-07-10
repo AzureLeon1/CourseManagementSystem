@@ -1,4 +1,5 @@
 <template>
+  <el-card>
     <div class="wrapper">
         <div class="header">
             <!-- <dir style="font-size: 16px; font-weight: bold; letter-spacing: .7em; color: #555;">课程表</dir> -->
@@ -370,7 +371,247 @@
                 </div>
             </div>
         </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+        <div class="day">
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course course-double">
+            <div class="name">马克思主义哲学</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course after-course-double">
+            <div class="name">数据库</div>
+            <div class="intro">F楼211</div>
+          </div>
+          <div class="course">
+            <div class="name">数据库原理与应用</div>
+            <div class="intro">F楼211</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </el-card>
 </template>
 
 <script>
@@ -420,16 +661,16 @@ export default {
         /* transform: scale(0.8); */
     }
 
-    .header{
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-    }
+.header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
 
-    .nav{
-        display: flex;
-        justify-content: center;
-    }
+.nav {
+  display: flex;
+  justify-content: center;
+}
 
     .nav-tag{
         flex: 1;
@@ -479,9 +720,9 @@ export default {
         /* border-radius: 2px; */
         border: 1px solid #eeeeee90;
 
-        color: #666;
-        box-sizing: border-box;
-    }
+  color: #666;
+  box-sizing: border-box;
+}
 
     .course:hover{
         background:#6e828b;
@@ -490,21 +731,21 @@ export default {
         transition: 0.2s;
     }
 
-    .name{
-        /* color: #ffffff; */
-        font-size: 13px;
-    }
+.name {
+  /* color: #ffffff; */
+  font-size: 13px;
+}
 
-    .intro{
-        /* color: #eeeeee; */
-        font-size: 10px;
-    }
+.intro {
+  /* color: #eeeeee; */
+  font-size: 10px;
+}
 
     .course-double{
         flex: 2;
     }
 
-    .after-course-double{
-        display: none;
-    }
+.after-course-double {
+  display: none;
+}
 </style>
