@@ -35,6 +35,7 @@ export default {
   getSearchResult,
   getFollowing,
   getFollowers,
+  getFollowCount,
   followPerson,
   deleteFollowPerson,
   getCourseDiscussion,
@@ -43,7 +44,12 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
+  getAllQuesiton,
+  newQuestion,
+  updateQuestion,
+  deleteQuestion,
   getClassExams,
+  newExam,
   checkExamResult,
   getExamQuestions,
   getCourseware,
@@ -51,6 +57,9 @@ export default {
   getTeam,
   createMessage,
   deletePost,
+  deleteCourseware,
+  uploadCourseware,
+  createAttenRecords,
   coursetableGetCoursetable
 }
 
@@ -284,7 +293,7 @@ async function getCourseDiscussion(){
         year: 1997
       }],
       question:[
-      {  
+      {
         discussion_id:111,
         user_id:111,
         user_name:'aaa',
@@ -394,7 +403,7 @@ async function broadcastStudent(form) {
 
 async function addDiscussion(form){
   const res = await request(POST,'/api/discussion',form)
-  console.log(res) 
+  console.log(res)
 }
 
 //all patch start from here
@@ -426,7 +435,7 @@ async function getClassInfo(form) {
 
 
 
-  
+
   return data
 
 }
@@ -582,6 +591,12 @@ async function getFollowers(id) {
   return res.data.data.users
 }
 
+async function getFollowCount() {
+  const res = await request(GET, '/api/follow_info')
+  console.log("followInfo", res.data.data)
+  return res.data.data
+}
+
 async function followPerson(id) {
   const res = await request(POST, '/api/following', {
     user_id: id
@@ -600,6 +615,30 @@ async function createClass(form){
   // const res = await request(POST, '/api/class', form)
   // console.log(res)
   console.log("提交成功")
+}
+
+async function getAllQuesiton(form) {
+  const res = await request(POST, '/api/course_questions', form)
+  console.log("allquestion", res.data.data)
+  return res.data.data
+}
+
+async function newQuestion(form) {
+  const res = await request(POST, '/api/questions', form)
+  console.log("newquesion", res.data)
+  return res.data
+}
+
+async function updateQuestion(form) {
+  const res = await request(PUT, '/api/questions', form)
+  console.log("updatequestion", res.data)
+  return res.data
+}
+
+async function deleteQuestion(form) {
+  const res = await request(PUT, '/api/questions', form)
+  console.log("updatequestion", res)
+  return res
 }
 
 async function createMessage(form) {
@@ -681,315 +720,325 @@ async function getTeam() //id?
   return data
 }
 //attendance api
-async function getAttendance() {
-  const data = {
-    attendancelist: [{
-        LessonNum: "2019-05-04",
-        sum: "45/60",
-        detail: "--",
-        student_ids: [{
-            student_id: "123",
-            student_name: "一二三",
-            attendance_status: 1,
+async function getAttendance(form) {
+  // const data = {
+  //   attendancelist: [{
+  //       LessonNum: "2019-05-04",
+  //       sum: "45/60",
+  //       detail: "--",
+  //       student_ids: [{
+  //           student_id: "123",
+  //           student_name: "一二三",
+  //           attendance_status: 1,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 2,
-       
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 3,
-          
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 4,
-          
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 4,
-      
-          },
-          {
-            student_id: "089",
-            student_name: "一二三",
-            attendance_status: 2,
-         
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 2,
-          
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 1,
-        
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: 1,
-          
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null",
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 2,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check",
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 3,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null",
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 4,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check",
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 4,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null",
+  //         },
+  //         {
+  //           student_id: "089",
+  //           student_name: "一二三",
+  //           attendance_status: 2,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check",
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 2,
 
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null",
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 1,
 
-          }
-        ]
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-27",
-        sum: "60/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-07-02",
-        sum: "57/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--"
-      },
-      {
-        LessonNum: "2019-06-03",
-        sum: "20/60",
-        detail: "--",
-        student_ids: [{
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "check"
-          },
-          {
-            student_id: "asd",
-            student_name: "一二三",
-            attendance_status: "null"
-          }
-        ]
-      }
-    ]
-  }
-  await delay(1000)
-  return data
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: 1,
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null",
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check",
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null",
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check",
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null",
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check",
+
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null",
+
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-27",
+  //       sum: "60/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-07-02",
+  //       sum: "57/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--"
+  //     },
+  //     {
+  //       LessonNum: "2019-06-03",
+  //       sum: "20/60",
+  //       detail: "--",
+  //       student_ids: [{
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "check"
+  //         },
+  //         {
+  //           student_id: "asd",
+  //           student_name: "一二三",
+  //           attendance_status: "null"
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
+  // await delay(1000)
+  // return data
+  const res = await request(POST, '/api/attendance', form)
+  console.log(res);
+  return res.data.data
 }
 
 async function getClassExams(form) {
-  const res = await request(GET, '/api/exams', form)
-  return res.data
+  const res = await request(POST, '/api/class_exams', form)
+  console.log("examlist", res.data.data)
+  return res.data.data
+}
+
+async function newExam(form) {
+  const res = await request(POST, '/api/exams', form)
+  return res.data.data
 }
 
 async function checkExamResult(form) {
-  const res = await request(GET, '/api/exam_results', form)
-  return res.data
+  const res = await request(POST, '/api/exam_results', form)
+  return res.data.data
 }
 
 async function getExamQuestions(form) {
-  const res = await request(GET, '/api/exam_questions', form)
-  return res.data
+  const res = await request(POST, '/api/exam_questions', form)
+  console.log("examquestions", res.data.data)
+  return res.data.data
 }
 
 async function getCourseware(course_id, sec_id, semester, year) {
@@ -1008,7 +1057,7 @@ async function getCourseware(course_id, sec_id, semester, year) {
       }
     ]
   }
-  // const res = await request(GET, '/api/courseware', {
+  // const res = await request(GET, '/api/CourseWares', {
   //   course_id: course_id,
   //   sec_id: sec_id,
   //   semester: semester,
@@ -1016,6 +1065,18 @@ async function getCourseware(course_id, sec_id, semester, year) {
   // })
   console.log(res);
   return res.data
+}
+
+async function deleteCourseware(courseware_id) {
+  const res = await request(DELETE, '/api/CourseWares', { courseware_id: courseware_id})
+  console.log(res);
+  return res
+}
+
+async function uploadCourseware(form) {
+  const res = await request (POST, 'api/CourseWare', form)
+  console.log(res);
+  return res
 }
 
 async function deletePost(id) {
@@ -1028,7 +1089,7 @@ async function deletePost(id) {
 
 async function coursetableGetCoursetable(form){
   const data={
-    courselist:[{      
+    courselist:[{
       day: 3,
       course_name: "C++",
       building: "济事楼",
@@ -1037,7 +1098,7 @@ async function coursetableGetCoursetable(form){
       length: 2,
       single_or_double: 1
     },
-    {      
+    {
       day: 2,
       course_name: "数据库",
       building: "b楼",
@@ -1046,7 +1107,7 @@ async function coursetableGetCoursetable(form){
       length: 2,
       single_or_double: 2
     },
-    {      
+    {
       day: 3,
       course_name: "组合数学",
       building: "a楼",
@@ -1055,7 +1116,7 @@ async function coursetableGetCoursetable(form){
       length: 2,
       single_or_double: 1
     },
-    {      
+    {
       day: 1,
       course_name: "组合数学",
       building: "a楼",
@@ -1064,7 +1125,7 @@ async function coursetableGetCoursetable(form){
       length: 2,
       single_or_double: 2
     },
-    {      
+    {
       day: 5,
       course_name: "组合数学",
       building: "b楼",
@@ -1073,7 +1134,7 @@ async function coursetableGetCoursetable(form){
       length: 2,
       single_or_double: 1
     },
-    {      
+    {
       day: 4,
       course_name: "C--",
       building: "济事楼",
@@ -1085,4 +1146,10 @@ async function coursetableGetCoursetable(form){
   }
   await delay(1000);
   return data
+}
+
+async function createAttenRecords(form) {
+  const res = await request(POST, '/api/attendance_records', form)
+  console.log(res);
+  return res
 }

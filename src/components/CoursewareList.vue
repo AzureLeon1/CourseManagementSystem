@@ -13,16 +13,48 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="handlepreview(scope.row)">下载</el-button>
+
+            <el-button
+              v-if="user_role == 'teacher_edu'"
+              size="mini"
+              @click="handleDelete(scope.row)"
+            >删除</el-button>
+
           </template>
         </el-table-column>
       </el-table>
     </div>
-  </div>
+
+
+      <!-- float: Add button -->
+    <div class="addbutton-wrapper formanager">
+      <!-- <el-button @click="showCreateMsgPanel"-->
+      <el-button
+        @click="showUploadPanel"
+        type="primary"
+        icon="el-icon-upload2"
+        circle
+      >
+        <!-- <i class="el-icon-plus"></i> -->
+      </el-button>
+    </div>
+
+    <!-- float: Add popover -->
+    <transition name="el-fade-in-linear">
+      <CoursewareUpload ref="upload" v-on:hideUpload="hideUpload" v-on:upload="upload"></CoursewareUpload>
+    </transition>
+
+    </div>
+
 </template>
 <script>
+import CoursewareUpload from '@/components/CoursewareUpload'
 import api from '@/api/index.js'
 export default {
   name: "Coursewarelist",
+  components: {
+    CoursewareUpload
+  },
   data() {
     return {
       request_body: {},
@@ -39,7 +71,7 @@ export default {
         semester: this.semester,
         year: this.year
       }
-      api.getCourseware()
+      api.getCourseware(this.request_body)
         .then(res => {
           this.allCourseList = res
           console.log(this.allCourseList);
@@ -51,14 +83,55 @@ export default {
     handlepreview(row) {
       window.open(row.location)
     },
-    filter() {
+    handleDelete(row) {
+      api.deleteCourseware(row.courseware_id)
+        .then(res => {
+          // 删除成功，重新获取课件列表
+          if (res.status == 200) {
+
+          }
+        })
+    },
+      filter() {
       if (this.searchkey == '') {
         this.filteredList = this.allCourseList
       }
       else {
         // TODO: 过滤
       }
+    },
+
+    showUploadPanel(){
+      this.upload = this.$refs.upload;
+      this.upload.form.name = ''
+      this.upload.form.location = ''
+      this.upload.showUpload=true;
+    },
+
+    upload(form) {
+      // 补充班级信息
+      form.course_id = this.course_id
+      form.sec_id = this.sec_id
+      form.semester = this.semester
+      form.year = this.year
+      console.log(form);
+      this.upload = this.$refs.upload;
+      this.upload.showUpload = false;
+      // api.uploadCourseware(form)
+      //   .then(res => {
+      //     // 上传成功，重新获取课件列表
+      //     if (res.status == 200) {
+
+      //     }
+
+      //   })
+    },
+
+    hideUpload() {
+      this.upload = this.$refs.upload;
+      this.upload.showUpload = false;
     }
+
 
   },
   mounted() {
@@ -80,11 +153,24 @@ export default {
     year() {
       return this.$store.state.classinfo.classinfo.year
     },
+    user_role() {
+      return this.$store.state.profile.user.role
+    }
   }
 };
 </script>
 
 <style scoped>
+
+.addbutton-wrapper {
+  position: fixed;
+  z-index: 1;
+  right: 9%;
+  bottom: 25%;
+}
+
+</style>
+
 .card{
   width: 100%;
   margin-left: auto;

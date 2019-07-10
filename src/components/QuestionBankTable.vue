@@ -71,6 +71,14 @@
           <el-input v-model="questionForm.content"></el-input>
         </el-form-item>
         <el-form-item
+          prop="chapter"
+          label="章节"
+          :rules="[
+            { required: true, message: '章节不能为空', trigger: 'blur' }
+          ]">
+          <el-input v-model="questionForm.chapter"></el-input>
+        </el-form-item>
+        <el-form-item
           prop="answer"
           label="答案"
           :rules="[
@@ -110,12 +118,15 @@
 </template>
 
 <script>
+import api from "../api"
+
 export default {
   name: "QuestionBankTable",
 
   data() {
     return {
       questions: [],
+      selectedQuestions: [],
       deleteVisible: false,
       dialogVisible: false,
       questionForm: {
@@ -125,34 +136,23 @@ export default {
         answer: ""
       },
       updateQuestionIndex: -1,
-      dialogTitle: ""
+      dialogTitle: "",
+      classInfo: {}
     };
   },
 
   methods: {
     getData() {
-      // To Do : get all questions
-      this.questions = [{
-        question_id: "000",
-        content: "1 + 3 = ____",
-        options: "1_2_3_4",
-        answer: "4"
-      },{
-        question_id: "111",
-        content: "1 + 2 = ____",
-        options: "0_1_2_3",
-        answer: "3"
-      },{
-        question_id: "222",
-        content: "1 + 1 = ____",
-        options: "0_1_2_3",
-        answer: "2"
-      },{
-        question_id: "333",
-        content: "1 + 4 = ____",
-        options: "0_5_2_3",
-        answer: "5"
-      }]
+      this.classInfo = this.$store.state.classinfo.classinfo
+      this.getAllQuestion()
+    },
+    getAllQuestion() {
+      api.getAllQuesiton({
+        course_id: this.classInfo.course_id
+      }).then(data => {
+        console.log("questionlist", data)
+        this.questions = data
+      })
     },
     createQuestion() {
       this.dialogVisible = true
@@ -166,24 +166,43 @@ export default {
     },
     selectQuestion(qs) {
       if (qs.length > 0) {
+        this.selectedQuestions = qs
         this.deleteVisible = true
       } else {
         this.deleteVisible = false
       }
     },
     deleteQuestion(r) {
-      // To Do
+      this.$confirm('是否删除题目?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        api.deleteQuestion({
+          question_id: r.question_id
+        }).then(res => {
+          this.$message.success("删除成功")
+          this.getAllQuestion()
+        })
+      }).catch(() => {      
+      })
     },
     deleteSelectedQuestion() {
-      // To Do
-    },
-    newQuestion() {
-      // To Do
+      for (let q of this.selectedQuestions) {
+        api.deleteQuestion({
+          question_id: r.question_id
+        }).catch(() => {
+          return
+        })
+      }
+      this.$message.success("删除成功")
+      this.getAllQuestion()
     },
     updateQuestion(r, i) {
       this.dialogVisible = true
       this.dialogTitle = "修改题目"
       this.questionForm = {
+        question_id: r.question_id,
         content: "",
         options: [],
         chapter: "",
@@ -210,14 +229,24 @@ export default {
             this.$message.error("选项总长过长")
             return
           }
+          this.questionForm.course_id = this.classInfo.course_id
           console.log(this.questionForm)
-          // To Do : api
-          if (this.dialogTitle === "新建题目") {
-            this.$message.success("新建成功")
-          } else {
-            this.$message.success("修改成功")
-          }
           this.dialogVisible = false
+          if (this.dialogTitle === "新建题目") {
+            api.newQuestion(this.questionForm)
+            .then(res => {
+              console.log("newq", res)
+              this.getAllQuestion()
+              this.$message.success("新建成功")
+            })
+          } else {
+            api.updateQuestion(this.questionForm)
+            .then(res => {
+              console.log("updq", res)
+              this.getAllQuestion()
+              this.$message.success("修改成功")
+            })
+          }
         } else {
           return
         }
