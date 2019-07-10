@@ -22,22 +22,24 @@ export default {
     },
     data () {
         return {
-            discussion_id:1,
-            user_id:1,
-            user_name:'name',
-            role:'student',
-            content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
-            time: "1997-12-11 15:30",
-            question_id:111
+            // discussion_id:1,
+            // user_id:1,
+            // user_name:'name',
+            // role:'student',
+            // content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
+            // time: "1997-12-11 15:30",
+            // question_id:111
         }
     },
     props: [
-        // 'discussion_id',
-        // 'user_name',
-        // 'avatar_url',
-        // 'role',
-        // 'content',
-        // 'time'
+        'discussion_id',
+        // 'user_id',
+        'user_name',
+        'avatar_url',
+        'role',
+        'content',
+        'time',
+        'question_id',
     ],
     methods: {
     },
