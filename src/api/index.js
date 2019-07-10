@@ -51,7 +51,6 @@ export default {
   getTeam,
   createMessage,
   deletePost,
-  getCoursetable,
   deleteCourseware,
   uploadCourseware,
   createAttenRecords,
