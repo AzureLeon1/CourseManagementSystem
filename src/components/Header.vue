@@ -46,6 +46,10 @@ export default {
                 this.routeName="项目组队";
                 this.routeType="课程主页";
             }
+            else if(this.routeName.search('/discussion')!=-1){
+                this.routeName="讨论区";
+                this.routeType="课程主页";
+            }
         }
     },
     mounted(){
@@ -62,7 +66,7 @@ export default {
     margin: 0 0 30px 0;
     border-bottom: 1px solid #cccccc;
     letter-spacing: .1em;
-    font-size: 13px;
+    font-size: 14px;
     color: #555555;
 }
 
@@ -81,8 +85,9 @@ export default {
 }
 
 .header :last-child{
+    /* font-size: 13px; */
     font-weight: bold;
-    font-size: 105%;
+    /* font-size: 105%; */
     color: #777777;
     /* border-bottom: 1px solid black; */
 }

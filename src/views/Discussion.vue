@@ -1,6 +1,6 @@
 <template>
   <el-container class="discussion">
-    <el-aside width="260px">
+    <el-aside width="238px">
       <class-nav :activeIndex="5"></class-nav>
     </el-aside>
     <el-container>
