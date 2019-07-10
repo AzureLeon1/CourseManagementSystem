@@ -834,3 +834,45 @@ async function getAttendance() {
   await delay(1000)
   return data
 }
+
+
+async function getClassExams(form) {
+  const res = await request(GET, '/api/exams', form)
+  return res.data
+}
+
+async function checkExamResult(form) {
+  const res = await request(GET, '/api/exam_results', form)
+  return res.data
+}
+
+async function getExamQuestions(form) {
+  const res = await request(GET, 'api/exam_questions', form)
+  return res.data
+}
+
+async function getCourseware(course_id, sec_id, semester, year) {
+  const res = {
+    data: [{
+        name: "课件1-pdf",
+        location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
+      },
+      {
+        name: "课件2-ppt",
+        location: "http://pu9bnvlst.bkt.clouddn.com/%E7%AC%AC1%E7%AB%A0%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5.ppt"
+      },
+      {
+        name: "课件3",
+        location: "url3"
+      }
+    ]
+  }
+  // const res = await request(GET, '/api/courseware', {
+  //   course_id: course_id,
+  //   sec_id: sec_id,
+  //   semester: semester,
+  //   year: year
+  // })
+  console.log(res);
+  return res.data
+}
