@@ -3,14 +3,14 @@
         <div class="header">
             <!-- <dir style="font-size: 16px; font-weight: bold; letter-spacing: .7em; color: #555;">课程表</dir> -->
             <div class="nav">
-                <div style="width: 40px;"></div>
+                <div style="width: 39px; border-top: 1px solid #ddd;border-left: 1px solid #ddd;"></div>
                 <div class="nav-tag">星期一</div>
                 <div class="nav-tag">星期二</div>
                 <div class="nav-tag">星期三</div>
                 <div class="nav-tag">星期四</div>
                 <div class="nav-tag">星期五</div>
                 <div class="nav-tag">星期六</div>
-                <div class="nav-tag">星期七</div>
+                <div class="nav-tag">星期日</div>
             </div>
         </div>
         <div class="timetable">
@@ -395,12 +395,6 @@ export default {
             secs[sec-1].getElementsByClassName("intro")[0].innerHTML=intro;
             secs[sec-1].style.display='flex';
             secs[sec-1].style.flex=length;
-            if(name!=' '){
-                secs[sec-1].style.border='#888 1px solid';
-            }
-            else{
-                secs[sec-1].style.border='1px solid #eeeeee90';
-            }
 
             for(let i=0;i<length-1;i++){
                 secs[sec+i].style.display='none';
@@ -437,7 +431,7 @@ export default {
         padding: 8px;
         font-size: 13px;
         box-sizing: border-box;
-        border: 1px solid #eeeeee90;
+        border: 1px solid #ddd;
     }
 
     .timetable{
@@ -451,7 +445,7 @@ export default {
         flex: 1;
         width: 40px;
         padding: 10px;
-        border: 1px solid #eeeeee90;
+        border: 1px solid #ddd;
         box-sizing: border-box;
         writing-mode: vertical-rl;
         letter-spacing: 0em;
@@ -477,14 +471,14 @@ export default {
         text-align: center;
         /* margin: 2px; */
         /* border-radius: 2px; */
-        border: 1px solid #eeeeee90;
-
+        border: 0.5px solid #c5c5c590;
+        /* border-collapse: collapse; */
         color: #666;
         box-sizing: border-box;
     }
 
     .course:hover{
-        background:#6e828b;
+        background:#2929619d;
         color:#fff;
         /* font-weight: bold; */
         transition: 0.2s;
@@ -492,12 +486,13 @@ export default {
 
     .name{
         /* color: #ffffff; */
-        font-size: 13px;
+        font-size: 14px;
+        font-weight: bold;
     }
 
     .intro{
         /* color: #eeeeee; */
-        font-size: 10px;
+        font-size: 13px;
     }
 
     .course-double{

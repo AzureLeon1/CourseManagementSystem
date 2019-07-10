@@ -47,17 +47,12 @@ export default new Router({
       component: Template
     },
     {
-      path: '/courseview',
-      name: 'Courseview',
-      component: Courseview
-    },
-    {
       path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
     },
     {
-      path:'/coursemessage',
+      path:'/class_home/:class_id/coursemessage',
       name:'CourseMessage',
       component: CourseMessage
     },
@@ -73,7 +68,7 @@ export default new Router({
     },
     {
       path: '/coursetable',
-      name: 'CourseTable',
+      name: 'Coursetable',
       component: CourseTable
     },
     {

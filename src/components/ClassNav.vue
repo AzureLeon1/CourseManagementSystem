@@ -67,7 +67,7 @@ export default {
           {
             index: 1,
             title: "班级消息",
-            routeName: "",
+            routeName: "CourseMessage",
             icon: "el-icon-chat-line-square"
           },
           {
@@ -100,7 +100,7 @@ export default {
           {
             index: 1,
             title: "班级消息",
-            routeName: "",
+            routeName: "CourseMessage",
             icon: "el-icon-chat-line-square"
           },
           {

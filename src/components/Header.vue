@@ -30,6 +30,22 @@ export default {
                 this.routeName="好友动态";
                 this.routeType="个人主页";
             }
+            else if(this.routeName.search('/coursetable')!=-1){
+                this.routeName="课程表";
+                this.routeType="个人主页";
+            }
+            else if(this.routeName.search('/coursemessage')!=-1){
+                this.routeName="班级消息";
+                this.routeType="课程主页";
+            }
+            else if(this.routeName.search('/courseware')!=-1){
+                this.routeName="课件下载";
+                this.routeType="课程主页";
+            }
+            else if(this.routeName.search('/team')!=-1){
+                this.routeName="项目组队";
+                this.routeType="课程主页";
+            }
         }
     },
     mounted(){

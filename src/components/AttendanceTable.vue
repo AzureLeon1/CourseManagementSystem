@@ -75,7 +75,7 @@ export default {
       this.$prompt("请输入点名课时", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        inputPattern: /^[\S][0-9]*$/,
+        inputPattern: /^[+]{0,1}(\d+)[\S]*$/,
         // 输入格式要求:数字
         inputErrorMessage: "格式不正确"
       })
