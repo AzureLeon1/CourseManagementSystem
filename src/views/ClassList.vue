@@ -4,11 +4,11 @@
       <el-input v-model="searchcondition" placeholder="请输入查询的班级"></el-input>
       <div
         v-for="item in result"
-        @click="toClassInfo(item.course_id,
-            item.sec_id, item.semeter, item.year, user_id)"
+        @click="toClassInfo(item.course_ID,
+            item.sec_ID, item.semester, item.year)"
         :key="item.name"
       >
-        <ClassCard :classname="item.name" :content="item.content" :imgURL="item.avatar" />
+        <ClassCard :classname="item.course_name" :content="item.course_description" :imgURL="item.avatar" />
       </div>
     </div>
   </div>
@@ -29,17 +29,31 @@ export default {
     };
   },
   methods: {
-    toClassInfo(course_id, sec_id, semester, year, user_id) {
-      this.$router.push({
-        name: "ClassDetail",
-        params: {
+    toClassInfo(course_id, sec_id, semester, year) {
+
+        this.$store.dispatch("classlistitem/getclickclass", {
           course_id: course_id,
           sec_id: sec_id,
           semester: semester,
           year: year,
-          user_id: user_id
+
+      });
+      
+      this.$router.push({
+        name: "ClassDetail",
+        params: {
+          class_id: course_id,
+          // sec_id: sec_id,
+          // semester: semester,
+          // year: year,
+       
         }
       });
+
+    
+
+
+
     },
     syncItem(items) {
       this.apidata = items;
@@ -52,6 +66,7 @@ export default {
     }
   },
   mounted() {
+    console.log("test");
     this.$store.dispatch("classlistitem/getClassListItem");
     this.syncItem(this.items);
     console.log(this.items);
@@ -64,16 +79,6 @@ export default {
     items() {
       return this.$store.state.classlistitem.Items;
     },
-    mounted(){
-        this.$store.dispatch('classlistitem/getClassListItem', )
-        this.syncItem(this.items)
-        console.log(this.items)
-
-        const self = this;
-        self.pageSize = 10;
-        self.current = 1;
-    },
-       
     classList() {
       return this.apidata.filter(a_class => {
         const text = Object.values(a_class)

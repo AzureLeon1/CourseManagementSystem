@@ -109,7 +109,7 @@ export default new Router({
 
     },
     {
-      path: '/classdetail',
+      path: '/classdetail/:class_id',
       name: 'ClassDetail',
       component: ClassDetail
     },

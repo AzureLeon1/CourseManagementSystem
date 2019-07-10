@@ -19,10 +19,14 @@ const actions = {
     async getClassInfo({commit, state}, form)
     {
         const data = await api.getClassInfo(form);
+        localStorage.setItem("classinfo",JSON.stringify(data.data.data))
         // Object.assign(window.localStorage, data.data)
+
+
         console.log(data);
 
-        commit('setClassInfo', data)
+
+        commit('setClassInfo', data.data.data)
 
 
     },
@@ -56,8 +60,11 @@ const actions = {
 const mutations = {
     setClassInfo(state, props)
     {
-        console.log(props)
+        
         state.classinfo = Object.assign({}, state.classinfo, props)
+        console.log(props)
+        console.log(state.classinfo)
+        // state.classinfo = Object.assign({}, state.classinfo, props)
     },
 
     setJoinStatus(state, status){

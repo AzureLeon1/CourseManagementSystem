@@ -175,11 +175,12 @@ async function getPersonFollowFans(id) {
 }
 
 async function getClassListItems() {
-  const res = await request(GET, '/api/club_info');
-  return res.data.class_es
+  const res = await request(POST, '/api/total_classes');
+  console.log("这是班级列表" , res)
+  return res.data.data.classes
 }
 
-async function getClassListItems() {
+/*async function getClassListItems() {
   // const res = await request(GET, '/api/club_info');
   // return res.data.class_es
   const data = [{
@@ -202,7 +203,7 @@ async function getClassListItems() {
 
   return data
 
-}
+} */
 
 async function getCheckingClassList(){
   const data = [{
@@ -287,21 +288,23 @@ async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
   // console.log('corp_info of ', res)
   // return res.data.data
-  const data = {
+  const data = await request(POST, '/api/one_class', form)
     // name: '高等数学',
-    teacher_name: '孙娟娟',
-    content: '高等数学',
-    avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
-    student_count: 54,
-    course_name: '高等数学',
-    student_count: 34,
-    building: 'A',
-    room_number: '345',
-    semester: 'Fall',
-    year: 2019
+    // teacher_name: '孙娟娟',
+    // content: '高等数学',
+    // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+    // student_count: 54,
+    // course_name: '高等数学',
+    // student_count: 34,
+    // building: 'A',
+    // room_number: '345',
+    // semester: 'Fall',
+    // year: 2019
+    console.log('这是班级的详细信息: ', data)
 
 
-  }
+
+  
   return data
 
 }
