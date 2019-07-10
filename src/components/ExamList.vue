@@ -1,5 +1,10 @@
 <template>
   <div class="examListBox">
+    <h2
+      v-if="examList.length == 0"
+      style="text-align:center;margin-top:30px">
+      暂无考试信息
+    </h2>
     <exam-card 
       v-for="exam in examList"
       :key="exam.exam_id"
@@ -33,7 +38,8 @@ export default {
         semester: classInfo.semester,
         year: classInfo.year
       }).then(data => {
-        this.examList = data
+        console.log("examlist", data.data)
+        this.examList = data.data
       })
       this.user = this.$store.state.profile.user;
       for(let e of this.examList) {

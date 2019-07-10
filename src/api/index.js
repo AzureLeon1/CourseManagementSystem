@@ -978,17 +978,17 @@ async function getAttendance() {
 }
 
 async function getClassExams(form) {
-  const res = await request(GET, '/api/exams', form)
+  const res = await request(POST, '/api/class_exams', form)
   return res.data
 }
 
 async function checkExamResult(form) {
-  const res = await request(GET, '/api/exam_results', form)
+  const res = await request(POST, '/api/exam_results', form)
   return res.data
 }
 
 async function getExamQuestions(form) {
-  const res = await request(GET, '/api/exam_questions', form)
+  const res = await request(POST, '/api/exam_questions', form)
   return res.data
 }
 
