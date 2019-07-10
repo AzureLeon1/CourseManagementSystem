@@ -68,24 +68,18 @@ export default {
       }
     },
 
-     toClassHome(course_id, sec_id, semester, year) {
-
-        this.$store.dispatch("classlistitem/getclickclass", {
-          course_id: course_id,
-          sec_id: sec_id,
-          semester: semester,
-          year: year,
-
+    toClassHome(course_id, sec_id, semester, year) {
+      console.log("wofole", course_id, sec_id)
+      this.$store.dispatch("classlistitem/getclickclass", {
+        course_id: course_id,
+        sec_id: sec_id,
+        semester: semester,
+        year: year,
       });
-      
       this.$router.push({
         name: "ClassHome",
         params: {
-          class_id: course_id,
-          // sec_id: sec_id,
-          // semester: semester,
-          // year: year,
-       
+          class_id: course_id
         }
       });
      }
