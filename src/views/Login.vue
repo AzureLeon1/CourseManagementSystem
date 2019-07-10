@@ -196,6 +196,8 @@ export default {
   font-weight: bold;
 }
 .card-container{
-  width: 35%;
+  width: 50%;
+  min-width: 344px;
+  max-width: 366px;
 }
 </style>
