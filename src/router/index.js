@@ -111,11 +111,11 @@ export default new Router({
       name: 'ClassDetail',
       component: ClassDetail
     },
-    {
-      path: 'createform',
-      name: 'CreateForm',
-      component: CreateForm,
-    },
+    // {
+    //   path: 'createform',
+    //   name: 'CreateForm',
+    //   component: CreateForm,
+    // },
     {
       path: '/class_home/:class_id',
       name: 'ClassHome',

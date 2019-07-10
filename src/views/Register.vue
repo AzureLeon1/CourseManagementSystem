@@ -29,12 +29,15 @@
   							<el-radio v-model="form.role" label="teacher">老师</el-radio>
   							<el-radio v-model="form.role" label="student">学生</el-radio>
 						</template>
+
 					</el-form-item>
+
 					<el-form-item prop="avatar" label="上传头像">
 						<template>
   							<upload v-on:listenToChildEvent="getAvatarUrl"/>
 						</template>
 					</el-form-item>
+					
 					<el-form-item>
 						<div class="btns">
 							<el-button type="primary" @click="onSubmit('form')" style="flex: 2">注册</el-button>

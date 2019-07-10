@@ -11,6 +11,7 @@ width="400px;">
                 <el-option label="计算机系统结构" value="shanghai"></el-option>
                 </el-select>
             </el-form-item>
+
             <el-form-item label="起始时间">
                 <el-col :span="11">
                 <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
@@ -20,6 +21,7 @@ width="400px;">
                 <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
                 </el-col>
             </el-form-item>
+            
             <el-form-item label="结束时间">
                 <el-col :span="11">
                 <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>

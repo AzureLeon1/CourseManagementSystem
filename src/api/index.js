@@ -26,16 +26,15 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-<<<<<<< HEAD
-  getCoursewareList
-=======
   getMessageWithID,
   getSearchResult,
   getFollowing,
   getFollowers,
   followPerson,
-  deleteFollowPerson
->>>>>>> master
+  deleteFollowPerson,
+  getCoursewareList,
+  getCheckingClassList,
+  createClass
 }
 
 function param(a) {
@@ -170,7 +169,7 @@ async function getClassListItems() {
   // const res = await request(GET, '/api/club_info');
   // return res.data.class_es
   const data = [{
-      name: "高数1班",
+      name: "高数",
       content: "张弢老师班",
       course_id: 1,
       sec_id: 1,
@@ -178,7 +177,7 @@ async function getClassListItems() {
       year: 2019
     },
     {
-      name: "高数2班",
+      name: "大物",
       content: "孙慧娟老师",
       course_id: 1,
       sec_id: 2,
@@ -188,6 +187,29 @@ async function getClassListItems() {
   ]
 
   return data
+
+}
+
+async function getCheckingClassList(){
+  const data = [{
+    name: "高数",
+    content: "张弢老师班",
+    course_id: 1,
+    sec_id: 1,
+    semester: 'fall',
+    year: 2019
+  },
+  {
+    name: "大物",
+    content: "孙慧娟老师",
+    course_id: 1,
+    sec_id: 2,
+    semester: 'fall',
+    year: 2019
+  }
+]
+return data
+
 
 }
 
@@ -441,4 +463,11 @@ async function deleteFollowPerson(id) {
     user_id: id
   })
   console.log(res)
+}
+
+async function createClass(form){
+  // const res = await request(POST, '/api/class', form)
+  // console.log(res)
+  console.log("提交成功")
+
 }

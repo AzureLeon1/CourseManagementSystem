@@ -20,7 +20,7 @@ const actions = {
     {
         const data = await api.getClassInfo(form);
         console.log(data);
-            commit('setClassInfo', data)
+        commit('setClassInfo', data)
 
 
     },
@@ -43,7 +43,7 @@ const actions = {
 
 
     },
-    getCoursewareList({commit, state}, form)
+    async getCoursewareList({commit, state}, form)
     {
         const data = await api.getCoursewareList(form)
         commit('setCoursewareList', data)

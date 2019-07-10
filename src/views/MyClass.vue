@@ -7,12 +7,7 @@
         <AllClass>
 
         </AllClass>
-<<<<<<< HEAD
      
-     
-=======
-
->>>>>>> master
     </el-main>
   </el-container>
 </template>
