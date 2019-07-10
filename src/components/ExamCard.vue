@@ -10,7 +10,7 @@
       <el-button
         style="float: right; padding: 3px 0" 
         type="text"
-        v-else-if="examInfo.hasDone"
+        v-else-if="examInfo.exam_status"
         @click="enterExam('CheckExam')">查看成绩</el-button>
       <el-button
         style="float: right; padding: 3px 0"
@@ -24,7 +24,7 @@
         v-else>参加考试</el-button>
     </div>
     <div class="examCardContent">
-      <el-row>{{examInfo.course}}&nbsp;|&nbsp;{{examInfo.type}}</el-row>
+      <el-row>{{examInfo.courseName}}&nbsp;|&nbsp;{{examInfo.type}}</el-row>
       <el-row style="color: #409eff">开始时间:&nbsp;{{examInfo.start_time}}</el-row>
       <el-row style="color: #f56c6c">截止时间:&nbsp;{{examInfo.end_time}}</el-row>
     </div>
@@ -58,15 +58,15 @@ export default {
       if (strDate >= this.examInfo.start_time) {
         this.hasStart = true
       }
-      if (!this.examInfo.hasDone && strDate > this.examInfo.end_time) {
-        this.examInfo.hasDone = true
+      if (!this.examInfo.exam_status && strDate > this.examInfo.end_time) {
+        this.examInfo.exam_status = true
       }
     },
     checkDetail() {
       this.$router.push({
         name: "ExamDetail",
         params: {
-          class_id: '1',
+          class_id: this.$store.state.classinfo.classinfo.course_id,
           exam_id: this.examInfo.exam_id
         }
       })
@@ -75,7 +75,7 @@ export default {
       this.$router.push({
         name: rName,
         params: {
-          class_id: '1',
+          class_id: this.$store.state.classinfo.classinfo.course_id,
           exam_id: this.examInfo.exam_id
         }
       })

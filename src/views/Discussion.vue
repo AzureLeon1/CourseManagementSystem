@@ -21,7 +21,7 @@
           <div class="container">
             <div v-for="(items) in DiscussionRes" :key="items.disscussion_id"></div>
             <div style="min-height:350px">
-            <el-collapse v-model="activeName" accordion>
+            <el-collapse accordion>
               <el-collapse-item name="1" v-show="wheShow1" >
                 <span class="collapse-title" slot="title" v-on:click="getReply(0)"><span style="font-size:14px;line-height:2px;background-color:#e8f4e2">{{role1}}</span>
                   {{quesDescription1}}<span style="font-size:12px"><br>{{username1}}发布于{{date1}}</span></span>
@@ -97,11 +97,11 @@
                        style="font-size: 18px;">添加问题</el-button>
       
             <el-dialog title="添加问题" :visible.sync="addQuestionVisible">
-              <el-form :model="form">
+              <el-form>
                 <el-form-item>
                   <div style="text-align:left;font-size:16px;">问题描述</div>
                   <el-input type="textarea" :rows="6" placeholder="请输入具体的问题描述"
-                            style="font-size: 15px;" maxlength="180" @input="descInput" v-model="desc"></el-input><br>
+                            style="font-size: 15px;" maxlength="180" @input="descInput"></el-input><br>
                   <span class="text" style="float:right;color:#909399;margin-right:8px;">输入{{180-remnant}}/180字</span>
                 </el-form-item>
               </el-form>
@@ -112,11 +112,11 @@
             </el-dialog>
 
             <el-dialog title="添加评论" :visible.sync="addCommentVisible">
-              <el-form :model="form">
+              <el-form>
                 <el-form-item>
                   <div style="text-align:left;font-size:16px;">回复内容</div>
                   <el-input type="textarea" :rows="6" placeholder="请输入具体的回复内容" 
-                            style="font-size: 15px;" maxlength="180" @input="descInput" v-model="desc">
+                            style="font-size: 15px;" maxlength="180" @input="descInput">
                   </el-input><br>
                   <span class="text" style="float:right;color:#909399;margin-right:8px;">输入{{180-remnant}}/180字</span>
                 </el-form-item>
@@ -136,12 +136,10 @@
 
 <script>
 import ClassNav from "../components/ClassNav"
-import DiscussionHome from "../components/DiscussHome"
 
 export default {
   name: 'Discussion',
   components: {
-    DiscussionHome,
     ClassNav
   },
   data() {
