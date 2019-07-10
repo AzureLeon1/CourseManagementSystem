@@ -127,6 +127,7 @@ export default {
 }
 .class_es {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   box-sizing: border-box;

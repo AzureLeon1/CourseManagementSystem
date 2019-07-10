@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="tag">{{routeType}}</div>
-        <div class="tag">{{routeName}}</div>
+        <div class="tag" style="cursor: pointer;" @click="">{{routeName}}</div>
     </div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
             }
             else if(this.routeName.search('/messageHome')!=-1){
                 this.routeName="我的消息";
+                this.routeType="个人主页";
+            }
+            else if(this.routeName.search('/twitter')!=-1){
+                this.routeName="好友动态";
                 this.routeType="个人主页";
             }
         }
@@ -65,6 +69,10 @@ export default {
     font-size: 105%;
     color: #777777;
     /* border-bottom: 1px solid black; */
+}
+
+.header :last-child:hover{
+    text-decoration: underline;
 }
 
 .partition{
