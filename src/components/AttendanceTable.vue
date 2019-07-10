@@ -131,6 +131,9 @@ export default {
       update_info.status = row.status
       update_info.time_id = row.time_id
       api.updateAtten(update_info)
+      .then(() => {
+        this.$store.dispatch("attendance/getAttendance", this.course_sec_info);
+      })
     },
     //发布动态时点击发布调用的代码
     // emit() {
