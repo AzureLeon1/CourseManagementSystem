@@ -1,22 +1,44 @@
 <template>
-  <el-row class="exmaDetailBox">
-    <el-row>
+  <el-row class="examDetailBox">
+    <el-row style="margin-bottom: 20px">
       <el-col :span="22" :offset="1">
-        <el-table :data="scores">
-          <el-table-column label="学号" prop="student_id"></el-table-column>
-          <el-table-column label="姓名" prop="student_name"></el-table-column>
-          <el-table-column label="分数">
-            <template slot-scope="scope">
-              <div :class="scope.row.scoreStyle">{{ scope.row.score }}</div>
-            </template>
-          </el-table-column>
-        </el-table>
+        <span style="font-size:18px">{{examTitle}}</span>
+        <el-button
+          type="text"
+          @click="changeView"
+          style="margin-left: 20px">{{tipMsg}}</el-button>
       </el-col>
     </el-row>
 
-    <el-row style="margin-top: 60px">
+    <div id="analysisBox">
+      <el-row>
+        <el-col :span="22" :offset="1">
+          <el-table :data="scores">
+            <el-table-column label="学号" prop="student_id"></el-table-column>
+            <el-table-column label="姓名" prop="student_name"></el-table-column>
+            <el-table-column label="分数">
+              <template slot-scope="scope">
+                <div :class="scope.row.scoreStyle">{{ scope.row.score }}</div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-col>
+      </el-row>
+
+      <el-row style="margin-top: 60px">
+        <el-col :span="22" :offset="1">
+          <div id="graph"></div>
+        </el-col>
+      </el-row>
+    </div>
+
+    <el-row id="questionBox">
       <el-col :span="22" :offset="1">
-        <div id="graph"></div>
+        <question-card 
+          v-for="question in questionList"
+          :key="question.question_id"
+          :questionInfo="question"
+          :showAnswer="true"></question-card>
       </el-col>
     </el-row>
   </el-row>
@@ -25,6 +47,8 @@
 <script>
 import echarts from "echarts"
 import "../../static/js/vintage"
+import api from "../api"
+import QuestionCard from "./QuestionCard"
 
 export default {
   name: "ExamDetailBox",
@@ -33,42 +57,41 @@ export default {
     return {
       examTitle: "",
       scores: [],
-      level: []
+      level: [],
+      questionList: [],
+      showAnalysis: true,
+      tipMsg: "查看试卷"
     };
+  },
+
+  components: {
+    QuestionCard
   },
 
   methods: {
     getData() {
-      // To Do : get exam title
-      this.examTitle = "数据库期末考试";
-      // To Do : get all scores
-      this.scores = [
-        {
-          student_id: "000",
-          student_name: "王亮",
-          score: 100
-        },
-        {
-          student_id: "111",
-          student_name: "xxx",
-          score: 89
-        },
-        {
-          student_id: "222",
-          student_name: "xxx",
-          score: 79
-        },
-        {
-          student_id: "333",
-          student_name: "xxx",
-          score: 69
-        },
-        {
-          student_id: "444",
-          student_name: "何立仁",
-          score: 1
-        }
-      ];
+      var classInfo = this.$store.state.classinfo.classinfo
+      // get exam results
+      api.checkExamResult({
+        course_id: classInfo.course_id,
+        sec_id: classInfo.sec_id,
+        semester: clasInfo.semester,
+        year: classInfo.year,
+        exam_id: this.$route.params.exam_id
+      }).then(data => {
+        this.examTitle = data.title
+        this.scores = data.scores
+      })
+      // get all questions
+      api.getExamQuestions({
+        course_id: classInfo.course_id,
+        sec_id: classInfo.sec_id,
+        semester: clasInfo.semester,
+        year: classInfo.year,
+        exam_id: this.$route.params.exam_id
+      }).then(data => {
+        this.questionList = data.questions
+      })
       // score style & 统计
       this.level = [0, 0, 0, 0, 0];
       for (let s of this.scores) {
@@ -87,7 +110,11 @@ export default {
           s.scoreStyle = "goodGrade";
         }
       }
+      this.drawPie()
+    },
+    drawPie() {
       // 画图
+      document.getElementById("graph").innerHTML = ""
       var myChart = echarts.init(document.getElementById("graph"), "vintage")
       myChart.setOption({
         title: {
@@ -131,27 +158,17 @@ export default {
         ]
       });
     },
-    selectQuestion(s, r) {
-      if (s.length > this.questions.length) {
-        this.questions.push(r);
+    changeView() {
+      this.showAnalysis = !this.showAnalysis
+      if (this.showAnalysis) {
+        this.tipMsg = "查看试卷"
+        document.getElementById("questionBox").style.display = "none"
+        document.getElementById("analysisBox").style.display = "block"
       } else {
-        for (let i = 0; i < this.questions.length; ++i) {
-          if (this.questions[i].question_id == r.question_id) {
-            this.questions.splice(i, 1);
-            return;
-          }
-        }
+        this.tipMsg = "查看统计"
+        document.getElementById("questionBox").style.display = "block"
+        document.getElementById("analysisBox").style.display = "none"
       }
-    },
-    submit() {
-      if (this.questions.length === 0) {
-        this.$message.error("试卷不能为空");
-        return;
-      }
-      for (let i = 1; i <= q.length; ++i) {
-        this.questions[i - 1].index = i;
-      }
-      // To Do
     }
   },
 
@@ -184,5 +201,9 @@ export default {
 #graph {
   width: 600px;
   height: 400px;
+}
+
+#questionBox {
+  display: none;
 }
 </style>

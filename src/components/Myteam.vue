@@ -35,38 +35,7 @@ export default {
   name: "Myteam",
   data(){
       return{
-          tableData: [
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_btn: "da"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_btn: "da"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_btn: "da"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_btn: "da"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_btn: "da"
-        },
-        {
-          team_id: "1234",
-          team_name: "一二三四",
-          team_btn: "da"
-        }
-      ]
+          
       }
   },
    methods: {
@@ -88,6 +57,17 @@ export default {
           });       
         });
       }
-   }
+   },
+   computed:{
+    tableData(){
+      return this.$store.state.team.myownteamlist
+    },
+  },
+  mounted(){
+    this.$store.dispatch("team/getTeam")
+    
+    //this.$stor.dispatch(actionType,playload)
+    //要触发的action类型，所携带的数据
+  }
 };
 </script>
