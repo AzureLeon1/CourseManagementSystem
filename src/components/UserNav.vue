@@ -57,7 +57,7 @@ export default {
           {
             index: 4,
             title: "课程表",
-            routeName: "coursetable",
+            routeName: "Coursetable",
             icon: "el-icon-date"
           },
           {

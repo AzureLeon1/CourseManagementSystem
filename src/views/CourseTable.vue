@@ -18,7 +18,7 @@
             <el-pagination class="week-shower"
                 small
                 layout="prev, pager, next"
-                :total="170"
+                :total="190"
                 @prev-click="updateTimetable(nowWeek-1)"
                 @next-click="updateTimetable(nowWeek+1)"
                 >

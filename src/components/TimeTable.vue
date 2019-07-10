@@ -10,7 +10,7 @@
                 <div class="nav-tag">星期四</div>
                 <div class="nav-tag">星期五</div>
                 <div class="nav-tag">星期六</div>
-                <div class="nav-tag">星期七</div>
+                <div class="nav-tag">星期日</div>
             </div>
         </div>
         <div class="timetable">
