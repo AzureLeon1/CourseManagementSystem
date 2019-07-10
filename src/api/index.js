@@ -1,4 +1,4 @@
-import axios from 'axios'
+﻿import axios from 'axios'
 import {
   delay
 } from '@/utils/util.js'
@@ -31,6 +31,7 @@ export default {
   getJoinStatus,
   getjoinedClassList,
   getMessageWithID,
+  createMessage,
   getSearchResult,
   getFollowing,
   getFollowers,
@@ -43,7 +44,8 @@ export default {
   getAttendance,
   getTeam,
   createMessage,
-  deletePost
+  deletePost,
+  getCoursetable
 }
 
 function param(a) {
@@ -255,7 +257,6 @@ async function changeUserInfo(form) {
   return res
 }
 
-
 async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
   // console.log('corp_info of ', res)
@@ -295,7 +296,6 @@ async function getjoinedClassList(id) {
     }
   ]
 }
-
 
 async function getSearchResult(name) {
   const res = await request(POST, '/api/users', {user_name: name})
@@ -512,56 +512,56 @@ async function getAttendance() {
         student_ids: [{
             student_id: "123",
             student_name: "一二三",
-            attendance_status: "1",
+            attendance_status: 1,
 
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+       
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "3",
-
+            attendance_status: 3,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
-
+            attendance_status: 4,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
-
+            attendance_status: 4,
+      
           },
           {
             student_id: "089",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+         
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
-
+            attendance_status: 1,
+        
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
-
+            attendance_status: 1,
+          
           },
           {
             student_id: "asd",
@@ -846,4 +846,60 @@ async function deletePost(id) {
   })
   console.log("deleteTwitterRes", res)
   return res.data
+}
+
+async function getCoursetable(form){
+  const data={
+    courselist:[{      
+      day: 3,
+      course_name: "C++",
+      building: "济事楼",
+      room: "211",
+      start_section: 1,
+      length: 2,
+    },
+    {      
+      day: 2,
+      course_name: "数据库",
+      building: "b楼",
+      room: "301",
+      start_section: 5,
+      length: 2,
+    },
+    {      
+      day: 3,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 9,
+      length: 2
+    },
+    {      
+      day: 1,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 5,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 4,
+      course_name: "C--",
+      building: "济事楼",
+      room: "112",
+      start_section: 7,
+      length: 2,
+    },]
+  }
+
+  await delay(500)
+  return data
 }
