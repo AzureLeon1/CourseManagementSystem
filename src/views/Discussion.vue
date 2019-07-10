@@ -190,7 +190,7 @@ export default {
       else{
         this.isShow4=!this.isShow4;
         this.showNum4=this.isShow4?3:this.commentNum;
-      } 
+      }    
     },
     onPageChange(pagenum){
       this.currentpage=pagenum;
@@ -239,7 +239,9 @@ export default {
       return this.MyQuestionReply;
     },
     MyDiscussionItems(){
+      //console.log('这是所有问题', this.$store.state.discussion.DiscussionItems)
       return this.$store.state.discussion.DiscussionItems;
+      
     },
     MyQuestionReply(){
       return this.$store.state.discussion.ReplyItems;

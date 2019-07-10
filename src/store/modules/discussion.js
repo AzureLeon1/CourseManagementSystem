@@ -28,16 +28,16 @@ const actions = {
 
 const mutations = {
     setDiscussionItems (state, props) {
-      state.basicItems=[]
+     // state.basicItems=[]
       state.basicItems.push(...props.basic)
-      state.DiscussionItems = []
+      //state.DiscussionItems = []
       state.DiscussionItems.push(...props.question)
     },
 
-    setReplyItems(state,props) {
-      state.basicproblemItems=[]
+    setReplyItems(state, props) {
+     // state.basicproblemItems=[]
       state.basicproblemItems.push(...props.basic)
-      state.ReplyItems=[]
+     // state.ReplyItems=[]
       state.ReplyItems.push(...props.reply)
     }
 }

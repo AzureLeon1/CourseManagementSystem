@@ -184,6 +184,7 @@ export default {
   },
 
   mounted() {
+      console.log("这是班级跳转参数", this.$route.params)
       console.log("这是班级跳转参数", this.$route.params.class_id)
 
 console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)

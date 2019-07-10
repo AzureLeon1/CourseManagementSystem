@@ -51,7 +51,8 @@ export default {
   getTeam,
   createMessage,
   deletePost,
-  getCoursetable
+  getCoursetable,
+  getAllCourses
 }
 
 function param(a) {
@@ -179,7 +180,7 @@ async function getPersonFollowFans(id) {
 
 async function getClassListItems() {
   const res = await request(POST, '/api/total_classes');
-  console.log("这是班级列表" , res)
+ console.log("这是班级列表" , res)
   return res.data.data.classes
 }
 
@@ -208,25 +209,12 @@ async function getClassListItems() {
 
 } */
 
-async function getCheckingClassList(){
-  const data = [{
-    name: "高数",
-    content: "张弢老师班",
-    course_id: 1,
-    sec_id: 1,
-    semester: 'fall',
-    year: 2019
-  },
-  {
-    name: "大物",
-    content: "孙慧娟老师",
-    course_id: 1,
-    sec_id: 2,
-    semester: 'fall',
-    year: 2019
-  }
-]
-return data
+async function getCheckingClassList(user_id){
+
+const res = await request(POST, '/api/waiting_classes');
+ //console.log("这是未加入班级列表" , res)
+ return res.data.data.classes
+
 
 
 }
@@ -453,20 +441,50 @@ async function getJoinStatus(form) {
 }
 
 async function getjoinedClassList(id) {
-  return [{
-      course_id: 2,
-      sec_id: 1,
-      semester: 'Spring',
-      year: 2019,
-      name: "高等数学",
-      avatar: "http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg"
-    },
-    // {
-    //   id: 2,
-    //   name: "C语言程序设计",
-    //   avatar: "http://img.cdn.leonwang.top/Xnip2019-07-08_20-00-45.jpg"
-    // }
-  ]
+
+
+      var form = {
+      }
+      var date=new Date;
+      var year=date.getFullYear();
+      var month = date.getMonth() + 1;
+     // console.log('这是年份', year)
+      // this.year_options.label = year;
+      // this.year_options.value = year;
+      //this.year_options.push({label: year, value: year})
+      if(month <= 9)
+      {
+        form.semester = 'Spring'
+        form.year = year
+        // form.push({semester:"Spring", year: year})
+      }
+      else if(month > 9)
+      {
+        form.semester = 'Autumn'
+        form.year = year
+      }
+
+      console.log('这是ffffffom', form)
+
+  const res = await request(POST, '/api/part_classes', form)
+  //console.log('这是学生参与的班级列表', res)
+  return res.data.data.classes
+
+
+  // return [{
+  //     course_id: 2,
+  //     sec_id: 1,
+  //     semester: 'Spring',
+  //     year: 2019,
+  //     name: "高等数学",
+  //     avatar: "http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg"
+  //   },
+  //   // {
+  //   //   id: 2,
+  //   //   name: "C语言程序设计",
+  //   //   avatar: "http://img.cdn.leonwang.top/Xnip2019-07-08_20-00-45.jpg"
+  //   // }
+  // ]
 }
 
 async function getSearchResult(name) {
@@ -1079,5 +1097,21 @@ async function getCoursetable(form){
   }
 
   await delay(500)
+  return data
+}
+
+async function getAllCourses() {
+ // const res = request(POST, `/api/allcourse`, {
+
+
+//  console.log("deleteTwitterRes", res)
+  const data = [
+    {Course_Id : 1, course_name: '数据库'},
+    {Course_Id : 2, course_name: '高等数学'},
+    {Course_Id : 3, course_name: 'C++'},
+    {Course_Id : 4, course_name: '操作系统'},
+    {Course_Id : 5, course_name: '计算机系统结构'},
+
+  ]
   return data
 }

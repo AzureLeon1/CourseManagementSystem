@@ -11,7 +11,7 @@
             @click="toClassHome(item.course_id, item.sec_id, item.semester, item.year)"
           >
             <Avatar :src="item.avatar" :size="40" :border="false" />
-            <div>{{item.name}}</div>
+            <div>{{item.course_name}}</div>
           </div>
 
           <div class="a_class" @click="jump()">
@@ -27,12 +27,11 @@
              <div class="class_es">
        
           <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="a_class"
-            @click="$router.push({name: 'ClassDetail', params: {course_id: item.course_id, sec_id: item.sec_id,
-            semester: item.semester, year: item.year}})">
+            @click="$router.push({name: 'ClassDetail', params: {class_id: item.course_id}})">
 
             <Avatar :src="item.avatar" :size="40" :border="false" />
 
-            <div>{{item.name}}</div>
+            <div>{{item.course_name}}</div>
           </div>
 
           <transition name="el-fade-in-linear">

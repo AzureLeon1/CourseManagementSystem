@@ -25,7 +25,7 @@ export default {
     }
   },
   mounted() {
-    console.log("石城航nb", this.$route.params.course_id)
+    console.log("石城航nb", this.$route.params.class_id)
   }
 }
 </script>
