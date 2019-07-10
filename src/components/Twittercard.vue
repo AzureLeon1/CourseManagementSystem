@@ -2,8 +2,9 @@
   <el-card :body-style="{
     display: 'flex',
     flexDirection: 'column',
-    padding: 0
-  }">
+    padding: 0,}"
+    shadow="never" 
+  >
     <div class="container">
       <Avatar :src="icon" :size="50" :border="false" />
       <div style="flex: 1;">
@@ -11,7 +12,9 @@
         <div class="time">{{time}}</div>
         <div class="content">{{message}}</div>
       </div>
-      <i class="el-icon-delete" @click="remove" v-if="showRemove"></i>
+      <div>
+        <i class="el-icon-delete" @click="remove" v-if="showRemove"></i>
+      </div>
     </div>
     <img :src="image" alt="此处有配图" v-if="image && image !== 'noImage'">
   </el-card>
@@ -48,17 +51,17 @@ export default {
     font-size: 18px;
   }
   .avatar {
-    margin-right: 12px;
+    margin-right: 15px;
     flex-shrink: 0;
   }
   .name {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 1;
-    margin-top: 8px;
+    // margin-top: 8px;
   }
   .time {
-    font-size: 12px;
-    opacity: 1;
+    font-size: 11px;
+    opacity: .6;
     line-height: 1.4;
     font-weight: 300;
     letter-spacing: 0.5px;
@@ -66,8 +69,9 @@ export default {
   }
   .container {
     display: flex;
+    align-items: stretch;
     padding: 20px;
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
   }
   .content {
     font-size: 14px;
@@ -85,12 +89,13 @@ export default {
   margin-right: auto;
   }
   .el-icon-delete {
-    color: #c0c4cc;
+    // color: #c0c4cc;
+    color: #606266;
     cursor: pointer;
     transition: .2s;
 
     &:hover {
-      color: #606266;
+      color: #c0c4cc;
     }
   }
 </style>
