@@ -1,7 +1,7 @@
 <template>
   <div class="teamlist">
     <div class="classteams">
-      <el-card style="width: 850px; margin:20px auto 20px auto">
+      <el-card style="width: 850px; margin:20px auto 20px auto;" shadow="never" >
         <div slot="header" class="clearfix">
           <span>班级队伍</span>
         </div>
