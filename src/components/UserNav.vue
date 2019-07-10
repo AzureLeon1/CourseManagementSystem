@@ -70,9 +70,16 @@ export default {
       } else if (this.user.role == "teacher_manage") {
         this.menu.push({
           index: 1,
-          title: "发布动态",
-          routeName: ""
-        });
+          title: "通知公告",
+          routeName: "",
+          icon: "el-icon-data-board"
+        },
+        {
+            index: 2,
+            title: "好友动态",
+            routeName: "Twitter",
+            icon: "el-icon-chat-line-square"
+          });
       }
     },
     routeTo(name, params) {
@@ -89,7 +96,6 @@ export default {
 
   computed: {
     user() {
-      console.log("fuck",this.$store.state.profile.user)
       return this.$store.state.profile.user
     }
   }

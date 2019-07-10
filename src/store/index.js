@@ -14,7 +14,7 @@ import classinfo from './modules/classinfo.js'
 
 
 import userlistitem from './modules/userlistitem.js'
-
+import coursetable from './modules/coursetable.js'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -32,7 +32,8 @@ export default new Vuex.Store({
     team,
     attendance,
     classinfo,
-    userlistitem
+    userlistitem,
+    coursetable,
   },
   strict: debug
 })
