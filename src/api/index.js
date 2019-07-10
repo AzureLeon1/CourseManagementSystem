@@ -1015,17 +1015,24 @@ async function getAttendance() {
 
 async function getClassExams(form) {
   const res = await request(POST, '/api/class_exams', form)
-  return res.data
+  console.log("examlist", res.data.data)
+  return res.data.data
+}
+
+async function newExam(form) {
+  const res = await request(POST, '/api/exams', form)
+  return res.data.data
 }
 
 async function checkExamResult(form) {
   const res = await request(POST, '/api/exam_results', form)
-  return res.data
+  return res.data.data
 }
 
 async function getExamQuestions(form) {
   const res = await request(POST, '/api/exam_questions', form)
-  return res.data
+  console.log("examquestions", res.data.data)
+  return res.data.data
 }
 
 async function getCourseware(course_id, sec_id, semester, year) {
@@ -1116,8 +1123,4 @@ async function getCoursetable(form){
 
   await delay(500)
   return data
-}
-
-async function newExam(form) {
-  
 }

@@ -38,8 +38,8 @@ export default {
         semester: classInfo.semester,
         year: classInfo.year
       }).then(data => {
-        console.log("examlist", data.data)
-        this.examList = data.data
+        console.log("examlist", data)
+        this.examList = data
       })
       this.user = this.$store.state.profile.user;
       for(let e of this.examList) {

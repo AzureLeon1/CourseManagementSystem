@@ -43,7 +43,7 @@ export default {
 
   methods: {
     getData() {
-      
+      api.newExam()
     },
     submitForm() {
       this.newFormVisible = false
@@ -51,6 +51,21 @@ export default {
     },
     submit() {
       this.questions = this.$refs.questionList.questions
+      this.newExamForm.questions = this.questions
+      var classInfo = this.$store.state.classinfo.classinfo
+      this.newExamForm.course_id = classInfo.course_id
+      this.newExamForm.sec_id = classInfo.sec_id
+      this.newExamForm.semester = classInfo.semester
+      this.newExamForm.year = classInfo.year
+      console.log("newexamform", this.newExamForm)
+      api.newExam(this.newExamForm)
+      .then(res => {
+        this.$message.success("创建成功")
+        this.$router.push({
+          name: "Exam",
+          class_id: classInfo.course_id
+        })
+      })
     }
   },
   
