@@ -3,7 +3,6 @@
     <div class="left">
       <div v-if="isCurrentUser">
         <div class="title">我的班级</div>
-
         <div class="class_es">
           <div
             v-for="(item, index) in claes"

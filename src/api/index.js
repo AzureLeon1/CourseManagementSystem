@@ -1,8 +1,12 @@
-﻿import {
+﻿import axios from 'axios'
+import {
   delay
 } from '@/utils/util.js'
+import {
+  Message
+} from 'element-ui';
 
-const server = 'http://192.168.1.16:8080/'
+const server = 'http://192.168.1.15:8080'
 
 const headers = {}
 
@@ -34,7 +38,14 @@ export default {
   deleteFollowPerson,
   getCoursewareList,
   getCheckingClassList,
-  createClass
+  createClass,
+  getClassExams,
+  checkExamResult,
+  getExamQuestions,
+  getCourseware,
+  getAttendance,
+  getTeam,
+  createMessage
 }
 
 function param(a) {
@@ -48,22 +59,27 @@ async function request(method, url, data) {
       Authorization: `Bearer ${token}`
     } : {}
     // TODO: 验证GET请求的参数形式
-    // if (method in {
-    //     GET
-    //   }) {
-    //   url += param(data)
-    //   data = null
-    // }
+    if (method in {
+        GET
+      }) {
+      url += param(data)
+      data = null
+    }
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
-    console.log(token && `Bearer ${token}`, url)
+    console.log(method);
+    console.log(url);
+    console.log(headers)
+    console.log(token);
+    console.log(data);
     const res = await axios({
-      method,
-      url,
-      data,
-      headers
+      method: method,
+      url: url,
+      data: data,
+      headers: headers
     })
+    console.log(res);
     var mes = res;
     if (res.status < 400) {
       if (res.data.code && res.data.code < 400) {
@@ -78,36 +94,43 @@ async function request(method, url, data) {
     }
   } catch (err) {
     console.log("get status")
-    console.log()
-    if (mes.data.code !== 402) {
-      Message({
-        message: err.message,
-        type: 'error',
-        showClose: true,
-      })
-    }
+    console.log(err)
 
-    console.error(err)
+    Message({
+      message: err.message,
+      type: 'error',
+      duration: 1000
+    });
+
+    // if (mes.data.code !== 402) {
+    //   Message({
+    //     message: err.message,
+    //     type: 'error',
+    //     showClose: true,
+    //   })
+    // }
   }
 }
 
 async function getAuthority(form) {
-  const data = {
-    "user_ID": 100001,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-    "name": "王亮",
-    "role": "student",
-    "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-    "phone_number": "18916083381",
-    "college": "软件学院",
-    "following": 0,
-    "follower": 0,
-    "email": "leonwangchn@163.com"
-  }
-  await delay(1000)
-  return data
-  // const res = await request(POST, '/api/login', form)
-  // return res.data.data
+  console.log(form);
+  // const data = {
+  //   "user_ID": 100001,
+  //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //   "name": "王亮",
+  //   "role": "student",
+  //   "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //   "phone_number": "18916083381",
+  //   "college": "软件学院",
+  //   "following": 0,
+  //   "follower": 0,
+  //   "email": "leonwangchn@163.com"
+  // }
+  // await delay(1000)
+  // return data
+  const res = await request(POST, '/api/login', form)
+  console.log(res);
+  return res.data.data
 }
 
 async function register(form) {
@@ -116,39 +139,42 @@ async function register(form) {
 }
 
 async function getPersonInfo(id) {
-  var data = {}
-  if (id == 100002) {
-    data = {
-      "user_ID": 100002,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-      "name": "施程航",
-      "role": "student",
-      "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
-      "phone_number": 13365445687,
-      "college": "软件学院",
-      "following": 0,
-      "follower": 0,
-      "email": "chenghang_shi@gmail.com"
-    }
-  } else {
-    data = {
-      "user_ID": 100001,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-      "name": "王亮",
-      "role": "student",
-      "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-      "phone_number": "18916083381",
-      "college": "软件学院",
-      "following": 0,
-      "follower": 0,
-      "email": "leonwangchn@163.com"
-    }
-  }
-  console.log(data);
+  // var data = {}
+  // if (id == 100002) {
+  //   data = {
+  //     "user_ID": 100002,
+  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //     "name": "施程航",
+  //     "role": "student",
+  //     "avatar": "https://view.moezx.cc/images/2018/06/06/_35588639.md.png",
+  //     "phone_number": 13365445687,
+  //     "college": "软件学院",
+  //     "following": 0,
+  //     "follower": 0,
+  //     "email": "chenghang_shi@gmail.com"
+  //   }
+  // } else {
+  //   data = {
+  //     "user_ID": 100001,
+  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
+  //     "name": "王亮",
+  //     "role": "student",
+  //     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+  //     "phone_number": "18916083381",
+  //     "college": "软件学院",
+  //     "following": 0,
+  //     "follower": 0,
+  //     "email": "leonwangchn@163.com"
+  //   }
+  // }
+  // console.log(data);
   // await delay(1000)
-  return data
-  // const res = await request(GET, `/api/users`, {id: id})
-  // return res.data
+  // return data
+  const res = await request(POST, `/api/users`, {
+    user_id: id
+  })
+  console.log(res.data.data);
+  return res.data.data
 }
 
 async function getPersonFollowFans(id) {
@@ -260,10 +286,11 @@ async function broadcastStudent(form) {
   console.log(res)
 }
 
-//all patch start from here
 //============================================================
-async function changeUserInfo(id, form) {
-  const res = await request(PATCH, '/api/users/${id}', form)
+async function changeUserInfo(form) {
+  console.log(form);
+  const res = await request(POST, '/api/user_info', form)
+  console.log(res);
   return res
 }
 
@@ -317,6 +344,7 @@ async function getjoinedClassList(id) {
     }
   ]
 }
+
 
 async function getSearchResult(name) {
   const res = {
@@ -373,11 +401,11 @@ async function getMessageWithID(id) {
         "semester": "spring",
         "year": 2019,
         "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11- 12:30",
+        "start_time": "1997-12-11 12:30",
         "end_time": "1997-12-13- 12:30"
       }, {
         "broadcast_id": "000002",
-        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "content": "不就是瞎编吗？谁不会啊！",
         "type": 1,
         "scope": 1,
         "sec_id": 111,
@@ -385,11 +413,11 @@ async function getMessageWithID(id) {
         "semester": "spring",
         "year": 2019,
         "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11- 12:30",
+        "start_time": "1997-12-11 12:30",
         "end_time": "1997-12-13- 12:30"
       }, {
         "broadcast_id": "000002",
-        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "content": "发现了一个问题，这个content的内容存不了分行的。完蛋。",
         "type": 1,
         "scope": 1,
         "sec_id": 111,
@@ -397,11 +425,11 @@ async function getMessageWithID(id) {
         "semester": "spring",
         "year": 2019,
         "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11- 12:30",
+        "start_time": "1997-12-11 12:30",
         "end_time": "1997-12-13- 12:30"
       }, {
         "broadcast_id": "000002",
-        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "content": "嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
         "type": 1,
         "scope": 1,
         "sec_id": 111,
@@ -409,11 +437,11 @@ async function getMessageWithID(id) {
         "semester": "spring",
         "year": 2019,
         "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11- 12:30",
+        "start_time": "1997-12-11 12:30",
         "end_time": "1997-12-13- 12:30"
       }, {
         "broadcast_id": "000002",
-        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "content": "数据造假，从我做起。学术造假，从我做起。",
         "type": 1,
         "scope": 1,
         "sec_id": 111,
@@ -421,7 +449,7 @@ async function getMessageWithID(id) {
         "semester": "spring",
         "year": 2019,
         "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11- 12:30",
+        "start_time": "1997-12-11 12:30",
         "end_time": "1997-12-13- 12:30"
       }, ]
     },
@@ -438,28 +466,31 @@ async function getMessageWithID(id) {
 }
 
 async function getFollowing(id) {
-  const res = await request(GET, '/api/following', {
-    id: id
+  const res = await request(POST, '/api/followings', {
+    user_id: id
   });
-  return res.data
+  console.log(res);
+  console.log(res.data.data.users);
+  return res.data.data.users
 }
 
 async function getFollowers(id) {
-  const res = await request(GET, '/api/followers', {
-    id: id
+  const res = await request(POST, '/api/followers', {
+    user_id: id
   });
-  return res.data
+  console.log(res);
+  return res.data.data.users
 }
 
 async function followPerson(id) {
-  const res = await request(POST, '/api/following/', {
+  const res = await request(POST, '/api/following', {
     user_id: id
   })
   console.log(res)
 }
 
 async function deleteFollowPerson(id) {
-  const res = await request(DELETE, '/api/following/', {
+  const res = await request(DELETE, '/api/following', {
     user_id: id
   })
   console.log(res)
@@ -469,5 +500,421 @@ async function createClass(form){
   // const res = await request(POST, '/api/class', form)
   // console.log(res)
   console.log("提交成功")
-
 }
+
+async function createMessage(form) {
+  // const res = await request(POST, '/api/broadcasts', form);
+  // return res;
+}
+
+///team api
+async function getTeam() //id?
+{
+
+  const data = {
+    teamlist: [{
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三五",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      }
+    ],
+    myteamlist: [{
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      },
+      {
+        team_id: "1234",
+        team_name: "一二三四",
+        team_member: "sad  sdf asdf"
+      }
+    ]
+  }
+
+  //const data = await request(GET, ,form)
+  await delay(500)
+  return data
+}
+//attendance api
+async function getAttendance() {
+  const data = {
+    attendancelist: [{
+        LessonNum: "2019-05-04",
+        sum: "45/60",
+        detail: "--",
+        student_ids: [{
+            student_id: "123",
+            student_name: "一二三",
+            attendance_status: "1",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "2",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "3",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "4",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "4",
+
+          },
+          {
+            student_id: "089",
+            student_name: "一二三",
+            attendance_status: "2",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "2",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "1",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "1",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check",
+
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null",
+
+          }
+        ]
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-27",
+        sum: "60/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-07-02",
+        sum: "57/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--"
+      },
+      {
+        LessonNum: "2019-06-03",
+        sum: "20/60",
+        detail: "--",
+        student_ids: [{
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "check"
+          },
+          {
+            student_id: "asd",
+            student_name: "一二三",
+            attendance_status: "null"
+          }
+        ]
+      }
+    ]
+  }
+  await delay(1000)
+  return data
+}
+
+async function getClassExams(form) {
+  const res = await request(GET, '/api/exams', form)
+  return res.data
+}
+
+async function checkExamResult(form) {
+  const res = await request(GET, '/api/exam_results', form)
+  return res.data
+}
+
+async function getExamQuestions(form) {
+  const res = await request(GET, 'api/exam_questions', form)
+  return res.data
+}
+
+async function getCourseware(course_id, sec_id, semester, year) {
+  const res = {
+    data: [{
+        name: "课件1-pdf",
+        location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
+      },
+      {
+        name: "课件2-ppt",
+        location: "http://pu9bnvlst.bkt.clouddn.com/%E7%AC%AC1%E7%AB%A0%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5.ppt"
+      },
+      {
+        name: "课件3",
+        location: "url3"
+      }
+    ]
+  }
+  // const res = await request(GET, '/api/courseware', {
+  //   course_id: course_id,
+  //   sec_id: sec_id,
+  //   semester: semester,
+  //   year: year
+  // })
+  console.log(res);
+  return res.data
+}
+

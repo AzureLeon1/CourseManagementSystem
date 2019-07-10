@@ -1,58 +1,86 @@
 <template>
-    <el-card shadow="never">
-        <div>
-            <el-input v-model="searchkey" placeholder="请输入课件名称" class="input-with-select">
-                <el-button slot="append" icon="el-icon-search" @click="searchCourseware()"></el-button>
-            </el-input>
-        </div>
+  <el-card shadow="never" style="width: 60%; margin-left: auto; margin-right: auto;">
+    <div>
+      <el-input v-model="searchkey" placeholder="请输入课件名称" class="input-with-select">
+        <el-button slot="append" icon="el-icon-search" @click="searchCourseware()"></el-button>
+      </el-input>
+    </div>
 
-         <div style="text-align: left">
-            <el-table :data="listdata">
-                <el-table-column prop="name" label="名称"></el-table-column>
-                <el-table-column  prop="location" label="下载地址"></el-table-column>
-               <el-table-column label="下载" width="150px">
-
-                   <template slot-scope="scope">
-                       <el-button size="mini" @click="handledownload(scope.row)">ttt</el-button>
-                   </template>
-               </el-table-column>
-            </el-table>
-        </div>
-
-    </el-card>
+    <div style="text-align: left;">
+      <el-table :data="allCourseList">
+        <el-table-column prop="name" label="名称"></el-table-column>
+        <!-- <el-table-column prop="location" label="下载地址"></el-table-column> -->
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handlepreview(scope.row)">下载</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+  </el-card>
 </template>
 <script>
+import api from '@/api/index.js'
 export default {
-    name: 'Coursewarelist',
-    data(){
-        return{
-            // listdata: [
-            //     {name : '课件1', location : 'www.baidu.com'},
-            //     {name : '课件2', location : 'url2'},
-            //     {name : '课件3', location : 'url3'}
-            // ],
-            searchkey: ""
-        }
+  name: "Coursewarelist",
+  data() {
+    return {
+      request_body: {},
+      allCourseList: [],
+      filteredList: [],
+      searchkey: ""
+    };
+  },
+  methods: {
+    getData() {
+      this.request_body = {
+        course_id: this.course_id,
+        sec_id: this.sec_id,
+        semester: this.semester,
+        year: this.year
+      }
+      api.getCourseware()
+        .then(res => {
+          this.allCourseList = res
+          console.log(this.allCourseList);
+        })
     },
-    mounted(){
-        this.$store.dispatch('classinfo/getCoursewareList', {course_id : this.$store.classinfo.state.course_id,
-        sec_id : this.$store.state.classinfo.sec_id, semester : this.$store.state.classinfo.semester,
-        year: this.$store.state.classinfo.semester})
-
+    searchCourseware() {
+      console.log(this.searchkey == '');
     },
-    methods: {
-
-        searchCourseware(){
-            console.log(this.searchkey);
-        },
-        handledownload(row){
-           
-        }
+    handlepreview(row) {
+      window.open(row.location)
     },
-    computed: {
-
+    filter() {
+      if (this.searchkey == '') {
+        this.filteredList = this.allCourseList
+      }
+      else {
+        // TODO: 过滤
+      }
     }
 
-}
+  },
+  mounted() {
+    this.allCourseList = []
+    this.filteredList = []
+    // 请求数据
+    this.getData()
+  },
+  computed: {
+    course_id() {
+      return this.$store.state.classinfo.classinfo.course_id
+    },
+    sec_id() {
+      return this.$store.state.classinfo.classinfo.sec_id
+    },
+    semester() {
+      return this.$store.state.classinfo.classinfo.semester
+    },
+    year() {
+      return this.$store.state.classinfo.classinfo.year
+    },
+  }
+};
 </script>
 

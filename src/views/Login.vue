@@ -1,13 +1,12 @@
 <template>
-  <div class="login">
-    <div class="login-container">
-      <div class="container">
-        <span>
-          <div class="desc">
-            <img src="../../static/logo.png" style="width:150px;" alt="CCMS" />
-          </div>
-        </span>
-
+  <div class="Login">
+    <div class="container">
+      <div class="show-container">
+        <img class="logo" src="/static/img/logo.06ab52f.png">
+        <div class="ccms ccms-english">ccms</div>
+        <!-- <div class="ccms">同济大学课程班级管理系统</div> -->
+      </div>
+      <div class="card-container">
         <el-card>
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
             <el-form-item prop="name">
@@ -18,7 +17,7 @@
             </el-form-item>
             <el-form-item prop="validate" class="validate-code">
               <el-input v-model="ruleForm.validate" placeholder="验证码"></el-input>
-              <div class="code">
+              <div class="code" @click="setValidate">
                 <s-identify :identifyCode="identifyCode"></s-identify>
               </div>
               <el-button
@@ -36,7 +35,7 @@
         </el-card>
       </div>
     </div>
-    <Footer id="footer" />
+    <!-- <Footer id="footer" /> -->
   </div>
 </template>
 
@@ -110,7 +109,7 @@ export default {
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
           const form = {
-            user_ID: this.ruleForm.name,
+            user_id: this.ruleForm.name,
             password: this.ruleForm.password
           };
           this.$store.dispatch('profile/getAuthority', form)
@@ -141,30 +140,25 @@ export default {
 </style>
 
 <style scoped>
-.login {
-  height: calc(100vh - 60px);
+.Login *{
+  box-sizing: border-box;
+}
+
+.Login {
   display: flex;
-  flex-direction: column;
-}
-.login-container {
-  background: lightyellow;
-  flex: 1;
-}
-.container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: center;
   align-items: center;
-  height: 600px;
-  max-width: 800px;
-  margin: auto;
+  height: calc(100vh - 50px);
+  background-color: #292961;
 }
+
 .el-card {
-  width: 320px;
+  width: 100%;
 }
+
 .code {
   margin: 0 5px 0 10px;
+  cursor: pointer;
 }
 .s-canvas {
   overflow: hidden;
@@ -174,11 +168,34 @@ export default {
 .btns {
   display: flex;
 }
-.desc {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vh;
+}
+.show-container{
+  flex-grow: 1;
   text-align: center;
+  margin-bottom: 30px;
+}
+.logo{
+  width: 200px;
+  margin-bottom: 20px;
+}
+.ccms{
   font-size: 20px;
-  letter-spacing: 1px;
+  font-family: "HwXihei";
+  color: #fff;
+  /* font-weight: bold; */
+  letter-spacing: .2em;
+  margin-bottom: 5px;
+}
+.ccms-english{
+  font-size: 40px;
+  font-weight: bold;
+}
+.card-container{
+  width: 35%;
 }
 </style>
