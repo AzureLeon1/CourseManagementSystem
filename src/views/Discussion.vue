@@ -6,7 +6,7 @@
     <el-container>
       <el-header >
         <div style="margin-top:2%;margin-left:15px;margin-right:10%;">
-          <el-form :model="formInline" class="demo-form-inline" style="display: flex;">
+          <el-form class="demo-form-inline" style="display: flex;">
             <el-form-item style="flex-grow:1;margin-right:1%">
               <el-input placeholder="请输入内容" v-model="input"></el-input>
             </el-form-item>
