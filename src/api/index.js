@@ -54,7 +54,8 @@ export default {
   deleteCourseware,
   uploadCourseware,
   createAttenRecords,
-  coursetableGetCoursetable
+  updateAtten,
+  coursetableGetCoursetable,
 }
 
 function param(a) {
@@ -1109,4 +1110,9 @@ async function createAttenRecords(form) {
   const res = await request(POST, '/api/attendance_records', form)
   console.log(res);
   return res
+}
+
+async function updateAtten(form) {
+  const res = await request(PUT, '/api/new_attendance', form)
+  console.log(res)
 }

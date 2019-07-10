@@ -44,7 +44,7 @@
                     <el-radio v-model="scope.row.attendance_status" label="4" size="small"> 迟到</el-radio>
                     </template>-->
                     <template slot-scope="scope">
-                      <el-radio-group v-model="scope.row.status" @change="changeHandler">
+                      <el-radio-group v-model="scope.row.status" @change="changeHandler(scope.row)">
                         <el-radio :label="1">出席</el-radio>
                         <el-radio :label="2">无故缺席</el-radio>
                         <el-radio :label="3">请假</el-radio>
@@ -120,10 +120,17 @@ export default {
         }, 20);
       }
     },
-    changeHandler(value) {
-      console.log("改变后的值为" + value);
+    changeHandler(row) {
+      console.log(row);
+      console.log("改变后的值为" + row);
       //把value送到后端!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
       // document.write("改变后的值为"+value)
+
+      var update_info = this.course_sec_info
+      update_info.user_id = row.student_id
+      update_info.status = row.status
+      update_info.time_id = row.time_id
+      api.updateAtten(update_info)
     },
     //发布动态时点击发布调用的代码
     // emit() {
