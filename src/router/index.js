@@ -52,7 +52,7 @@ export default new Router({
       component: MessageHome
     },
     {
-      path:'/coursemessage',
+      path:'/class_home/:class_id/coursemessage',
       name:'CourseMessage',
       component: CourseMessage
     },
