@@ -8,8 +8,7 @@
             v-for="(item, index) in claes"
             :key="index"
             class="a_class"
-            @click="$router.push({name: 'ClassHome', params: {course_id: item.course_id, sec_id: item.sec_id,
-            semester: item.semester, year: item.year}})"
+            @click="toClassHome(item.course_id, item.sec_id, item.semester, item.year)"
           >
             <Avatar :src="item.avatar" :size="40" :border="false" />
             <div>{{item.name}}</div>
@@ -68,7 +67,29 @@ export default {
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg = true;
       }
-    }
+    },
+
+     toClassHome(course_id, sec_id, semester, year) {
+
+        this.$store.dispatch("classlistitem/getclickclass", {
+          course_id: course_id,
+          sec_id: sec_id,
+          semester: semester,
+          year: year,
+
+      });
+      
+      this.$router.push({
+        name: "ClassHome",
+        params: {
+          class_id: course_id,
+          // sec_id: sec_id,
+          // semester: semester,
+          // year: year,
+       
+        }
+      });
+     }
   },
   computed: {
     claes() {
@@ -92,7 +113,7 @@ export default {
       this.$store.state.profile.user.id
     );
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .personal {
