@@ -30,6 +30,10 @@ export default {
                 this.routeName="好友动态";
                 this.routeType="个人主页";
             }
+            else if(this.routeName.search('/coursetable')!=-1){
+                this.routeName="课程表";
+                this.routeType="个人主页";
+            }
         }
     },
     mounted(){

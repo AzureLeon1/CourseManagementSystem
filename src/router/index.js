@@ -72,7 +72,7 @@ export default new Router({
       component: Register
     },
     {
-      path: '/coursetable',
+      path: '/Coursetable',
       name: 'CourseTable',
       component: CourseTable
     },
