@@ -76,6 +76,12 @@ const actions = {
       commit('setUser',data)
     },
 
+    async getFollowInfo({commit, state}){
+      const res = await api.getFollowCount()
+      console.log("followinfo", res)
+      commit('setFollowInfo',res)
+    },
+
     async getClassList({commit, state}, user_id)
     {
        const classes = await api.getjoinedClassList(user_id)
@@ -109,6 +115,11 @@ const mutations = {
     // },
     setRole(state,props){
         state.role = props
+    },
+    setFollowInfo(state,props) {
+      state.user.follower = props.follower
+      state.user.following = props.following
+      console.log("state.user", state.user)
     },
 
     setjoinedClassList(state, props){

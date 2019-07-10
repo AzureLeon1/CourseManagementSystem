@@ -5,6 +5,8 @@
       v-if="!hasStart">考试未开始!</div>
 
     <div v-else>
+      <div style="margin-left: 20px; font-size:18px">{{title}}</div>
+
       <count-down 
         :endTime="endTime"
         v-on:timeOver="submit"
@@ -34,6 +36,8 @@
 import QuestionCard from "./QuestionCard"
 import CountDown from "./CountDown"
 
+import api from "../api"
+
 export default {
   data() {
     return {
@@ -43,7 +47,8 @@ export default {
       hasStart: false,
       startTime: "",
       endTime: "",
-      score: 0
+      score: 0,
+      title: ""
     }
   },
 
@@ -54,42 +59,21 @@ export default {
 
   methods: {
     getData() {
-      // To Do: get all questions and state(hasDone and time)
-      // if checkanswer get answer and score
-      this.hasDone = false
-      this.startTime = "2019.07.09 02:00"
-      this.endTime = "2019.07.09 20:30"
-      this.getState()
-      this.score = 40
-      this.questionList = [{
-        question_id: "000",
-        index: 3,
-        content: "1 + 3 = ____",
-        options: "1_2_3_4",
-        score: 10,
-        answer: "4"
-      },{
-        question_id: "111",
-        index: 2,
-        content: "1 + 2 = ____",
-        options: "0_1_2_3",
-        score: 10,
-        answer: "3"
-      },{
-        question_id: "222",
-        index: 1,
-        content: "1 + 1 = ____",
-        options: "0_1_2_3",
-        score: 10,
-        answer: "2"
-      },{
-        question_id: "333",
-        index: 4,
-        content: "1 + 4 = ____",
-        options: "0_5_2_3",
-        score: 10,
-        answer: "5"
-      }]
+      api.getExamQuestions({
+        exam_id: this.$route.params.exam_id
+      }).then(res => {
+        this.title = res.title
+        this.questionList = res.questions
+        this.startTime = res.start_time
+        this.endTime = res.end_time
+        if (user.role == "student") {
+          this.hasDone = res.exam_status
+          this.getState()
+          if (this.hasDone) {
+            this.score = this.total_score
+          }
+        }
+      })
       for (let q of this.questionList) {
         q.content = q.index + ".\xa0\xa0" + q.content
       }
@@ -137,6 +121,12 @@ export default {
 
   mounted() {
     this.getData()
+  },
+
+  computed: {
+    user() {
+      return this.$store.state.profile.user
+    }
   }
 }
 </script>

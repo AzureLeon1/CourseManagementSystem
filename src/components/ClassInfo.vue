@@ -86,21 +86,21 @@
           class="status_btn"
           size="primary"
           style="font-weight: 300; "
-          v-if="joinStatus === 0"
+          v-if="the_class.status === 0"
           @click="join"
         >申请加入</el-button>
         <el-button
           class="status_btn"
           size="primary"
           style="font-weight: 300; "
-          v-if="joinStatus === 1"
+          v-if="the_class.status === 1"
           disabled
         >待审核</el-button>
         <el-button
           class="status_btn"
           size="primary"
           style="font-weight: 300; "
-          v-if="joinStatus === 2"
+          v-if="the_class.status === 2"
           disabled
         >已加入</el-button>
       </template>
@@ -186,10 +186,12 @@ export default {
   mounted() {
       console.log("这是班级跳转参数", this.$route.params)
       console.log("这是班级跳转参数", this.$route.params.class_id)
+      this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
 
 console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
     if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id)
-       { this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
+       {  console.log('这是前段的form', this.$store.state.classlistitem.clickedclass)
+           this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
     this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass);}
   }
 };

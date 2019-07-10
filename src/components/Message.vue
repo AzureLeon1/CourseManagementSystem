@@ -1,7 +1,7 @@
 <template>
-  <div id="Message" style="width: 70%;">
+  <div id="Message">
     <div style="display: flex; flex-direction: column; min-height: 450px;">
-      <div style="padding: 15px; border: 1px solid #eee">
+      <div style="padding: 15px; border: 1px solid #eee; min-height: 500px;">
         <el-table :data="tableData" @row-click="readMsg">
           <el-table-column prop="content" label="广播消息" min-width="200px">
             <template slot-scope="scope">
@@ -80,6 +80,7 @@ export default {
     }
     
     return {
+      eachPage: 9,
       //pagination
       page_total: 10,
       //detailed message
@@ -96,7 +97,7 @@ export default {
     //all
     initial(){
         this.$refs.msc.$on['hide']=this.hideReadMsg;
-        console.log(this.$refs.msc.$on)
+        // console.log(this.$refs.msc.$on)
         this.getMessageWithID(111);
       
     },
@@ -132,8 +133,8 @@ export default {
     //pagination
     onPageChange(pagenum){
       this.tableData=Array(0);
-      let start_item=(pagenum-1)*7;
-      let end_item=start_item+7;
+      let start_item=(pagenum-1)*this.eachPage;
+      let end_item=start_item+this.eachPage;
       end_item=this.messages.length<end_item?this.messages.length:end_item;
       for(let i=start_item;i<end_item;i++){
         this.tableData.push(this.messages[i]);
@@ -151,14 +152,14 @@ export default {
       }
 
       //update page 1 content
-      let range=this.messages.length<7?this.messages.length:7;
+      let range=this.messages.length<this.eachPage?this.messages.length:this.eachPage;
       // console.log(range);
       for(let i=0;i<range;i++){
         this.tableData.push(this.messages[i]);
       }
 
       //update pagination page_total
-      this.page_total=Math.ceil(this.messages.length/7);
+      this.page_total=Math.ceil(this.messages.length/this.eachPage);
       this.page_total=this.page_total*10;
       // console.log(this.page_total);
     }

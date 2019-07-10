@@ -1,5 +1,10 @@
 <template>
   <div class="examListBox">
+    <h2
+      v-if="examList.length == 0"
+      style="text-align:center;margin-top:30px">
+      暂无考试信息
+    </h2>
     <exam-card 
       v-for="exam in examList"
       :key="exam.exam_id"
@@ -30,9 +35,10 @@ export default {
       api.getClassExams({
         course_id: classInfo.course_id,
         sec_id: classInfo.sec_id,
-        semester: clasInfo.semester,
+        semester: classInfo.semester,
         year: classInfo.year
       }).then(data => {
+        console.log("examlist", data)
         this.examList = data
       })
       this.user = this.$store.state.profile.user;
