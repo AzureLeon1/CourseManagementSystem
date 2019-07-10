@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "HwXihei";
+    src: url("huawenxihei.ttf");
+}
+@font-face {
+    font-family: "Helvetica";
+    src: url("Helvetica.ttf");
+}
+@font-face {
+    font-family: "Helvetica";
+    src: url("HelveticaBold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Tahoma";
+    src: url("tahoma.ttf");
+}
+@font-face {
+    font-family: "Tahoma";
+    src: url("tahomabd.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Siyuan";
+    src: url("NotoSans-Regular.ttf");
+}
+@font-face {
+    font-family: "Siyuan";
+    src: url("NotoSans-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Siyuan";
+    src: url("NotoSans-Italic.ttf");
+    font-weight: bold;
+}

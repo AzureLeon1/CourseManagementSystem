@@ -4,7 +4,9 @@
       <user-nav :activeIndex="3"></user-nav>
     </el-aside>
     <el-main>
-      <Message></Message>
+      <div class="set-middle">
+        <Message></Message>
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -25,5 +27,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .set-middle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10vh;
+  }
 </style>

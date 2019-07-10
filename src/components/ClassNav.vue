@@ -169,14 +169,14 @@ export default {
 
 <style scoped>
 .classNav {
-  position: absolute;
+  position: fixed;
   z-index: 1;
-  height: 100%;
+  height: 100vh;
   left: 0;
   top: 0;
   padding-top: 50px;
   width: 238px;
-  min-height: 630px;
+  box-sizing: border-box;
   background: #fafafa;
   border: #d0d0d0 1px solid;
   /* transform: translateX(-100%); */
@@ -229,17 +229,31 @@ export default {
   margin-bottom: 20px;
 }
 
+.menu-item *{
+  cursor: pointer;
+}
+
 .menu-item{
   height: 50px;
   width: 100%;
   line-height: 50px;
   text-align: center;
+  cursor: pointer;
 }
 
 .menu-item:hover{
   box-sizing: border-box;
   border-left: #292961 3px solid;
   background-color: #ebebeb;
+  color: #292961;
+  transition: .1s;
+}
+
+.menu-item:active{
+  box-sizing: border-box;
+  border-left: #292961 3px solid;
+  background-color: #d3d3d3;
+  color: #292961;
   transition: .1s;
 }
 
