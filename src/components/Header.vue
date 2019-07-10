@@ -18,8 +18,12 @@ export default {
         getRoute(){
             this.routeName=this.$route.path;
             if(this.routeName.search('/myclass')!=-1){
-                console.log("匹配myclass");
+                // console.log("匹配myclass");
                 this.routeName="我的班级";
+                this.routeType="个人主页";
+            }
+            else if(this.routeName.search('/messageHome')!=-1){
+                this.routeName="我的消息";
                 this.routeType="个人主页";
             }
         }
