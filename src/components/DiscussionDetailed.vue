@@ -74,10 +74,15 @@ export default {
   methods: {
         show(input){
             this.item=input;
+            this.updateComments(input['discussion_id']);
         },
         turnBack(){
             this.$parent.isShowList=!this.$parent.isShowList;
         },
+        //调数据库 找到数据库中回复id的评论
+        updateComments(id){
+            
+        }
   },
   mounted () {
     

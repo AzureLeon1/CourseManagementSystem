@@ -21,7 +21,7 @@ import CourseTable from '@/views/CourseTable'
 import UserProfile from '@/views/UserProfile'
 import Friends from '@/views/Friends'
 import MyClass from '@/views/MyClass'
-// import Discussion from '@/views/Discussion'
+import Discussion from '@/views/Discussion'
 import SearchUser from '@/views/SearchUser'
 import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
@@ -29,7 +29,6 @@ import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
 import MembershipAudit from '@/views/MembershipAudit'
 import Summary from '@/views/Summary'
-import Discussion from '@/components/Discussion'
 
 Vue.use(Router)
 
