@@ -51,7 +51,9 @@ export default {
   getTeam,
   createMessage,
   deletePost,
-  getCoursetable
+  getCoursetable,
+  deleteCourseware,
+  uploadCourseware
 }
 
 function param(a) {
@@ -284,7 +286,7 @@ async function getCourseDiscussion(){
         year: 1997
       }],
       question:[
-      {  
+      {
         discussion_id:111,
         user_id:111,
         user_name:'aaa',
@@ -394,7 +396,7 @@ async function broadcastStudent(form) {
 
 async function addDiscussion(form){
   const res = await request(POST,'/api/discussion',form)
-  console.log(res) 
+  console.log(res)
 }
 
 //all patch start from here
@@ -426,7 +428,7 @@ async function getClassInfo(form) {
 
 
 
-  
+
   return data
 
 }
@@ -697,49 +699,49 @@ async function getAttendance() {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 2,
-       
+
           },
           {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 3,
-          
+
           },
           {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 4,
-          
+
           },
           {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 4,
-      
+
           },
           {
             student_id: "089",
             student_name: "一二三",
             attendance_status: 2,
-         
+
           },
           {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 2,
-          
+
           },
           {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 1,
-        
+
           },
           {
             student_id: "asd",
             student_name: "一二三",
             attendance_status: 1,
-          
+
           },
           {
             student_id: "asd",
@@ -1008,7 +1010,7 @@ async function getCourseware(course_id, sec_id, semester, year) {
       }
     ]
   }
-  // const res = await request(GET, '/api/courseware', {
+  // const res = await request(GET, '/api/CourseWares', {
   //   course_id: course_id,
   //   sec_id: sec_id,
   //   semester: semester,
@@ -1016,6 +1018,18 @@ async function getCourseware(course_id, sec_id, semester, year) {
   // })
   console.log(res);
   return res.data
+}
+
+async function deleteCourseware(courseware_id) {
+  const res = await request(DELETE, '/api/CourseWares', { courseware_id: courseware_id})
+  console.log(res);
+  return res
+}
+
+async function uploadCourseware(form) {
+  const res = await request (POST, 'api/CourseWare', form)
+  console.log(res);
+  return res
 }
 
 async function deletePost(id) {
@@ -1028,7 +1042,7 @@ async function deletePost(id) {
 
 async function getCoursetable(form){
   const data={
-    courselist:[{      
+    courselist:[{
       day: 3,
       course_name: "C++",
       building: "济事楼",
@@ -1036,7 +1050,7 @@ async function getCoursetable(form){
       start_section: 1,
       length: 2,
     },
-    {      
+    {
       day: 2,
       course_name: "数据库",
       building: "b楼",
@@ -1044,7 +1058,7 @@ async function getCoursetable(form){
       start_section: 5,
       length: 2,
     },
-    {      
+    {
       day: 3,
       course_name: "组合数学",
       building: "a楼",
@@ -1052,7 +1066,7 @@ async function getCoursetable(form){
       start_section: 9,
       length: 2
     },
-    {      
+    {
       day: 1,
       course_name: "组合数学",
       building: "a楼",
@@ -1060,7 +1074,7 @@ async function getCoursetable(form){
       start_section: 2,
       length: 2
     },
-    {      
+    {
       day: 5,
       course_name: "组合数学",
       building: "a楼",
@@ -1068,7 +1082,7 @@ async function getCoursetable(form){
       start_section: 2,
       length: 2
     },
-    {      
+    {
       day: 4,
       course_name: "C--",
       building: "济事楼",

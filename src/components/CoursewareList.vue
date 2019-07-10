@@ -13,6 +13,13 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="handlepreview(scope.row)">下载</el-button>
+
+            <el-button
+              v-if="user_role == 'teacher_edu'"
+              size="mini"
+              @click="handleDelete(scope.row)"
+            >删除</el-button>
+
           </template>
         </el-table-column>
       </el-table>
@@ -39,7 +46,7 @@ export default {
         semester: this.semester,
         year: this.year
       }
-      api.getCourseware()
+      api.getCourseware(this.request_body)
         .then(res => {
           this.allCourseList = res
           console.log(this.allCourseList);
@@ -51,14 +58,43 @@ export default {
     handlepreview(row) {
       window.open(row.location)
     },
-    filter() {
+    handleDelete(row) {
+      api.deleteCourseware(row.courseware_id)
+        .then(res => {
+          // 删除成功，重新获取课件列表
+          if (res.status == 200) {
+
+          }
+        })
+    },
+    handleUpload() {
+      var form = {
+        course_id: this.course_id,
+        sec_id: this.sec_id,
+        semester: this.semester,
+        year: this.year,
+        // TODO: 更新name和location
+        name: null,
+        location: null,
+      }
+      api.uploadCourseware(form)
+        .then(res => {
+          // 上传成功，重新获取课件列表
+          if (res.status == 200) {
+
+          }
+
+        })
+      },
+      filter() {
       if (this.searchkey == '') {
         this.filteredList = this.allCourseList
       }
       else {
         // TODO: 过滤
       }
-    }
+    },
+
 
   },
   mounted() {
@@ -80,6 +116,9 @@ export default {
     year() {
       return this.$store.state.classinfo.classinfo.year
     },
+    user_role() {
+      return this.$store.state.profile.user.role
+    }
   }
 };
 </script>
