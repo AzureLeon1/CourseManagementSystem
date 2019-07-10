@@ -35,6 +35,7 @@ export default {
   getSearchResult,
   getFollowing,
   getFollowers,
+  getFollowCount,
   followPerson,
   deleteFollowPerson,
   getCourseDiscussion,
@@ -44,6 +45,7 @@ export default {
   getCheckingClassList,
   createClass,
   getClassExams,
+  newExam,
   checkExamResult,
   getExamQuestions,
   getCourseware,
@@ -582,6 +584,12 @@ async function getFollowers(id) {
   return res.data.data.users
 }
 
+async function getFollowCount() {
+  const res = await request(GET, '/api/follow_info')
+  console.log("followInfo", res.data.data)
+  return res.data.data
+}
+
 async function followPerson(id) {
   const res = await request(POST, '/api/following', {
     user_id: id
@@ -1080,4 +1088,8 @@ async function getCoursetable(form){
 
   await delay(500)
   return data
+}
+
+async function newExam(form) {
+  
 }
