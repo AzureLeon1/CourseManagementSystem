@@ -7,7 +7,7 @@
     <el-carousel :interval="4000" type="card" height="500px" width="500px">
       <el-carousel-item v-for="item in cardList" :key="item.id">
         <div style="margin-left: auto;margin-right: auto;width:300px;height=500px">
-          <h2 style="text-align:center">{{item.title}}</h2>
+          <br><h2 style="text-align:center">{{item.title}}</h2>
           <h3 style="text-align:left">{{item.words_1}}</h3>
           <div style="text-align:center; font-size:45px">{{item.tot_time}}</div>
           <h3 style="text-align:right">{{item.words_2}}</h3>
@@ -168,10 +168,10 @@ export default {
 }
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #b4bbc5;
+  background-color: #e7e7fae8;
 }
 
 .el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3d7db;
+  background-color: #cfcfe9e8;
 }
 </style>

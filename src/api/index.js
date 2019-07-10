@@ -891,7 +891,7 @@ async function getCoursetable(form){
       building: "b楼",
       room: "301",
       start_section: 5,
-      length: 2,
+      length: 3,
     },
     {      
       day: 3,
