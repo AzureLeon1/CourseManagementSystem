@@ -24,9 +24,12 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('classinfo/getClassInfo', this.$route.params)
-    this.$store.dispatch('classinfo/getJoinStatus', this.$route.params)
-    console.log(this.$store.state.classinfo);
+    console.log("ididid", this.$route.params.class_id , this.$store.state.classinfo.classinfo.course_id)
+    if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id) { 
+      this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass)
+      this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass)
+    }
+    console.log("classhomeinfo", this.$store.state.classinfo);
   }
 }
 </script>

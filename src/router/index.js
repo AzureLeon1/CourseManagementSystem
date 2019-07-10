@@ -119,7 +119,7 @@ export default new Router({
     //   component: CreateForm,
     // },
     {
-      path: '/class_home/:course_id',
+      path: '/class_home/:class_id',
       name: 'ClassHome',
       component: ClassHome,
       props: true,
