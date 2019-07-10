@@ -25,9 +25,11 @@ export default {
   },
   mounted() {
 
-  if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id)
-       { this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
-    this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass);}
+  if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id) {
+    this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
+    this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass);
+    }
+
 
     // this.$store.dispatch('classinfo/getClassInfo', this.$route.params)
     // this.$store.dispatch('classinfo/getJoinStatus', this.$route.params)
