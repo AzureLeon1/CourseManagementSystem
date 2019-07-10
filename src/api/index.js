@@ -45,7 +45,8 @@ export default {
   getCourseware,
   getAttendance,
   getTeam,
-  createMessage
+  createMessage,
+  getStudentCourses
 }
 
 function param(a) {
@@ -996,4 +997,10 @@ async function getCourseware(course_id, sec_id, semester, year) {
   // })
   console.log(res);
   return res.data
+}
+
+async function getStudentCourses(){
+  const data = {
+
+  }
 }
