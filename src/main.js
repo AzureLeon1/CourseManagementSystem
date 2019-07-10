@@ -41,6 +41,9 @@ store.commit('profile/setUser', {
   phone_number
 })
 
+const classinfo = localStorage.getItem("classinfo")
+store.commit('classinfo/setClassInfo', JSON.parse(classinfo))
+
 /* eslint-disable no-new */
 window.vm = new Vue({
   el: '#app',

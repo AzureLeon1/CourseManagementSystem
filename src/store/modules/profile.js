@@ -6,7 +6,8 @@ const state = {
     user: new User(),
     // corp: new CorpDetail(),
     role: window.localStorage.role,
-    joinedclasslist:[]
+    joinedclasslist:[],
+    checkingclasslist:[]
 }
 
 const getters = {
@@ -77,10 +78,18 @@ const actions = {
 
     async getClassList({commit, state}, user_id)
     {
-       const clubs = await api.getjoinedClassList(user_id)
-       commit('setjoinedClassList', clubs)
+       const classes = await api.getjoinedClassList(user_id)
+       commit('setjoinedClassList', classes)
 
+    },
+
+    async getCheckingClassList({commit, state}, user_id)
+    {
+        const checkingclasses = await api.getCheckingClassList(user_id)
+        commit('setcheckingclasslist', checkingclasses)
     }
+
+
 
 }
 
@@ -103,6 +112,11 @@ const mutations = {
     setjoinedClassList(state, props){
         state.joinedclasslist = []
         state.joinedclasslist.push(...props)
+    },
+    setcheckingclasslist(state, props){
+        state.checkingclasslist = []
+        state.checkingclasslist.push(...props)
+
     }
 }
 

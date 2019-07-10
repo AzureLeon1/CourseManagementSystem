@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Navigation></Navigation>
-    <transition mode="out-in" name="custom-classes-transition" :enter-active-class="enterAnimate" :leave-active-class="leaveAnimate">
-      <router-view/>
-    </transition>
+    <!-- <transition mode="out-in" name="custom-classes-transition" :enter-active-class="enterAnimate" :leave-active-class="leaveAnimate"> -->
+      <router-view></router-view>
+    <!-- </transition> -->
   </div>
 </template>
 

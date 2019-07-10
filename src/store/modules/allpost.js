@@ -15,6 +15,11 @@ const actions = {
     async broadcastStudent({dispatch, commit,state},{ form, person_id} ){
         const res = await api.broadcastStudent(form)
         dispatch('twitter/getUserTwitter', person_id, {root: true})
+    },
+
+    async createClass({commit, state}, form){
+        const res = await api.createClass(form)
+
     }
 
 }

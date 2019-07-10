@@ -7,7 +7,7 @@
         <AllClass>
 
         </AllClass>
-
+     
     </el-main>
   </el-container>
 </template>
@@ -15,12 +15,14 @@
 <script>
 import UserNav from "../components/UserNav"
 import AllClass from "../components/AllClass"
+import CreateForm from "../components/CreateForm"
 
 export default {
   name: 'MyClass',
   components: {
     UserNav,
-    AllClass
+    AllClass,
+    CreateForm
   },
   data () {
     return {

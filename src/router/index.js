@@ -109,12 +109,17 @@ export default new Router({
 
     },
     {
-      path: '/classdetail',
+      path: '/classdetail/:class_id',
       name: 'ClassDetail',
       component: ClassDetail
     },
+    // {
+    //   path: 'createform',
+    //   name: 'CreateForm',
+    //   component: CreateForm,
+    // },
     {
-      path: '/class_home/:class_id',
+      path: '/class_home/:course_id',
       name: 'ClassHome',
       component: ClassHome,
       props: true,

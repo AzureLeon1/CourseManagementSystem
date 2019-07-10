@@ -16,14 +16,24 @@ export class User {
 
 export class Class {
   constructor (props = {}){
-    this.course_id = props.course_id
-    this.sec_id = props.sec_id
-    this.semester = props.semester
-    this.year = props.year
+    this.building = props.building
+    this.room_number = props.room_number
     this.avatar = props.avatar
-    this.content = props.content
-    this.status = props.status
-    this.name = props.name
-    this.student_count = props.student_count
+    this.teacher_name = props.user_name
+    
+
+
+
+    //this.course_id = props.course_id
+   // this.sec_id = props.sec_id
+   // this.semester = props.semester
+   // this.year = props.year
+    this.avatar = props.avatar
+    this.content = props.course_description
+
+   // this.status = props.status
+   // this.name = props.course_description
+    this.student_count = props.student_number
+    
   }
 }

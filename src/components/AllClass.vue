@@ -8,20 +8,37 @@
             v-for="(item, index) in claes"
             :key="index"
             class="a_class"
-            @click="$router.push({name: 'ClassHome', params: {class_id: item.id}})"
+            @click="$router.push({name: 'ClassHome', params: {course_id: item.course_id, sec_id: item.sec_id,
+            semester: item.semester, year: item.year}})"
           >
             <Avatar :src="item.avatar" :size="40" :border="false" />
             <div>{{item.name}}</div>
           </div>
-          <div class="a_class" @click="addClass">
+
+          <div class="a_class" @click="jump()">
             <Avatar :src="addimg" :size="40" :border="false" />
           </div>
 
-          <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="class unaudit">
+          <transition name="el-fade-in-linear">
+            <CreateForm ref="msc"></CreateForm>
+          </transition>
+        </div>
+
+ <div class="title">待审核班级</div>
+             <div class="class_es">
+       
+          <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="a_class"
+            @click="$router.push({name: 'ClassDetail', params: {course_id: item.course_id, sec_id: item.sec_id,
+            semester: item.semester, year: item.year}})">
+
             <Avatar :src="item.avatar" :size="40" :border="false" />
 
             <div>{{item.name}}</div>
           </div>
+
+          <transition name="el-fade-in-linear">
+            <CreateForm ref="msc"></CreateForm>
+          </transition>
         </div>
       </div>
     </div>
@@ -29,10 +46,13 @@
 </template>
 <script>
 import Avatar from "@/components/Avatar";
+import CreateForm from "@/components/CreateForm";
+
 export default {
   name: "AllClass",
   components: {
-    Avatar
+    Avatar,
+    CreateForm
   },
   props: ["person_id"],
   data() {
@@ -41,17 +61,22 @@ export default {
     };
   },
   methods: {
-    addClass() {
-      this.$router.push({
-        name:'GlobalClass'
-      })
+    jump() {
+      if (this.$store.state.profile.user.role == "student")
+        this.$router.push({ name: "GlobalClass" });
+      else if (this.$store.state.profile.user.role == "teacher_edu") {
+        this.msc = this.$refs.msc;
+        this.msc.showCreateMsg = true;
+      }
     }
   },
   computed: {
     claes() {
       return this.$store.state.profile.joinedclasslist;
     },
-    unauditClasses() {},
+    unauditClasses() {
+      return this.$store.state.profile.checkingclasslist;
+    },
     isCurrentUser() {
       return true;
     },
@@ -60,6 +85,10 @@ export default {
   mounted() {
     this.$store.dispatch(
       "profile/getClassList",
+      this.$store.state.profile.user.id
+    );
+    this.$store.dispatch(
+      "profile/getCheckingClassList",
       this.$store.state.profile.user.id
     );
   }
@@ -107,7 +136,8 @@ export default {
   letter-spacing: 1px;
   margin: 10px;
 }
-.club.unaudit .avatar {
+.class.unaudit .avatar {
+    
   opacity: 0.5;
 }
 </style>
