@@ -96,7 +96,6 @@ export default {
 
   computed: {
     user() {
-      console.log("fuck",this.$store.state.profile.user)
       return this.$store.state.profile.user
     }
   }

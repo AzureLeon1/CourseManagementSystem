@@ -8,12 +8,12 @@
       <Avatar :src="icon" :size="50" :border="false" />
       <div style="flex: 1;">
         <div class="name">{{name}}</div>
-        <div class="time">{{new Date(time).toLocaleString()}}</div>
+        <div class="time">{{time}}</div>
         <div class="content">{{message}}</div>
       </div>
       <i class="el-icon-delete" @click="remove" v-if="showRemove"></i>
     </div>
-    <img :src="image" alt="此处有配图" v-if="image && image !== 'NO'">
+    <img :src="image" alt="此处有配图" v-if="image && image !== 'noImage'">
   </el-card>
 </template>
 
@@ -28,10 +28,11 @@ export default {
     return {
     }
   },
-  props:['name', 'message', 'icon', 'image', 'time', 'showRemove'],
+  props:['name', 'message', 'icon', 'image', 'time', 'showRemove', 'id'],
   methods: {
     remove () {
-      this.$emit('remove')
+      console.log("id",this.id)
+      this.$emit('remove',this.id)
     }
   },
   mounted() {
