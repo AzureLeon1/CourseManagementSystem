@@ -37,6 +37,9 @@ export default {
   getFollowers,
   followPerson,
   deleteFollowPerson,
+  getCourseDiscussion,
+  getQuestionReply,
+  addDiscussion,
   getCoursewareList,
   getCheckingClassList,
   createClass,
@@ -271,11 +274,130 @@ async function getUserTwitter() {
   return res.data.data
 }
 
+async function getCourseDiscussion(){
+  const data = {
+      basic:[
+      {
+        course_id: 1,
+        sec_id: 1,
+        semester: "Spring",
+        year: 1997
+      }],
+      question:[
+      {  
+        discussion_id:111,
+        user_id:111,
+        user_name:'aaa',
+        role:'student',
+        content:"课本第三章的课后习题3.20的答案是否有误？",
+        time:"1997.12.11 12.30",
+      },
+      {
+        discussion_id:112,
+        user_id:222,
+        user_name:'bbb',
+        role:'student',
+        content:"老师上课提到的参考书目的名称可以再发一下吗？",
+        time:"1997.12.12,16.30",
+      },
+      {
+        discussion_id:113,
+        user_id:333,
+        user_name:'ccc',
+        role:'student',
+        content:"本次小测的选择题的最后一道题的题干是什么？",
+        time:"1997.12.13,16.30",
+      },
+      {
+        discussion_id:116,
+        user_id:444,
+        user_name:'dddd',
+        role:'student',
+        content:"这次项目的题干要求与相应的输入不对应",
+        time:"1997.12.13,16.30",
+      },
+      {
+        discussion_id:121,
+        user_id:444,
+        user_name:'eeeee',
+        role:'student',
+        content:"题目如下：乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉",
+        time:"1997.12.14,16.30",
+      }]
+  }
+
+  await delay(100)
+  // const res=await request(GET,'.api/discussion')
+  return data
+}
+
+async function getQuestionReply(){
+  const data = {
+    basic:[
+    {
+      course_id: 1,
+      sec_id: 1,
+      semester: "Spring",
+      year: 1997,
+      discussion_id:111,
+      user_id:111
+    }],
+    reply:[
+      {
+        discussion_id:155,
+        user_id:121,
+        user_name:'kkkkkk',
+        role:'student',
+        content:"我觉得答案有问题，第二问的答案应该是xxx",
+        time: "1997.12.11 14.30",
+      },
+      {
+        discussion_id:159,
+        user_id:131,
+        user_name:'xixixiix',
+        role:'student',
+        content:"我觉得答案没有问题，但是第二问本身的描述不够准确有一定歧义",
+        time: "1997.12.11,15.30",
+        question_id:111
+      },
+      {
+        discussion_id:168,
+        user_id:141,
+        user_name:'lalala',
+        role:'student',
+        content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
+        time: "1997.12.11 15.30",
+        question_id:111
+      },
+      {
+        discussion_id:178,
+        user_id:143,
+        user_name:'1234',
+        role:'teacher_edu',
+        content:"错的！",
+        time: "1997.12.12 10.30",
+        question_id:111
+      },
+    ]
+  }
+
+  console.log(data)
+  await delay(1000)
+  // const res=await request(GET,'.api/discussion/id')
+  return data
+}
+
 async function broadcastStudent(form) {
   const res = await request(POST, '/api/twitter', form)
   console.log("sendTwitterRes",res)
 }
 
+async function addDiscussion(form){
+  const res = await request(POST,'/api/discussion',form)
+  console.log(res) 
+}
+
+//all patch start from here
 //============================================================
 async function changeUserInfo(form) {
   console.log(form);

@@ -14,7 +14,9 @@ import classinfo from './modules/classinfo.js'
 
 
 import userlistitem from './modules/userlistitem.js'
+import discussion from './modules/discussion.js'
 import coursetable from './modules/coursetable.js'
+
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -33,7 +35,8 @@ export default new Vuex.Store({
     attendance,
     classinfo,
     userlistitem,
-    coursetable,
+    discussion,
+    coursetable
   },
   strict: debug
 })
