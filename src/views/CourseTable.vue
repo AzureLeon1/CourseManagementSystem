@@ -1,6 +1,6 @@
 <template>
 <el-container class="home">
-    <el-aside width="260px">
+    <el-aside width="238px">
         <user-nav :activeIndex="0"></user-nav>
     </el-aside>
     <el-main style="padding: 20px 15% 0 15%;">
