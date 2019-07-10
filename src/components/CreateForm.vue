@@ -190,23 +190,23 @@ export default {
       course_options: [
         {
           value: 1,
-          label: "1"
+          label: "数据库(1)"
         },
         {
           value: 2,
-          label: "2"
+          label: "高等数学(2)"
         },
         {
           value: 3,
-          label: "3"
+          label: "C++(3)"
         },
         {
           value: 4,
-          label: "4"
+          label: "操作系统(4)"
         },
         {
           value: 5,
-          label: "5"
+          label: "计算机系统结构(5)"
         }
       ],
       sec_options: [
@@ -287,6 +287,10 @@ export default {
         {
           value: 2,
           label: "双周"
+        },
+        {
+          value: 3,
+          lable: "单双周"
         }
       ]
     };

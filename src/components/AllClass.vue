@@ -61,9 +61,9 @@ export default {
   },
   methods: {
     jump() {
-      if (this.$store.state.profile.user.role == "teacher_edu")
+      if (this.$store.state.profile.user.role == "student")
         this.$router.push({ name: "GlobalClass" });
-      else if (this.$store.state.profile.user.role == "student") {
+      else if (this.$store.state.profile.user.role == "teacher_edu") {
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg = true;
       }

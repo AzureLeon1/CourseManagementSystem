@@ -25,14 +25,14 @@
       <div class="key">
         <i class="el-icon-user"></i> &nbsp; 教师
       </div>
-      <div class="value">{{ the_class.teacher_name }}</div>
+      <div class="value">{{ the_class.user_name }}</div>
     </div>
 
     <div class="item">
       <div class="key">
         <i class="el-icon-location"></i> &nbsp; 教室楼
       </div>
-      <div class="value">F楼</div>
+      <div class="value">{{the_class.building}}</div>
      
     </div>
 
@@ -41,7 +41,7 @@
         <i class="el-icon-location"></i> &nbsp; 教室
       </div>
       
-      <div class="value">412</div>
+      <div class="value">{{the_class.room_number}}</div>
     </div>
 
     <div class="item">
@@ -68,7 +68,7 @@
       <div class="key">
         <i class="el-icon-s-custom"></i> &nbsp; 人数
       </div>
-      <div class="value">{{the_class.student_count}}</div>
+      <div class="value">{{the_class.student_number}}</div>
     </div>
 
        <div class="item">
@@ -76,7 +76,7 @@
         <i class="el-icon-tickets"></i> &nbsp; 简介
       </div>
       <br/>
-      <div class="value2">{{the_class.content}}</div>
+      <div class="value2">{{the_class.course_description}}</div>
     </div>
 
 
@@ -159,6 +159,7 @@ export default {
     },
 
     the_class() {
+        console.log('这是classinfo', this.$store.state.classinfo.classinfo)
       return this.$store.state.classinfo.classinfo;
     },
 
@@ -178,17 +179,20 @@ export default {
       return this.userinfo.role == "teacher_manage";
     },
     join() {
-      this.$store.dispatch("classinfo/join", this.$route.params);
+      this.$store.dispatch("classinfo/join", this.$store.state.classlistitem.clickedclass);
     }
   },
 
   mounted() {
-    this.$store.dispatch("classinfo/getClassInfo", this.$route.params);
-    this.$store.dispatch("classinfo/getJoinStatus", this.$route.params);
+      console.log("这是班级跳转参数", this.$route.params.class_id)
+
+console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
+    if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id)
+       { this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
+    this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass);}
   }
 };
 </script>
-
 
 
 <style lang="scss" scoped>
