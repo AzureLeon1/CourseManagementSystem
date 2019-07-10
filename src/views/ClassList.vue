@@ -64,6 +64,16 @@ export default {
     items() {
       return this.$store.state.classlistitem.Items;
     },
+    mounted(){
+        this.$store.dispatch('classlistitem/getClassListItem', )
+        this.syncItem(this.items)
+        console.log(this.items)
+
+        const self = this;
+        self.pageSize = 10;
+        self.current = 1;
+    },
+       
     classList() {
       return this.apidata.filter(a_class => {
         const text = Object.values(a_class)

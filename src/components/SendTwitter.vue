@@ -54,14 +54,14 @@ export default {
   },
   methods: {
     emit () {
-      if (!this.textarea) {
+      if (!this.textarea && !this.dialogImageUrl) {
         return
       }
       this.$emit('send', Object.assign({},
         this.dialogImageUrl ? {
           image: this.dialogImageUrl
-        } : {},
-        this.textarea ? {content: this.textarea} : {},
+        } : {image: "noImage"},
+        this.textarea !== "" ? {content: this.textarea} : {content: "default"},
          {time: getNowTime()},
          {user_id: this.$store.state.profile.user.id}
         ))

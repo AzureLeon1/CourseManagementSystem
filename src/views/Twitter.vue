@@ -21,8 +21,9 @@
               :time="item.time"
               :icon="item.avatar"
               :image="item.image"
-              @remove="handleRemove(item)"
-              :show-remove="item.student_ID == userId"
+              :id="item.twitter_id"
+              @remove="handleRemove"
+              :show-remove="item.user_id == userId"
             />
           </div>
         </transition-group>
@@ -54,12 +55,10 @@ export default {
     syncTwitterItem(TwitterItems) {
       this.apiTwitterItems = TwitterItems;
     },
-    handleRemove(item) {
-      const id = item.broadcast_ID;
+    handleRemove(id) {
       this.$store.dispatch("alldelete/deletePost", {
         id,
-        person_id: this.userId,
-        club_id: null
+        person_id: this.userId
       });
     },
     handleSend(form) {

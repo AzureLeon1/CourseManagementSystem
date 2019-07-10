@@ -31,6 +31,7 @@ export default {
   getJoinStatus,
   getjoinedClassList,
   getMessageWithID,
+  createMessage,
   getSearchResult,
   getFollowing,
   getFollowers,
@@ -39,13 +40,18 @@ export default {
   getCourseDiscussion,
   getQuestionReply,
   addDiscussion,
+  getCoursewareList,
+  getCheckingClassList,
+  createClass,
   getClassExams,
   checkExamResult,
   getExamQuestions,
   getCourseware,
   getAttendance,
   getTeam,
-  createMessage
+  createMessage,
+  deletePost,
+  getCoursetable
 }
 
 function param(a) {
@@ -113,22 +119,8 @@ async function request(method, url, data) {
 
 async function getAuthority(form) {
   console.log(form);
-  // const data = {
-  //   "user_ID": 100001,
-  //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
-  //   "name": "王亮",
-  //   "role": "student",
-  //   "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-  //   "phone_number": "18916083381",
-  //   "college": "软件学院",
-  //   "following": 0,
-  //   "follower": 0,
-  //   "email": "leonwangchn@163.com"
-  // }
-  // await delay(1000)
-  // return data
   const res = await request(POST, '/api/login', form)
-  console.log(res);
+  console.log("loginRes",res);
   return res.data.data
 }
 
@@ -194,7 +186,7 @@ async function getClassListItems() {
   // const res = await request(GET, '/api/club_info');
   // return res.data.class_es
   const data = [{
-      name: "高数1班",
+      name: "高数",
       content: "张弢老师班",
       course_id: 1,
       sec_id: 1,
@@ -202,7 +194,7 @@ async function getClassListItems() {
       year: 2019
     },
     {
-      name: "高数2班",
+      name: "大物",
       content: "孙慧娟老师",
       course_id: 1,
       sec_id: 2,
@@ -212,6 +204,29 @@ async function getClassListItems() {
   ]
 
   return data
+
+}
+
+async function getCheckingClassList(){
+  const data = [{
+    name: "高数",
+    content: "张弢老师班",
+    course_id: 1,
+    sec_id: 1,
+    semester: 'fall',
+    year: 2019
+  },
+  {
+    name: "大物",
+    content: "孙慧娟老师",
+    course_id: 1,
+    sec_id: 2,
+    semester: 'fall',
+    year: 2019
+  }
+]
+return data
+
 
 }
 
@@ -373,7 +388,7 @@ async function getQuestionReply(){
 
 async function broadcastStudent(form) {
   const res = await request(POST, '/api/twitter', form)
-  console.log(res)
+  console.log("sendTwitterRes",res)
 }
 
 async function addDiscussion(form){
@@ -390,17 +405,24 @@ async function changeUserInfo(form) {
   return res
 }
 
-
 async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
   // console.log('corp_info of ', res)
   // return res.data.data
   const data = {
-    name: '高等数学',
+    // name: '高等数学',
     teacher_name: '孙娟娟',
-    content: '这是同济大学2019年春季学期高数1班',
+    content: '高等数学',
     avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
     student_count: 54,
+    course_name: '高等数学',
+    student_count: 34,
+    building: 'A',
+    room_number: '345',
+    semester: 'Fall',
+    year: 2019
+
+
   }
   return data
 
@@ -409,6 +431,16 @@ async function getClassInfo(form) {
 async function joinClass(form) {
 
 
+
+}
+async function getCoursewareList(form)
+{
+
+  return  {listdata: [
+    {name : '课件1', location : 'www.baidu.com'},
+    {name : '课件2', location : 'www.google.com'},
+    {name : '课件3', location : '4m3.tongji.edu.cn'}
+],}
 
 }
 
@@ -431,34 +463,10 @@ async function getjoinedClassList(id) {
   ]
 }
 
-
 async function getSearchResult(name) {
-  const res = {
-    data: [{
-        user_id: 100001,
-        name: '姜华',
-        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-        role: "student",
-        department: '物理学院'
-      },
-      {
-        user_id: 100002,
-        name: '姜华',
-        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-        role: "teacher_edu",
-        department: '土木学院'
-      },
-      {
-        user_id: 100003,
-        name: '姜华',
-        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-        role: "student",
-        department: '建筑与城市规划学院'
-      }
-    ]
-  }
-  // const res = await request(POST, '/api/users', {name: name})
-  return res.data;
+  const res = await request(POST, '/api/users', {user_name: name})
+  console.log("searchuser",res.data)
+  return res.data.data.users;
 }
 
 async function getMessageWithID(id) {
@@ -582,6 +590,12 @@ async function deleteFollowPerson(id) {
   console.log(res)
 }
 
+async function createClass(form){
+  // const res = await request(POST, '/api/class', form)
+  // console.log(res)
+  console.log("提交成功")
+}
+
 async function createMessage(form) {
   // const res = await request(POST, '/api/broadcasts', form);
   // return res;
@@ -670,56 +684,56 @@ async function getAttendance() {
         student_ids: [{
             student_id: "123",
             student_name: "一二三",
-            attendance_status: "1",
+            attendance_status: 1,
 
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+       
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "3",
-
+            attendance_status: 3,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
-
+            attendance_status: 4,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "4",
-
+            attendance_status: 4,
+      
           },
           {
             student_id: "089",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+         
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "2",
-
+            attendance_status: 2,
+          
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
-
+            attendance_status: 1,
+        
           },
           {
             student_id: "asd",
             student_name: "一二三",
-            attendance_status: "1",
-
+            attendance_status: 1,
+          
           },
           {
             student_id: "asd",
@@ -968,7 +982,7 @@ async function checkExamResult(form) {
 }
 
 async function getExamQuestions(form) {
-  const res = await request(GET, 'api/exam_questions', form)
+  const res = await request(GET, '/api/exam_questions', form)
   return res.data
 }
 
@@ -996,4 +1010,68 @@ async function getCourseware(course_id, sec_id, semester, year) {
   // })
   console.log(res);
   return res.data
+}
+
+async function deletePost(id) {
+  const res = request(DELETE, `/api/twitters`, {
+    twitter_id: id
+  })
+  console.log("deleteTwitterRes", res)
+  return res.data
+}
+
+async function getCoursetable(form){
+  const data={
+    courselist:[{      
+      day: 3,
+      course_name: "C++",
+      building: "济事楼",
+      room: "211",
+      start_section: 1,
+      length: 2,
+    },
+    {      
+      day: 2,
+      course_name: "数据库",
+      building: "b楼",
+      room: "301",
+      start_section: 5,
+      length: 2,
+    },
+    {      
+      day: 3,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 9,
+      length: 2
+    },
+    {      
+      day: 1,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 5,
+      course_name: "组合数学",
+      building: "a楼",
+      room: "421",
+      start_section: 2,
+      length: 2
+    },
+    {      
+      day: 4,
+      course_name: "C--",
+      building: "济事楼",
+      room: "112",
+      start_section: 7,
+      length: 2,
+    },]
+  }
+
+  await delay(500)
+  return data
 }
