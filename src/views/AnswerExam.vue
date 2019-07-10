@@ -1,7 +1,7 @@
 <template>
   <el-container class="answerExamBox">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <class-nav :activeIndex="3"></class-nav>
     </el-aside>
     <el-main>
       <question-list ref="questionList"></question-list>
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
+import ClassNav from "../components/ClassNav"
 import QuestionList from "../components/QuestionList"
 
 export default {
   name: 'AnswerExam',
 
   components: {
-    UserNav,
+    ClassNav,
     QuestionList
   },
 

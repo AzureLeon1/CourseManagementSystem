@@ -1,4 +1,4 @@
-import {
+﻿import {
   delay
 } from '@/utils/util.js'
 
@@ -26,6 +26,12 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
+  getMessageWithID,
+  getSearchResult,
+  getFollowing,
+  getFollowers,
+  followPerson,
+  deleteFollowPerson,
   getCourseDiscussion,
   getQuestionReply,
   addDiscussion
@@ -42,12 +48,12 @@ async function request(method, url, data) {
       Authorization: `Bearer ${token}`
     } : {}
     // TODO: 验证GET请求的参数形式
-    if (method in {
-        GET
-      }) {
-      url += param(data)
-      data = null
-    }
+    // if (method in {
+    //     GET
+    //   }) {
+    //   url += param(data)
+    //   data = null
+    // }
     if (!url.match(/^http|\/\//g)) {
       url = server + url
     }
@@ -90,7 +96,7 @@ async function getAuthority(form) {
     "user_ID": 100001,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwMDAwMSIsIm5iZiI6MTU2MjM3MzY4NCwiZXhwIjoxNTYyMzgwODg0LCJpYXQiOjE1NjIzNzM2ODR9.v1YWTErby6wYqZwTJVlo0yLxW9owLEJdMxl05g9hRcc",
     "name": "王亮",
-    "role": "student",
+    "role": "teacher_edu",
     "avatar": "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
     "phone_number": "18916083381",
     "college": "软件学院",
@@ -141,7 +147,7 @@ async function getPersonInfo(id) {
   console.log(data);
   // await delay(1000)
   return data
-  // const res = await request(GET, `/api/users/${id}`)
+  // const res = await request(GET, `/api/users`, {id: id})
   // return res.data
 }
 
@@ -159,15 +165,28 @@ async function getClassListItems() {
   return res.data.class_es
 }
 
-async function getClassListItems(){
- // const res = await request(GET, '/api/club_info');
- // return res.data.class_es
- const data = [
-   {name: "高数1班", content : "张弢老师班", course_id : 1, sec_id : 1, semester : 'fall', year : 2019},
-   {name: "高数2班", content : "孙慧娟老师", course_id : 1, sec_id : 2, semester : 'fall', year : 2019}
- ]
+async function getClassListItems() {
+  // const res = await request(GET, '/api/club_info');
+  // return res.data.class_es
+  const data = [{
+      name: "高数1班",
+      content: "张弢老师班",
+      course_id: 1,
+      sec_id: 1,
+      semester: 'fall',
+      year: 2019
+    },
+    {
+      name: "高数2班",
+      content: "孙慧娟老师",
+      course_id: 1,
+      sec_id: 2,
+      semester: 'fall',
+      year: 2019
+    }
+  ]
 
- return data
+  return data
 
 }
 
@@ -227,46 +246,41 @@ async function getCourseDiscussion(){
         discussion_id:111,
         user_id:111,
         user_name:'aaa',
-        user_type:0,
+        role:'student',
         content:"课本第三章的课后习题3.20的答案是否有误？",
-        time:"1997.12.11,12.30",
-        question_id:0
+        time:"1997.12.11 12.30",
       },
       {
         discussion_id:112,
         user_id:222,
         user_name:'bbb',
-        user_type:0,
+        role:'student',
         content:"老师上课提到的参考书目的名称可以再发一下吗？",
         time:"1997.12.12,16.30",
-        question_id:0
       },
       {
         discussion_id:113,
         user_id:333,
         user_name:'ccc',
-        user_type:0,
+        role:'student',
         content:"本次小测的选择题的最后一道题的题干是什么？",
         time:"1997.12.13,16.30",
-        question_id:0
       },
       {
         discussion_id:116,
         user_id:444,
         user_name:'dddd',
-        user_type:0,
-        content:"本次小测的选择题的最后一道题的题干是什么？",
+        role:'student',
+        content:"这次项目的题干要求与相应的输入不对应",
         time:"1997.12.13,16.30",
-        question_id:0
       },
       {
         discussion_id:121,
         user_id:444,
         user_name:'eeeee',
-        user_type:0,
+        role:'student',
         content:"题目如下：乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉",
         time:"1997.12.14,16.30",
-        question_id:0
       }]
   }
 
@@ -291,16 +305,15 @@ async function getQuestionReply(){
         discussion_id:155,
         user_id:121,
         user_name:'kkkkkk',
-        user_type:0,
+        role:'student',
         content:"我觉得答案有问题，第二问的答案应该是xxx",
-        time: "1997.12.11,14.30",
-        question_id:111
+        time: "1997.12.11 14.30",
       },
       {
         discussion_id:159,
         user_id:131,
         user_name:'xixixiix',
-        user_type:0,
+        role:'student',
         content:"我觉得答案没有问题，但是第二问本身的描述不够准确有一定歧义",
         time: "1997.12.11,15.30",
         question_id:111
@@ -309,18 +322,18 @@ async function getQuestionReply(){
         discussion_id:168,
         user_id:141,
         user_name:'lalala',
-        user_type:0,
+        role:'student',
         content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
-        time: "1997.12.11,15.30",
+        time: "1997.12.11 15.30",
         question_id:111
       },
       {
         discussion_id:178,
         user_id:143,
         user_name:'1234',
-        user_type:1,
+        role:'teacher_edu',
         content:"错的！",
-        time: "1997.12.12,10.30",
+        time: "1997.12.12 10.30",
         question_id:111
       },
     ]
@@ -332,9 +345,8 @@ async function getQuestionReply(){
   return data
 }
 
-
-async function broadcastStudent(form){
-  const res = await request(POST,'/api/twitter',form)
+async function broadcastStudent(form) {
+  const res = await request(POST, '/api/twitter', form)
   console.log(res)
 }
 
@@ -351,37 +363,189 @@ async function changeUserInfo(id, form) {
 }
 
 
- async function getClassInfo(form){
+async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
   // console.log('corp_info of ', res)
   // return res.data.data
   const data = {
-    name : '高数1班',
-    teacher_name : '孙娟娟',
-    content : '这是同济大学2019年春季学期高数1班',
-    avatar : '../static/defaultAvatar.jpg'
+    name: '高等数学',
+    teacher_name: '孙娟娟',
+    content: '这是同济大学2019年春季学期高数1班',
+    avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+    student_count: 54,
   }
   return data
 
 }
 
-async function joinClass(form)
-{
+async function joinClass(form) {
 
 
 
 }
 
-async function getJoinStatus(form)
-{
+async function getJoinStatus(form) {
   return "已加入"
 
 }
-async function getjoinedClassList(id)
-{
-  return [
-    {name : "同济大学高数1班", avatar : "../static/logo.png"},
-    {name : "同济大学高数2班", avatar : "../static/defaultAvatar.jpg"}
-]
+
+async function getjoinedClassList(id) {
+  return [{
+      id: 1,
+      name: "高等数学",
+      avatar: "http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg"
+    },
+    {
+      id: 2,
+      name: "C语言程序设计",
+      avatar: "http://img.cdn.leonwang.top/Xnip2019-07-08_20-00-45.jpg"
+    }
+  ]
 }
 
+async function getSearchResult(name) {
+  const res = {
+    data: [{
+        user_id: 100001,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "student",
+        department: '物理学院'
+      },
+      {
+        user_id: 100002,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "teacher_edu",
+        department: '土木学院'
+      },
+      {
+        user_id: 100003,
+        name: '姜华',
+        avatar: "https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        role: "student",
+        department: '建筑与城市规划学院'
+      }
+    ]
+  }
+  // const res = await request(POST, '/api/users', {name: name})
+  return res.data;
+}
+
+async function getMessageWithID(id) {
+  //fake message data;
+  const res = {
+    "data": {
+      "broadcasts": [{
+        "broadcast_id": "000001",
+        "content": "这是一条很长的广播！第一条广播！",
+        "type": 1,
+        "scope": 1,
+        "sec_id": 111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time": "1997-12-11 12:30",
+        "start_time": "1997-12-11 12:30",
+        "end_time": "1997-12-14 12:30"
+      }, {
+        "broadcast_id": "000002",
+        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "type": 1,
+        "scope": 1,
+        "sec_id": 111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time": "1997-12-11 12:30",
+        "start_time": "1997-12-11- 12:30",
+        "end_time": "1997-12-13- 12:30"
+      }, {
+        "broadcast_id": "000002",
+        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "type": 1,
+        "scope": 1,
+        "sec_id": 111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time": "1997-12-11 12:30",
+        "start_time": "1997-12-11- 12:30",
+        "end_time": "1997-12-13- 12:30"
+      }, {
+        "broadcast_id": "000002",
+        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "type": 1,
+        "scope": 1,
+        "sec_id": 111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time": "1997-12-11 12:30",
+        "start_time": "1997-12-11- 12:30",
+        "end_time": "1997-12-13- 12:30"
+      }, {
+        "broadcast_id": "000002",
+        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "type": 1,
+        "scope": 1,
+        "sec_id": 111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time": "1997-12-11 12:30",
+        "start_time": "1997-12-11- 12:30",
+        "end_time": "1997-12-13- 12:30"
+      }, {
+        "broadcast_id": "000002",
+        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+        "type": 1,
+        "scope": 1,
+        "sec_id": 111,
+        "course_id": 1111,
+        "semester": "spring",
+        "year": 2019,
+        "publish_time": "1997-12-11 12:30",
+        "start_time": "1997-12-11- 12:30",
+        "end_time": "1997-12-13- 12:30"
+      }, ]
+    },
+    "code": 200,
+    "message": 'ok'
+  }
+  const data = res.data.broadcasts;
+  // console.log(data);
+  // console.log(typeof(data));
+  await (delay(1000));
+  return res.data;
+  // const res = await request(GET, '/api/broadcasts', {'user': id});
+  // return res;
+}
+
+async function getFollowing(id) {
+  const res = await request(GET, '/api/following', {
+    id: id
+  });
+  return res.data
+}
+
+async function getFollowers(id) {
+  const res = await request(GET, '/api/followers', {
+    id: id
+  });
+  return res.data
+}
+
+async function followPerson(id) {
+  const res = await request(POST, '/api/following/', {
+    user_id: id
+  })
+  console.log(res)
+}
+
+async function deleteFollowPerson(id) {
+  const res = await request(DELETE, '/api/following/', {
+    user_id: id
+  })
+  console.log(res)
+}

@@ -1,12 +1,12 @@
 <template>
   <el-container class="examBox">
     <el-aside width="260px">
-      <user-nav :activeIndex="0"></user-nav>
+      <class-nav :activeIndex="3"></class-nav>
     </el-aside>
     <el-main>
       <exam-list></exam-list>
 
-      <div class="createExamBtn" v-if="user.role=='teacher'">
+      <div class="createExamBtn" v-if="user.role=='teacher_edu'">
         <el-button 
           @click="createExam" 
           type="primary" 
@@ -18,20 +18,20 @@
 </template>
 
 <script>
-import UserNav from "../components/UserNav"
+import ClassNav from "../components/ClassNav"
 import ExamList from "../components/ExamList"
 
 export default {
   name: 'Exam',
 
   components: {
-    UserNav,
+    ClassNav,
     ExamList
   },
   
   data () {
     return {
-      
+      user: this.$store.state.profile.user
     }
   },
 

@@ -32,8 +32,8 @@ export default {
         title: "数据库期中考试",
         scope: "前五章",
         type: "期中考试",
-        start_time: "2019.11.11 14:00",
-        end_time: "2019.11.11 16:00",
+        start_time: "2019.07.09 02:00",
+        end_time: "2019.07.09 20:00",
         hasDone: false
       },{
         exam_id: 222,
