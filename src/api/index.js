@@ -35,6 +35,7 @@ export default {
   getSearchResult,
   getFollowing,
   getFollowers,
+  getFollowCount,
   followPerson,
   deleteFollowPerson,
   getCourseDiscussion,
@@ -43,7 +44,12 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
+  getAllQuesiton,
+  newQuestion,
+  updateQuestion,
+  deleteQuestion,
   getClassExams,
+  newExam,
   checkExamResult,
   getExamQuestions,
   getCourseware,
@@ -585,6 +591,12 @@ async function getFollowers(id) {
   return res.data.data.users
 }
 
+async function getFollowCount() {
+  const res = await request(GET, '/api/follow_info')
+  console.log("followInfo", res.data.data)
+  return res.data.data
+}
+
 async function followPerson(id) {
   const res = await request(POST, '/api/following', {
     user_id: id
@@ -603,6 +615,30 @@ async function createClass(form){
   // const res = await request(POST, '/api/class', form)
   // console.log(res)
   console.log("提交成功")
+}
+
+async function getAllQuesiton(form) {
+  const res = await request(POST, '/api/course_questions', form)
+  console.log("allquestion", res.data.data)
+  return res.data.data
+}
+
+async function newQuestion(form) {
+  const res = await request(POST, '/api/questions', form)
+  console.log("newquesion", res.data)
+  return res.data
+}
+
+async function updateQuestion(form) {
+  const res = await request(PUT, '/api/questions', form)
+  console.log("updatequestion", res.data)
+  return res.data
+}
+
+async function deleteQuestion(form) {
+  const res = await request(PUT, '/api/questions', form)
+  console.log("updatequestion", res)
+  return res
 }
 
 async function createMessage(form) {
@@ -984,18 +1020,25 @@ async function getAttendance(form) {
 }
 
 async function getClassExams(form) {
-  const res = await request(GET, '/api/exams', form)
-  return res.data
+  const res = await request(POST, '/api/class_exams', form)
+  console.log("examlist", res.data.data)
+  return res.data.data
+}
+
+async function newExam(form) {
+  const res = await request(POST, '/api/exams', form)
+  return res.data.data
 }
 
 async function checkExamResult(form) {
-  const res = await request(GET, '/api/exam_results', form)
-  return res.data
+  const res = await request(POST, '/api/exam_results', form)
+  return res.data.data
 }
 
 async function getExamQuestions(form) {
-  const res = await request(GET, '/api/exam_questions', form)
-  return res.data
+  const res = await request(POST, '/api/exam_questions', form)
+  console.log("examquestions", res.data.data)
+  return res.data.data
 }
 
 async function getCourseware(course_id, sec_id, semester, year) {
