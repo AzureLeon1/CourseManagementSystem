@@ -15,6 +15,7 @@ import classinfo from './modules/classinfo.js'
 
 import userlistitem from './modules/userlistitem.js'
 import discussion from './modules/discussion.js'
+import coursetable from './modules/coursetable.js'
 
 Vue.use(Vuex)
 
@@ -34,7 +35,8 @@ export default new Vuex.Store({
     attendance,
     classinfo,
     userlistitem,
-    discussion
+    discussion,
+    coursetable
   },
   strict: debug
 })

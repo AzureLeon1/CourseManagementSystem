@@ -4,7 +4,8 @@ import {Class} from '@/utils/model.js'
 const state = {
     joinStatus: 0,
     teacherList: '',
-    classinfo: new Class()
+    classinfo: new Class(),
+    coursewarelist: []
 
 }
 const getters = {
@@ -19,7 +20,10 @@ const actions = {
     {
         const data = await api.getClassInfo(form);
         console.log(data);
-            commit('setClassInfo', data)
+        localStorage.setItem("classinfo",JSON.stringify(data.data.data))
+        // console.log(localStorage.getItem("classinfo"));
+        // Object.assign(window.localStorage, data.data)
+        commit('setClassInfo', data.data.data)
 
 
     },
@@ -41,14 +45,23 @@ const actions = {
 
 
 
+    },
+    async getCoursewareList({commit, state}, form)
+    {
+        const data = await api.getCoursewareList(form)
+        commit('setCoursewareList', data)
+
     }
 }
 
 const mutations = {
     setClassInfo(state, props)
     {
-        console.log(props)
+
         state.classinfo = Object.assign({}, state.classinfo, props)
+        console.log(props)
+        console.log(state.classinfo)
+        // state.classinfo = Object.assign({}, state.classinfo, props)
     },
 
     setJoinStatus(state, status){
@@ -58,6 +71,9 @@ const mutations = {
             "已加入": 2
         }
         state.joinStatus = rule[status]
+    },
+    setCoursewareList(state, status){
+        state.coursewarelist = status
     }
 }
 

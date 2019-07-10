@@ -27,7 +27,7 @@
   <div class="ClassNavWrapper">
     <div class="classNav">
       <img class="avatar" :src="classinfo.avatar" @click="routeTo('ClassDetail', {corp_id: 1})">
-      
+
       <div class="name">{{classinfo.name}}</div>
       <div class="intro">学生人数：{{classinfo.student_count}}</div>
 
@@ -67,7 +67,7 @@ export default {
           {
             index: 1,
             title: "班级消息",
-            routeName: "",
+            routeName: "CourseMessage",
             icon: "el-icon-chat-line-square"
           },
           {
@@ -100,12 +100,12 @@ export default {
           {
             index: 1,
             title: "班级消息",
-            routeName: "",
+            routeName: "CourseMessage",
             icon: "el-icon-chat-line-square"
           },
           {
             index: 2,
-            title: "课件上传",
+            title: "课件管理",
             routeName: "Courseware",
             icon: "el-icon-folder-opened"
           },

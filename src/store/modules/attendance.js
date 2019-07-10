@@ -9,9 +9,9 @@ const getters = {
 }
 
 const actions = {
-  async getAttendance({commit, state}, id) {
+  async getAttendance({commit, state}, form) {
     // 暂时没有用到id
-    const data = await api.getAttendance()
+    const data = await api.getAttendance(form)
     commit('setAttendance', data)
   },
 }
@@ -19,7 +19,8 @@ const actions = {
 const mutations = {
     setAttendance(state, props) {
       state.classattendancelist = []
-      state.classattendancelist.push(...props.attendancelist)
+      state.classattendancelist.push(...props.class_attendance)
+      console.log(state.classattendancelist);
     },
 }
 

@@ -15,8 +15,8 @@ const actions = {
     //删除一条twitter
     async deletePost({commit,state, dispatch},{ id, person_id }){
         const res = await api.deletePost(id)
-        if(person_id !== null)
-            dispatch('twitter/getUserTwitter', person_id, {root: true})
+        console.log("person_id",person_id)
+        dispatch('twitter/getUserTwitter', person_id, {root: true})
     },
 
 }

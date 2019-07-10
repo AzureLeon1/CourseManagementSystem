@@ -1,7 +1,7 @@
 <template>
   <div class="teamlist">
     <div class="classteams">
-      <el-card style="width: 850px; margin:20px auto 20px auto">
+      <el-card style="width: 100%; margin:20px auto 20px auto;" shadow="never" >
         <div slot="header" class="clearfix">
           <span>班级队伍</span>
         </div>
@@ -28,8 +28,8 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column prop="team_id" width="300px"></el-table-column>
-            <el-table-column prop="team_name" width="350px"></el-table-column>
+            <el-table-column prop="team_id" width="250px"></el-table-column>
+            <el-table-column prop="team_name"></el-table-column>
             <el-table-column prop="team_btn" width="100px">
               <template slot-scope="scope" v-if="isShow">
                 <el-button @click="JoinClick(scope.row)" type="text" size="small">加入</el-button>

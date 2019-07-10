@@ -59,6 +59,8 @@
 <script>
 import {SlickList, SlickItem} from 'vue-slicksort'
 
+import api from "../api"
+
 export default {
   name: 'SelectQuestion',
 
@@ -76,28 +78,11 @@ export default {
 
   methods: {
     getData() {
-      // To Do : get all questions
-      this.totalQuestions = [{
-        question_id: "000",
-        content: "1 + 3 = ____",
-        options: "1_2_3_4",
-        answer: "4"
-      },{
-        question_id: "111",
-        content: "1 + 2 = ____",
-        options: "0_1_2_3",
-        answer: "3"
-      },{
-        question_id: "222",
-        content: "1 + 1 = ____",
-        options: "0_1_2_3",
-        answer: "2"
-      },{
-        question_id: "333",
-        content: "1 + 4 = ____",
-        options: "0_5_2_3",
-        answer: "5"
-      }]
+      api.getExamQuestions({
+        exam_id: this.$route.params.exam_id
+      }).then(res => {
+        this.totalQuestions = res.questions
+      })
     },
     selectQuestion(s, r) {
       if (s.length > this.questions.length) {
@@ -119,7 +104,7 @@ export default {
       for (let i = 1; i <= q.length; ++i) {
         this.questions[i-1].index = i
       }
-      // To Do
+      this.$emit('submit')
     }
   },
   

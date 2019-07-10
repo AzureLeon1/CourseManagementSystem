@@ -9,7 +9,7 @@
       @click="$router.push({name: 'UserProfile', params: {person_id: item.user_id}})"
       :key="item.user_id"
     >
-      <UserCard :name="item.name" :role="item.role" :avatar="item.avatar" :department="item.department" style="margin: 10px 0;"/>
+      <UserCard :name="item.user_name" :role="item.role" :avatar="item.avatar" :department="item.department" style="margin: 10px 0;"/>
     </div>
   </div>
 </template>

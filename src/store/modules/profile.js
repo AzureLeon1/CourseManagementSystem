@@ -6,7 +6,8 @@ const state = {
     user: new User(),
     // corp: new CorpDetail(),
     role: window.localStorage.role,
-    joinedclasslist:[]
+    joinedclasslist:[],
+    checkingclasslist:[]
 }
 
 const getters = {
@@ -75,12 +76,26 @@ const actions = {
       commit('setUser',data)
     },
 
+    async getFollowInfo({commit, state}){
+      const res = await api.getFollowCount()
+      console.log("followinfo", res)
+      commit('setFollowInfo',res)
+    },
+
     async getClassList({commit, state}, user_id)
     {
-       const clubs = await api.getjoinedClassList(user_id)
-       commit('setjoinedClassList', clubs)
+       const classes = await api.getjoinedClassList(user_id)
+       commit('setjoinedClassList', classes)
 
+    },
+
+    async getCheckingClassList({commit, state}, user_id)
+    {
+        const checkingclasses = await api.getCheckingClassList(user_id)
+        commit('setcheckingclasslist', checkingclasses)
     }
+
+
 
 }
 
@@ -99,10 +114,20 @@ const mutations = {
     setRole(state,props){
         state.role = props
     },
+    setFollowInfo(state,props) {
+      state.user.follower = props.follower
+      state.user.following = props.following
+      console.log("state.user", state.user)
+    },
 
     setjoinedClassList(state, props){
         state.joinedclasslist = []
         state.joinedclasslist.push(...props)
+    },
+    setcheckingclasslist(state, props){
+        state.checkingclasslist = []
+        state.checkingclasslist.push(...props)
+
     }
 }
 

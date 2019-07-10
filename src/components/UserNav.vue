@@ -57,7 +57,7 @@ export default {
           {
             index: 4,
             title: "课程表",
-            routeName: "",
+            routeName: "Coursetable",
             icon: "el-icon-date"
           },
           {
@@ -83,6 +83,9 @@ export default {
       }
     },
     routeTo(name, params) {
+      console.log(name);
+      console.log(params);
+      // this.$router.push('/coursetable');
       this.$router.push({ name, params });
     },
     logout() {
@@ -96,7 +99,6 @@ export default {
 
   computed: {
     user() {
-      console.log("fuck",this.$store.state.profile.user)
       return this.$store.state.profile.user
     }
   }

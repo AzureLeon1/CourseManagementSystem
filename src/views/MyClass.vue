@@ -1,26 +1,28 @@
 <template>
   <el-container class="home">
-    <el-aside width="260px">
+    <el-aside width="238px">
       <user-nav :activeIndex="1"></user-nav>
     </el-aside>
-    <el-main>
-        <AllClass>
-
-        </AllClass>
-
+    <el-main style="padding: 20px 15% 0 15%;">
+      <Header></Header>
+      <AllClass></AllClass>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import UserNav from "../components/UserNav"
+import Header from "../components/Header"
 import AllClass from "../components/AllClass"
+import CreateForm from "../components/CreateForm"
 
 export default {
   name: 'MyClass',
   components: {
     UserNav,
-    AllClass
+    Header,
+    AllClass,
+    CreateForm
   },
   data () {
     return {

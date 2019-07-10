@@ -57,8 +57,8 @@ export default {
         title: "",
         type: "",
         scope: "",
-        startTime: "",
-        endTime: ""
+        start_time: "",
+        end_time: ""
       },
       rules: {
         title: [
@@ -100,10 +100,10 @@ export default {
     submit() {
       this.$refs['examForm'].validate((valid) => {
         if (valid) {
-          this.newExam.startTime = this.toTimeStr(this.examForm.startTime)
-          this.newExam.endTime = this.toTimeStr(this.examForm.endTime)
-          if (this.newExam.startTime.split(" ")[0] != 
-              this.newExam.endTime.split(" ")[0]) {
+          this.newExam.start_time = this.toTimeStr(this.examForm.startTime)
+          this.newExam.end_time = this.toTimeStr(this.examForm.endTime)
+          if (this.newExam.start_time.split(" ")[0] != 
+              this.newExam.end_time.split(" ")[0]) {
             this.$message.error("考试需在一天")
             return false
           }

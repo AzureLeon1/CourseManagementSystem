@@ -27,9 +27,8 @@ import Twitter from '@/views/Twitter'
 import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
-import Summary from '@/views/Summary'
-
 import MembershipAudit from '@/views/MembershipAudit'
+import Summary from '@/views/Summary'
 
 Vue.use(Router)
 
@@ -48,17 +47,12 @@ export default new Router({
       component: Template
     },
     {
-      path: '/courseview',
-      name: 'Courseview',
-      component: Courseview
-    },
-    {
       path:'/messageHome',
       name:'MessageHome',
       component: MessageHome
     },
     {
-      path:'/coursemessage',
+      path:'/class_home/:class_id/coursemessage',
       name:'CourseMessage',
       component: CourseMessage
     },
@@ -74,7 +68,7 @@ export default new Router({
     },
     {
       path: '/coursetable',
-      name: 'CourseTable',
+      name: 'Coursetable',
       component: CourseTable
     },
     {
@@ -110,20 +104,20 @@ export default new Router({
 
     },
     {
-      path: '/classdetail',
+      path: '/classdetail/:class_id',
       name: 'ClassDetail',
       component: ClassDetail
     },
+    // {
+    //   path: 'createform',
+    //   name: 'CreateForm',
+    //   component: CreateForm,
+    // },
     {
       path: '/class_home/:class_id',
       name: 'ClassHome',
       component: ClassHome,
-      props: true
-    },
-    {
-      path: '/summary',
-      name: 'Summary',
-      component: Summary,
+      props: true,
     },
     {
       path: '/class_home/:class_id/courseware',
@@ -182,6 +176,16 @@ export default new Router({
       name: 'MembershipAudit',
       component: MembershipAudit,
       props: true,
-    }
+    },
+    {
+      path: '/summary',
+      name: 'Summary',
+      component: Summary
+    },
+    {
+      path: '/discussion',
+      name: 'Discussion',
+      component: Discussion
+    },
   ]
 })

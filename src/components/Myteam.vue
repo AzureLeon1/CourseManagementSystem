@@ -1,6 +1,6 @@
 <template>
   <div class="myteamlist">
-    <el-card style="width: 850px; margin:20px auto 20px auto">
+    <el-card style="width: 100%; margin:20px auto 20px auto" shadow="never">
         <div slot="header" class="clearfix">
             <span>我的队伍</span>
             <el-button style="float:right; padding: 5px 8px" icon="add"  size="medium" circle @click="InsertTeam">+</el-button>
@@ -22,8 +22,8 @@
                 </el-form>
               </template>
             </el-table-column>
-            <el-table-column prop="team_id" width="300"></el-table-column>
-            <el-table-column prop="team_name" width="450"></el-table-column>
+            <el-table-column prop="team_id" width="250px"></el-table-column>
+            <el-table-column prop="team_name"></el-table-column>
           </el-table>
         </div>
     </el-card>
