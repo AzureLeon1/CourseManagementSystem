@@ -1163,65 +1163,68 @@ async function deletePost(id) {
 }
 
 async function coursetableGetCoursetable(form) {
-  const data = {
-    courselist: [{
-        day: 3,
-        course_name: "C++",
-        building: "济事楼",
-        room: "211",
-        start_section: 1,
-        length: 2,
-        single_or_double: 1
-      },
-      {
-        day: 2,
-        course_name: "数据库",
-        building: "b楼",
-        room: "301",
-        start_section: 5,
-        length: 2,
-        single_or_double: 2
-      },
-      {
-        day: 3,
-        course_name: "组合数学",
-        building: "a楼",
-        room: "421",
-        start_section: 9,
-        length: 2,
-        single_or_double: 1
-      },
-      {
-        day: 1,
-        course_name: "组合数学",
-        building: "a楼",
-        room: "421",
-        start_section: 2,
-        length: 2,
-        single_or_double: 2
-      },
-      {
-        day: 5,
-        course_name: "组合数学",
-        building: "b楼",
-        room: "421",
-        start_section: 2,
-        length: 2,
-        single_or_double: 1
-      },
-      {
-        day: 4,
-        course_name: "C--",
-        building: "济事楼",
-        room: "112",
-        start_section: 7,
-        length: 2,
-        single_or_double: 1
-      }
-    ]
-  }
+  // const data = {
+  //   courselist: [{
+  //       day: 3,
+  //       course_name: "C++",
+  //       building: "济事楼",
+  //       room: "211",
+  //       start_section: 1,
+  //       length: 2,
+  //       single_or_double: 1
+  //     },
+  //     {
+  //       day: 2,
+  //       course_name: "数据库",
+  //       building: "b楼",
+  //       room: "301",
+  //       start_section: 5,
+  //       length: 2,
+  //       single_or_double: 2
+  //     },
+  //     {
+  //       day: 3,
+  //       course_name: "组合数学",
+  //       building: "a楼",
+  //       room: "421",
+  //       start_section: 9,
+  //       length: 2,
+  //       single_or_double: 1
+  //     },
+  //     {
+  //       day: 1,
+  //       course_name: "组合数学",
+  //       building: "a楼",
+  //       room: "421",
+  //       start_section: 2,
+  //       length: 2,
+  //       single_or_double: 2
+  //     },
+  //     {
+  //       day: 5,
+  //       course_name: "组合数学",
+  //       building: "b楼",
+  //       room: "421",
+  //       start_section: 2,
+  //       length: 2,
+  //       single_or_double: 1
+  //     },
+  //     {
+  //       day: 4,
+  //       course_name: "C--",
+  //       building: "济事楼",
+  //       room: "112",
+  //       start_section: 7,
+  //       length: 2,
+  //       single_or_double: 1
+  //     }
+  //   ]
+  // }
+  console.log(form)
+  const data = await request(POST, '/api/term_part_classes', form)
+  console.log("这是课程表时间", data.data.data.classes)
   await delay(1000);
-  return data
+  return data.data.data.classes
 }
 
 async function getAllCourses() {
