@@ -107,6 +107,10 @@ export default {
             this.$message.error("考试需在一天")
             return false
           }
+          if (this.newExam.start_time >= this.newExam.end_time) {
+            this.$message.error("时间错误")
+            return false
+          }
           this.newExam.title = this.examForm.title
           this.newExam.type = this.examForm.type
           this.newExam.scope = this.examForm.scope
