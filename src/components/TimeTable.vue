@@ -380,15 +380,7 @@ export default {
     name: 'TimeTable',
     data() {
       return {
-          semester: '',
-          year,
-            semesters : [
-          "Spring", "Autumn"
-        ],
-            years: [
-                2017, 2018, 2019
-
-            ]
+     
       }
     },
     mounted() {
