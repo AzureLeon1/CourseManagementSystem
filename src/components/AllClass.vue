@@ -22,7 +22,7 @@
             <CreateForm ref="msc"></CreateForm>
           </transition>
       </div>
-      <div class="title">待审核班级</div>
+      <div v-if="this.$store.state.profile.user.role == 'student'" class="title">待审核班级</div>
           <div class="class_es">
        
           <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="a_class"
@@ -123,6 +123,8 @@ export default {
       "profile/getClassList",
       this.$store.state.profile.user.id
     );
+
+    if(this.$store.state.profile.user.role != 'teacher_edu')
     this.$store.dispatch(
       "profile/getCheckingClassList",
       this.$store.state.profile.user.id
