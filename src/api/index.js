@@ -67,8 +67,10 @@ export default {
   createAttenRecords,
   updateAtten,
   coursetableGetCoursetable,
-  getGlobalBro,
   getTeamlist,
+  getAllDiscussions,
+  getDiscussionReply,
+  getGlobalBro,
   postBroadcast,
 }
 
@@ -441,8 +443,8 @@ async function getClassInfoForTea(form) {
   // return res.data.data
 
   // 老师api
-  const data = await request(POST, '/api/class_details')
-    // name: '高等数学',
+  const data = await request(POST, '/api/class_details', form)
+    // name: '高等数学', 
     // teacher_name: '孙娟娟',
     // content: '高等数学',
     // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
@@ -1244,6 +1246,16 @@ async function getTeamlist(form) {
   const res = await request(POST, '/api/teams', form)
   console.log(res)
 }
+
+async function getAllDiscussions(form) {
+  const res = await request(POST, '/api/discussions', form)
+  return res
+}
+
+async function getDiscussionReply({commit, state}, id)
+{
+  const res = await request(POST, '/api/one_discussion', id)
+  return res
 
 async function postBroadcast(form) {
   const res = await request(POST, '/api/broadcasts', form)

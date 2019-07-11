@@ -13,30 +13,30 @@ const getters = {
 }
 
 const actions = {
-  async getAllDiscussions({commit, state}, id) {
+  async getAllDiscussions({commit, state}, form) {
     // 暂时没有用到id
-    const data = await api.getCourseDiscussion()
-    commit('setDiscussionItems', data)
+    const data = await api.getCourseDiscussion(form)
+    commit('setDiscussionItems', data.data.questions)
   },
 
   async getDiscussionReply({commit,state},id){
     //id为查看问题的discussion_id
-    const data=await api.getQuestionReply()
-    commit('setReplyItems',data)
+    const data=await api.getQuestionReply(id)
+    commit('setReplyItems',data.data.reply)
   }
 }
 
 const mutations = {
     setDiscussionItems (state, props) {
      // state.basicItems=[]
-      state.basicItems.push(...props.basic)
+     // state.basicItems.push(...props.basic)
       //state.DiscussionItems = []
-      state.DiscussionItems.push(...props.question)
+      state.DiscussionItems.push(...props)
     },
 
     setReplyItems(state, props) {
      // state.basicproblemItems=[]
-      state.basicproblemItems.push(...props.basic)
+    //  state.basicproblemItems.push(...props.basic)
      // state.ReplyItems=[]
       state.ReplyItems.push(...props.reply)
     }
