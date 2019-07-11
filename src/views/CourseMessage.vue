@@ -16,7 +16,7 @@
                         <div class="tickle"><i class="el-icon-success"></i></div>
                     </div>
                 </div>
-                <Message position="class"></Message>
+                <Message ref="msg"  position="class"></Message>
             </div>
         </el-main>
     </el-container>
@@ -39,6 +39,13 @@ export default {
   methods: {
       select(option){
         console.log(option);
+        var temp = this.$refs.msg
+        if (option == 1) {
+          temp.showActMsg()
+        }
+        else {
+          temp.showWorkMsg()
+        }
         //update select button
         let i=option-1;
         let tickles = document.getElementsByClassName('tickle');
