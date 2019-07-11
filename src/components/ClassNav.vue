@@ -26,7 +26,7 @@
   </div> -->
   <div class="ClassNavWrapper">
     <div class="classNav">
-      <img class="avatar" :src="classinfo.avatar" @click="routeTo('ClassDetail', {corp_id: 1})">
+      <img class="avatar" :src="classinfo.avatar" @click="toClassDetail">
 
       <div class="name">任课教师: {{classinfo.user_name}}</div>
       <div class="intro">学生人数：<el-button type="text" @click="routeTo('ClassMembers',{class_id:classinfo.course_id})">{{classinfo.student_number}}</el-button></div>
@@ -150,6 +150,18 @@ export default {
     },
     routeTo(name, params) {
       this.$router.push({ name, params });
+    },
+    toClassDetail() {
+      this.$store.commit("classinfo/setClassDetailUseClassNav", true)
+      this.$router.push({
+        name: "ClassDetail",
+        params: {
+          class_id: this.classinfo.course_id,
+          sec_id: this.classinfo.sec_id,
+          semester: this.classinfo.semester,
+          year: this.classinfo.year
+        }
+      })
     }
   },
 

@@ -47,23 +47,24 @@ export default {
       })
     },
     allow(r) {
-      this.joinOrNoe(1)
+      this.joinOrNo(1, r)
     },
     refuse(r) {
-      this.joinOrNoe(0)
+      this.joinOrNo(0, r)
     },
-    joinOrNoe(status) {
-      api.joinClass({
+    joinOrNo(status, r) {
+      api.auditJoinClass({
         sec_id: this.classInfo.sec_id,
         course_id: this.classInfo.course_id,
         semester: this.classInfo.semester,
         year: this.classInfo.year,
-        status: status
+        status: status,
+        user_id: r.student_id
       }).then(res => {
         this.$message.success("操作成功")
         this.getData()
         if (status) {
-          this.$store.dispatch('classinfo/addClassMemberNum')
+          this.$store.dispatch('classinfo/getClassMemberNum')
         }
       })
     }

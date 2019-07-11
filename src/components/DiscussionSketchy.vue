@@ -13,11 +13,27 @@
     <div class="content">{{content}}</div>
     <div class="button-wrapper">
         <slot>
-            <button><i class="el-icon-chat-line-square btn-logo"></i>评论</button>
+            <button @click="dialogCommentVisible=true"><i class="el-icon-chat-line-square btn-logo"></i>评论</button>
             <button @click="readMore(discussion_id)"><i class="el-icon-more btn-logo"></i>更多</button>
         </slot>
     </div>
-</div>
+        
+    <el-dialog title="添加评论" :visible.sync="dialogCommentVisible">
+        <el-form>
+            <div style="font-size:16px;margin-bottom:2%;">评论内容</div>
+                <el-form-item>
+                    <el-input type="textarea" placeholder="请在此处填写具体评论内容" rows="7" 
+                              v-model="desc" maxlength="200" @input="descInput" ></el-input>
+                    <div style="float:right;font-size:12px;color:#cccbc9;">已输入{{200-remain}}/200字</div>
+                </el-form-item>
+        </el-form>
+        <div slot="footer" class="foot">
+          <button @click="dialogCommentVisible = false" style="font-size:16px;">取 消</button>
+          <button type="primary" @click="dialogCommentVisible = false" style="font-size:16px;">确 定</button>
+      </div>
+    </el-dialog>
+  </div>
+  
 </template>
 
 <script>
@@ -28,6 +44,9 @@ export default {
     },
     data () {
     return {
+        dialogCommentVisible:false,
+        remain:200,
+        inputComment:'',
         // user_name:"张萌萌",
         // avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
         // role:"学生",
@@ -44,6 +63,11 @@ export default {
         'time'
     ],
     methods: {
+        descInput(){
+            console.log(this.remain);
+            var txtVal=this.desc.length;
+            this.remain=200-txtVal;
+        },
         readMore(id){
             this.$parent.showDiscussionDetail(id);
         },
@@ -55,6 +79,18 @@ export default {
     }
 }
 </script>
+
+<style>
+#DiscussionSketchy
+.el-dialog__body{
+    padding-top: 5px;
+    padding-bottom:10px;
+}
+#DiscussionSketchy
+.el-dialog{
+    width:40%;
+}
+</style>
 
 <style scoped>
 #DiscussionSketchy{
@@ -135,6 +171,12 @@ button{
   width: 30px;
 }
 
+.foot{
+    display:flex;
+    flex:1;
+    justify-content:center;
+    align-items:center;
+}
 button:hover{
   border: 1px solid #b9b9b9;
   background: #dddddd;

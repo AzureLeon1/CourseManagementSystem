@@ -92,10 +92,10 @@ export default {
             this.form.sec_id = this.$store.state.classinfo.classinfo.sec_id
             this.form.semester = this.$store.state.classinfo.classinfo.semester
             this.form.year = this.$store.state.classinfo.classinfo.year
-            this.form.publised_time = getNowTime()
+            this.form.published_time = getNowTime()
             console.log(this.form);
-            // api.postBroadcast(this.form)
-            //   .then()
+            api.postBroadcast(this.form)
+              .then()
 
             this.$emit('createMsg');
 

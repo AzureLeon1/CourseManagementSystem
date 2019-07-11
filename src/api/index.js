@@ -75,7 +75,11 @@ export default {
   getDiscussionReply,
   getGlobalBro,
   postBroadcast,
-  getAllTeacherId
+  getAllTeacherId,
+  deleteBro,
+  getAllTeams,
+  getMyTeams,
+  joinTeam,
 }
 
 function param(a) {
@@ -463,7 +467,9 @@ async function getClassInfoForTea(form) {
 }
 
 async function joinClass(form) {
-  const res = await request(POST, )
+  const res = await request(POST, '/api/student_class', form)
+  console.log("joinClass", res)
+  return res
 }
 async function getCoursewareList(form) {
 
@@ -1107,34 +1113,30 @@ async function submitExam(form) {
   return res.data.data
 }
 
-async function getCourseware(course_id, sec_id, semester, year) {
-  const res = {
-    data: [{
-        name: "课件1-pdf",
-        location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
-      },
-      {
-        name: "课件2-ppt",
-        location: "http://pu9bnvlst.bkt.clouddn.com/%E7%AC%AC1%E7%AB%A0%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5.ppt"
-      },
-      {
-        name: "课件3",
-        location: "url3"
-      }
-    ]
-  }
-  // const res = await request(GET, '/api/CourseWares', {
-  //   course_id: course_id,
-  //   sec_id: sec_id,
-  //   semester: semester,
-  //   year: year
-  // })
-  console.log(res);
-  return res.data
+async function getCourseware(form) {
+  // const res = {
+  //   data: [{
+  //       name: "课件1-pdf",
+  //       location: "http://pu9bnvlst.bkt.clouddn.com/FsblA11WcY9ZsFm5ywmr8PlG2MdN"
+  //     },
+  //     {
+  //       name: "课件2-ppt",
+  //       location: "http://pu9bnvlst.bkt.clouddn.com/%E7%AC%AC1%E7%AB%A0%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5.ppt"
+  //     },
+  //     {
+  //       name: "课件3",
+  //       location: "url3"
+  //     }
+  //   ]
+  // }
+  console.log(form);
+  const res = await request(POST, '/api/CourseWares', form)
+  console.log(res.data.data);
+  return res.data.data.courswares
 }
 
 async function deleteCourseware(courseware_id) {
-  const res = await request(DELETE, '/api/CourseWares', {
+  const res = await request(DELETE, '/api/CourseWare_Removement', {
     courseware_id: courseware_id
   })
   console.log(res);
@@ -1142,7 +1144,7 @@ async function deleteCourseware(courseware_id) {
 }
 
 async function uploadCourseware(form) {
-  const res = await request(POST, 'api/CourseWare', form)
+  const res = await request(POST, '/api/CourseWare', form)
   console.log(res);
   return res
 }
@@ -1265,7 +1267,7 @@ async function getToBeAudited(form) {
 }
 
 async function auditJoinClass(form) {
-  const res = request(POST, '/api/permission', form)
+  const res = request(PUT, '/api/permission', form)
   return res
 }
 
@@ -1299,5 +1301,35 @@ async function getAllTeacherId()
   const res = await request(POST, '/api/teachers')
   return res.data.teachers_id
 
+}
 
+async function deleteBro(form) {
+  const res = await request(DELETE, '/api/broadcasts', form)
+  console.log(res)
+  return res
+}
+
+async function getAllTeams(form) {
+  const res = await request(POST, '/api/teams', form)
+  console.log(res.data.data.teams);
+  return res.data.data.teams
+}
+
+
+async function getMyTeams(form) {
+  const res = await request(POST, '/api/its_teams', form)
+  console.log(res.data.data);
+  return res.data.data.teams
+}
+
+async function joinTeam(form) {
+  const res = await request(POST, '/api/teams_attendance', form)
+  console.log(res);
+  return res
+}
+
+async function createTeam(form) {
+  const res = await request(POST, '/api/team', form)
+  console.log(res);
+  return res.data.code
 }

@@ -72,7 +72,7 @@ export default {
           this.hasDone = res.exam_status
           this.getState()
           if (this.hasDone) {
-            this.score = this.total_score
+            this.score = res.total_score
           }
         }
         for (let q of this.questionList) {

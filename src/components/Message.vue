@@ -19,6 +19,11 @@
               <span>{{scope.row.publish_time}}</span>
             </template>
           </el-table-column>
+          <el-table-column prop="delete" label="操作" width="160px">
+            <template slot-scope="scope">
+              <el-button @click="deleteBro(scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
       <div style="text-align: center; margin: 10px auto;">
@@ -161,6 +166,14 @@ export default {
       for(let i=start_item;i<end_item;i++){
         this.tableData.push(this.messages[i]);
       }
+    },
+    deleteBro(row) {
+      console.log(row);
+      apiIndex.deleteBro({broadcast_id: row.broadcast_id})
+        .then(res => {
+
+        })
+
     },
 
     getAllMessage() {

@@ -8,7 +8,7 @@
         :content="item['content']"
         :time="item['time']"
     >
-        <button @click="turnBack"><i class="el-icon-caret-left btn-logo"></i>返回</button>
+    <button @click="turnBack"><i class="el-icon-caret-left btn-logo"></i>返回</button>
     </DiscussionSketchy>
     <div class="wrapper" v-for="i in commentList"
     :key="i.discussion_id">

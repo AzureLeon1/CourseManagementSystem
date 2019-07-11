@@ -30,31 +30,16 @@ export default {
   },
   methods: {
     toClassInfo(course_id, sec_id, semester, year) {
-
-        this.$store.dispatch("classlistitem/getclickclass", {
-          course_id: course_id,
-          sec_id: sec_id,
-          semester: semester,
-          year: year,
-
-      });
-      
+      this.$store.commit("classinfo/setClassDetailUseClassNav", false)
       this.$router.push({
         name: "ClassDetail",
         params: {
           class_id: course_id,
           sec_id: sec_id,
-          // sec_id: sec_id,
-          // semester: semester,
-          // year: year,
-       
+          semester: semester,
+          year: year,
         }
       });
-
-    
-
-
-
     },
     syncItem(items) {
       this.apidata = items;
