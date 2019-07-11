@@ -25,7 +25,7 @@ const actions = {
       else if (state.profile.user.role == 'teacher_edu') {
         data = await api.getClassInfoForTea(form)
       }
-        console.log(data);
+        // console.log(data);
         localStorage.setItem("classinfo",JSON.stringify(data.data.data))
         // console.log(localStorage.getItem("classinfo"));
         // Object.assign(window.localStorage, data.data)
@@ -65,8 +65,8 @@ const mutations = {
     {
 
         state.classinfo = Object.assign({}, state.classinfo, props)
-        console.log(props)
-        console.log(state.classinfo)
+        // console.log(props)
+        // console.log(state.classinfo)
         // state.classinfo = Object.assign({}, state.classinfo, props)
     },
 

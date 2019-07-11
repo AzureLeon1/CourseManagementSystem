@@ -39,13 +39,16 @@ export default {
       }
   },
    methods: {
-      InsertTeam() {
-        this.$prompt('请输入要创建的队伍名称', {
+      async InsertTeam() {
+        let teamName=null;
+        await this.$prompt('请输入要创建的队伍名称', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern:/^[\s\S]*.*[^\s][\s\S]*$/ ,
           inputErrorMessage: '队伍名称格式不正确'
         }).then(({ value }) => {
+          teamName=value;
+          console.log(teamName)
           this.$message({
             type: 'success',
             message: '成功创建队伍' + value
@@ -56,6 +59,17 @@ export default {
             message: '取消输入'
           });       
         });
+        
+        let form={
+          course_id:this.$store.state.classinfo.classinfo.course_id,
+          sec_id:this.$store.state.classinfo.classinfo.sec_id,
+          semester:this.$store.state.classinfo.classinfo.semester,
+          year:this.$store.state.classinfo.classinfo.year,
+          team_name:teamName
+        }
+        console.log(form)
+        
+        // console.log(this.$store.state.classinfo.classinfo)
       }
    },
    computed:{

@@ -91,7 +91,24 @@ export default {
         });
       });
     },
-    searchClassTeam() {}
+    updateTable(){
+      let form1={
+        course_id:this.classinfo.course_id,
+        sec_id:this.classinfo.sec_id,
+        semester:this.classinfo.semester,
+        year:this.classinfo.year
+      };
+      // console.log(this.$store.state.profile['user']['id']);
+      let form2={
+        user_id:this.$store.state.profile['user']['id']
+      };
+
+      // alert("!")
+      console.log(form2);
+      this.$store.dispatch('team/getClassteam',form1);
+      this.$store.dispatch('team/getMyteam',form2);
+    }
+
   },
   watch: {
     table_Select_Data: {
@@ -128,11 +145,14 @@ export default {
       else{
         return this.tableData
       }
+    },
+    classinfo() {
+      return this.$store.state.classinfo.classinfo;
     }
   },
   mounted() {
-    this.$store.dispatch("team/getTeam");
-    this.table_Select_Data = this.tableData;
+    this.updateTable();
+    // this.table_Select_Data = this.tableData;
     //this.$stor.dispatch(actionType,playload)
     //要触发的action类型，所携带的数据
   }

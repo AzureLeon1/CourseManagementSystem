@@ -55,7 +55,6 @@ export default {
   getExamQuestions,
   getCourseware,
   getAttendance,
-  getTeam,
   createMessage,
   deletePost,
   deleteCourseware,
@@ -63,7 +62,10 @@ export default {
   createAttenRecords,
   updateAtten,
   coursetableGetCoursetable,
-  getTeamlist
+  getTeamList,
+  getMyTeamList,
+  addTeam,
+  joinTeam,
 }
 
 function param(a) {
@@ -673,77 +675,10 @@ async function createMessage(form) {
 }
 
 ///team api
-async function getTeam() //id?
+async function getTeamList(form)
 {
-
-  const data = {
-    teamlist: [{
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三五",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      }
-    ],
-    myteamlist: [{
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      },
-      {
-        team_id: "1234",
-        team_name: "一二三四",
-        team_member: "sad  sdf asdf"
-      }
-    ]
-  }
-
-  //const data = await request(GET, ,form)
-  await delay(500)
-  return data
+  const res = await request(POST, '/api/teams', form);
+  return res;
 }
 //attendance api
 async function getAttendance(form) {
@@ -1185,8 +1120,23 @@ async function updateAtten(form) {
   console.log(res)
 }
 
-async function getTeamlist(form) {
-  const res = await request(POST, '/api/teams', form)
+async function getMyTeamList(form) {
+  console.log("index.js awaked.")
+  const res = await request(POST, '/api/its_teams', form)
   console.log(res)
+  return res;
 }
 
+async function addTeam(form){
+  console.log("index.js awaked.")
+  const res = await request(POST, '/api/its_teams', form)
+  console.log(res);
+  return res;
+}
+
+async function joinTeam(form){
+  console.log("index.js awaked.")
+  const res = await request(POST, '/api/its_teams', form)
+  console.log(res);
+  return res;
+}
