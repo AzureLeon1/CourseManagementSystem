@@ -27,6 +27,7 @@ export default {
   getUserTwitter,
   broadcastStudent,
   getClassInfo,
+  getClassInfoForTea,
   joinClass,
   getJoinStatus,
   getjoinedClassList,
@@ -62,7 +63,8 @@ export default {
   deleteCourseware,
   uploadCourseware,
   createAttenRecords,
-  coursetableGetCoursetable
+  updateAtten,
+  coursetableGetCoursetable,
 }
 
 function param(a) {
@@ -409,6 +411,7 @@ async function getClassInfo(form) {
   // console.log('corp_info of ', res)
   // return res.data.data
 
+  // 学生api
   const data = await request(POST, '/api/one_class', form)
     // name: '高等数学',
     // teacher_name: '孙娟娟',
@@ -423,8 +426,29 @@ async function getClassInfo(form) {
     // year: 2019
     console.log('这是班级的详细信息status 测试: ', data)
 
+  return data
 
+}
 
+async function getClassInfoForTea(form) {
+  // const res = await request(GET, `/api/club_info/${id}`)
+  // console.log('corp_info of ', res)
+  // return res.data.data
+
+  // 老师api
+  const data = await request(POST, '/api/class_details')
+    // name: '高等数学',
+    // teacher_name: '孙娟娟',
+    // content: '高等数学',
+    // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+    // student_count: 54,
+    // course_name: '高等数学',
+    // student_count: 34,
+    // building: 'A',
+    // room_number: '345',
+    // semester: 'Fall',
+    // year: 2019
+    console.log('这是班级的详细信息: ', data)
 
   return data
 
@@ -1190,4 +1214,9 @@ async function createAttenRecords(form) {
   const res = await request(POST, '/api/attendance_records', form)
   console.log(res);
   return res
+}
+
+async function updateAtten(form) {
+  const res = await request(PUT, '/api/new_attendance', form)
+  console.log(res)
 }

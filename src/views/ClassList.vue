@@ -43,6 +43,7 @@ export default {
         name: "ClassDetail",
         params: {
           class_id: course_id,
+          sec_id: sec_id,
           // sec_id: sec_id,
           // semester: semester,
           // year: year,

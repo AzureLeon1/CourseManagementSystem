@@ -186,13 +186,16 @@ export default {
   mounted() {
       console.log("这是班级跳转参数", this.$route.params)
       console.log("这是班级跳转参数", this.$route.params.class_id)
-      this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
+      //this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
 
-//console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
-    if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id)
+console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
+    if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id || 
+    this.$route.params.sec_id != this.$store.state.classinfo.classinfo.sec_id)
        {  console.log('这是前段的form', this.$store.state.classlistitem.clickedclass)
-           this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
-    this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass);}
+       console.log('角色实际上是', this.$store.state.profile.user.role)
+           this.$store.dispatch("classinfo/getClassInfo", { form : this.$store.state.classlistitem.clickedclass, role: this.$store.state.profile.user.role});
+    //this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass);
+    }
   }
 };
 </script>
