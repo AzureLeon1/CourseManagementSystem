@@ -10,7 +10,7 @@
           </el-table-column>
           <el-table-column prop="from" label="来自" width="150px">
             <template slot-scope="scope">
-              <el-link class="from">{{scope.row.from}}</el-link>
+              <el-link class="from">{{scope.row.course_name}}</el-link>
             </template>
           </el-table-column>
           <el-table-column prop="time" label="时间" width="160px">
@@ -36,7 +36,16 @@
     <!-- float: Add button -->
     <div class="addbutton-wrapper formanager">
       <!-- <el-button @click="showCreateMsgPanel"-->
-      <el-button
+      <el-button v-if="$store.state.profile.user.role == 'teacher_edu' && position == 'class'"
+        @click="showCreateMsgPanel"
+        type="primary"
+        icon="el-icon-plus"
+        circle
+      >
+        <!-- <i class="el-icon-plus"></i> -->
+      </el-button>
+
+      <el-button v-if="$store.state.profile.user.role == 'teacher_manage' && position == 'global'"
         @click="showCreateMsgPanel"
         type="primary"
         icon="el-icon-plus"
@@ -59,6 +68,7 @@ import UserNav from "@/components/UserNav";
 import MessageDetailed from "@/components/MessageDetailed";
 import MessageCreate from "@/components/MessageCreate";
 import api from "@/store/modules/message.js";
+import apiIndex from '../api/index.js'
 
 export default {
   name: "Message",
@@ -67,6 +77,7 @@ export default {
     MessageCreate,
     UserNav
   },
+  props: ['position'],
   data() {
     const simData = {
       'broadcast_id': 123123, //广播的ID
@@ -97,8 +108,21 @@ export default {
     //all
     initial(){
         this.$refs.msc.$on['hide']=this.hideReadMsg;
-        // console.log(this.$refs.msc.$on)
-        this.getMessageWithID(111);
+        if (this.position == 'global') {
+          console.log("获取全局广播");
+          this.getAllMessage()
+        }
+        else {
+          this.getMessageWithID(
+            {
+              course_id: this.$store.state.classinfo.classinfo.course_id,
+              sec_id: this.$store.state.classinfo.classinfo.sec_id,
+              semester: this.$store.state.classinfo.classinfo.semester,
+              year: this.$store.state.classinfo.classinfo.year,
+            }
+          );
+        }
+        // this.getMessageWithID(111);
 
     },
     //front-end
@@ -141,10 +165,37 @@ export default {
       }
     },
 
+    getAllMessage() {
+      apiIndex.getGlobalBro()
+        .then(bros => {
+          console.log(bros);
+          this.messages=Array(0);
+          for(let i=0;i<bros.length;i++){
+            this.messages.push(bros[i]);
+          }
+          console.log(this.messages);
+
+          //update page 1 content
+      let range=this.messages.length<this.eachPage?this.messages.length:this.eachPage;
+      // console.log(range);
+      for(let i=0;i<range;i++){
+        this.tableData.push(this.messages[i]);
+      }
+
+      //update pagination page_total
+      this.page_total=Math.ceil(this.messages.length/this.eachPage);
+      this.page_total=this.page_total*10;
+      // console.log(this.page_total);
+      })
+
+
+
+    },
+
 
     //back-end
-    getMessageWithID(id){
-      api.getMessageWithID(id)
+    getMessageWithID(form){
+      apiIndex.getClassMessage(form)
       .then(getMessage => {
         this.messages=Array(0);
       for(let i=0;i<getMessage.length;i++){
@@ -162,6 +213,8 @@ export default {
       this.page_total=Math.ceil(this.messages.length/this.eachPage);
       this.page_total=this.page_total*10;
       // console.log(this.page_total);
+
+      console.log(this.tableData);
       })
 
 
@@ -186,6 +239,7 @@ export default {
     }
   },
   mounted(){
+    console.log(this.position);
     this.initial();
   }
 };
