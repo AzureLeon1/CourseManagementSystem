@@ -19,6 +19,7 @@ const actions = {
     async getClassInfo({commit, state}, form)
     {
       var data = {}
+      console.log(state.profile.user.role);
       if (state.profile.user.role == 'student') {
         data = await api.getClassInfo(form);
       }

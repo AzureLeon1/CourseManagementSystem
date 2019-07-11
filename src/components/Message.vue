@@ -10,7 +10,7 @@
           </el-table-column>
           <el-table-column prop="from" label="来自" width="150px">
             <template slot-scope="scope">
-              <el-link class="from">{{scope.row.from}}</el-link>
+              <el-link class="from">{{scope.row.course_name}}</el-link>
             </template>
           </el-table-column>
           <el-table-column prop="time" label="时间" width="160px">
@@ -36,7 +36,16 @@
     <!-- float: Add button -->
     <div class="addbutton-wrapper formanager">
       <!-- <el-button @click="showCreateMsgPanel"-->
-      <el-button
+      <el-button v-if="$store.state.profile.user.role == 'teacher_edu' && position == 'class'"
+        @click="showCreateMsgPanel"
+        type="primary"
+        icon="el-icon-plus"
+        circle
+      >
+        <!-- <i class="el-icon-plus"></i> -->
+      </el-button>
+
+      <el-button v-if="$store.state.profile.user.role == 'teacher_manage' && position == 'global'"
         @click="showCreateMsgPanel"
         type="primary"
         icon="el-icon-plus"
