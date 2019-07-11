@@ -8,15 +8,15 @@
             <div class="CourseMessage">
                 <div class="tagWrapper">
                     <div class="tag" @click="select(1);">
-                        <div style="flex-grow:1;">活动广播</div>
-                        <div class="tickle"><i class="el-icon-success"></i></div>
-                    </div>
-                    <div class="tag" @click="select(2);">
                         <div style="flex-grow:1;">作业广播</div>
                         <div class="tickle"><i class="el-icon-success"></i></div>
                     </div>
+                    <div class="tag" @click="select(2);">
+                        <div style="flex-grow:1;">活动广播</div>
+                        <div class="tickle"><i class="el-icon-success"></i></div>
+                    </div>
                 </div>
-                <Message position="class"></Message>
+                <Message ref="msg" position="class"></Message>
             </div>
         </el-main>
     </el-container>
@@ -44,6 +44,8 @@ export default {
         let tickles = document.getElementsByClassName('tickle');
         tickles[i].style.display='inline';
         tickles[1-i].style.display='none';
+        //data
+        this.$refs.msg.ChangeMsgType(option);
       }
   },
   mounted(){

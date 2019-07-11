@@ -19,11 +19,11 @@
               <span>{{scope.row.publish_time}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="delete" label="操作" width="160px">
+          <!-- <el-table-column prop="delete" label="操作" width="160px">
             <template slot-scope="scope">
               <el-button @click="deleteBro(scope.row)">删除</el-button>
             </template>
-          </el-table-column>
+          </el-table-column> -->
         </el-table>
       </div>
       <div style="text-align: center; margin: 10px auto;">
@@ -105,6 +105,9 @@ export default {
       publish_time: "",
       //all messages
       messages: null,
+      activity: Array(0),
+      homework: Array(0),
+      //reveal message
       tableData: Array(0),
       // tableData: Array(20).fill(simData);
       currentrow:0,
@@ -112,22 +115,24 @@ export default {
   },
   methods: {
     //all
-    initial(){
+    async initial(){
         this.$refs.msc.$on['hide']=this.hideReadMsg;
         if (this.position == 'global') {
           console.log("获取全局广播");
-          this.getAllMessage()
+          await this.getAllMessage()
         }
         else {
-          this.getMessageWithID(
+          await this.getMessageWithID(
             {
               course_id: this.$store.state.classinfo.classinfo.course_id,
               sec_id: this.$store.state.classinfo.classinfo.sec_id,
               semester: this.$store.state.classinfo.classinfo.semester,
               year: this.$store.state.classinfo.classinfo.year,
             }
-          );
+          )
         }
+
+        
         // this.getMessageWithID(111);
 
     },
@@ -189,6 +194,8 @@ export default {
               bros[i].course_name = '教务消息'
             }
             this.messages.push(bros[i]);
+            if(bros[i]['type']==1)this.homework.push(bros[i]);
+            else this.activity.push(bros[i]);
           }
           console.log(this.messages);
 
@@ -204,11 +211,7 @@ export default {
       this.page_total=this.page_total*10;
       // console.log(this.page_total);
       })
-
-
-
     },
-
 
     //back-end
     getMessageWithID(form){
@@ -220,6 +223,8 @@ export default {
           getMessage[i].course_name = '教务消息'
         }
         this.messages.push(getMessage[i]);
+        if(getMessage[i]['type']==1)this.homework.push(getMessage[i]);
+        else this.activity.push(getMessage[i]);
       }
 
       //update page 1 content
@@ -256,11 +261,29 @@ export default {
       // this.page_total=Math.ceil(this.messages.length/this.eachPage);
       // this.page_total=this.page_total*10;
       // // console.log(this.page_total);
+    },
+
+    ChangeMsgType(type){
+      // alert("!!!!!"+type)
+      // this.ChooseMsgType();
+      console.log('all-messages',this.messages); 
+      if(type==1){
+        this.messages=this.homework;
+      }
+      else{
+        this.messages=this.activity;
+      }
+      //update pagination page_total
+      this.page_total=Math.ceil(this.messages.length/this.eachPage);
+      this.page_total=this.page_total*10;
+      this.onPageChange(1);
     }
+
+
   },
   mounted(){
-    console.log(this.position);
     this.initial();
+    this.ChooseMsgType(1);
   }
 };
 </script>
