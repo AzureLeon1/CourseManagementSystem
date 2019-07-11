@@ -31,7 +31,7 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  getMessageWithID,
+  // getMessageWithID,
   getClassMessage,
   createMessage,
   getSearchResult,
@@ -1170,8 +1170,9 @@ async function updateAtten(form) {
 }
 
 async function getMyTeamList(form) {
-  console.log("index.js awaked.")
+  // console.log("index.js awaked.")
   const res = await request(POST, '/api/its_teams', form)
+  return res;
 }
 
 async function getGlobalBro() {
@@ -1181,6 +1182,7 @@ async function getGlobalBro() {
 }
 
 async function getTeamlist(form) {
+  console.log('form-getteam:',form);
   const res = await request(POST, '/api/teams', form)
   console.log(res)
   return res;

@@ -60,7 +60,14 @@ export default {
     };
   },
   methods: {
-    JoinClick() {
+    JoinClick(mes) {
+      console.log(mes);
+      let form={
+        team_id:mes['team_id'],
+        user_id:this.$store.state.profile['user']['id']
+      };
+      console.log(this.$store.state.profile);
+      console.log(form);
       const h = this.$createElement;
       this.$msgbox({
         message: h("p", null, [
@@ -72,6 +79,10 @@ export default {
         cancelButtonText: "取消",
         beforeClose: (action, instance, done) => {
           if (action === "confirm") {
+            this.$store.dispatch('team/joinTeam',form).then(res=>{
+              console.log('afteradd')
+              this.updateTable();
+            });
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = "执行中...";
             setTimeout(() => {
@@ -84,19 +95,14 @@ export default {
             done();
           }
         }
-      }).then(() => {
-        this.$message({
-          type: "success",
-          message: "action" + action
-        });
-      });
+      })
     },
     updateTable(){
       let form1={
-        course_id:this.classinfo.course_id,
-        sec_id:this.classinfo.sec_id,
-        semester:this.classinfo.semester,
-        year:this.classinfo.year
+        course_id:this.$store.state.classinfo.classinfo.course_id,
+        sec_id:this.$store.state.classinfo.classinfosec_id,
+        semester:this.$store.state.classinfo.classinfosemester,
+        year:this.$store.state.classinfo.classinfo.year
       };
       // console.log(this.$store.state.profile['user']['id']);
       let form2={
@@ -104,7 +110,9 @@ export default {
       };
 
       // alert("!")
-      console.log(form2);
+      // console.log(this.$store.state.classinfo);
+      // console.log('form1',form1);
+      // console.log('form2',form2);
       this.$store.dispatch('team/getClassteam',form1);
       this.$store.dispatch('team/getMyteam',form2);
     }

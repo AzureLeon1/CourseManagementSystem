@@ -27,17 +27,17 @@ const actions = {
     // console.log(form);
     let data = await api.getMyTeamList(form);
     data=data['data']['data']['teams'];
-    // console.log(data);
+    console.log("myteams:",data);
     context.commit('setMyteam', data)
   },
-  async addTeam(context, form) {
+  async addTeam(form) {
     // console.log(form);
     let data = await api.addTeam(form);
     // data=data['data']['data']['teams'];
     console.log(data);
     // context.commit('setMyteam', data)
   },
-  async joinTeam(context, form) {
+  async joinTeam(form) {
     // console.log(form);
     let data = await api.joinTeam(form);
     // data=data['data']['data']['teams'];
