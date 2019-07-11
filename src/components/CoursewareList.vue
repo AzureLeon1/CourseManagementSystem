@@ -27,7 +27,7 @@
 
 
       <!-- float: Add button -->
-    <div class="addbutton-wrapper formanager">
+    <div class="addbutton-wrapper formanager" v-if="user_role == 'teacher_edu'">
       <!-- <el-button @click="showCreateMsgPanel"-->
       <el-button
         @click="showUploadPanel"
@@ -60,7 +60,7 @@ export default {
       request_body: {},
       allCourseList: [],
       filteredList: [],
-      searchkey: ""
+      searchkey: "",
     };
   },
   methods: {
@@ -71,6 +71,7 @@ export default {
         semester: this.semester,
         year: this.year
       }
+      console.log(this.request_body);
       api.getCourseware(this.request_body)
         .then(res => {
           this.allCourseList = res
@@ -88,7 +89,11 @@ export default {
         .then(res => {
           // 删除成功，重新获取课件列表
           if (res.status == 200) {
-
+            this.$message({
+              type: "success",
+              message: "删除成功～"
+            })
+            this.getData()
           }
         })
     },
@@ -115,16 +120,18 @@ export default {
       form.semester = this.semester
       form.year = this.year
       console.log(form);
-      this.upload = this.$refs.upload;
       this.upload.showUpload = false;
-      // api.uploadCourseware(form)
-      //   .then(res => {
-      //     // 上传成功，重新获取课件列表
-      //     if (res.status == 200) {
-
-      //     }
-
-      //   })
+      api.uploadCourseware(form)
+        .then(res => {
+          // 上传成功，重新获取课件列表
+          if (res.status == 200) {
+            this.$message({
+              type: "success",
+              message: "上传成功"
+            })
+            this.getData()
+          }
+        })
     },
 
     hideUpload() {
