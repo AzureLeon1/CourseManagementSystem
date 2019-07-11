@@ -56,7 +56,6 @@ export default {
   getAttendance,
   getTeam,
   createMessage,
-  getStudentCourses,
   deletePost,
   deleteCourseware,
   uploadCourseware,
