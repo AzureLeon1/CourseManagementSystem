@@ -43,15 +43,19 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    this.$confirm('退出此页面将不会保存你的答案,是否退出', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }).then(() => {
+    if (!this.$refs.questionList.hasSubmit) {
+      this.$confirm('退出此页面将不会保存你的答案,是否退出', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        next()
+      }).catch(() => {
+        
+      })
+    } else {
       next()
-    }).catch(() => {
-      
-    })
+    }
   }
 }
 </script>

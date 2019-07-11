@@ -10,30 +10,30 @@
 </template>
 
 <script>
-import ClassNav from "../components/ClassNav"
+import ClassNav from "../components/ClassNav";
 
 export default {
-  name: 'ClassHome',
+  name: "ClassHome",
   components: {
     ClassNav
   },
   props: ["class_id"],
-  data () {
-    return {
-
-    }
+  data() {
+    return {};
   },
   mounted() {
-    console.log(this.$store.state.classlistitem.clickedclass);
-    console.log(this.$store.state.profile.user.role);
-    this.$store.dispatch("classinfo/getClassInfo", {form:this.$store.state.classlistitem.clickedclass, role: this.$store.state.profile.user.role})
-    this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass)
-    console.log("classhomeinfo", this.$store.state.classinfo);
+    this.$store.dispatch("classinfo/getClassInfo", {
+      form: this.$store.state.classlistitem.clickedclass,
+      role: this.$store.state.profile.user.role
+    });
+    this.$store.dispatch(
+      "classinfo/getJoinStatus",
+      this.$store.state.classlistitem.clickedclass
+    );
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
