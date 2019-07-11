@@ -57,13 +57,13 @@ export default {
   getAttendance,
   getTeam,
   createMessage,
-  getStudentCourses,
   deletePost,
   deleteCourseware,
   uploadCourseware,
   createAttenRecords,
   updateAtten,
   coursetableGetCoursetable,
+  getTeamlist
 }
 
 function param(a) {
@@ -1184,3 +1184,9 @@ async function updateAtten(form) {
   const res = await request(PUT, '/api/new_attendance', form)
   console.log(res)
 }
+
+async function getTeamlist(form) {
+  const res = await request(POST, '/api/teams', form)
+  console.log(res)
+}
+
