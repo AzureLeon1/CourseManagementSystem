@@ -34,6 +34,7 @@ export class Class {
    // this.status = props.status
    // this.name = props.course_description
     this.student_count = props.student_number
+    this.status = props.status
     
   }
 }

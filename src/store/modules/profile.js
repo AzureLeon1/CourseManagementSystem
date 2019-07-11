@@ -92,7 +92,9 @@ const actions = {
     async getCheckingClassList({commit, state}, user_id)
     {
         const checkingclasses = await api.getCheckingClassList(user_id)
+        console.log('这是待审核的班级', checkingclasses)
         commit('setcheckingclasslist', checkingclasses)
+        
     }
 
 
@@ -123,10 +125,13 @@ const mutations = {
     setjoinedClassList(state, props){
         state.joinedclasslist = []
         state.joinedclasslist.push(...props)
+        //console.log('这是Joinedclasslist', state.joinedclasslist)
+
     },
     setcheckingclasslist(state, props){
         state.checkingclasslist = []
         state.checkingclasslist.push(...props)
+        console.log('这是待审核的班级',state.checkingclasslist)
 
     }
 }

@@ -23,6 +23,7 @@ const actions = {
 
     async getclickclass({commit, state}, form)
     {
+      
       console.log(form)
       commit('setclickedclass',form)
 
