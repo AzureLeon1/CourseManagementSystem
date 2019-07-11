@@ -105,7 +105,7 @@ export default new Router({
 
     },
     {
-      path: '/classdetail/:class_id/:sec_id',
+      path: '/classdetail/:class_id/:sec_id/:semester/:year',
       name: 'ClassDetail',
       component: ClassDetail
     },

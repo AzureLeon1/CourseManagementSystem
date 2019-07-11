@@ -462,7 +462,9 @@ async function getClassInfoForTea(form) {
 }
 
 async function joinClass(form) {
-  const res = await request(POST, )
+  const res = await request(POST, '/api/student_class', form)
+  console.log("joinClass", res)
+  return res
 }
 async function getCoursewareList(form) {
 
