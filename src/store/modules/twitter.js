@@ -61,13 +61,16 @@ const actions = {
   }) {
     await api.deleteFollowPerson(id)
     dispatch('getUserFollow', user)
+    dispatch('profile/getFollowInfo', null, {root: true})
   },
   async getUserFollow({
     commit,
-    state
+    state,
+    dispatch
   }, id) { //获取关注的用户
     const following = await api.getFollowing(id);
     commit('setfollowPeopleItems', following)
+    dispatch('profile/getFollowInfo', null, {root: true})
   },
 }
 
