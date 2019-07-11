@@ -40,12 +40,13 @@ export default {
       }).then(data => {
         console.log("examlist", data)
         this.examList = data
+        this.user = this.$store.state.profile.user;
+        for(let e of this.examList) {
+          e.userRole = this.user.role
+          // console.log(classInfo)
+          e.courseName = classInfo.course_name
+        }
       })
-      this.user = this.$store.state.profile.user;
-      for(let e of this.examList) {
-        e.userRole = this.user.role
-        e.courseName = classInfo.name
-      }
     }
   },
 

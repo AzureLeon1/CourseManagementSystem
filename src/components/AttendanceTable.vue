@@ -44,7 +44,7 @@
                     <el-radio v-model="scope.row.attendance_status" label="4" size="small"> 迟到</el-radio>
                     </template>-->
                     <template slot-scope="scope">
-                      <el-radio-group v-model="scope.row.status" @change="changeHandler">
+                      <el-radio-group v-model="scope.row.status" @change="changeHandler(scope.row)">
                         <el-radio :label="1">出席</el-radio>
                         <el-radio :label="2">无故缺席</el-radio>
                         <el-radio :label="3">请假</el-radio>
@@ -95,14 +95,18 @@ export default {
           api.createAttenRecords(request_body)
             .then(res => {
               console.log(res);
-              // TODO: 根据res.status判断是否创建成功
+              if (res.status == 200) {
+
+                this.$store.dispatch("attendance/getAttendance", this.course_sec_info);
+                this.$message({
+                  type: "success",
+                  message: "成功发布" + value + "考勤"
+                  //增加time_id=value的出席记录表!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                });
+              }
             })
 
-          this.$message({
-            type: "success",
-            message: "成功发布" + value + "考勤"
-            //增加time_id=value的出席记录表!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          });
+
         })
         .catch(er => {
           console.log(er);
@@ -120,10 +124,20 @@ export default {
         }, 20);
       }
     },
-    changeHandler(value) {
-      console.log("改变后的值为" + value);
+    changeHandler(row) {
+      console.log(row);
+      console.log("改变后的值为" + row);
       //把value送到后端!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
       // document.write("改变后的值为"+value)
+
+      var update_info = this.course_sec_info
+      update_info.user_id = row.student_id
+      update_info.status = row.status
+      update_info.time_id = row.time_id
+      api.updateAtten(update_info)
+      .then(() => {
+        this.$store.dispatch("attendance/getAttendance", this.course_sec_info);
+      })
     },
     //发布动态时点击发布调用的代码
     // emit() {

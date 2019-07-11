@@ -15,7 +15,7 @@
             @click="toClassHome(item.course_id, item.sec_id, item.semester, item.year)"
           >
             <Avatar :src="item.avatar" :size="40" :border="false" />
-            <div>{{item.name}}</div>
+            <div>{{item.course_name}}</div>
           </div>
 
           <transition name="el-fade-in-linear">
@@ -26,12 +26,11 @@
           <div class="class_es">
        
           <div v-for="(item, index) in unauditClasses" :key="'u' + index" class="a_class"
-            @click="$router.push({name: 'ClassDetail', params: {course_id: item.course_id, sec_id: item.sec_id,
-            semester: item.semester, year: item.year}})">
+            @click="toClassDetail(item.course_id, item.sec_id, item.semester, item.year)">
 
             <Avatar :src="item.avatar" :size="40" :border="false" />
 
-            <div>{{item.name}}</div>
+            <div>{{item.course_name}}</div>
           </div>
 
           <transition name="el-fade-in-linear">
@@ -82,13 +81,36 @@ export default {
           class_id: course_id
         }
       });
+     },
+
+     toClassDetail(course_id, sec_id, semester, year){
+       console.log("我要去details了", semester)
+
+         this.$store.dispatch("classlistitem/getclickclass", {
+        course_id: course_id,
+        sec_id: sec_id,
+        semester: semester,
+        year: year,
+      });
+      this.$router.push({
+        name: "ClassDetail",
+        params: {
+          class_id: course_id,
+          sec_id: sec_id
+        }
+      });
+
+
      }
   },
   computed: {
     claes() {
       return this.$store.state.profile.joinedclasslist;
+
+      console.log("已经已经加入到列表", this.$store.state.profile.joinedclasslist)
     },
     unauditClasses() {
+    //  console.log("查看有无正确返回", this.$store.state.profile.checkingclasslist)
       return this.$store.state.profile.checkingclasslist;
     },
     isCurrentUser() {
