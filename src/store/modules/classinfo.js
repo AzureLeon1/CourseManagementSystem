@@ -20,14 +20,16 @@ const actions = {
     {
       var data = {}
       console.log('角色到底是什么', role)
-    //   console.log('form到底是什么', form)
-      if (role == 'student') {
-        data = await api.getClassInfo(form);
-        console.log('返回值到底是什么', data)
-      }
-      else if (role == 'teacher_edu') {
-        data = await api.getClassInfoForTea(form)
-      }
+
+      // if (role == 'student') {
+      //   data = await api.getClassInfo(form);
+      //   console.log('返回值到底是什么', data)
+      // }
+      // else if (role == 'teacher_edu') {
+      //   data = await api.getClassInfoForTea(form)
+      // }
+      // 统一获取数据的方式
+      data = await api.getClassInfo(form)
         console.log(data);
         localStorage.setItem("classinfo",JSON.stringify(data.data.data))
         // console.log(localStorage.getItem("classinfo"));
@@ -60,6 +62,10 @@ const actions = {
         const data = await api.getCoursewareList(form)
         commit('setCoursewareList', data)
 
+    },
+    async getClassMemberNum({commit, state})
+    {
+        state.classinfo.student_number += 1
     }
 }
 

@@ -4,7 +4,7 @@
       {{questionInfo.content}}&nbsp;&nbsp;({{questionInfo.score}}分)
     </div>
 
-    <el-radio-group v-model="select">
+    <el-radio-group v-model="answer">
       <el-radio 
         v-for="s in selects"
         :key="s.label"
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       selects: [],
-      select: ""
+      answer: "",
+      question_id: ""
     }
   },
 
@@ -43,6 +44,7 @@ export default {
       if (this.showAnswer) {
         this.select = this.questionInfo.answer
       }
+      this.question_id = this.questionInfo.question_id
     }
   },
 

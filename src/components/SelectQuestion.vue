@@ -4,7 +4,8 @@
       <el-col :span="13" :offset="1">
         <el-table
           :data="totalQuestions"
-          @select="selectQuestion">
+          @select="selectQuestion"
+          @select-all="selectAll">
           <el-table-column 
             type="selection"
             width="50"></el-table-column>
@@ -57,9 +58,8 @@
 </template>
 
 <script>
-import {SlickList, SlickItem} from 'vue-slicksort'
-
 import api from "../api"
+import {SlickList, SlickItem} from 'vue-slicksort'
 
 export default {
   name: 'SelectQuestion',
@@ -78,14 +78,15 @@ export default {
 
   methods: {
     getData() {
-      api.getExamQuestions({
-        exam_id: this.$route.params.exam_id
+      api.getAllQuestion({
+        course_id: this.$route.params.class_id
       }).then(res => {
-        this.totalQuestions = res.questions
+        this.totalQuestions = res
       })
     },
     selectQuestion(s, r) {
       if (s.length > this.questions.length) {
+        r.score = 3
         this.questions.push(r)
       } else {
         for (let i = 0; i < this.questions.length; ++i) {
@@ -96,12 +97,18 @@ export default {
         }
       }
     },
+    selectAll(s) {
+      this.questions = s
+      for (let q of this.questions) {
+        q.score = 3
+      }
+    },
     submit() {
       if (this.questions.length === 0) {
         this.$message.error("试卷不能为空")
         return
       }
-      for (let i = 1; i <= q.length; ++i) {
+      for (let i = 1; i <= this.questions.length; ++i) {
         this.questions[i-1].index = i
       }
       this.$emit('submit')

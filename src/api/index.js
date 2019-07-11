@@ -31,7 +31,7 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  getMessageWithID,
+  getClassMessage,
   createMessage,
   getSearchResult,
   getFollowing,
@@ -45,7 +45,7 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
-  getAllQuesiton,
+  getAllQuestion,
   newQuestion,
   updateQuestion,
   deleteQuestion,
@@ -53,6 +53,7 @@ export default {
   newExam,
   checkExamResult,
   getExamQuestions,
+  submitExam,
   getCourseware,
   getAttendance,
   getTeam,
@@ -66,8 +67,14 @@ export default {
   updateAtten,
   coursetableGetCoursetable,
   getTeamlist,
+  // 审核
+  getToBeAudited,
+  auditJoinClass,
+  getAllStudents,
   getAllDiscussions,
-  getDiscussionReply
+  getDiscussionReply,
+  getGlobalBro,
+  postBroadcast
 }
 
 function param(a) {
@@ -136,7 +143,7 @@ async function request(method, url, data) {
 async function getAuthority(form) {
   console.log(form);
   const res = await request(POST, '/api/login', form)
-  console.log("loginRes",res);
+  console.log("loginRes", res);
   return res.data.data
 }
 
@@ -195,7 +202,7 @@ async function getPersonFollowFans(id) {
 
 async function getClassListItems() {
   const res = await request(POST, '/api/total_classes');
- console.log("这是班级列表" , res)
+  console.log("这是班级列表", res)
   return res.data.data.classes
 }
 
@@ -224,11 +231,11 @@ async function getClassListItems() {
 
 } */
 
-async function getCheckingClassList(user_id){
+async function getCheckingClassList(user_id) {
 
-const res = await request(POST, '/api/waiting_classes');
- //console.log("这是未加入班级列表" , res)
- return res.data.data.classes
+  const res = await request(POST, '/api/waiting_classes');
+  //console.log("这是未加入班级列表" , res)
+  return res.data.data.classes
 
 
 
@@ -277,56 +284,55 @@ async function getUserTwitter() {
   return res.data.data
 }
 
-async function getCourseDiscussion(){
+async function getCourseDiscussion() {
   const data = {
-      basic:[
-      {
-        course_id: 1,
-        sec_id: 1,
-        semester: "Spring",
-        year: 1997
-      }],
-      question:[
-      {
-        discussion_id:111,
-        user_id:111,
-        user_name:'aaa',
-        role:'student',
-        content:"课本第三章的课后习题3.20的答案是否有误？",
-        time:"1997.12.11 12.30",
+    basic: [{
+      course_id: 1,
+      sec_id: 1,
+      semester: "Spring",
+      year: 1997
+    }],
+    question: [{
+        discussion_id: 111,
+        user_id: 111,
+        user_name: 'aaa',
+        role: 'student',
+        content: "课本第三章的课后习题3.20的答案是否有误？",
+        time: "1997.12.11 12.30",
       },
       {
-        discussion_id:112,
-        user_id:222,
-        user_name:'bbb',
-        role:'student',
-        content:"老师上课提到的参考书目的名称可以再发一下吗？",
-        time:"1997.12.12,16.30",
+        discussion_id: 112,
+        user_id: 222,
+        user_name: 'bbb',
+        role: 'student',
+        content: "老师上课提到的参考书目的名称可以再发一下吗？",
+        time: "1997.12.12,16.30",
       },
       {
-        discussion_id:113,
-        user_id:333,
-        user_name:'ccc',
-        role:'student',
-        content:"本次小测的选择题的最后一道题的题干是什么？",
-        time:"1997.12.13,16.30",
+        discussion_id: 113,
+        user_id: 333,
+        user_name: 'ccc',
+        role: 'student',
+        content: "本次小测的选择题的最后一道题的题干是什么？",
+        time: "1997.12.13,16.30",
       },
       {
-        discussion_id:116,
-        user_id:444,
-        user_name:'dddd',
-        role:'student',
-        content:"这次项目的题干要求与相应的输入不对应",
-        time:"1997.12.13,16.30",
+        discussion_id: 116,
+        user_id: 444,
+        user_name: 'dddd',
+        role: 'student',
+        content: "这次项目的题干要求与相应的输入不对应",
+        time: "1997.12.13,16.30",
       },
       {
-        discussion_id:121,
-        user_id:444,
-        user_name:'eeeee',
-        role:'student',
-        content:"题目如下：乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉",
-        time:"1997.12.14,16.30",
-      }]
+        discussion_id: 121,
+        user_id: 444,
+        user_name: 'eeeee',
+        role: 'student',
+        content: "题目如下：乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉乌拉",
+        time: "1997.12.14,16.30",
+      }
+    ]
   }
 
   await delay(100)
@@ -334,52 +340,50 @@ async function getCourseDiscussion(){
   return data
 }
 
-async function getQuestionReply(){
+async function getQuestionReply() {
   const data = {
-    basic:[
-    {
+    basic: [{
       course_id: 1,
       sec_id: 1,
       semester: "Spring",
       year: 1997,
-      discussion_id:111,
-      user_id:111
+      discussion_id: 111,
+      user_id: 111
     }],
-    reply:[
-      {
-        discussion_id:155,
-        user_id:121,
-        user_name:'kkkkkk',
-        role:'student',
-        content:"我觉得答案有问题，第二问的答案应该是xxx",
+    reply: [{
+        discussion_id: 155,
+        user_id: 121,
+        user_name: 'kkkkkk',
+        role: 'student',
+        content: "我觉得答案有问题，第二问的答案应该是xxx",
         time: "1997.12.11 14.30",
       },
       {
-        discussion_id:159,
-        user_id:131,
-        user_name:'xixixiix',
-        role:'student',
-        content:"我觉得答案没有问题，但是第二问本身的描述不够准确有一定歧义",
+        discussion_id: 159,
+        user_id: 131,
+        user_name: 'xixixiix',
+        role: 'student',
+        content: "我觉得答案没有问题，但是第二问本身的描述不够准确有一定歧义",
         time: "1997.12.11,15.30",
-        question_id:111
+        question_id: 111
       },
       {
-        discussion_id:168,
-        user_id:141,
-        user_name:'lalala',
-        role:'student',
-        content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
+        discussion_id: 168,
+        user_id: 141,
+        user_name: 'lalala',
+        role: 'student',
+        content: "可能是题目有问题吧，按一种理解来的话，答案这样也可以",
         time: "1997.12.11 15.30",
-        question_id:111
+        question_id: 111
       },
       {
-        discussion_id:178,
-        user_id:143,
-        user_name:'1234',
-        role:'teacher_edu',
-        content:"错的！",
+        discussion_id: 178,
+        user_id: 143,
+        user_name: '1234',
+        role: 'teacher_edu',
+        content: "错的！",
         time: "1997.12.12 10.30",
-        question_id:111
+        question_id: 111
       },
     ]
   }
@@ -392,11 +396,11 @@ async function getQuestionReply(){
 
 async function broadcastStudent(form) {
   const res = await request(POST, '/api/twitter', form)
-  console.log("sendTwitterRes",res)
+  console.log("sendTwitterRes", res)
 }
 
-async function addDiscussion(form){
-  const res = await request(POST,'/api/discussion',form)
+async function addDiscussion(form) {
+  const res = await request(POST, '/api/discussion', form)
   console.log(res)
 }
 
@@ -416,18 +420,18 @@ async function getClassInfo(form) {
 
   // 学生api
   const data = await request(POST, '/api/one_class', form)
-    // name: '高等数学',
-    // teacher_name: '孙娟娟',
-    // content: '高等数学',
-    // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
-    // student_count: 54,
-    // course_name: '高等数学',
-    // student_count: 34,
-    // building: 'A',
-    // room_number: '345',
-    // semester: 'Fall',
-    // year: 2019
-    console.log('这是班级的详细信息status 测试: ', data)
+  // name: '高等数学',
+  // teacher_name: '孙娟娟',
+  // content: '高等数学',
+  // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+  // student_count: 54,
+  // course_name: '高等数学',
+  // student_count: 34,
+  // building: 'A',
+  // room_number: '345',
+  // semester: 'Fall',
+  // year: 2019
+  console.log('这是班级的详细信息status 测试: ', data)
 
   return data
 
@@ -440,36 +444,43 @@ async function getClassInfoForTea(form) {
 
   // 老师api
   const data = await request(POST, '/api/class_details', form)
-    // name: '高等数学', 
-    // teacher_name: '孙娟娟',
-    // content: '高等数学',
-    // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
-    // student_count: 54,
-    // course_name: '高等数学',
-    // student_count: 34,
-    // building: 'A',
-    // room_number: '345',
-    // semester: 'Fall',
-    // year: 2019
-    console.log('这是班级的详细信息: ', data)
+  // name: '高等数学',
+  // teacher_name: '孙娟娟',
+  // content: '高等数学',
+  // avatar: 'http://img.cdn.leonwang.top/Xnip2019-07-08_19-47-51.jpg',
+  // student_count: 54,
+  // course_name: '高等数学',
+  // student_count: 34,
+  // building: 'A',
+  // room_number: '345',
+  // semester: 'Fall',
+  // year: 2019
+  console.log('这是班级的详细信息: ', data)
 
   return data
 
 }
 
 async function joinClass(form) {
-
-
-
+  const res = await request(POST, )
 }
-async function getCoursewareList(form)
-{
+async function getCoursewareList(form) {
 
-  return  {listdata: [
-    {name : '课件1', location : 'www.baidu.com'},
-    {name : '课件2', location : 'www.google.com'},
-    {name : '课件3', location : '4m3.tongji.edu.cn'}
-],}
+  return {
+    listdata: [{
+        name: '课件1',
+        location: 'www.baidu.com'
+      },
+      {
+        name: '课件2',
+        location: 'www.google.com'
+      },
+      {
+        name: '课件3',
+        location: '4m3.tongji.edu.cn'
+      }
+    ],
+  }
 
 }
 
@@ -481,28 +492,24 @@ async function getJoinStatus(form) {
 async function getjoinedClassList(id) {
 
 
-      var form = {
-      }
-      var date=new Date;
-      var year=date.getFullYear();
-      var month = date.getMonth() + 1;
-     // console.log('这是年份', year)
-      // this.year_options.label = year;
-      // this.year_options.value = year;
-      //this.year_options.push({label: year, value: year})
-      if(month <= 9)
-      {
-        form.semester = 'Spring'
-        form.year = year
-        // form.push({semester:"Spring", year: year})
-      }
-      else if(month > 9)
-      {
-        form.semester = 'Autumn'
-        form.year = year
-      }
+  var form = {}
+  var date = new Date;
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  // console.log('这是年份', year)
+  // this.year_options.label = year;
+  // this.year_options.value = year;
+  //this.year_options.push({label: year, value: year})
+  if (month <= 9) {
+    form.semester = 'Spring'
+    form.year = year
+    // form.push({semester:"Spring", year: year})
+  } else if (month > 9) {
+    form.semester = 'Autumn'
+    form.year = year
+  }
 
-      console.log('这是ffffffom', form)
+  console.log('这是ffffffom', form)
 
   const res = await request(POST, '/api/part_classes', form)
   //console.log('这是学生参与的班级列表', res)
@@ -526,97 +533,101 @@ async function getjoinedClassList(id) {
 }
 
 async function getSearchResult(name) {
-  const res = await request(POST, '/api/users', {user_name: name})
-  console.log("searchuser",res.data)
+  const res = await request(POST, '/api/users', {
+    user_name: name
+  })
+  console.log("searchuser", res.data)
   return res.data.data.users;
 }
 
-async function getMessageWithID(id) {
+async function getClassMessage(form) {
   //fake message data;
-  const res = {
-    "data": {
-      "broadcasts": [{
-        "broadcast_id": "000001",
-        "content": "这是一条很长的广播！第一条广播！",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-14 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "不就是瞎编吗？谁不会啊！",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "发现了一个问题，这个content的内容存不了分行的。完蛋。",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "数据造假，从我做起。学术造假，从我做起。",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, ]
-    },
-    "code": 200,
-    "message": 'ok'
-  }
-  const data = res.data.broadcasts;
+  // const res = {
+  //   "data": {
+  //     "broadcasts": [{
+  //       "broadcast_id": "000001",
+  //       "content": "这是一条很长的广播！第一条广播！",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-14 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "不就是瞎编吗？谁不会啊！",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "发现了一个问题，这个content的内容存不了分行的。完蛋。",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "数据造假，从我做起。学术造假，从我做起。",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, ]
+  //   },
+  //   "code": 200,
+  //   "message": 'ok'
+  // }
+  // const data = res.data.broadcasts;
   // console.log(data);
   // console.log(typeof(data));
-  await (delay(1000));
-  return res.data;
+  // await (delay(1000));
+  const res = await request(POST, '/api/class_broadcasts', form)
+  console.log(res);
+  return res.data.data.broadcasts;
   // const res = await request(GET, '/api/broadcasts', {'user': id});
   // return res;
 }
@@ -658,13 +669,13 @@ async function deleteFollowPerson(id) {
   console.log(res)
 }
 
-async function createClass(form){
+async function createClass(form) {
   // const res = await request(POST, '/api/class', form)
   // console.log(res)
   console.log("提交成功")
 }
 
-async function getAllQuesiton(form) {
+async function getAllQuestion(form) {
   const res = await request(POST, '/api/course_questions', form)
   console.log("allquestion", res.data.data)
   return res.data.data
@@ -1088,6 +1099,12 @@ async function getExamQuestions(form) {
   return res.data.data
 }
 
+async function submitExam(form) {
+  const res = await request(POST, '/api/finished_exam', form)
+  console.log("finishexam", res.data.data)
+  return res.data.data
+}
+
 async function getCourseware(course_id, sec_id, semester, year) {
   const res = {
     data: [{
@@ -1115,13 +1132,15 @@ async function getCourseware(course_id, sec_id, semester, year) {
 }
 
 async function deleteCourseware(courseware_id) {
-  const res = await request(DELETE, '/api/CourseWares', { courseware_id: courseware_id})
+  const res = await request(DELETE, '/api/CourseWares', {
+    courseware_id: courseware_id
+  })
   console.log(res);
   return res
 }
 
 async function uploadCourseware(form) {
-  const res = await request (POST, 'api/CourseWare', form)
+  const res = await request(POST, 'api/CourseWare', form)
   console.log(res);
   return res
 }
@@ -1134,72 +1153,73 @@ async function deletePost(id) {
   return res.data
 }
 
-async function coursetableGetCoursetable(form){
-  const data={
-    courselist:[{
-      day: 3,
-      course_name: "C++",
-      building: "济事楼",
-      room: "211",
-      start_section: 1,
-      length: 2,
-      single_or_double: 1
-    },
-    {
-      day: 2,
-      course_name: "数据库",
-      building: "b楼",
-      room: "301",
-      start_section: 5,
-      length: 2,
-      single_or_double: 2
-    },
-    {
-      day: 3,
-      course_name: "组合数学",
-      building: "a楼",
-      room: "421",
-      start_section: 9,
-      length: 2,
-      single_or_double: 1
-    },
-    {
-      day: 1,
-      course_name: "组合数学",
-      building: "a楼",
-      room: "421",
-      start_section: 2,
-      length: 2,
-      single_or_double: 2
-    },
-    {
-      day: 5,
-      course_name: "组合数学",
-      building: "b楼",
-      room: "421",
-      start_section: 2,
-      length: 2,
-      single_or_double: 1
-    },
-    {
-      day: 4,
-      course_name: "C--",
-      building: "济事楼",
-      room: "112",
-      start_section: 7,
-      length: 2,
-      single_or_double: 1
-    }]
+async function coursetableGetCoursetable(form) {
+  const data = {
+    courselist: [{
+        day: 3,
+        course_name: "C++",
+        building: "济事楼",
+        room: "211",
+        start_section: 1,
+        length: 2,
+        single_or_double: 1
+      },
+      {
+        day: 2,
+        course_name: "数据库",
+        building: "b楼",
+        room: "301",
+        start_section: 5,
+        length: 2,
+        single_or_double: 2
+      },
+      {
+        day: 3,
+        course_name: "组合数学",
+        building: "a楼",
+        room: "421",
+        start_section: 9,
+        length: 2,
+        single_or_double: 1
+      },
+      {
+        day: 1,
+        course_name: "组合数学",
+        building: "a楼",
+        room: "421",
+        start_section: 2,
+        length: 2,
+        single_or_double: 2
+      },
+      {
+        day: 5,
+        course_name: "组合数学",
+        building: "b楼",
+        room: "421",
+        start_section: 2,
+        length: 2,
+        single_or_double: 1
+      },
+      {
+        day: 4,
+        course_name: "C--",
+        building: "济事楼",
+        room: "112",
+        start_section: 7,
+        length: 2,
+        single_or_double: 1
+      }
+    ]
   }
   await delay(1000);
   return data
 }
 
 async function getAllCourses() {
- // const res = request(POST, `/api/allcourse`, {
+  // const res = request(POST, `/api/allcourse`, {
 
 
-//  console.log("deleteTwitterRes", res)
+  //  console.log("deleteTwitterRes", res)
   // const data = [
   //   {Course_Id : 1, course_name: '数据库'},
   //   {Course_Id : 2, course_name: '高等数学'},
@@ -1224,9 +1244,34 @@ async function updateAtten(form) {
   console.log(res)
 }
 
+async function getGlobalBro() {
+  const res = await request(POST, '/api/all_broadcasts')
+  console.log(res.data.data.broadcasts);
+  return res.data.data.broadcasts
+}
+
 async function getTeamlist(form) {
   const res = await request(POST, '/api/teams', form)
   console.log(res)
+}
+
+// 审核
+async function getToBeAudited(form) {
+  const res = await request(POST, '/api/waiting_students', form)
+  console.log("auditlist", res.data.data)
+  return res.data.data
+}
+
+async function auditJoinClass(form) {
+  const res = request(POST, '/api/permission', form)
+  return res
+}
+
+// get all students of a class
+async function getAllStudents(form) {
+  const res = await request(POST, '/api/students', form)
+  console.log("allstudents", res.data.data)
+  return res.data.data
 }
 
 async function getAllDiscussions(form) {
@@ -1234,9 +1279,14 @@ async function getAllDiscussions(form) {
   return res
 }
 
-async function getDiscussionReply({commit, state}, id)
-{
+async function getDiscussionReply({
+  commit,
+  state
+}, id) {
   const res = await request(POST, '/api/one_discussion', id)
   return res
 }
-
+async function postBroadcast(form) {
+  const res = await request(POST, '/api/broadcasts', form)
+  console.log(res)
+}

@@ -147,7 +147,7 @@ export default {
       this.getAllQuestion()
     },
     getAllQuestion() {
-      api.getAllQuesiton({
+      api.getAllQuestion({
         course_id: this.classInfo.course_id
       }).then(data => {
         console.log("questionlist", data)

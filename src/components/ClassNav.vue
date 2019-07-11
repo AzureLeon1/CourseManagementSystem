@@ -28,10 +28,10 @@
     <div class="classNav">
       <img class="avatar" :src="classinfo.avatar" @click="routeTo('ClassDetail', {corp_id: 1})">
 
-      <div class="name">{{classinfo.name}}</div>
-      <div class="intro">学生人数：{{classinfo.student_count}}</div>
+      <div class="name">任课教师: {{classinfo.user_name}}</div>
+      <div class="intro">学生人数：<el-button type="text" @click="routeTo('ClassMembers',{class_id:classinfo.course_id})">{{classinfo.student_number}}</el-button></div>
 
-      <div class="menu-item" v-for="item in menu" @click="routeTo(item.routeName)">
+      <div class="menu-item" v-for="(item,index) in menu" @click="routeTo(item.routeName)" :key="index">
         <i :class="item.icon"></i>
         <span>{{item.title}}</span>
       </div>
@@ -222,7 +222,7 @@ export default {
 .intro{
   font-size: 13px;
   color:#888888;
-  margin-bottom: 25px;
+  margin-bottom: -5px;
 }
 
 .btn-wrapper{
