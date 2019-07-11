@@ -16,7 +16,7 @@
                         <div class="tickle"><i class="el-icon-success"></i></div>
                     </div>
                 </div>
-                <Message></Message>
+                <Message position="class"></Message>
             </div>
         </el-main>
     </el-container>

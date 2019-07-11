@@ -16,13 +16,16 @@ const getters = {
 
 
 const actions = {
-    async getClassInfo({commit, state}, form)
+    async getClassInfo({commit, state}, {form, role})
     {
       var data = {}
-      if (state.profile.user.role == 'student') {
+    //   console.log('角色到底是什么', role)
+    //   console.log('form到底是什么', form)
+      if (role == 'student') {
         data = await api.getClassInfo(form);
+        console.log('返回值到底是什么', data)
       }
-      else if (state.profile.user.role == 'teacher_edu') {
+      else if (role == 'teacher_edu') {
         data = await api.getClassInfoForTea(form)
       }
         // console.log(data);
