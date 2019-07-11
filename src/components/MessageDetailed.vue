@@ -6,9 +6,9 @@
     width="50%;">
         <div id="messageDetail" style="padding-right: 15px;">
             <div class="message-part">
-                <div class="label">
+                <!-- <div class="label">
                     来 自<i class="el-icon-caret-right"></i>
-                </div>
+                </div> -->
                 <div style="flex-grow: 1; padding: 5px;">{{from}}</div>
             </div>
             <div class="message-part">
