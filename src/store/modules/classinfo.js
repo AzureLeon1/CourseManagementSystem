@@ -61,6 +61,10 @@ const actions = {
         const data = await api.getCoursewareList(form)
         commit('setCoursewareList', data)
 
+    },
+    async getClassMemberNum({commit, state})
+    {
+        state.classinfo.student_number += 1
     }
 }
 

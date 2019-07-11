@@ -28,6 +28,7 @@ import GlobalClass from '@/views/GlobalClass'
 import ClassDetail from '@/views/ClassDetail'
 import ClassHome from '@/views/ClassHome'
 import MembershipAudit from '@/views/MembershipAudit'
+import ClassMembers from '@/views/ClassMembers'
 import Summary from '@/views/Summary'
 
 Vue.use(Router)
@@ -176,6 +177,11 @@ export default new Router({
       name: 'MembershipAudit',
       component: MembershipAudit,
       props: true,
+    },
+    {
+      path: '/class_home/:class_id/classMembers',
+      name: 'ClassMembers',
+      component: ClassMembers
     },
     {
       path: '/summary',
