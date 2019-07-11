@@ -24,7 +24,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass)
+    console.log(this.$store.state.classlistitem.clickedclass);
+    console.log(this.$store.state.profile.user.role);
+    this.$store.dispatch("classinfo/getClassInfo", {form:this.$store.state.classlistitem.clickedclass, role: this.$store.state.profile.user.role})
     this.$store.dispatch("classinfo/getJoinStatus", this.$store.state.classlistitem.clickedclass)
     console.log("classhomeinfo", this.$store.state.classinfo);
   }

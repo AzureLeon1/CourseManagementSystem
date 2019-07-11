@@ -147,8 +147,6 @@ export default {
     createMsg(form){
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=false;
-        // alert(form);
-        api.createMessage(form);
     },
     hideCreateMsg(){
         this.msc = this.$refs.msc;
@@ -171,6 +169,9 @@ export default {
           console.log(bros);
           this.messages=Array(0);
           for(let i=0;i<bros.length;i++){
+            if (bros[i].course_id == 0 && bros[i].sec_id == 0 && bros[i].semester == "Spring" && bros[i].year == 1997) {
+              bros[i].course_name = '教务消息'
+            }
             this.messages.push(bros[i]);
           }
           console.log(this.messages);
@@ -199,6 +200,9 @@ export default {
       .then(getMessage => {
         this.messages=Array(0);
       for(let i=0;i<getMessage.length;i++){
+        if (getMessage[i].course_id == 0 && getMessage[i].sec_id == 0 && getMessage[i].semester == "Spring" && getMessage[i].year == 1997) {
+          getMessage[i].course_name = '教务消息'
+        }
         this.messages.push(getMessage[i]);
       }
 

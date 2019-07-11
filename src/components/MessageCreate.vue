@@ -6,29 +6,29 @@ width="400px;">
     <div class="body" style="padding: 0 15px;">
         <el-form ref="form" :model="form" label-width="70px" label-position="left">
             <el-form-item label="广播范围">
-                <el-select v-model="form.region" placeholder="请选择活动区域">
-                <el-option v-if="this.$store.state.profile.role == 'teacher_manage'" label="全局广播" value="beijing"></el-option>
-                <el-option label="计算机系统结构" value="shanghai"></el-option>
+                <el-select v-model="form.scope" placeholder="请选择活动区域">
+                <el-option v-if="this.$store.state.profile.role == 'teacher_manage'" label="全局广播" value="2"></el-option>
+                <el-option v-if="this.$store.state.profile.role == 'teacher_edu'" label="班级广播" value="1"></el-option>
                 </el-select>
             </el-form-item>
 
             <el-form-item label="起始时间">
                 <el-col :span="11">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.start_date" style="width: 100%;"></el-date-picker>
+                <el-date-picker value-format="yyyy.MM.dd" type="date" placeholder="选择日期" v-model="form.start_date" style="width: 100%;"></el-date-picker>
                 </el-col>
                 <el-col class="line" :span="2" style="text-align: center;">-</el-col>
                 <el-col :span="11">
-                <el-time-picker placeholder="选择时间" v-model="form.start_time" style="width: 100%;"></el-time-picker>
+                <el-time-picker value-format="HH:mm:ss" placeholder="选择时间" v-model="form.start_time" style="width: 100%;"></el-time-picker>
                 </el-col>
             </el-form-item>
 
             <el-form-item label="结束时间">
                 <el-col :span="11">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.end_date" style="width: 100%;"></el-date-picker>
+                <el-date-picker value-format="yyyy.MM.dd" type="date" placeholder="选择日期" v-model="form.end_date" style="width: 100%;"></el-date-picker>
                 </el-col>
                 <el-col class="line" :span="2" style="text-align: center;">-</el-col>
                 <el-col :span="11">
-                <el-time-picker placeholder="选择时间" v-model="form.end_time" style="width: 100%;"></el-time-picker>
+                <el-time-picker value-format="HH:mm:ss" placeholder="选择时间" v-model="form.end_time" style="width: 100%;"></el-time-picker>
                 </el-col>
             </el-form-item>
             <el-form-item label="广播类型">
@@ -54,6 +54,8 @@ width="400px;">
 </template>
 
 <script>
+import api from '../api/index.js'
+import { getNowTime } from '../utils/util.js'
 export default {
     name: 'MessageCreate',
     props:{
@@ -65,7 +67,7 @@ export default {
       return {
         flag_true: true,
         form: {
-            region:'',
+            scope:'',
             start_date:'',
             start_time:'',
             end_date:'',
@@ -82,8 +84,21 @@ export default {
         },
         createMsg(){
             //调用父组件函数
-            // console.log(this.form);
-            this.$emit('createMsg',this.form);
+            console.log(this.form);
+            this.form.type = (this.form.type == '作业广播' ? 1 : 2 )
+            this.form.start_time = this.form.start_date + ' ' + this.form.start_time
+            this.form.end_time = this.form.end_date + ' ' + this.form.end_time
+            this.form.course_id = this.$store.state.classinfo.classinfo.course_id
+            this.form.sec_id = this.$store.state.classinfo.classinfo.sec_id
+            this.form.semester = this.$store.state.classinfo.classinfo.semester
+            this.form.year = this.$store.state.classinfo.classinfo.year
+            this.form.publised_time = getNowTime()
+            console.log(this.form);
+            // api.postBroadcast(this.form)
+            //   .then()
+
+            this.$emit('createMsg');
+
         }
     }
 }
