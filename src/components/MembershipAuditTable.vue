@@ -62,6 +62,9 @@ export default {
       }).then(res => {
         this.$message.success("操作成功")
         this.getData()
+        if (status) {
+          this.$store.dispatch('classinfo/addClassMemberNum')
+        }
       })
     }
   },

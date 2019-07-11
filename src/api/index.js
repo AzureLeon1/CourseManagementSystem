@@ -464,9 +464,7 @@ async function getClassInfoForTea(form) {
 }
 
 async function joinClass(form) {
-
-
-
+  const res = await request(POST, )
 }
 async function getCoursewareList(form)
 {
