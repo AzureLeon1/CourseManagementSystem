@@ -945,8 +945,8 @@ async function getDiscussionReply(id) {
   const res = await request(POST, '/api/one_discussion', {
     discussion_id: id
   })
-  console.log("discussioncomment", res)
-  return res
+  console.log("discussioncomment", res.data.data)
+  return res.data.data
 }
 
 async function sendComment(form) {

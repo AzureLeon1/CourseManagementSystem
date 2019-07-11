@@ -59,7 +59,7 @@ export default {
             api.getDiscussionReply(id)
             .then(res => {
                 this.item = res
-                this.commentList = res.reply
+                this.commentList = res.replys
             })
             
         }
