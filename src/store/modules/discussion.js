@@ -1,6 +1,7 @@
 import api from '@/api/index.js'
 import { parseAuth } from '@/utils/util.js'
 import { STATUS_CODES } from 'http';
+import { changeRole } from "../../utils/util"
 
 const state = {
     basicItems:[],
@@ -15,6 +16,9 @@ const getters = {
 const actions = {
   async getAllDiscussions({commit, state}, form) {
     const data = await api.getCourseDiscussion(form)
+    for (let q of data.questions) {
+      q.role = changeRole(q.role)
+    }
     commit('setDiscussionItems', data.questions)
   },
 
