@@ -107,6 +107,7 @@ export default {
       messages: null,
       tableData: Array(0),
       // tableData: Array(20).fill(simData);
+      currentrow:0,
     };
   },
   methods: {
@@ -140,6 +141,7 @@ export default {
         this.msr.publish_time = row.publish_time;
         this.msr.start_time = row.start_time;
         this.msr.end_time = row.end_time;
+        this.currentrow=row;
     },
     hideReadMsg(){
         this.msr=this.$refs.msr;
@@ -151,7 +153,7 @@ export default {
     },
     createMsg(form){
         this.msc = this.$refs.msc;
-        this.msc.showCreateMsg=false;
+        this.msc.showCreateMsg=true;
     },
     hideCreateMsg(){
         this.msc = this.$refs.msc;
@@ -167,12 +169,13 @@ export default {
         this.tableData.push(this.messages[i]);
       }
     },
-    deleteBro(row) {
-      console.log(row);
-      apiIndex.deleteBro({broadcast_id: row.broadcast_id})
-        .then(res => {
+    deleteBro() {
+      //delete currentrow
+      console.log(this.currentrow);
+      // apiIndex.deleteBro({broadcast_id: row.broadcast_id})
+      //   .then(res => {
 
-        })
+      //   })
 
     },
 
@@ -189,7 +192,7 @@ export default {
           }
           console.log(this.messages);
 
-          //update page 1 content
+      //update page 1 content
       let range=this.messages.length<this.eachPage?this.messages.length:this.eachPage;
       // console.log(range);
       for(let i=0;i<range;i++){

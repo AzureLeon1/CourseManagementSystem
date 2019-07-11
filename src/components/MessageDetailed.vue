@@ -29,8 +29,8 @@
         </div>
 
         <div slot="footer" class="dialog-footer" style="text-align: center;">
-            <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="readMore">查 看 详 情</el-button>
             <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="hideReadMsg">我 知 道 了</el-button>
+            <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="danger" @click="deleteRow">删 除</el-button>
         </div>
     </el-dialog>
 </div>
@@ -41,7 +41,7 @@ export default {
     name: 'MessageDetailed',
     props: {
         showMessageDetailed:{
-            default: false
+            default: true
         },
         broadcast_id:{
             default: 0
@@ -74,9 +74,12 @@ export default {
     },
     methods: {
         readMore(){
+            },
+        hideReadMsg(){
             this.$emit("hideReadMsg");
         },
-        hideReadMsg(){
+        deleteRow(){
+            this.$parent.deleteBro();
             this.$emit("hideReadMsg");
         }
     }
