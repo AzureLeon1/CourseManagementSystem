@@ -1210,7 +1210,7 @@ async function getAllCourses() {
   // ]
   // return data
     const data = await request(POST, '/api/courses')
-    console.log('这是api返回值', data.data.couses)
+    console.log('这是api返回值', data.data.courses)
     return data.data.courses
 }
 async function createAttenRecords(form) {

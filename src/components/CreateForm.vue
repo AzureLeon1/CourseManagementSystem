@@ -357,7 +357,7 @@ export default {
     submitForm(formName) {
       this.$store.dispatch("allpost/createClass", formName);
 
-      console.log(formName);
+      console.log('这是最终提交的表单', formName);
 
       var ids = [];
       for (var i = 0; i < formName.time_slots.length; i++) {
