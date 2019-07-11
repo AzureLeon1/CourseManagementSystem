@@ -47,7 +47,7 @@
     </div>
     <!-- 老师不显示-->
     <div class="myteams" v-if="isShow">
-      <Myteam />
+      <Myteam ref="myteam"/>
     </div>
   </div>
 </template>
@@ -113,7 +113,7 @@ export default {
 
 
     },
-    JoinClick() {
+    JoinClick(row) {
       const h = this.$createElement;
       this.$msgbox({
         message: h("p", null, [
@@ -127,12 +127,17 @@ export default {
           if (action === "confirm") {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = "执行中...";
-            setTimeout(() => {
-              done();
-              setTimeout(() => {
-                instance.confirmButtonLoading = false;
-              }, 300);
-            }, 3000);
+            api.joinTeam({team_id: row.team_id, user_id: this.$store.state.profile.user.id})
+              .then(res => {
+                console.log(res.data);
+                if (res.data.code == 200){
+                  done()
+                  instance.confirmButtonLoading = false;
+                  this.getData()
+                  this.$refs.myteam.getData()
+
+                }
+              })
           } else {
             done();
           }

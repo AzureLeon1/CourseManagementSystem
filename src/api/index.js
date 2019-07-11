@@ -78,6 +78,7 @@ export default {
   deleteBro,
   getAllTeams,
   getMyTeams,
+  joinTeam,
 }
 
 function param(a) {
@@ -1307,4 +1308,10 @@ async function getMyTeams(form) {
   const res = await request(POST, '/api/its_teams', form)
   console.log(res.data.data);
   return res.data.data.teams
+}
+
+async function joinTeam(form) {
+  const res = await request(POST, '/api/teams_attendance', form)
+  console.log(res);
+  return res
 }
