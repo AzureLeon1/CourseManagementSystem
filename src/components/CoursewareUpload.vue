@@ -65,6 +65,7 @@ export default {
     upload() {
       //调用父组件函数
       // console.log(this.form);
+      console.log(this.form.location);
       if (this.form.name == "" || this.form.location == "")
       {
         this.$message({
