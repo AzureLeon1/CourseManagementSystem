@@ -48,25 +48,22 @@ export default {
   data () {
     return {
         isShowList:true,
-        dislogQuestionVisible:false,
-        remain:200,
-
-        showList:[{
-                discussion_id:1,
-                user_name:"张萌萌",
-                avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-                role:"学生",
-                content:"一个非常长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的问题。",
-                time:"2018-7-11 12:30"
-            },{
-                discussion_id:2,
-                user_name:"同济不放假大学",
-                avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-                role:"老师",
-                content:"我不想参与讨论。",
-                time:"2018-7-11 12:30"
-            },
-        ]
+        // showList:[{
+        //         discussion_id:1,
+        //         user_name:"张萌萌",
+        //         avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        //         role:"学生",
+        //         content:"一个非常长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的问题。",
+        //         time:"2018-7-11 12:30"
+        //     },{
+        //         discussion_id:2,
+        //         user_name:"同济不放假大学",
+        //         avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        //         role:"老师",
+        //         content:"我不想参与讨论。",
+        //         time:"2018-7-11 12:30"
+        //     },
+        // ]
       }
   },
 
@@ -96,9 +93,25 @@ export default {
 
       }
   },
-  mounted:function(){
-      this.$store.dispatch("discussion/getAllDiscussions",this.userId);
+  computed: {
+      showList()
+      {
+          return this.$store.state.discussion.DiscussionItems
+      }
+
+  },
+  mounted () {
+
     //   updateList(classID);
+    this.$store.dispatch("discussion/getAllDiscussions", 
+    {course_id:this.$store.state.classinfo.classinfo.course_id,
+    sec_id: this.$store.state.classinfo.classinfo.sec_id,
+    semester: this.$store.state.classinfo.classinfo.semester,
+    year: this.$store.state.classinfo.classinfo.year,})
+
+
+
+
   },
   computed: {
       showList(){

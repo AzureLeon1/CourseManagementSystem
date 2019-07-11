@@ -47,7 +47,7 @@
           </el-select>
         </el-form-item>
         <el-form-item
-          prop="room"
+          prop="room_number"
           label="教室号"
           :rules="[
       { required: true, message: '教室号不能为空', trigger: 'blur'},
@@ -56,7 +56,7 @@
       }}
       ]"
         >
-          <el-input v-model="form.room"></el-input>
+          <el-input v-model="form.room_number"></el-input>
         </el-form-item>
 
         <el-form-item
@@ -96,18 +96,18 @@
         </el-form-item>
 
         <el-form-item
-          v-for="(domain, index) in form.domains"
+          v-for="(domain, index) in form.time_slots"
           :label="'第' + String(index+1) +  '次课'"
           :key="domain.key"
-          :prop="'domains.' + index + '.value'"
+          :prop="'time_slots.' + index + '.value'"
           :rules="{
                    required:true, trigger:'blur'}"
         >
           <el-form-item label>
-            <el-select v-model="domain.week_day" placeholder="星期">
+            <el-select v-model="domain.day" placeholder="星期">
               <el-option
                 v-for="item in week_options"
-                :prop="'domains.' + index + '.start_sec'"
+                :prop="'time_slots.' + index + '.start_sec'"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -123,34 +123,34 @@
               ></el-option>
             </el-select>
 
-            <el-select v-if="(domain.start_sec === 1 )" v-model="domain.class_length" placeholder="持续节数">
+            <el-select v-if="(domain.start_sec === 1 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens1" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
-             <el-select v-if="(domain.start_sec === 3 )" v-model="domain.class_length" placeholder="持续节数">
+             <el-select v-if="(domain.start_sec === 3 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens3" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
-             <el-select v-if="(domain.start_sec === 5 )" v-model="domain.class_length" placeholder="持续节数">
+             <el-select v-if="(domain.start_sec === 5 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens5" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
-                <el-select v-if="(domain.start_sec === 7 )" v-model="domain.class_length" placeholder="持续节数">
+                <el-select v-if="(domain.start_sec === 7 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens7" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
 
-                <el-select v-if="(domain.start_sec === 9)" v-model="domain.class_length" placeholder="持续节数">
+                <el-select v-if="(domain.start_sec === 9)" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens9" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
 
-                <el-select v-if="(domain.start_sec === 11 )" v-model="domain.class_length" placeholder="持续节数">
+                <el-select v-if="(domain.start_sec === 11 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens11" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
 
-                <el-select v-if="(domain.start_sec === null )" v-model="domain.class_length" placeholder="持续节数">
+                <el-select v-if="(domain.start_sec === null )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lensnull" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
@@ -159,9 +159,9 @@
 
 
 
-            <el-select v-model="domain.odd_even" placeholder="单双周">
+            <el-select v-model="domain.single_or_double" placeholder="单双周">
               <el-option
-                v-for="item in odd_even"
+                v-for="item in single_or_double"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -211,19 +211,19 @@ export default {
         semester: null,
         year: null,
         building: "",
-        room: null,
+        room_number: null,
         start_week: null,
         end_week: null,
         teacher_id: null,
         avatar: "",
 
-        domains: [
+        time_slots: [
           {
-            week_day: null,
+            day: null,
             value: null,
             start_sec: null,
-            class_length: null,
-            odd_even: null
+            length: null,
+            single_or_double: null
           }
         ]
       },
@@ -329,7 +329,7 @@ export default {
           label: "星期五"
         }
       ],
-      odd_even: [
+      single_or_double: [
         {
           value: 1,
           label: "单周"
@@ -360,8 +360,8 @@ export default {
       console.log(formName);
 
       var ids = [];
-      for (var i = 0; i < formName.domains.length; i++) {
-        console.log(formName.domains[i].week_day);
+      for (var i = 0; i < formName.time_slots.length; i++) {
+        console.log(formName.time_slots[i].day);
       }
     },
     resetForm(formName) {
@@ -369,15 +369,15 @@ export default {
       this.$refs[formName].resetFields();
     },
     removeDomain(item) {
-      var index = this.form.domains.indexOf(item);
+      var index = this.form.time_slots.indexOf(item);
       if (index !== -1) {
-        this.form.domains.splice(index, 1);
+        this.form.time_slots.splice(index, 1);
       }
     },
     addDomain() {
-      if(this.form.domains.length < 5)
+      if(this.form.time_slots.length < 5)
       {
-      this.form.domains.push({
+      this.form.time_slots.push({
         value: "",
         key: Date.now()
       });
@@ -391,7 +391,7 @@ export default {
     // slot_ids :function()
     // {
     //   ids = []
-    //   for(var i = 0; i < this.form.domains.length; i++)
+    //   for(var i = 0; i < this.form.time_slots.length; i++)
     //   {
     //     ids.push(11111)
     //     console.log(ids[i])

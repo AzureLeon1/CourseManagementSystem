@@ -82,9 +82,16 @@ export default {
         //调数据库 找到数据库中回复id的评论
         updateComments(id){
             
+            
         }
   },
   mounted () {
+
+
+
+
+
+
     
   },
   computed: {
