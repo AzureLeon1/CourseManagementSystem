@@ -31,7 +31,6 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  // getMessageWithID,
   getClassMessage,
   createMessage,
   getSearchResult,
