@@ -89,7 +89,11 @@ export default {
         .then(res => {
           // 删除成功，重新获取课件列表
           if (res.status == 200) {
-
+            this.$message({
+              type: "success",
+              message: "删除成功～"
+            })
+            this.getData()
           }
         })
     },

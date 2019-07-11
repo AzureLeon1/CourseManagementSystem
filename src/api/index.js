@@ -1129,7 +1129,7 @@ async function getCourseware(form) {
 }
 
 async function deleteCourseware(courseware_id) {
-  const res = await request(DELETE, '/api/CourseWares', {
+  const res = await request(DELETE, '/api/CourseWare_Removement', {
     courseware_id: courseware_id
   })
   console.log(res);
