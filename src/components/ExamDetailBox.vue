@@ -98,18 +98,11 @@ export default {
       this.level = [0, 0, 0, 0, 0];
       for (let s of this.scores) {
         s.scoreStyle = "normalGrade";
-        if (s.score < 60) {
-          this.level[0] += 1;
+        this.level[s.grade-1] += 1
+        if (s.grade == 1) {
           s.scoreStyle = "failGrade";
-        } else if (s.score < 70) {
-          this.level[1] += 1;
-        } else if (s.score < 80) {
-          this.level[2] += 1;
-        } else if (s.score < 90) {
-          this.level[3] += 1;
-        } else {
-          this.level[4] += 1;
-          s.scoreStyle = "goodGrade";
+        } else if (s.grade == 5) {
+          s.scoreStyle = "goodGrade"
         }
       }
       this.drawPie()
