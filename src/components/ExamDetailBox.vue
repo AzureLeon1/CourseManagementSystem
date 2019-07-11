@@ -2,7 +2,9 @@
   <el-row class="examDetailBox">
     <el-row style="margin-bottom: 20px">
       <el-col :span="22" :offset="1">
-        <span style="font-size:18px">{{examTitle}}</span>
+        <span style="font-size:18px">
+          {{examTitle}}  (总分: {{total_score}} )
+        </span>
         <el-button
           type="text"
           @click="changeView"
@@ -60,7 +62,8 @@ export default {
       level: [],
       questionList: [],
       showAnalysis: true,
-      tipMsg: "查看试卷"
+      tipMsg: "查看试卷",
+      total_score: 0
     };
   },
 
@@ -80,7 +83,20 @@ export default {
         exam_id: this.$route.params.exam_id
       }).then(data => {
         console.log("examresult", data)
-        this.scores = data
+        this.scores = data.scores
+        this.total_score = data.total_score
+        // score style & 统计
+        this.level = [0, 0, 0, 0, 0];
+        for (let s of this.scores) {
+          s.scoreStyle = "normalGrade";
+          this.level[s.grade-1] += 1
+          if (s.grade == 1) {
+            s.scoreStyle = "failGrade";
+          } else if (s.grade == 5) {
+            s.scoreStyle = "goodGrade"
+          }
+        }
+        this.drawPie()
       })
       // get all questions
       api.getExamQuestions({
@@ -92,20 +108,8 @@ export default {
       }).then(data => {
         console.log("examquestions",data)
         this.questionList = data.questions
-        this.title = data.title
+        this.examTitle = data.title
       })
-      // score style & 统计
-      this.level = [0, 0, 0, 0, 0];
-      for (let s of this.scores) {
-        s.scoreStyle = "normalGrade";
-        this.level[s.grade-1] += 1
-        if (s.grade == 1) {
-          s.scoreStyle = "failGrade";
-        } else if (s.grade == 5) {
-          s.scoreStyle = "goodGrade"
-        }
-      }
-      this.drawPie()
     },
     drawPie() {
       // 画图
