@@ -95,14 +95,18 @@ export default {
           api.createAttenRecords(request_body)
             .then(res => {
               console.log(res);
-              // TODO: 根据res.status判断是否创建成功
+              if (res.status == 200) {
+
+                this.$store.dispatch("attendance/getAttendance", this.course_sec_info);
+                this.$message({
+                  type: "success",
+                  message: "成功发布" + value + "考勤"
+                  //增加time_id=value的出席记录表!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                });
+              }
             })
 
-          this.$message({
-            type: "success",
-            message: "成功发布" + value + "考勤"
-            //增加time_id=value的出席记录表!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          });
+
         })
         .catch(er => {
           console.log(er);
