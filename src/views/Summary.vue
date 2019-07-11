@@ -5,8 +5,8 @@
         <div id="absolute"><img src="./../assets/Summarybg1.png" style="width:100vw;height:calc(100vh - 50px);"></div>
         <div id="title">成绩总结</div>
         <div id="text">本学期您一共完成了
-          <span style="font-size:32px;color:#fca326;">&nbsp;&nbsp;{{tot_tests}}&nbsp;&nbsp;</span>门课程</div>
-        <div id="chart"><course-summary></course-summary></div>
+          <span style="font-size:32px;color:#fca326;">&nbsp;&nbsp;{{tot_tests}}&nbsp;&nbsp;</span>次考试</div>
+        <div id="chart"><course-summary :value1="value1" :value2="value2" :value3="value3" :value4="value4" :value5="value5"></course-summary></div>
       </el-carousel-item>
       <el-carousel-item name='2'>
         <div id="absolute"><img src="./../assets/Summarybg2.png" style="width:100%"></div>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import api from '../api/index.js'
 import CourseSummary from "@/components/CourseSummary";
 
 export default {
@@ -67,17 +68,37 @@ export default {
        tot_discourses:8,
        tot_attend:42,
        disattend:6,
-       dis_course:"数据库原理与应用"
+       dis_course:"数据库原理与应用",
       }
   },
   methods: {
+    getData() {
+      api.examSum()
+        .then(data => {
+          console.log(data.exam_num);
+          this.tot_tests = data.exam_num
+        })
 
+      api.dissSum()
+        .then(data => {
+          this.dis_course = data.max_course_name
+          this.tot_discussions = data.total_discussions
+          this.tot_discourses = data.total_courses
+        })
+
+      api.attenSum()
+        .then(data => {
+          this.disattend = data.total_absent
+          this.tot_attend = data.total_attendance
+        })
+    }
   },
   mounted(){
+    this.getData()
 
   },
   computed: {
-   
+
   }
 }
 </script>
@@ -95,7 +116,7 @@ export default {
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-#summary 
+#summary
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }

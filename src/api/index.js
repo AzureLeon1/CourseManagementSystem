@@ -80,6 +80,11 @@ export default {
   getAllTeams,
   getMyTeams,
   joinTeam,
+  createTeam,
+  examSum,
+  dissSum,
+  attenSum,
+
 }
 
 function param(a) {
@@ -1293,6 +1298,7 @@ async function getDiscussionReply({
 async function postBroadcast(form) {
   const res = await request(POST, '/api/broadcasts', form)
   console.log(res)
+  return res.data.code
 }
 
 async function getAllTeacherId()
@@ -1332,4 +1338,22 @@ async function createTeam(form) {
   const res = await request(POST, '/api/team', form)
   console.log(res);
   return res.data.code
+}
+
+async function examSum() {
+  const res = await request(GET, '/api/exam_summary')
+  console.log(res);
+  return res.data.data
+}
+
+async function dissSum() {
+  const res = await request(POST, '/api/discussion_summary', { semester: "Spring" , year :2019 })
+  console.log(res);
+  return res.data.data
+}
+
+async function attenSum() {
+  const res = await request(POST, '/api/attendance_summary', { semester: "Spring" , year :2019 })
+  console.log(res);
+  return res.data.data
 }
