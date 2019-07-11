@@ -12,8 +12,27 @@
                 :time="item['time']"
             ></DiscussionSketchy>
         </div>
+        <div style="display:flex;align-items: center;justify-content: center;">
+            <el-button type="plain" @click="dislogQuestionVisible=true">添加问题</el-button></div>
+        
+        <el-dialog title="添加问题" :visible.sync="dislogQuestionVisible">
+            <el-form>
+                <div style="font-size:16px;margin-bottom:2%;">问题描述</div>
+                <el-form-item>
+                    <el-input type="textarea" placeholder="请在此处填写具体问题描述" rows="7" 
+                              v-model="desc" maxlength="200" @input="descInput" ></el-input>
+                    <div style="float:right;font-size:12px;color:#cccbc9;">已输入{{200-remain}}/200字</div>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="foot">
+                <el-button @click="dislogQuestionVisible = false">取 消</el-button>
+                <el-button type="primary" @click="submit">确 定</el-button>
+      </div>
+    </el-dialog>
     </div>
     <DiscussionDetailed v-show="!isShowList" ref="detail"></DiscussionDetailed>
+    
+        
 </div>
 </template>
 
@@ -50,6 +69,14 @@ export default {
 
 
   methods: {
+      submit(){
+          dislogQuestionVisible = false;
+      },
+      descInput(){
+            console.log(this.remain);
+            var txtVal=this.desc.length;
+            this.remain=200-txtVal;
+      },
       showDiscussionDetail(id){
             this.isShowList=!this.isShowList;
             let target=null;
@@ -87,7 +114,12 @@ export default {
 
   },
   computed: {
-
+      showList(){
+          return this.MyDiscussionItems;
+      },
+      MyDiscussionItems(){
+          return this.$store.state.twitter.DiscussionItems;
+      }
   }
 }
 </script>
