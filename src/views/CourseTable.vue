@@ -42,22 +42,23 @@
 
             <div class="selector-wrapper" style="width:100%">
                 <div class="selector-hint">请选择年份</div>
-                <el-select v-model="nowWeek" placeholder="">
-  <el-option v-for="item in (1, 2, 3)" :key="item" :value="item"></el-option>
+                <el-select v-model="year" @change="initialize" placeholder>
+  <el-option v-for="item in year_options" :key="item" :label="item" :value="item"></el-option>
  </el-select>
   <div class="selector-hint">请选择学期</div>
-     <el-select v-model="nowWeek" placeholder="">
-  <el-option v-for="item in (1, 2, 3)" :key="item" :value="item"></el-option>
+     <el-select v-model="semester" @change="initialize" placeholder>
+  <el-option v-for="item in semester_options" :key="item" :label="item" :value="item">{{item}}</el-option>
  </el-select>
-
  
+
+  
                
 
             </div>
 
             <div class="timetable-title">第{{nowWeek}}周</div>
 
-            <TimeTable ref="timetable"></TimeTable>
+            <TimeTable ref="timetable" :year="year" :semester="semester"></TimeTable>
             <!-- <div class="button-wrapper">
                 <el-button circle icon="el-icon-arrow-right" @click='updateTimetable(nowWeek+1);'></el-button>
             </div> -->
@@ -67,6 +68,7 @@
                 :total="190"
                 @prev-click="updateTimetable(nowWeek-1)"
                 @next-click="updateTimetable(nowWeek+1)"
+                @current-change="updateTimetable"
                 >
             </el-pagination>
         </div>
@@ -93,25 +95,47 @@ export default {
     return {
         allCourses: "before-contents",
         nowWeek:1,
+        year: 2019,
+        semester:'Spring',
+
+        year_options: [2017, 2018, 2019],
+        semester_options: ['Spring', 'Fall']
         // form: {
         //     year,
         //     semester:null
         // }
     }
   },
+  watch: {
+ 
+
+  },
   methods: {
     async initialize(){
         await this.getTimetable();
         this.updateTimetable(this.nowWeek);//第一周
     },
+
+    async yearTri(year){
+
+         this.allCourses = await api.coursetableGetCoursetable({year: year, semester: this.semester});
+
+    },
+    async semesterTri(semester){
+
+        this.allCourses = await api.coursetableGetCoursetable({ year: this.year, semester: semester});
+
+
+    },
     async getTimetable(){
         
-        this.allCourses = await api.coursetableGetCoursetable({year: 2019, semester: 'Spring'});
+        this.allCourses = await api.coursetableGetCoursetable({year: this.year, semester: this.semester});
         console.log('这是数组中的数据',this.allCourses);
         //console.log("这是取到过后的数据", this.allCourses)
        // this.allCourses=this.allCourses['courselist'];
     },
     updateTimetable(nowWeek){
+        console.log("这是nowweek", nowWeek)
         this.nowWeek=nowWeek;//update nowWeek
         nowWeek=nowWeek%2;
         if(nowWeek==0)nowWeek=2;
