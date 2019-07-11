@@ -74,7 +74,8 @@ export default {
   getAllDiscussions,
   getDiscussionReply,
   getGlobalBro,
-  postBroadcast
+  postBroadcast,
+  deleteBro
 }
 
 function param(a) {
@@ -1289,4 +1290,10 @@ async function getDiscussionReply({
 async function postBroadcast(form) {
   const res = await request(POST, '/api/broadcasts', form)
   console.log(res)
+}
+
+async function deleteBro(form) {
+  const res = await request(DELETE, '/api/broadcasts', form)
+  console.log(res)
+  return res
 }
