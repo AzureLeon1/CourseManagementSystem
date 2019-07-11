@@ -31,6 +31,7 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
+  getMessageWithID,
   getClassMessage,
   createMessage,
   getSearchResult,
@@ -45,7 +46,7 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
-  getAllQuesiton,
+  getAllQuestion,
   newQuestion,
   updateQuestion,
   deleteQuestion,
@@ -53,6 +54,7 @@ export default {
   newExam,
   checkExamResult,
   getExamQuestions,
+  submitExam,
   getCourseware,
   getAttendance,
   getTeam,
@@ -665,7 +667,7 @@ async function createClass(form){
   console.log("提交成功")
 }
 
-async function getAllQuesiton(form) {
+async function getAllQuestion (form) {
   const res = await request(POST, '/api/course_questions', form)
   console.log("allquestion", res.data.data)
   return res.data.data
@@ -1086,6 +1088,12 @@ async function checkExamResult(form) {
 async function getExamQuestions(form) {
   const res = await request(POST, '/api/exam_questions', form)
   console.log("examquestions", res.data.data)
+  return res.data.data
+}
+
+async function submitExam(form) {
+  const res = await request(POST, '/api/finished_exam', form)
+  console.log("finishexam", res.data.data)
   return res.data.data
 }
 

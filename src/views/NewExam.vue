@@ -43,7 +43,7 @@ export default {
 
   methods: {
     getData() {
-      api.newExam()
+      
     },
     submitForm() {
       this.newFormVisible = false
