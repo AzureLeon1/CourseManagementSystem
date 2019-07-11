@@ -95,10 +95,22 @@ export default {
             this.form.published_time = getNowTime()
             console.log(this.form);
             api.postBroadcast(this.form)
-              .then()
+              .then(res => {
+                if (res == 200) {
+                  this.$emit('createMsg');
+                  this.$parent.initial()
 
-            this.$emit('createMsg');
-
+                  this.form =  {
+                    scope:'',
+                    start_date:'',
+                    start_time:'',
+                    end_date:'',
+                    end_time:'',
+                    type:'',
+                    content:''
+                  }
+                }
+              })
         }
     }
 }

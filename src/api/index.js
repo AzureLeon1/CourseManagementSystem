@@ -75,12 +75,16 @@ export default {
   getDiscussionReply,
   getGlobalBro,
   postBroadcast,
+  getAllTeacherId,
   deleteBro,
   getAllTeams,
   getMyTeams,
   joinTeam,
   createTeam,
   sendComment,
+  examSum,
+  dissSum,
+  attenSum,
 }
 
 function param(a) {
@@ -628,9 +632,10 @@ async function deleteFollowPerson(id) {
 }
 
 async function createClass(form) {
-  // const res = await request(POST, '/api/class', form)
-  // console.log(res)
-  console.log("提交成功")
+  console.log('这是提交的form', form)
+   const res = await request(POST, '/api/class', form)
+   console.log("提交结果", res)
+  //console.log("提交成功")
 }
 
 async function getAllQuestion(form) {
@@ -815,65 +820,68 @@ async function deletePost(id) {
 }
 
 async function coursetableGetCoursetable(form) {
-  const data = {
-    courselist: [{
-        day: 3,
-        course_name: "C++",
-        building: "济事楼",
-        room: "211",
-        start_section: 1,
-        length: 2,
-        single_or_double: 1
-      },
-      {
-        day: 2,
-        course_name: "数据库",
-        building: "b楼",
-        room: "301",
-        start_section: 5,
-        length: 2,
-        single_or_double: 2
-      },
-      {
-        day: 3,
-        course_name: "组合数学",
-        building: "a楼",
-        room: "421",
-        start_section: 9,
-        length: 2,
-        single_or_double: 1
-      },
-      {
-        day: 1,
-        course_name: "组合数学",
-        building: "a楼",
-        room: "421",
-        start_section: 2,
-        length: 2,
-        single_or_double: 2
-      },
-      {
-        day: 5,
-        course_name: "组合数学",
-        building: "b楼",
-        room: "421",
-        start_section: 2,
-        length: 2,
-        single_or_double: 1
-      },
-      {
-        day: 4,
-        course_name: "C--",
-        building: "济事楼",
-        room: "112",
-        start_section: 7,
-        length: 2,
-        single_or_double: 1
-      }
-    ]
-  }
+  // const data = {
+  //   courselist: [{
+  //       day: 3,
+  //       course_name: "C++",
+  //       building: "济事楼",
+  //       room: "211",
+  //       start_section: 1,
+  //       length: 2,
+  //       single_or_double: 1
+  //     },
+  //     {
+  //       day: 2,
+  //       course_name: "数据库",
+  //       building: "b楼",
+  //       room: "301",
+  //       start_section: 5,
+  //       length: 2,
+  //       single_or_double: 2
+  //     },
+  //     {
+  //       day: 3,
+  //       course_name: "组合数学",
+  //       building: "a楼",
+  //       room: "421",
+  //       start_section: 9,
+  //       length: 2,
+  //       single_or_double: 1
+  //     },
+  //     {
+  //       day: 1,
+  //       course_name: "组合数学",
+  //       building: "a楼",
+  //       room: "421",
+  //       start_section: 2,
+  //       length: 2,
+  //       single_or_double: 2
+  //     },
+  //     {
+  //       day: 5,
+  //       course_name: "组合数学",
+  //       building: "b楼",
+  //       room: "421",
+  //       start_section: 2,
+  //       length: 2,
+  //       single_or_double: 1
+  //     },
+  //     {
+  //       day: 4,
+  //       course_name: "C--",
+  //       building: "济事楼",
+  //       room: "112",
+  //       start_section: 7,
+  //       length: 2,
+  //       single_or_double: 1
+  //     }
+  //   ]
+  // }
+  console.log(form)
+  const data = await request(POST, '/api/term_part_classes', form)
+  console.log("这是课程表时间", data.data.data.classes)
   await delay(1000);
-  return data
+  return data.data.data.classes
 }
 
 async function getAllCourses() {
@@ -890,9 +898,9 @@ async function getAllCourses() {
 
   // ]
   // return data
-  const data = await request(POST, '/api/courses')
-  console.log('这是api返回值', data.data.couses)
-  return data.data.courses
+    const data = await request(POST, '/api/courses')
+    console.log('这是api返回值', data.data.data.courses)
+    return data.data.data.courses
 }
 async function createAttenRecords(form) {
   const res = await request(POST, '/api/attendance_records', form)
@@ -958,6 +966,15 @@ async function sendComment(form) {
 async function postBroadcast(form) {
   const res = await request(POST, '/api/broadcasts', form)
   console.log(res)
+  return res.data.code
+}
+
+async function getAllTeacherId()
+
+{
+  const res = await request(POST, '/api/teachers')
+  return res.data.teachers_id
+
 }
 
 async function deleteBro(form) {
@@ -989,4 +1006,22 @@ async function createTeam(form) {
   const res = await request(POST, '/api/team', form)
   console.log(res);
   return res.data.code
+}
+
+async function examSum() {
+  const res = await request(GET, '/api/exam_summary')
+  console.log(res);
+  return res.data.data
+}
+
+async function dissSum() {
+  const res = await request(POST, '/api/discussion_summary', { semester: "Spring" , year :2019 })
+  console.log(res);
+  return res.data.data
+}
+
+async function attenSum() {
+  const res = await request(POST, '/api/attendance_summary', { semester: "Spring" , year :2019 })
+  console.log(res);
+  return res.data.data
 }

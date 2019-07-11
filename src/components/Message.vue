@@ -2,7 +2,7 @@
   <div id="Message">
     <div style="display: flex; flex-direction: column; min-height: 450px;">
       <div style="padding: 15px; border: 1px solid #eee; min-height: 500px;">
-        <el-table :data="tableData" @row-click="readMsg">
+        <el-table :data="filteredData" @row-click="readMsg">
           <el-table-column prop="content" label="广播消息" min-width="200px">
             <template slot-scope="scope">
               <p class="message">{{scope.row.content}}</p>
@@ -17,11 +17,6 @@
             <template slot-scope="scope">
               <i class="el-icon-time"></i>
               <span>{{scope.row.publish_time}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="delete" label="操作" width="160px">
-            <template slot-scope="scope">
-              <el-button @click="deleteBro(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -106,12 +101,23 @@ export default {
       //all messages
       messages: null,
       tableData: Array(0),
+      filteredData: Array(0),
+      filter_value: 1,
       // tableData: Array(20).fill(simData);
     };
   },
   methods: {
+    showActMsg() {
+      this.filteredData = this.tableData.filter(ele => ele.type == 2 )
+      console.log(this.tableData);
+      console.log(this.filteredData);
+    },
+    showWorkMsg() {
+      this.filteredData = this.tableData.filter(ele => ele.type == 1 )
+    },
     //all
     initial(){
+        this.tableData = new Array(0)
         this.$refs.msc.$on['hide']=this.hideReadMsg;
         if (this.position == 'global') {
           console.log("获取全局广播");
@@ -140,6 +146,7 @@ export default {
         this.msr.publish_time = row.publish_time;
         this.msr.start_time = row.start_time;
         this.msr.end_time = row.end_time;
+        this.msr.position = this.position;
     },
     hideReadMsg(){
         this.msr=this.$refs.msr;
@@ -167,14 +174,6 @@ export default {
         this.tableData.push(this.messages[i]);
       }
     },
-    deleteBro(row) {
-      console.log(row);
-      apiIndex.deleteBro({broadcast_id: row.broadcast_id})
-        .then(res => {
-
-        })
-
-    },
 
     getAllMessage() {
       apiIndex.getGlobalBro()
@@ -182,7 +181,7 @@ export default {
           console.log(bros);
           this.messages=Array(0);
           for(let i=0;i<bros.length;i++){
-            if (bros[i].course_id == 0 && bros[i].sec_id == 0 && bros[i].semester == "Spring" && bros[i].year == 1997) {
+            if (bros[i].course_id == 2 && bros[i].sec_id == 100003 && bros[i].semester == "Spring" && bros[i].year == 0) {
               bros[i].course_name = '教务消息'
             }
             this.messages.push(bros[i]);
@@ -195,6 +194,13 @@ export default {
       for(let i=0;i<range;i++){
         this.tableData.push(this.messages[i]);
       }
+
+      if (this.position == 'class')
+      this.showActMsg()
+      else
+      this.filteredData = this.tableData
+
+      console.log(this.tableData);
 
       //update pagination page_total
       this.page_total=Math.ceil(this.messages.length/this.eachPage);
@@ -213,7 +219,7 @@ export default {
       .then(getMessage => {
         this.messages=Array(0);
       for(let i=0;i<getMessage.length;i++){
-        if (getMessage[i].course_id == 0 && getMessage[i].sec_id == 0 && getMessage[i].semester == "Spring" && getMessage[i].year == 1997) {
+        if (getMessage[i].course_id == 2 && getMessage[i].sec_id == 100003 && getMessage[i].semester == "Spring" && getMessage[i].year == 0) {
           getMessage[i].course_name = '教务消息'
         }
         this.messages.push(getMessage[i]);
@@ -232,6 +238,11 @@ export default {
       // console.log(this.page_total);
 
       console.log(this.tableData);
+
+      if (this.position == 'class')
+      this.showActMsg();
+      else
+      this.filteredData = this.tableData
       })
 
 

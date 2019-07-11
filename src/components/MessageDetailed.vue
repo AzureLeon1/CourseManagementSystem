@@ -1,7 +1,7 @@
 <template>
 <div>
     <!-- float: Detailed Message -->
-    <el-dialog 
+    <el-dialog
     :visible.sync="showMessageDetailed"
     width="50%;">
         <div id="messageDetail" style="padding-right: 15px;">
@@ -29,7 +29,7 @@
         </div>
 
         <div slot="footer" class="dialog-footer" style="text-align: center;">
-            <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="readMore">查 看 详 情</el-button>
+            <el-button v-if="limit()" style="font-size: 70%; padding: 8px 12px; margin: 0 10px; background-color: #ff7675; border-color: #ff7675;" type="primary" @click="deleteBro">删 除 广 播</el-button>
             <el-button style="font-size: 70%; padding: 8px 12px; margin: 0 10px;" type="primary" @click="hideReadMsg">我 知 道 了</el-button>
         </div>
     </el-dialog>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import api from '../api/index.js'
 export default {
     name: 'MessageDetailed',
     props: {
@@ -66,6 +67,9 @@ export default {
         },
         end_time:{
             default: ""
+        },
+        position: {
+          default: ""
         }
     },
     data () {
@@ -73,8 +77,24 @@ export default {
         }
     },
     methods: {
-        readMore(){
-            this.$emit("hideReadMsg");
+      limit() {
+        if (this.$store.state.profile.user.role == 'teacher_manage') {
+          return true
+        }
+        else if (this.$store.state.profile.user.role == 'teacher_edu' && this.position == 'class') {
+          return true
+        }
+        else {
+          return false
+        }
+      },
+        deleteBro(){
+            api.deleteBro( {broadcast_id: this.broadcast_id} )
+              .then(res => {
+                console.log(res);
+                this.$emit("hideReadMsg");
+                this.$parent.initial()
+              })
         },
         hideReadMsg(){
             this.$emit("hideReadMsg");

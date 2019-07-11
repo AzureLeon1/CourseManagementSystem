@@ -34,7 +34,7 @@ export default {
 
   methods: {
     getData() {
-      if (this.user.role == "student" || this.user.role == "teacher_edu") {
+      if (this.user.role == "student") {
         this.menu.push(
           {
             index: 1,
@@ -63,15 +63,43 @@ export default {
           {
             index: 5,
             title: "期末总结",
-            routeName: "",
+            routeName: "Summary",
             icon: "el-icon-data-analysis"
           }
         );
-      } else if (this.user.role == "teacher_manage") {
+      }else if (this.user.role == "teacher_edu") {
+        this.menu.push(
+          {
+            index: 1,
+            title: "我的班级",
+            routeName: "MyClass",
+            icon: "el-icon-school"
+          },
+          {
+            index: 2,
+            title: "好友动态",
+            routeName: "Twitter",
+            icon: "el-icon-chat-line-square"
+          },
+          {
+            index: 3,
+            title: "我的消息",
+            routeName: "MessageHome",
+            icon: "el-icon-message"
+          },
+          {
+            index: 4,
+            title: "课程表",
+            routeName: "Coursetable",
+            icon: "el-icon-date"
+          }
+        );
+      }
+       else if (this.user.role == "teacher_manage") {
         this.menu.push({
           index: 1,
           title: "通知公告",
-          routeName: "",
+          routeName: "MessageHome",
           icon: "el-icon-data-board"
         },
         {
