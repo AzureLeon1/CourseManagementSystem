@@ -1,177 +1,162 @@
 <template>
-  <el-card style="width: 900px; margin:20px auto 20px auto">
-    <div
-      style=" vertical-align:middle; text-align:center;margin-left: auto;margin-right: auto;"
-    >期末总结</div>
-    <br />
-    <el-carousel :interval="4000" type="card" height="500px" width="500px">
-      <el-carousel-item v-for="item in cardList" :key="item.id">
-        <div style="margin-left: auto;margin-right: auto;width:300px;height=500px">
-          <h2 style="text-align:center">{{item.title}}</h2>
-          <h3 style="text-align:left">{{item.words_1}}</h3>
-          <div style="text-align:center; font-size:45px">{{item.tot_time}}</div>
-          <h3 style="text-align:right">{{item.words_2}}</h3>
+  <div id="summary">
+    <el-carousel height="calc(100vh - 50px)" direction="vertical" :autoplay="true" :interval=7000>
+      <el-carousel-item name='1'>
+        <div id="absolute"><img src="./../assets/Summarybg1.png" style="width:100vw;height:calc(100vh - 50px);"></div>
+        <div id="title">成绩总结</div>
+        <div id="text">本学期您一共完成了
+          <span style="font-size:32px;color:#fca326;">&nbsp;&nbsp;{{tot_tests}}&nbsp;&nbsp;</span>门课程</div>
+        <div id="chart"><course-summary></course-summary></div>
+      </el-carousel-item>
+      <el-carousel-item name='2'>
+        <div id="absolute"><img src="./../assets/Summarybg2.png" style="width:100%"></div>
+                <div id="title">讨论总结</div>
+        <div class="dismiddle">
+          <div class="dispart">
+            <div id="text">本学期您一共发布了</div>
+            <div style="font-size:36px;color:#fca326;font-weight:600;">{{tot_discussions}}</div>
+            <div id="text">条评论</div>
+          </div>
+          <div class="dispart">
+            <div id="text">参与的课程讨论数量为</div>
+            <div style="font-size:36px;color:#e2808f;font-weight:600;">{{tot_discourses}}</div>
+            <div id="text">门</div>
+          </div>
+          <div class="dispart">
+            <div id="text">您所发布的讨论数目最多的课程为</div>
+            <div style="font-size:36px;color:#efcc6b;font-weight:600;">{{dis_course}}</div>
+          </div>
         </div>
       </el-carousel-item>
-    </el-carousel>
-    <!-- <div id="graph"></div> -->
-  </el-card>
+      <el-carousel-item name='3'>
+        <div id="absolute"><img src="./../assets/Summarybg3.png" style="width:100%"></div>
+        <div id="title">出勤总结</div>
+        <div class="dismiddle">
+          <div class="dispart">
+            <div id="text">本学期您所参加课程一共进行了</div>
+            <div style="font-size:36px;color:#fca326;font-weight:600;">{{tot_attend}}</div>
+            <div id="text">次点名</div>
+          </div>
+          <div class="dispart">
+            <div id="text">您缺勤的次数为</div>
+            <div style="font-size:36px;color:#e2808f;font-weight:600;">{{disattend}}</div>
+            <div id="text">次</div>
+          </div>
+        </div>
+        <div id="text" style="margin-top:11%">
+          <div style="font-size:26px;color:#efcc6b;font-weight:600;">冰冻三尺远非一日之寒</div>
+          <div style="font-size:26px;color:#efcc6b;font-weight:600;">百尺竿头亦可更进一步</div>
+        </div>
+      </el-carousel-item>
+  </el-carousel>
+  </div>
 </template>
 
-
 <script>
+import CourseSummary from "@/components/CourseSummary";
+
 export default {
-  name: "Summary",
-  data() {
+   name:"Summary",
+   components:{
+     CourseSummary
+   },
+   data () {
     return {
-      sum_data: "",
-      cardList: [
-        {
-          id: 1,
-          title: "考试总结",
-          words_1: "您已参加了",
-          words_2: "次考试",
-          tot_time:37
-        },
-        {
-          id: 2,
-          title: "考勤总结",
-          words_1: "您所在的班级已发布了",
-          words_2: "次考勤",
-          tot_time: ""
-        },
-        {
-          id: 3,
-          title: "讨论总结",
-          words_1: "您已发表了",
-          words_2: "次讨论",
-          tot_time: ""
-        },
-        {
-          id: 4,
-          title: "组队总结",
-          words_1: "您已经加入了",
-          words_2: "支队伍",
-          tot_time: ""
-        }
-      ]
-    };
-  },
-  methods:{
-    getData() {
-      // To Do : get exam title
-      // To Do : get all scores
-      scores = [
-        {
-
-          score: 100
-        },
-        {
-
-          score: 89
-        },
-        {
-         
-          score: 79
-        },
-        {
- 
-          score: 69
-        },
-        {
-
-          score: 1
-        }
-      ];
-      // score style & 统计
-      this.level = [0, 0, 0, 0, 0];
-      for (let s of this.scores) {
-        s.scoreStyle = "normalGrade";
-        if (s.score < 60) {
-          this.level[0] += 1;
-          s.scoreStyle = "failGrade";
-        } else if (s.score < 70) {
-          this.level[1] += 1;
-        } else if (s.score < 80) {
-          this.level[2] += 1;
-        } else if (s.score < 90) {
-          this.level[3] += 1;
-        } else {
-          this.level[4] += 1;
-          s.scoreStyle = "goodGrade";
-        }
+       tot_tests:13,
+       tot_discussions:50,
+       tot_discourses:8,
+       tot_attend:42,
+       disattend:6,
+       dis_course:"数据库原理与应用"
       }
-      // 画图
-      var myChart = echarts.init(document.getElementById("graph"), "vintage")
-      myChart.setOption({
-        title: {
-          left: "center"
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: "{b}: {c} ({d}%)"
-        },
-        legend: {
-          bottom: 10,
-          left: "center",
-          data: ["优", "良", "中", "及格", "不及格"]
-        },
-        series: [
-          {
-            type: "pie",
-            radius: "65%",
-            center: ["50%", "50%"],
-            selectedMode: "single",
-            label: {
-              normal: {
-                formatter: '{b}: {c} ({d}%)'
-              }
-            },
-            data: [
-              { value: this.level[0], name: "不及格" },
-              { value: this.level[1], name: "及格" },
-              { value: this.level[2], name: "中" },
-              { value: this.level[3], name: "良" },
-              { value: this.level[4], name: "优" }
-            ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
-          }
-        ]
-      });
-    },
+  },
+  methods: {
+
+  },
+  mounted(){
+
   },
   computed: {
-    tot_exam_time() {
-      return "9";
-    }
-  },
-  mounted() {
-    this.getData();
+   
   }
-};
+}
 </script>
->
 
 <style>
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 200px;
-  margin: 0;
+#summary
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+#summary
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+#summary 
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+#summary
+  .el-carousel__indicators{
+    size:30%;
+  }
+</style>
+
+<style lang="scss" scoped>
+#relative{
+  position:relative;
+}
+#absolute{
+  position:absolute;
+  z-index: -1;
+}
+#title{
+  margin-top:10px;       //相对于父级元素向下移10px
+  width:100%;     //设置文字盒子的宽度
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  opacity:0.9;
+  font-size:26px;
+  //font-weight:700;
+  font-family: "Ruizi";
+  color:#ffffff;
+}
+#text{
+  margin-top:4px;
+  text-align:center;
+  font-family: "Ruizi";
+  font-size:22px;
+  //font-size:20px;
+  color:#ffffff;
+  opacity:0.9;
+}
+#chart{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:2%
+}
+.dismiddle{
+  margin-top:5%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:40%;
+}
+.dispart{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+   justify-content:center;
+   align-items:center;
+   height:100%;
+}
+.dispart div{
+  flex:1;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #b4bbc5;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3d7db;
-}
 </style>

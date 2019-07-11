@@ -34,3 +34,7 @@
     src: url("NotoSans-Italic.ttf");
     font-weight: bold;
 }
+@font-face{
+    font-family: "Ruizi";
+    src:url("锐字工房云字库超粗黑GBK.ttf");
+}
