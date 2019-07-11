@@ -42,7 +42,7 @@ export default {
         })
       }
       if (this.showAnswer) {
-        this.select = this.questionInfo.answer
+        this.answer = this.questionInfo.answer
       }
       this.question_id = this.questionInfo.question_id
     }
