@@ -9,7 +9,7 @@
 
       <count-down 
         :endTime="endTime"
-        v-on:timeOver="submit"
+        v-on:timeOver="submit(true)"
         v-if="!hasDone"></count-down>
 
       <question-card 
@@ -24,7 +24,7 @@
           class="finalScoreBox"
           v-if="hasDone">最终得分: {{score}}</div>
         <el-button 
-          @click="submit" 
+          @click="submit(false)" 
           type="primary"
           v-else>提交</el-button>
       </div>
@@ -125,26 +125,30 @@ export default {
       })
     },
 
-    submit() {
-      var allChecked = true
-      for (let q of this.$refs.questions){
-        if (q.answer === "") {
-          this.allChecked = false
-          break
-        }
-      }
-      if (!allChecked) {
-        this.$confirm('题目未全部完成,是否提交', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning' 
-        }).then(() => {
-          this.submitForm()
-        }).catch(() => {
-          return
-        })
-      } else {
+    submit(timeout) {
+      if (timeout) {
         this.submitForm()
+      } else {
+        var allChecked = true
+        for (let q of this.$refs.questions){
+          if (q.answer === "") {
+            this.allChecked = false
+            break
+          }
+        }
+        if (!allChecked) {
+          this.$confirm('题目未全部完成,是否提交', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning' 
+          }).then(() => {
+            this.submitForm()
+          }).catch(() => {
+            return
+          })
+        } else {
+          this.submitForm()
+        }
       }
     }
   },

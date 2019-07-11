@@ -657,8 +657,8 @@ async function updateQuestion(form) {
 }
 
 async function deleteQuestion(form) {
-  const res = await request(PUT, '/api/questions', form)
-  console.log("updatequestion", res)
+  const res = await request(DELETE, '/api/questions', form)
+  console.log("deletequestion", res)
   return res
 }
 

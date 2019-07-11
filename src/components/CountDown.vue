@@ -30,7 +30,7 @@ export default {
       // set interval
       let clock = window.setInterval(() => {
         --this.leftTotalSeconds;
-        if (this.leftTotalSeconds == 0) {
+        if (this.leftTotalSeconds <= 0) {
           window.clearInterval(clock)
           this.$emit('timeOver')
           return

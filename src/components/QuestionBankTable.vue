@@ -190,7 +190,7 @@ export default {
     deleteSelectedQuestion() {
       for (let q of this.selectedQuestions) {
         api.deleteQuestion({
-          question_id: r.question_id
+          question_id: q.question_id
         }).catch(() => {
           return
         })
