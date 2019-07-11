@@ -90,14 +90,28 @@ export default {
         this.tableData.sort(function(x,y){return x.team_id-y.team_id;})
         this.table_Select_Data = this.tableData;
         console.log(this.tableData);
-      });
 
-      api
+        api
         .getMyTeams({ user_id: this.$store.state.profile.user.id })
         .then(res => {
           console.log(res);
           this.my_teams = res;
+          // 从全部队伍中删除已加入的队伍
+          this.my_teams.forEach(ele => {
+            this.tableData.forEach(a => {
+              if(a.team_id == ele.team_id) {
+                this.tableData.splice(this.tableData.indexOf(a), 1)
+              }
+            })
+
+
+
+          })
         });
+
+      });
+
+
     },
     JoinClick() {
       const h = this.$createElement;
