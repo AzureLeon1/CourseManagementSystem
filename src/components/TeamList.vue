@@ -29,7 +29,7 @@
                   </el-form-item>
                   <br />
                   <el-form-item label="队员：">
-                    <span>{{ props.row.team_member }}</span>
+                    <span>{{ props.row.students }}</span>
                   </el-form-item>
                 </el-form>
               </template>
@@ -66,13 +66,30 @@ export default {
       searchkey: "",
       sec_data: {},
       all_teams: [],
-      my_teams: []
+      my_teams: [],
+      tableData: [],
+      table_Select_Data: [],
     };
   },
   methods: {
     getData() {
       api.getAllTeams(this.sec_data).then(res => {
         this.all_teams = res;
+        console.log(eval(res[0].students));
+        this.tableData = res;
+
+        // 把队员json数组处理成字符串
+        this.tableData.forEach(ele => {
+          ele.students_array = eval(ele.students)
+          ele.students = ""
+          ele.students_array.forEach(stu => {
+            ele.students = ele.students + stu.student_name + " "
+          })
+        })
+        // 根据team_id排序
+        this.tableData.sort(function(x,y){return x.team_id-y.team_id;})
+        this.table_Select_Data = this.tableData;
+        console.log(this.tableData);
       });
 
       api
@@ -124,12 +141,12 @@ export default {
   },
 
   computed: {
-    tableData() {
-      return this.$store.state.team.classteamlist;
-    },
-    table_Select_Data() {
-      return this.$store.state.team.classteamlist;
-    },
+    // tableData() {
+    //   return this.$store.state.team.classteamlist;
+    // },
+    // table_Select_Data() {
+    //   return this.$store.state.team.classteamlist;
+    // },
     isShow() {
       if (this.$store.state.profile.role == "student") {
         return true;
@@ -162,7 +179,7 @@ export default {
 
     this.getData()
 
-    this.$store.dispatch("team/getTeam");
+    // this.$store.dispatch("team/getTeam");
     this.table_Select_Data = this.tableData;
     //this.$stor.dispatch(actionType,playload)
     //要触发的action类型，所携带的数据

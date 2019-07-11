@@ -1306,5 +1306,5 @@ async function getAllTeams(form) {
 async function getMyTeams(form) {
   const res = await request(POST, '/api/its_teams', form)
   console.log(res.data.data);
-  return res.data.data.teams.teams
+  return res.data.data.teams
 }
