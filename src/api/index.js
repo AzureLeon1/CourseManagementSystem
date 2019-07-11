@@ -75,7 +75,9 @@ export default {
   getDiscussionReply,
   getGlobalBro,
   postBroadcast,
-  deleteBro
+  deleteBro,
+  getAllTeams,
+  getMyTeams,
 }
 
 function param(a) {
@@ -1292,4 +1294,17 @@ async function deleteBro(form) {
   const res = await request(DELETE, '/api/broadcasts', form)
   console.log(res)
   return res
+}
+
+async function getAllTeams(form) {
+  const res = await request(POST, '/api/teams', form)
+  console.log(res.data.data.teams);
+  return res.data.data.teams
+}
+
+
+async function getMyTeams(form) {
+  const res = await request(POST, '/api/its_teams', form)
+  console.log(res.data.data);
+  return res.data.data.teams.teams
 }

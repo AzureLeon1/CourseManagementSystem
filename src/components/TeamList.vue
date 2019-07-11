@@ -1,13 +1,19 @@
 <template>
   <div class="teamlist">
     <div class="classteams">
-      <el-card style="width: 100%; margin:20px auto 20px auto;" shadow="never" >
+      <el-card style="width: 100%; margin:20px auto 20px auto;" shadow="never">
         <div slot="header" class="clearfix">
           <span>班级队伍</span>
         </div>
         <div>
-          <el-input v-focus placeholder="请输入关键字" v-model="searchkey" class="input-with-select" clearable autofocus>
-          </el-input>
+          <el-input
+            v-focus
+            placeholder="请输入关键字"
+            v-model="searchkey"
+            class="input-with-select"
+            clearable
+            autofocus
+          ></el-input>
         </div>
         <div>
           <el-table :data="table_Select_Data" height="300px" :border="false" :show-header="false">
@@ -47,6 +53,7 @@
 </template>
 
 <script>
+import api from "../api/index.js";
 import Myteam from "../components/Myteam";
 import temp from "@/store/modules/team.js";
 export default {
@@ -56,10 +63,25 @@ export default {
   },
   data() {
     return {
-      searchkey: ""
+      searchkey: "",
+      sec_data: {},
+      all_teams: [],
+      my_teams: []
     };
   },
   methods: {
+    getData() {
+      api.getAllTeams(this.sec_data).then(res => {
+        this.all_teams = res;
+      });
+
+      api
+        .getMyTeams({ user_id: this.$store.state.profile.user.id })
+        .then(res => {
+          console.log(res);
+          this.my_teams = res;
+        });
+    },
     JoinClick() {
       const h = this.$createElement;
       this.$msgbox({
@@ -105,7 +127,7 @@ export default {
     tableData() {
       return this.$store.state.team.classteamlist;
     },
-    table_Select_Data(){
+    table_Select_Data() {
       return this.$store.state.team.classteamlist;
     },
     isShow() {
@@ -115,22 +137,31 @@ export default {
         return false;
       }
     },
-    table_Select_Data:function(){
-      
-      var _search=this.searchkey
-      if(_search){
-      return this.tableData.filter(function(tableData){
-        return Object.keys(tableData).some(function(key){
-          return String(tableData[key]).toLowerCase().indexOf(_search)>-1
-        })
-      })
-      }
-      else{
-        return this.tableData
+    table_Select_Data: function() {
+      var _search = this.searchkey;
+      if (_search) {
+        return this.tableData.filter(function(tableData) {
+          return Object.keys(tableData).some(function(key) {
+            return (
+              String(tableData[key])
+                .toLowerCase()
+                .indexOf(_search) > -1
+            );
+          });
+        });
+      } else {
+        return this.tableData;
       }
     }
   },
   mounted() {
+    this.sec_data.course_id = this.$store.state.classinfo.classinfo.course_id;
+    this.sec_data.sec_id = this.$store.state.classinfo.classinfo.sec_id;
+    this.sec_data.semester = this.$store.state.classinfo.classinfo.semester;
+    this.sec_data.year = this.$store.state.classinfo.classinfo.year;
+
+    this.getData()
+
     this.$store.dispatch("team/getTeam");
     this.table_Select_Data = this.tableData;
     //this.$stor.dispatch(actionType,playload)
