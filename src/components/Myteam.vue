@@ -86,14 +86,16 @@ export default {
             semester: this.$store.state.classinfo.classinfo.semester,
             year: this.$store.state.classinfo.classinfo.year,
             team_name: value
-          }
-          api.createTeam(sec_info)
-            .then(res => {
-              console.log(res);
-            })
-          this.$message({
-            type: "success",
-            message: "成功创建队伍" + value
+          };
+          api.createTeam(sec_info).then(res_code => {
+            console.log(res_code);
+            if (res_code == 200) {
+              this.$message({
+                type: "success",
+                message: "成功创建队伍" + value
+              });
+              this.$parent.getData()
+            }
           });
         })
         .catch(() => {

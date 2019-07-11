@@ -1320,4 +1320,5 @@ async function joinTeam(form) {
 async function createTeam(form) {
   const res = await request(POST, '/api/team', form)
   console.log(res);
+  return res.data.code
 }
