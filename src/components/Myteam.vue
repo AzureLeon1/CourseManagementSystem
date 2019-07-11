@@ -1,71 +1,120 @@
 <template>
   <div class="myteamlist">
     <el-card style="width: 100%; margin:20px auto 20px auto" shadow="never">
-        <div slot="header" class="clearfix">
-            <span>我的队伍</span>
-            <el-button style="float:right; padding: 5px 8px" icon="add"  size="medium" circle @click="InsertTeam">+</el-button>
-        </div>
-        <div>
-          <el-table :data="tableData" height="300" :border="false" :show-header="false">
-            <el-table-column type="expand">
-              <template slot-scope="props">
-                <el-form label-position="left" inline class="demo-table-expand">
-                  <el-form-item label="队伍ID：">
-                    <span>{{ props.row.team_id }}</span>
-                  </el-form-item><br>                  
-                  <el-form-item label="队伍名称：">
-                    <span>{{ props.row.team_name }}</span>
-                  </el-form-item><br>
-                  <el-form-item label="队员：">
-                    <span>{{ props.row.team_member }}</span>
-                  </el-form-item>
-                </el-form>
-              </template>
-            </el-table-column>
-            <el-table-column prop="team_id" width="250px"></el-table-column>
-            <el-table-column prop="team_name"></el-table-column>
-          </el-table>
-        </div>
+      <div slot="header" class="clearfix">
+        <span>我的队伍</span>
+        <el-button
+          style="float:right; padding: 5px 8px"
+          icon="add"
+          size="medium"
+          circle
+          @click="InsertTeam"
+        >+</el-button>
+      </div>
+      <div>
+        <el-table :data="tableData" height="300" :border="false" :show-header="false">
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <el-form label-position="left" inline class="demo-table-expand">
+                <el-form-item label="队伍ID：">
+                  <span>{{ props.row.team_id }}</span>
+                </el-form-item>
+                <br />
+                <el-form-item label="队伍名称：">
+                  <span>{{ props.row.team_name }}</span>
+                </el-form-item>
+                <br />
+                <el-form-item label="队员：">
+                  <span>{{ props.row.students }}</span>
+                </el-form-item>
+              </el-form>
+            </template>
+          </el-table-column>
+          <el-table-column prop="team_id" width="250px"></el-table-column>
+          <el-table-column prop="team_name"></el-table-column>
+        </el-table>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import api from "../api/index.js";
 export default {
   name: "Myteam",
-  data(){
-      return{
-          
-      }
+  data() {
+    return {
+      tableData: []
+    };
   },
-   methods: {
-      InsertTeam() {
-        this.$prompt('请输入要创建的队伍名称', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPattern:/^[\s\S]*.*[^\s][\s\S]*$/ ,
-          inputErrorMessage: '队伍名称格式不正确'
-        }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: '成功创建队伍' + value
+  methods: {
+    getData() {
+      api
+        .getMyTeams({ user_id: this.$store.state.profile.user.id })
+        .then(res => {
+          console.log(res);
+          this.tableData = res;
+
+          // 把队员json数组处理成字符串
+          this.tableData.forEach(ele => {
+            ele.students_array = eval(ele.students);
+            ele.students = "";
+            ele.students_array.forEach(stu => {
+              ele.students = ele.students + stu.student_name + " ";
+            });
           });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });       
+          // 根据team_id排序
+          this.tableData.sort(function(x, y) {
+            return x.team_id - y.team_id;
+          });
+
+          console.log(this.tableData);
         });
-      }
-   },
-   computed:{
-    tableData(){
-      return this.$store.state.team.myownteamlist
     },
+    InsertTeam() {
+      this.$prompt("请输入要创建的队伍名称", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        inputPattern: /^[\s\S]*.*[^\s][\s\S]*$/,
+        inputErrorMessage: "队伍名称格式不正确"
+      })
+        .then(({ value }) => {
+          console.log(value);
+          var sec_info = {
+            course_id: this.$store.state.classinfo.classinfo.course_id,
+            sec_id: this.$store.state.classinfo.classinfo.sec_id,
+            semester: this.$store.state.classinfo.classinfo.semester,
+            year: this.$store.state.classinfo.classinfo.year,
+            team_name: value
+          };
+          api.createTeam(sec_info).then(res_code => {
+            console.log(res_code);
+            if (res_code == 200) {
+              this.$message({
+                type: "success",
+                message: "成功创建队伍" + value
+              });
+              this.$parent.getData()
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消输入"
+          });
+        });
+    }
   },
-  mounted(){
-    this.$store.dispatch("team/getTeam")
-    
+  computed: {
+    // tableData(){
+    //   return this.$store.state.team.myownteamlist
+    // },
+  },
+  mounted() {
+    this.getData();
+    // this.$store.dispatch("team/getTeam")
+
     //this.$stor.dispatch(actionType,playload)
     //要触发的action类型，所携带的数据
   }
