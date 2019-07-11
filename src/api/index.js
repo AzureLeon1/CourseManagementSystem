@@ -64,6 +64,7 @@ export default {
   updateAtten,
   coursetableGetCoursetable,
   getGlobalBro,
+  getTeamlist,
 }
 
 function param(a) {
@@ -1192,3 +1193,9 @@ async function getGlobalBro() {
   console.log(res.data.data.broadcasts);
   return res.data.data.broadcasts
 }
+
+async function getTeamlist(form) {
+  const res = await request(POST, '/api/teams', form)
+  console.log(res)
+}
+
