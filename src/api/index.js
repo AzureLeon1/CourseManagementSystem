@@ -408,6 +408,7 @@ async function getClassInfo(form) {
   // const res = await request(GET, `/api/club_info/${id}`)
   // console.log('corp_info of ', res)
   // return res.data.data
+
   const data = await request(POST, '/api/one_class', form)
     // name: '高等数学',
     // teacher_name: '孙娟娟',
@@ -420,7 +421,7 @@ async function getClassInfo(form) {
     // room_number: '345',
     // semester: 'Fall',
     // year: 2019
-    console.log('这是班级的详细信息: ', data)
+    console.log('这是班级的详细信息status 测试: ', data)
 
 
 
@@ -1172,15 +1173,18 @@ async function getAllCourses() {
 
 
 //  console.log("deleteTwitterRes", res)
-  const data = [
-    {Course_Id : 1, course_name: '数据库'},
-    {Course_Id : 2, course_name: '高等数学'},
-    {Course_Id : 3, course_name: 'C++'},
-    {Course_Id : 4, course_name: '操作系统'},
-    {Course_Id : 5, course_name: '计算机系统结构'},
+  // const data = [
+  //   {Course_Id : 1, course_name: '数据库'},
+  //   {Course_Id : 2, course_name: '高等数学'},
+  //   {Course_Id : 3, course_name: 'C++'},
+  //   {Course_Id : 4, course_name: '操作系统'},
+  //   {Course_Id : 5, course_name: '计算机系统结构'},
 
-  ]
-  return data
+  // ]
+  // return data
+    const data = await request(POST, '/api/courses')
+    console.log('这是api返回值', data.data.couses)
+    return data.data.courses
 }
 async function createAttenRecords(form) {
   const res = await request(POST, '/api/attendance_records', form)

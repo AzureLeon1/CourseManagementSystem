@@ -182,5 +182,10 @@ export default new Router({
       name: 'Summary',
       component: Summary
     },
+    {
+      path: '/discussion',
+      name: 'Discussion',
+      component: Discussion
+    },
   ]
 })

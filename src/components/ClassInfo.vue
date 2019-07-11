@@ -188,7 +188,7 @@ export default {
       console.log("这是班级跳转参数", this.$route.params.class_id)
       this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
 
-console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
+//console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
     if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id)
        {  console.log('这是前段的form', this.$store.state.classlistitem.clickedclass)
            this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
