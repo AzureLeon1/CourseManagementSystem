@@ -43,12 +43,12 @@
             <div class="selector-wrapper" style="width:100%">
                 <div class="selector-hint">请选择年份</div>
                 <el-select v-model="year" @change="initialize" placeholder>
-  <el-option v-for="item in year_options" :key="item" :label="item" :value="item"></el-option>
- </el-select>
-  <div class="selector-hint">请选择学期</div>
-     <el-select v-model="semester" @change="initialize" placeholder>
-  <el-option v-for="item in semester_options" :key="item" :label="item" :value="item">{{item}}</el-option>
- </el-select>
+                    <el-option v-for="item in year_options" :key="item" :label="item" :value="item"></el-option>
+                </el-select>
+                <div class="selector-hint">请选择学期</div>
+                    <el-select v-model="semester" @change="initialize" placeholder>
+                <el-option v-for="item in semester_options" :key="item" :label="item" :value="item">{{item}}</el-option>
+                </el-select>
  
 
   
@@ -211,5 +211,14 @@ export default {
         margin-bottom: 10px;
     }
     
-    
+    .selector-wrapper *{
+        flex-grow:1;
+    }
+
+    .selector-hint{
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #444;
+    }
 </style>
