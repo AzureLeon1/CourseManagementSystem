@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       questionList: [],
+      questionAnswers: [],
       hasSubmit: false,
       hasDone: false,
       hasStart: false,
@@ -102,9 +103,16 @@ export default {
     },
 
     submitForm() {
+      this.questionAnswers = []
+      for (let q of this.$refs.questions) {
+        this.questionAnswers.push({
+          answer: q.answer,
+          question_id: q.question_id
+        })
+      }
       api.submitExam({
         exam_id: this.$route.params.exam_id,
-        questions: this.$refs.questions
+        questions: this.questionAnswers
       }).then(res => {
         this.hasSubmit = true
         this.$message.success("提交成功")

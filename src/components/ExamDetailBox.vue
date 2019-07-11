@@ -71,6 +71,18 @@ export default {
   methods: {
     getData() {
       var classInfo = this.$store.state.classinfo.classinfo
+      // get all questions
+      api.getExamQuestions({
+        course_id: classInfo.course_id,
+        sec_id: classInfo.sec_id,
+        semester: classInfo.semester,
+        year: classInfo.year,
+        exam_id: this.$route.params.exam_id
+      }).then(data => {
+        console.log("examquestions",data)
+        this.examTitle = data.title
+        this.questionList = data.questions
+      })
       // get exam results
       api.checkExamResult({
         course_id: classInfo.course_id,
@@ -80,18 +92,7 @@ export default {
         exam_id: this.$route.params.exam_id
       }).then(data => {
         console.log("examresult", data)
-        this.examTitle = data.title
-        this.scores = data.scores
-      })
-      // get all questions
-      api.getExamQuestions({
-        course_id: classInfo.course_id,
-        sec_id: classInfo.sec_id,
-        semester: classInfo.semester,
-        year: classInfo.year,
-        exam_id: this.$route.params.exam_id
-      }).then(data => {
-        this.questionList = data.questions
+        this.scores = data
       })
       // score style & 统计
       this.level = [0, 0, 0, 0, 0];
