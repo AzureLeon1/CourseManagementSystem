@@ -32,6 +32,7 @@ export default {
   getJoinStatus,
   getjoinedClassList,
   getMessageWithID,
+  getClassMessage,
   createMessage,
   getSearchResult,
   getFollowing,
@@ -45,7 +46,7 @@ export default {
   getCoursewareList,
   getCheckingClassList,
   createClass,
-  getAllQuesiton,
+  getAllQuestion,
   newQuestion,
   updateQuestion,
   deleteQuestion,
@@ -53,6 +54,7 @@ export default {
   newExam,
   checkExamResult,
   getExamQuestions,
+  submitExam,
   getCourseware,
   getAttendance,
   getTeam,
@@ -67,7 +69,9 @@ export default {
   coursetableGetCoursetable,
   getTeamlist,
   getAllDiscussions,
-  getDiscussionReply
+  getDiscussionReply,
+  getGlobalBro,
+  postBroadcast,
 }
 
 function param(a) {
@@ -531,92 +535,94 @@ async function getSearchResult(name) {
   return res.data.data.users;
 }
 
-async function getMessageWithID(id) {
+async function getClassMessage(form) {
   //fake message data;
-  const res = {
-    "data": {
-      "broadcasts": [{
-        "broadcast_id": "000001",
-        "content": "这是一条很长的广播！第一条广播！",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-14 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "这是第二条广播！来自（模拟）后端（的数据）！",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "不就是瞎编吗？谁不会啊！",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "发现了一个问题，这个content的内容存不了分行的。完蛋。",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, {
-        "broadcast_id": "000002",
-        "content": "数据造假，从我做起。学术造假，从我做起。",
-        "type": 1,
-        "scope": 1,
-        "sec_id": 111,
-        "course_id": 1111,
-        "semester": "spring",
-        "year": 2019,
-        "publish_time": "1997-12-11 12:30",
-        "start_time": "1997-12-11 12:30",
-        "end_time": "1997-12-13- 12:30"
-      }, ]
-    },
-    "code": 200,
-    "message": 'ok'
-  }
-  const data = res.data.broadcasts;
+  // const res = {
+  //   "data": {
+  //     "broadcasts": [{
+  //       "broadcast_id": "000001",
+  //       "content": "这是一条很长的广播！第一条广播！",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-14 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "这是第二条广播！来自（模拟）后端（的数据）！",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "不就是瞎编吗？谁不会啊！",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "发现了一个问题，这个content的内容存不了分行的。完蛋。",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "嘤嘤嘤嘤嘤嘤。想吃肉。很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长。",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, {
+  //       "broadcast_id": "000002",
+  //       "content": "数据造假，从我做起。学术造假，从我做起。",
+  //       "type": 1,
+  //       "scope": 1,
+  //       "sec_id": 111,
+  //       "course_id": 1111,
+  //       "semester": "spring",
+  //       "year": 2019,
+  //       "publish_time": "1997-12-11 12:30",
+  //       "start_time": "1997-12-11 12:30",
+  //       "end_time": "1997-12-13- 12:30"
+  //     }, ]
+  //   },
+  //   "code": 200,
+  //   "message": 'ok'
+  // }
+  // const data = res.data.broadcasts;
   // console.log(data);
   // console.log(typeof(data));
-  await (delay(1000));
-  return res.data;
+  // await (delay(1000));
+  const res = await request(POST, '/api/class_broadcasts', form)
+  console.log(res);
+  return res.data.data.broadcasts;
   // const res = await request(GET, '/api/broadcasts', {'user': id});
   // return res;
 }
@@ -664,7 +670,7 @@ async function createClass(form){
   console.log("提交成功")
 }
 
-async function getAllQuesiton(form) {
+async function getAllQuestion (form) {
   const res = await request(POST, '/api/course_questions', form)
   console.log("allquestion", res.data.data)
   return res.data.data
@@ -1088,6 +1094,12 @@ async function getExamQuestions(form) {
   return res.data.data
 }
 
+async function submitExam(form) {
+  const res = await request(POST, '/api/finished_exam', form)
+  console.log("finishexam", res.data.data)
+  return res.data.data
+}
+
 async function getCourseware(course_id, sec_id, semester, year) {
   const res = {
     data: [{
@@ -1224,6 +1236,12 @@ async function updateAtten(form) {
   console.log(res)
 }
 
+async function getGlobalBro() {
+  const res = await request(POST, '/api/all_broadcasts')
+  console.log(res.data.data.broadcasts);
+  return res.data.data.broadcasts
+}
+
 async function getTeamlist(form) {
   const res = await request(POST, '/api/teams', form)
   console.log(res)
@@ -1238,5 +1256,9 @@ async function getDiscussionReply({commit, state}, id)
 {
   const res = await request(POST, '/api/one_discussion', id)
   return res
+
+async function postBroadcast(form) {
+  const res = await request(POST, '/api/broadcasts', form)
+  console.log(res)
 }
 
