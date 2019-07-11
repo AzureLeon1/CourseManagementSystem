@@ -5,7 +5,7 @@
       v-if="!hasStart">考试未开始!</div>
 
     <div v-else>
-      <div style="margin-left: 20px; font-size:18px">{{title}}</div>
+      <h2 style="margin-bottom: 20px; font-size:18px">{{title}}</h2>
 
       <count-down 
         :endTime="endTime"
@@ -62,23 +62,24 @@ export default {
       api.getExamQuestions({
         exam_id: this.$route.params.exam_id
       }).then(res => {
+        console.log("examquestions", res)
         this.title = res.title
         this.questionList = res.questions
         this.startTime = res.start_time
         this.endTime = res.end_time
-        if (user.role == "student") {
+        if (this.user.role == "student") {
           this.hasDone = res.exam_status
           this.getState()
           if (this.hasDone) {
             this.score = this.total_score
           }
         }
-      })
-      for (let q of this.questionList) {
-        q.content = q.index + ".\xa0\xa0" + q.content
-      }
-      this.questionList.sort(function(a, b){
-        return a.index - b.index
+        for (let q of this.questionList) {
+          q.content = q.index + ".\xa0\xa0" + q.content
+        }
+        this.questionList.sort(function(a, b){
+          return a.index - b.index
+        })
       })
     },
 
@@ -91,6 +92,7 @@ export default {
       var strDate = "" + date.getFullYear() + "." + 
         (month<10?"0"+month:month) + "." + (day<10?"0"+day:day) + " " + 
         (hours<10?"0"+hours:hours) + ":" + (minutes<10?"0"+minutes:minutes)
+      console.log("time",strDate,this.startTime)
       if (strDate >= this.startTime) {
         this.hasStart = true
       }
@@ -99,23 +101,43 @@ export default {
       }
     },
 
+    submitForm() {
+      api.submitExam({
+        exam_id: this.$route.params.exam_id,
+        questions: this.$refs.questions
+      }).then(res => {
+        this.hasSubmit = true
+        this.$message.success("提交成功")
+        this.$router.push({
+          name: "CheckExam",
+          params: {
+            exam_id: this.$route.params.exam_id
+          }
+        })
+      })
+    },
+
     submit() {
+      var allChecked = true
       for (let q of this.$refs.questions){
-        // To Do
-        console.log(q.select)
-        if (q.select === "") {
-          this.$confirm('题目未全部完成,是否提交', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            
-          }).catch(() => {
-            
-          })
+        if (q.answer === "") {
+          this.allChecked = false
+          break
         }
       }
-      this.hasSubmit = true
+      if (!allChecked) {
+        this.$confirm('题目未全部完成,是否提交', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning' 
+        }).then(() => {
+          this.submitForm()
+        }).catch(() => {
+          return
+        })
+      } else {
+        this.submitForm()
+      }
     }
   },
 

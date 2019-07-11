@@ -26,28 +26,33 @@ export default {
       var time = this.endTime.split(" ")[1]
       this.endHours = Number(time.split(":")[0])
       this.endMins = Number(time.split(":")[1])
-      var date = new Date()
-      this.leftHours = this.endHours - date.getHours()
-      this.leftMins = this.endMins - date.getMinutes()
-      this.leftSeconds = date.getSeconds()
-      if (date.getMinutes() > this.endMins) {
-        this.leftHours -= 1
-        this.leftMins += 60
-      }
-      this.leftTotalSeconds = this.leftHours*3600 + 
-        this.leftMins*60 + this.leftSeconds
-      // ser interval
+      this.getLeftTime()
+      // set interval
       let clock = window.setInterval(() => {
         --this.leftTotalSeconds;
         if (this.leftTotalSeconds == 0) {
           window.clearInterval(clock)
           this.$emit('timeOver')
           return
+        } else if (this.leftTotalSeconds % 60 == 0) {
+          this.getLeftTime()
         }
         this.leftHours = Math.floor(this.leftTotalSeconds / 3600)
         this.leftMins = Math.floor(this.leftTotalSeconds % 3600 / 60)
         this.leftSeconds = this.leftTotalSeconds % 60
       }, 1000)
+    },
+    getLeftTime() {
+      var date = new Date()
+      this.leftHours = this.endHours - date.getHours()
+      this.leftMins = this.endMins - 1 - date.getMinutes()
+      this.leftSeconds = 60 - date.getSeconds()
+      if (date.getMinutes() > this.endMins) {
+        this.leftHours -= 1
+        this.leftMins += 60
+      }
+      this.leftTotalSeconds = this.leftHours*3600 + 
+        this.leftMins*60 + this.leftSeconds
     }
   },
 

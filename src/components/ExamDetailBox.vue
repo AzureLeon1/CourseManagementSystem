@@ -75,10 +75,11 @@ export default {
       api.checkExamResult({
         course_id: classInfo.course_id,
         sec_id: classInfo.sec_id,
-        semester: clasInfo.semester,
+        semester: classInfo.semester,
         year: classInfo.year,
         exam_id: this.$route.params.exam_id
       }).then(data => {
+        console.log("examresult", data)
         this.examTitle = data.title
         this.scores = data.scores
       })
@@ -86,7 +87,7 @@ export default {
       api.getExamQuestions({
         course_id: classInfo.course_id,
         sec_id: classInfo.sec_id,
-        semester: clasInfo.semester,
+        semester: classInfo.semester,
         year: classInfo.year,
         exam_id: this.$route.params.exam_id
       }).then(data => {

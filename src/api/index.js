@@ -51,6 +51,7 @@ export default {
   newExam,
   checkExamResult,
   getExamQuestions,
+  submitExam,
   getCourseware,
   getAttendance,
   getTeam,
@@ -1037,6 +1038,12 @@ async function checkExamResult(form) {
 async function getExamQuestions(form) {
   const res = await request(POST, '/api/exam_questions', form)
   console.log("examquestions", res.data.data)
+  return res.data.data
+}
+
+async function submitExam(form) {
+  const res = await request(POST, '/api/finished_exam', form)
+  console.log("finishexam", res.data.data)
   return res.data.data
 }
 
