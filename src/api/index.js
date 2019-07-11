@@ -31,7 +31,7 @@ export default {
   joinClass,
   getJoinStatus,
   getjoinedClassList,
-  getMessageWithID,
+  // getMessageWithID,
   getClassMessage,
   createMessage,
   getSearchResult,
@@ -69,6 +69,11 @@ export default {
   coursetableGetCoursetable,
   getGlobalBro,
   getTeamlist,
+  // 审核
+  getToBeAudited,
+  auditJoinClass,
+  // get all sutdents of a class
+  getAllStudents
 }
 
 function param(a) {
@@ -1244,3 +1249,21 @@ async function getTeamlist(form) {
   console.log(res)
 }
 
+// 审核
+async function getToBeAudited(form) {
+  const res = await request(POST, '/api/waiting_students', form)
+  console.log("auditlist", res.data.data)
+  return res.data.data
+}
+
+async function auditJoinClass(form) {
+  const res = request(POST, '/api/permission', form)
+  return res
+}
+
+// get all students of a class
+async function getAllStudents(form) {
+  const res = await request(POST, '/api/students', form)
+  console.log("allstudents", res.data.data)
+  return res.data.data
+}

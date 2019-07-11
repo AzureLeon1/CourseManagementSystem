@@ -1,10 +1,10 @@
 <template>
-  <el-row class="questionTableBank">
+  <el-row>
     <el-col :span="22" :offset="1">
       <el-table
         :data="studentToBeAudited">
         <el-table-column label="学号" prop="student_id"></el-table-column>
-        <el-table-column label="姓名" prop="student_name"></el-table-column>
+        <el-table-column label="姓名" prop="user_name"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button 
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import api from "../api"
+
 export default {
   name: "MembershipAuditTable",
 
@@ -35,34 +37,43 @@ export default {
 
   methods: {
     getData() {
-      // To Do : get all students
-      this.studentToBeAudited = [{
-        student_id: "111",
-        student_name: "施程航"
-      },{
-        student_id: "111",
-        student_name: "施程航"
-      },{
-        student_id: "111",
-        student_name: "施程航"
-      },{
-        student_id: "111",
-        student_name: "施程航"
-      },{
-        student_id: "111",
-        student_name: "施程航"
-      }]
+      api.getToBeAudited({
+        sec_id: this.classInfo.sec_id,
+        course_id: this.classInfo.course_id,
+        semester: this.classInfo.semester,
+        year: this.classInfo.year
+      }).then(res => {
+        this.studentToBeAudited = res.students_info
+      })
     },
     allow(r) {
-      // To Do : 
+      this.joinOrNoe(1)
     },
     refuse(r) {
-      // To Do :
+      this.joinOrNoe(0)
+    },
+    joinOrNoe(status) {
+      api.joinClass({
+        sec_id: this.classInfo.sec_id,
+        course_id: this.classInfo.course_id,
+        semester: this.classInfo.semester,
+        year: this.classInfo.year,
+        status: status
+      }).then(res => {
+        this.$message.success("操作成功")
+        this.getData()
+      })
     }
   },
 
   mounted() {
     this.getData();
+  },
+
+  computed: {
+    classInfo() {
+      return this.$store.state.classinfo.classinfo
+    }
   }
 };
 </script>
