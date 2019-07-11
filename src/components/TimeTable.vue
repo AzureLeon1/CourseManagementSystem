@@ -383,6 +383,7 @@ export default {
      
       }
     },
+    props:['year', 'semester'],
     mounted() {
         this.cleanCoursetable();
         // this.setCourse(3,2,5,'fsq','fsqintro')
