@@ -104,7 +104,14 @@ export default {
           this.getAllMessage()
         }
         else {
-          this.getMessageWithID(111);
+          this.getMessageWithID(
+            {
+              course_id: this.$store.state.classinfo.classinfo.course_id,
+              sec_id: this.$store.state.classinfo.classinfo.sec_id,
+              semester: this.$store.state.classinfo.classinfo.semester,
+              year: this.$store.state.classinfo.classinfo.year,
+            }
+          );
         }
         // this.getMessageWithID(111);
 
@@ -178,8 +185,8 @@ export default {
 
 
     //back-end
-    getMessageWithID(id){
-      api.getMessageWithID(id)
+    getMessageWithID(form){
+      apiIndex.getClassMessage(form)
       .then(getMessage => {
         this.messages=Array(0);
       for(let i=0;i<getMessage.length;i++){
