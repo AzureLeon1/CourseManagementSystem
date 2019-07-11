@@ -7,6 +7,22 @@
         <Header></Header>
         <div class="timetable-wrapper">
             <div class="topic"></div>
+            <el-form>
+                <el-form-item label="年份">
+                    <el-select v-model="form.course_id" placeholder="请选择课程号">
+                        <el-option
+                        v-for="item in year_options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                        ></el-option>
+                    </el-select>
+
+
+                </el-form-item>
+
+                <el-form-item label="学期"></el-form-item>
+            </el-form>
             <!-- <div class="button-wrapper">
                 <el-button circle icon="el-icon-arrow-left"></el-button>
             </div> -->
