@@ -12,8 +12,8 @@
       </div>
 
 
-     
- 
+
+
     <div class="item">
       <div class="key">
         <i class="el-icon-s-home"></i> &nbsp; 课程
@@ -33,14 +33,14 @@
         <i class="el-icon-location"></i> &nbsp; 教室楼
       </div>
       <div class="value">{{the_class.building}}</div>
-     
+
     </div>
 
     <div class="item">
       <div class="key">
         <i class="el-icon-location"></i> &nbsp; 教室
       </div>
-      
+
       <div class="value">{{the_class.room_number}}</div>
     </div>
 
@@ -49,8 +49,8 @@
         <i class="el-icon-date"></i> &nbsp; 学期
       </div>
        <div class="value">{{the_class.semester}}</div>
-    
-    
+
+
     </div>
 
     <div class="item">
@@ -58,11 +58,11 @@
         <i class="el-icon-date"></i> &nbsp; 年份
       </div>
        <div class="value">{{the_class.year}}</div>
-    
-   
+
+
     </div>
 
-  
+
 
     <div class="item">
       <div class="key">
@@ -81,7 +81,7 @@
 
 
     <div class="btns">
-      <template v-if="isStudent">
+      <template v-if="isStudent()">
         <el-button
           class="status_btn"
           size="primary"
@@ -121,7 +121,7 @@
 </div>
   </div>
 
-  
+
 
 </template>
 
@@ -170,13 +170,13 @@ export default {
 
   methods: {
     isStudent() {
-      return this.userinfo.role == "student";
+      return this.$store.state.profile.user.role == "student";
     },
     isTeacherEdu() {
-      return this.userinfo.role == "teacher_edu";
+      return this.$store.state.profile.user.role == "teacher_edu";
     },
     isTeacherManage() {
-      return this.userinfo.role == "teacher_manage";
+      return this.$store.state.profile.user.role == "teacher_manage";
     },
     join() {
       this.$store.dispatch("classinfo/join", this.$store.state.classlistitem.clickedclass);
@@ -184,12 +184,13 @@ export default {
   },
 
   mounted() {
+    console.log(this.$store.state.profile.user.role);
       console.log("这是班级跳转参数", this.$route.params)
       console.log("这是班级跳转参数", this.$route.params.class_id)
       //this.$store.dispatch("classinfo/getClassInfo", this.$store.state.classlistitem.clickedclass);
 
 console.log(this.$route.params.class_id, this.$store.state.classinfo.classinfo)
-    if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id || 
+    if(this.$route.params.class_id != this.$store.state.classinfo.classinfo.course_id ||
     this.$route.params.sec_id != this.$store.state.classinfo.classinfo.sec_id)
        {  console.log('这是前段的form', this.$store.state.classlistitem.clickedclass)
        console.log('角色实际上是', this.$store.state.profile.user.role)
