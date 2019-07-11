@@ -79,6 +79,7 @@ export default {
   getAllTeams,
   getMyTeams,
   joinTeam,
+  createTeam
 }
 
 function param(a) {
@@ -1314,4 +1315,9 @@ async function joinTeam(form) {
   const res = await request(POST, '/api/teams_attendance', form)
   console.log(res);
   return res
+}
+
+async function createTeam(form) {
+  const res = await request(POST, '/api/team', form)
+  console.log(res);
 }

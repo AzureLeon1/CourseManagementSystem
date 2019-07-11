@@ -5,7 +5,7 @@
         <div slot="header" class="clearfix">
           <span>班级队伍</span>
         </div>
-        <div>
+        <!-- <div>
           <el-input
             v-focus
             placeholder="请输入关键字"
@@ -14,7 +14,7 @@
             clearable
             autofocus
           ></el-input>
-        </div>
+        </div> -->
         <div>
           <el-table :data="table_Select_Data" height="300px" :border="false" :show-header="false">
             <el-table-column type="expand">
@@ -161,10 +161,10 @@ export default {
 
   computed: {
     // tableData() {
-    //   return this.$store.state.team.classteamlist;
+    //   return this.tableData;
     // },
     // table_Select_Data() {
-    //   return this.$store.state.team.classteamlist;
+    //   return this.tableData;
     // },
     isShow() {
       if (this.$store.state.profile.role == "student") {
@@ -176,6 +176,7 @@ export default {
     table_Select_Data: function() {
       var _search = this.searchkey;
       if (_search) {
+        console.log(_search);
         return this.tableData.filter(function(tableData) {
           return Object.keys(tableData).some(function(key) {
             return (

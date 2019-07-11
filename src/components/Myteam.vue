@@ -79,6 +79,18 @@ export default {
         inputErrorMessage: "队伍名称格式不正确"
       })
         .then(({ value }) => {
+          console.log(value);
+          var sec_info = {
+            course_id: this.$store.state.classinfo.classinfo.course_id,
+            sec_id: this.$store.state.classinfo.classinfo.sec_id,
+            semester: this.$store.state.classinfo.classinfo.semester,
+            year: this.$store.state.classinfo.classinfo.year,
+            team_name: value
+          }
+          api.createTeam(sec_info)
+            .then(res => {
+              console.log(res);
+            })
           this.$message({
             type: "success",
             message: "成功创建队伍" + value
