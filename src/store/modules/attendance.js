@@ -19,6 +19,12 @@ const actions = {
 const mutations = {
     setAttendance(state, props) {
       state.classattendancelist = []
+      props.class_attendance.forEach(time => {
+        time.students.forEach(stu => {
+          stu.time_id = time.time_id
+        })
+        time.sum = time.present_num + '/' + (time.present_num+time.absent_num)
+      });
       state.classattendancelist.push(...props.class_attendance)
       console.log(state.classattendancelist);
     },

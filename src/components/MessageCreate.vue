@@ -1,5 +1,5 @@
 <template>
-<el-dialog 
+<el-dialog
 :visible.sync="showCreateMsg"
 width="400px;">
     <div slot="title" class="title">创建广播</div>
@@ -7,7 +7,7 @@ width="400px;">
         <el-form ref="form" :model="form" label-width="70px" label-position="left">
             <el-form-item label="广播范围">
                 <el-select v-model="form.region" placeholder="请选择活动区域">
-                <el-option label="全局广播" value="beijing"></el-option>
+                <el-option v-if="this.$store.state.profile.role == 'teacher_manage'" label="全局广播" value="beijing"></el-option>
                 <el-option label="计算机系统结构" value="shanghai"></el-option>
                 </el-select>
             </el-form-item>
@@ -21,7 +21,7 @@ width="400px;">
                 <el-time-picker placeholder="选择时间" v-model="form.start_time" style="width: 100%;"></el-time-picker>
                 </el-col>
             </el-form-item>
-            
+
             <el-form-item label="结束时间">
                 <el-col :span="11">
                 <el-date-picker type="date" placeholder="选择日期" v-model="form.end_date" style="width: 100%;"></el-date-picker>

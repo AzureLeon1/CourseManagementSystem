@@ -1,0 +1,148 @@
+<template>
+<div id="DiscussionSketchy">
+    <div class="user">
+        <div class="user-avatar-wrapper">
+            <img class="user-avatar" :src="avatar_url"/>
+        </div>
+        <div class="user-message">
+            <div class="user-name">{{user_name}}</div>
+            <div class="user-identity">{{role}}</div>
+        </div>
+        <div class="time">{{time}}</div>
+    </div>
+    <div class="content">{{content}}</div>
+    <div class="button-wrapper">
+        <slot>
+            <button><i class="el-icon-chat-line-square btn-logo"></i>评论</button>
+            <button @click="readMore(discussion_id)"><i class="el-icon-more btn-logo"></i>更多</button>
+        </slot>
+    </div>
+</div>
+</template>
+
+<script>
+
+export default {
+    name: 'DiscussionSketchy',
+    components: {
+    },
+    data () {
+    return {
+        // user_name:"张萌萌",
+        // avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
+        // role:"学生",
+        // content:"一个非常长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的问题。",
+        // time:"2018-7-11 12:30"
+        }
+    },
+    props: [
+        'discussion_id',
+        'user_name',
+        'avatar_url',
+        'role',
+        'content',
+        'time'
+    ],
+    methods: {
+        readMore(id){
+            this.$parent.showDiscussionDetail(id);
+        },
+    },
+    mounted () {
+    },
+    computed: {
+
+    }
+}
+</script>
+
+<style scoped>
+#DiscussionSketchy{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.user-avatar-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.user-name{
+    font-size: 15px;
+    color: #555555;
+}
+
+.user-identity{
+    font-size: 13px;
+    color: #555555;
+}
+
+.time{
+    font-size: 12px;
+    position: absolute;
+    right: 5px;
+    color: #555555;
+}
+
+.content{
+    /* padding: 5px; */
+    margin: 17px 10px;
+    font-size: 15px;
+    word-wrap: break-word;
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+
+button{
+    display:flex;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dcdfe6;
+    /* border: none; */
+    width: 65px;
+    height: 28px;
+    background: #fff;
+    border-radius: 4px;
+    outline: none;
+    transition: .1s;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: .2em;
+}
+
+.btn-logo{
+  font-size: 20px;
+  width: 30px;
+}
+
+button:hover{
+  border: 1px solid #b9b9b9;
+  background: #dddddd;
+  color: #5a5a5a;
+}
+
+button:active{
+  background: #fcfcfc;
+  border: 1px solid #aaaaaa;
+}
+</style>

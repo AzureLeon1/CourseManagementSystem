@@ -104,7 +104,7 @@ export default new Router({
 
     },
     {
-      path: '/classdetail/:class_id',
+      path: '/classdetail/:class_id/:sec_id',
       name: 'ClassDetail',
       component: ClassDetail
     },
@@ -181,6 +181,11 @@ export default new Router({
       path: '/summary',
       name: 'Summary',
       component: Summary
+    },
+    {
+      path: '/discussion',
+      name: 'Discussion',
+      component: Discussion
     },
   ]
 })

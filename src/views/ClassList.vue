@@ -4,8 +4,8 @@
       <el-input v-model="searchcondition" placeholder="请输入查询的班级"></el-input>
       <div
         v-for="item in result"
-        @click="toClassInfo(item.course_ID,
-            item.sec_ID, item.semester, item.year)"
+        @click="toClassInfo(item.course_id,
+            item.sec_id, item.semester, item.year)"
         :key="item.name"
       >
         <ClassCard :classname="item.course_name" :content="item.course_description" :imgURL="item.avatar" />
@@ -43,6 +43,7 @@ export default {
         name: "ClassDetail",
         params: {
           class_id: course_id,
+          sec_id: sec_id,
           // sec_id: sec_id,
           // semester: semester,
           // year: year,
