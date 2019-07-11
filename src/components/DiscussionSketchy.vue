@@ -2,7 +2,7 @@
 <div id="DiscussionSketchy">
     <div class="user">
         <div class="user-avatar-wrapper">
-            <img class="user-avatar" :src="avatar_url"/>
+            <img class="user-avatar" :src="avatar_url" @click="hh"/>
         </div>
         <div class="user-message">
             <div class="user-name">{{user_name}}</div>
@@ -88,9 +88,25 @@ export default {
                 this.$message.success("发布成功")
                 this.dialogCommentVisible = false
             })
+        },
+        hh() {
+            console.log(this.avatar_url)
         }
     },
     mounted () {
+        switch (this.role) {
+        case "student":
+            this.role = "学生"
+            break
+        case "teacher_edu":
+            this.role = "教师"
+            break
+        case "teacher_manage":
+            this.role = "教务老师"
+            break
+        default:
+            this.role = "error"
+        }
     },
     computed: {
 

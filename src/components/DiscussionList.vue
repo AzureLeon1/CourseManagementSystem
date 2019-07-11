@@ -5,7 +5,7 @@
         <DiscussionSketchy
           :discussion_id="item['discussion_id']"
           :user_name="item['user_name']"
-          :avatar_url="item['avatar_url']"
+          :avatar_url="item['avatar']"
           :role="item['role']"
           :content="item['content']"
           :time="item['time']"
