@@ -19,7 +19,6 @@
           :row-class-name="tableRowAttendance"
         >
           <el-table-column prop="time_id" label="课时" width="375px" sortable></el-table-column>
-          <!-- TODO: sum -> absent_num & present_num -->
           <el-table-column prop="sum" label="统计" width="325px"></el-table-column>
           <el-table-column prop="detail" label="具体信息" width="100px">
             <template slot-scope="scope">
@@ -101,12 +100,9 @@ export default {
                 this.$message({
                   type: "success",
                   message: "成功发布" + value + "考勤"
-                  //增加time_id=value的出席记录表!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 });
               }
             })
-
-
         })
         .catch(er => {
           console.log(er);
@@ -171,9 +167,6 @@ export default {
     this.course_sec_info.semester = this.$store.state.classinfo.classinfo.semester
     this.course_sec_info.year = this.$store.state.classinfo.classinfo.year
     this.$store.dispatch("attendance/getAttendance", this.course_sec_info);
-
-    //this.$stor.dispatch(actionType,playload)
-    //要触发的action类型，所携带的数据
   }
 };
 </script>

@@ -103,9 +103,6 @@ export default {
                 this.tableData.splice(this.tableData.indexOf(a), 1)
               }
             })
-
-
-
           })
         });
 
@@ -118,7 +115,6 @@ export default {
       this.$msgbox({
         message: h("p", null, [
           h("span", null, "确定加入？")
-          // h("i", { style: "color: teal" }, "VNode")
         ]),
         showCancelButton: true,
         confirmButtonText: "加入",
@@ -135,7 +131,6 @@ export default {
                   instance.confirmButtonLoading = false;
                   this.getData()
                   this.$refs.myteam.getData()
-
                 }
               })
           } else {
