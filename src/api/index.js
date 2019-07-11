@@ -67,10 +67,14 @@ export default {
   updateAtten,
   coursetableGetCoursetable,
   getTeamlist,
+  // 审核
+  getToBeAudited,
+  auditJoinClass,
+  getAllStudents,
   getAllDiscussions,
   getDiscussionReply,
   getGlobalBro,
-  postBroadcast,
+  postBroadcast
 }
 
 function param(a) {
@@ -458,9 +462,7 @@ async function getClassInfoForTea(form) {
 }
 
 async function joinClass(form) {
-
-
-
+  const res = await request(POST, )
 }
 async function getCoursewareList(form) {
 
@@ -1251,6 +1253,25 @@ async function getGlobalBro() {
 async function getTeamlist(form) {
   const res = await request(POST, '/api/teams', form)
   console.log(res)
+}
+
+// 审核
+async function getToBeAudited(form) {
+  const res = await request(POST, '/api/waiting_students', form)
+  console.log("auditlist", res.data.data)
+  return res.data.data
+}
+
+async function auditJoinClass(form) {
+  const res = request(POST, '/api/permission', form)
+  return res
+}
+
+// get all students of a class
+async function getAllStudents(form) {
+  const res = await request(POST, '/api/students', form)
+  console.log("allstudents", res.data.data)
+  return res.data.data
 }
 
 async function getAllDiscussions(form) {
