@@ -44,6 +44,19 @@ export default {
     methods: {
     },
     mounted () {
+        switch (this.role) {
+        case "student":
+            this.role = "学生"
+            break
+        case "teacher_edu":
+            this.role = "教师"
+            break
+        case "teacher_manage":
+            this.role = "教务老师"
+            break
+        default:
+            this.role = "error"
+        }
     },
     computed: {
 
