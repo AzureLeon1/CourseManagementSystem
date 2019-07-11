@@ -63,6 +63,7 @@ export default {
   createAttenRecords,
   updateAtten,
   coursetableGetCoursetable,
+  getGlobalBro,
 }
 
 function param(a) {
@@ -1182,4 +1183,10 @@ async function createAttenRecords(form) {
 async function updateAtten(form) {
   const res = await request(PUT, '/api/new_attendance', form)
   console.log(res)
+}
+
+async function getGlobalBro() {
+  const res = await request(POST, '/api/all_broadcasts')
+  console.log(res.data.data.broadcasts);
+  return res.data.data.broadcasts
 }

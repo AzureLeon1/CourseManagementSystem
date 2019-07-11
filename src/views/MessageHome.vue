@@ -5,7 +5,7 @@
     </el-aside>
     <el-main style="padding: 20px 15% 0 15%;">
         <Header></Header>
-        <Message></Message>
+        <Message position="global"></Message>
     </el-main>
   </el-container>
 </template>
