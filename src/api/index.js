@@ -1265,7 +1265,7 @@ async function getToBeAudited(form) {
 }
 
 async function auditJoinClass(form) {
-  const res = request(POST, '/api/permission', form)
+  const res = request(PUT, '/api/permission', form)
   return res
 }
 

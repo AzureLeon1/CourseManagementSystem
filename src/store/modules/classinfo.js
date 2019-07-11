@@ -5,8 +5,8 @@ const state = {
     joinStatus: 0,
     teacherList: '',
     classinfo: new Class(),
-    coursewarelist: []
-
+    coursewarelist: [],
+    classDetailUseClassNav: false
 }
 const getters = {
     // presidentName (state) {
@@ -65,7 +65,7 @@ const actions = {
     },
     async getClassMemberNum({commit, state})
     {
-        state.classinfo.student_number += 1
+        commit('addClassMemberNum')
     }
 }
 
@@ -89,6 +89,13 @@ const mutations = {
     },
     setCoursewareList(state, status){
         state.coursewarelist = status
+    },
+    addClassMemberNum(state) {
+        state.classinfo.student_number += 1
+    },
+    
+    setClassDetailUseClassNav(state, flag) {
+        state.classDetailUseClassNav = flag
     }
 }
 

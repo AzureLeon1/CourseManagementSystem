@@ -1,7 +1,8 @@
 <template>
   <el-container class="home">
     <el-aside width="260px">
-      <class-nav :activeIndex="0"></class-nav>
+      <class-nav :activeIndex="0" v-if="this.$store.state.classinfo.classDetailUseClassNav"></class-nav>
+      <user-nav :activeIndex="0" v-else></user-nav>
     </el-aside>
     <el-main>
      <ClassInfo></ClassInfo>
@@ -11,13 +12,15 @@
 
 <script>
 import ClassNav from "../components/ClassNav"
+import UserNav from "../components/UserNav"
 import ClassInfo from "../components/ClassInfo"
 
 export default {
   name: 'ClassDetail',
   components: {
     ClassNav,
-    ClassInfo
+    ClassInfo,
+    UserNav
   },
   data () {
     return {

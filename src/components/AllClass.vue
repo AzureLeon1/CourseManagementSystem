@@ -84,23 +84,16 @@ export default {
      },
 
      toClassDetail(course_id, sec_id, semester, year){
-       console.log("我要去details了", semester)
-
-         this.$store.dispatch("classlistitem/getclickclass", {
-        course_id: course_id,
-        sec_id: sec_id,
-        semester: semester,
-        year: year,
-      });
-      this.$router.push({
-        name: "ClassDetail",
-        params: {
-          class_id: course_id,
-          sec_id: sec_id
-        }
-      });
-
-
+       this.$store.commit("classinfo/setClassDetailUseClassNav", false)
+       this.$router.push({
+          name: "ClassDetail",
+          params: {
+            class_id: course_id,
+            sec_id: sec_id,
+            semester: semester,
+            year: year
+          }
+        });
      }
   },
   computed: {

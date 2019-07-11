@@ -171,6 +171,7 @@ export default {
   },
 
   mounted() {
+    
     api.getClassInfo({
       course_id: this.$route.params.class_id,
       sec_id: this.$route.params.sec_id,
