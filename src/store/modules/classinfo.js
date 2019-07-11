@@ -21,6 +21,7 @@ const actions = {
       var data = {}
     //   console.log('角色到底是什么', role)
     //   console.log('form到底是什么', form)
+    console.log(role);
       if (role == 'student') {
         data = await api.getClassInfo(form);
         console.log('返回值到底是什么', data)
