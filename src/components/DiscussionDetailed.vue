@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import api from "../api"
+
 import DiscussionSketchy from "../components/DiscussionSketchy"
 import DiscussionComment from "../components/DiscussionComment"
 
@@ -37,43 +39,16 @@ export default {
   },
   data () {
     return {
-        item:{
-            discussion_id:1,
-            user_name:"default",
-            avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
-            role:"default",
-            content:"default",
-            time:"default"
-        },
-        commentList:[
-            {
-                discussion_id:159,
-                user_id:131,
-                avatar_url:'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
-                user_name:'xixixiix',
-                role:'student',
-                content:"我觉得答案没有问题，但是第二问本身的描述不够准确有一定歧义",
-                time: "1997.12.11,15.30",
-                question_id:111
-            },
-            {
-                discussion_id:168,
-                avatar_url:'https://view.moezx.cc/images/2018/06/12/31133259.jpg',
-                user_id:141,
-                user_name:'lalala',
-                role:'student',
-                content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
-                time: "1997.12.11 15.30",
-                question_id:111
-            },
-        ]
-      }
+        item: {},
+        commentList: []
+    }
   },
 
 
   methods: {
         show(input){
             this.item=input;
+            console.log("input",input)
             this.updateComments(input['discussion_id']);
         },
         turnBack(){
@@ -81,7 +56,11 @@ export default {
         },
         //调数据库 找到数据库中回复id的评论
         updateComments(id){
-            
+            api.getDiscussionReply(id)
+            .then(res => {
+                this.item = res
+                this.commentList = res.replys
+            })
             
         }
   },

@@ -2,7 +2,7 @@
 <div id="DiscussionSketchy">
     <div class="user">
         <div class="user-avatar-wrapper">
-            <img class="user-avatar" :src="avatar_url"/>
+            <img class="user-avatar" :src="avatar_url" @click="hh"/>
         </div>
         <div class="user-message">
             <div class="user-name">{{user_name}}</div>
@@ -29,7 +29,7 @@
         </el-form>
         <div slot="footer" class="foot">
           <button @click="dialogCommentVisible = false" style="font-size:16px;">取 消</button>
-          <button type="primary" @click="dialogCommentVisible = false" style="font-size:16px;">确 定</button>
+          <button type="primary" @click="submitComment" style="font-size:16px;">确 定</button>
       </div>
     </el-dialog>
   </div>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import api from '../api';
+import { getNowTime } from '../utils/util.js'
 
 export default {
     name: 'DiscussionSketchy',
@@ -46,6 +48,7 @@ export default {
     return {
         dialogCommentVisible:false,
         remain:200,
+        desc:"",
         inputComment:'',
         // user_name:"张萌萌",
         // avatar_url:"https://view.moezx.cc/images/2018/06/12/31133259.jpg",
@@ -71,8 +74,39 @@ export default {
         readMore(id){
             this.$parent.showDiscussionDetail(id);
         },
+        submitComment() {
+            api.sendComment({
+                course_id: this.$store.state.classinfo.classinfo.course_id,
+                sec_id: this.$store.state.classinfo.classinfo.sec_id,
+                semester: this.$store.state.classinfo.classinfo.semester,
+                year: this.$store.state.classinfo.classinfo.year,
+                user_id: this.$store.state.profile.user.id,
+                content: this.desc,
+                time: getNowTime(),
+                question_id: this.discussion_id
+            }).then(res => {
+                this.$message.success("发布成功")
+                this.dialogCommentVisible = false
+            })
+        },
+        hh() {
+            console.log(this.avatar_url)
+        }
     },
     mounted () {
+        switch (this.role) {
+        case "student":
+            this.role = "学生"
+            break
+        case "teacher_edu":
+            this.role = "教师"
+            break
+        case "teacher_manage":
+            this.role = "教务老师"
+            break
+        default:
+            this.role = "error"
+        }
     },
     computed: {
 
