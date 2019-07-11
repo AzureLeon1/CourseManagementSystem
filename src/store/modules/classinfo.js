@@ -18,7 +18,13 @@ const getters = {
 const actions = {
     async getClassInfo({commit, state}, form)
     {
-        const data = await api.getClassInfo(form);
+      var data = {}
+      if (state.profile.user.role == 'student') {
+        data = await api.getClassInfo(form);
+      }
+      else if (state.profile.user.role == 'teacher_edu') {
+        data = await api.getClassInfoForTea(form)
+      }
         console.log(data);
         localStorage.setItem("classinfo",JSON.stringify(data.data.data))
         // console.log(localStorage.getItem("classinfo"));

@@ -78,7 +78,7 @@ export default {
       'end_time': "2019-6-23 12:22",
       'publish_time': "2019-6-19 12:24"
     }
-    
+
     return {
       eachPage: 9,
       //pagination
@@ -99,7 +99,7 @@ export default {
         this.$refs.msc.$on['hide']=this.hideReadMsg;
         // console.log(this.$refs.msc.$on)
         this.getMessageWithID(111);
-      
+
     },
     //front-end
     readMsg(row) {
@@ -143,10 +143,10 @@ export default {
 
 
     //back-end
-    async getMessageWithID(id){
-      //get data
-      var getMessage = await api.getMessageWithID(id);
-      this.messages=Array(0);
+    getMessageWithID(id){
+      api.getMessageWithID(id)
+      .then(getMessage => {
+        this.messages=Array(0);
       for(let i=0;i<getMessage.length;i++){
         this.messages.push(getMessage[i]);
       }
@@ -162,6 +162,27 @@ export default {
       this.page_total=Math.ceil(this.messages.length/this.eachPage);
       this.page_total=this.page_total*10;
       // console.log(this.page_total);
+      })
+
+
+      // //get data
+      // var getMessage = await api.getMessageWithID(id);
+      // this.messages=Array(0);
+      // for(let i=0;i<getMessage.length;i++){
+      //   this.messages.push(getMessage[i]);
+      // }
+
+      // //update page 1 content
+      // let range=this.messages.length<this.eachPage?this.messages.length:this.eachPage;
+      // // console.log(range);
+      // for(let i=0;i<range;i++){
+      //   this.tableData.push(this.messages[i]);
+      // }
+
+      // //update pagination page_total
+      // this.page_total=Math.ceil(this.messages.length/this.eachPage);
+      // this.page_total=this.page_total*10;
+      // // console.log(this.page_total);
     }
   },
   mounted(){
