@@ -94,6 +94,19 @@ export function timeFormat(convert_time) {
   return res;
 }
 
+export function changeRole(role) {
+  switch (role) {
+  case "student":
+      return "学生"
+  case "teacher_edu":
+      return "教师"
+  case "teacher_manage":
+      return "教务老师"
+  default:
+      return "error"
+  }
+}
+
 // export default {
 //     emailReg,
 //     idCardReg,
