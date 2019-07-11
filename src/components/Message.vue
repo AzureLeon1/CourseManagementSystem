@@ -147,8 +147,6 @@ export default {
     createMsg(form){
         this.msc = this.$refs.msc;
         this.msc.showCreateMsg=false;
-        // alert(form);
-        api.createMessage(form);
     },
     hideCreateMsg(){
         this.msc = this.$refs.msc;

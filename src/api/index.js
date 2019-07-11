@@ -67,6 +67,7 @@ export default {
   coursetableGetCoursetable,
   getGlobalBro,
   getTeamlist,
+  postBroadcast,
 }
 
 function param(a) {
@@ -1233,6 +1234,11 @@ async function getGlobalBro() {
 
 async function getTeamlist(form) {
   const res = await request(POST, '/api/teams', form)
+  console.log(res)
+}
+
+async function postBroadcast(form) {
+  const res = await request(POST, '/api/broadcasts', form)
   console.log(res)
 }
 
