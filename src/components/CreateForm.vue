@@ -8,8 +8,8 @@
             <el-option
               v-for="item in course_options"
               :key="item.Course_Id"
-              :label="item.course_name + '(' + item.Course_Id + ')'"
-              :value="item.Course_Id"
+              :label="item.course_name + '(' + item.course_id + ')'"
+              :value="item.course_id"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -60,7 +60,7 @@
         </el-form-item>
 
         <el-form-item
-          prop="teacher_id"
+          prop="user_id"
           label="教师工号"
           :rules="[
       { required: true, message: '教师工号不能为空', trigger: 'blur'},
@@ -69,7 +69,7 @@
       }}
       ]"
         >
-          <el-input  v-model="form.teacher_id"></el-input>
+          <el-input  v-model="form.user_id"></el-input>
         </el-form-item>
 
         <el-form-item :prop="start_week" label="开始周数" :rules="[{required : true}]">
@@ -107,50 +107,50 @@
             <el-select v-model="domain.day" placeholder="星期">
               <el-option
                 v-for="item in week_options"
-                :prop="'time_slots.' + index + '.start_sec'"
+                :prop="'time_slots.' + index + '.start_section'"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
               ></el-option>
             </el-select>
 
-            <el-select v-model="domain.start_sec" placeholder="开始节次">
+            <el-select v-model="domain.start_section" placeholder="开始节次">
               <el-option
-                v-for="item in start_secs1"
+                v-for="item in start_sections1"
                 :key="item"
                 :label="item"
                 :value="item"
               ></el-option>
             </el-select>
 
-            <el-select v-if="(domain.start_sec === 1 )" v-model="domain.length" placeholder="持续节数">
+            <el-select v-if="(domain.start_section === 1 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens1" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
-             <el-select v-if="(domain.start_sec === 3 )" v-model="domain.length" placeholder="持续节数">
+             <el-select v-if="(domain.start_section === 3 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens3" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
-             <el-select v-if="(domain.start_sec === 5 )" v-model="domain.length" placeholder="持续节数">
+             <el-select v-if="(domain.start_section === 5 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens5" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
-                <el-select v-if="(domain.start_sec === 7 )" v-model="domain.length" placeholder="持续节数">
+                <el-select v-if="(domain.start_section === 7 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens7" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
 
-                <el-select v-if="(domain.start_sec === 9)" v-model="domain.length" placeholder="持续节数">
+                <el-select v-if="(domain.start_section === 9)" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens9" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
 
-                <el-select v-if="(domain.start_sec === 11 )" v-model="domain.length" placeholder="持续节数">
+                <el-select v-if="(domain.start_section === 11 )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lens11" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
 
-                <el-select v-if="(domain.start_sec === null )" v-model="domain.length" placeholder="持续节数">
+                <el-select v-if="(domain.start_section === null )" v-model="domain.length" placeholder="持续节数">
               <el-option v-for="item in lensnull" :key="item" :label="item" :value="item"></el-option>
             </el-select>
 
@@ -214,20 +214,20 @@ export default {
         room_number: null,
         start_week: null,
         end_week: null,
-        teacher_id: null,
+        user_id: null,
         avatar: "",
 
         time_slots: [
           {
             day: null,
             value: null,
-            start_sec: null,
+            start_section: null,
             length: null,
             single_or_double: null
           }
         ]
       },
-      start_secs1:[1, 3, 5, 7, 9, 11],
+      start_sections1:[1, 3, 5, 7, 9, 11],
       lens1:[1, 2, 3, 4],
       lens3:[2],
       lens5:[2, 3, 4],
@@ -235,6 +235,8 @@ export default {
       lens9:[2, 3, 4],
       lens11:[2],
       lensnull:[1,2,3,4],
+
+      teacher_id_list:[],
 
       rules: {},
       course_options: [
@@ -399,14 +401,19 @@ export default {
     // }
   },
   mounted(){
+
+    api.getAllTeacherId().then(res => {
+      this.teacher_id_list.push(res)
+    })
+
     api.getAllCourses()
       .then(res => {
 
         //console.log(course_options);
-       console.log('这是课程列表返回值', res)
+      // console.log('这是课程列表返回值', res)
       //  console.log(this.course_options);
          this.course_options = res
-         console.log('这是课程列表返回值', this.course_options)
+        // console.log('这是课程列表返回值', this.course_options)
       })
 
       var date=new Date;

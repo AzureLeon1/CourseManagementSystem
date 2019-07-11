@@ -74,7 +74,8 @@ export default {
   getAllDiscussions,
   getDiscussionReply,
   getGlobalBro,
-  postBroadcast
+  postBroadcast,
+  getAllTeacherId
 }
 
 function param(a) {
@@ -670,9 +671,10 @@ async function deleteFollowPerson(id) {
 }
 
 async function createClass(form) {
-  // const res = await request(POST, '/api/class', form)
-  // console.log(res)
-  console.log("提交成功")
+  console.log('这是提交的form', form)
+   const res = await request(POST, '/api/class', form)
+   console.log("提交结果", res)
+  //console.log("提交成功")
 }
 
 async function getAllQuestion(form) {
@@ -1230,8 +1232,8 @@ async function getAllCourses() {
   // ]
   // return data
     const data = await request(POST, '/api/courses')
-    console.log('这是api返回值', data.data.courses)
-    return data.data.courses
+    console.log('这是api返回值', data.data.data.courses)
+    return data.data.data.courses
 }
 async function createAttenRecords(form) {
   const res = await request(POST, '/api/attendance_records', form)
@@ -1289,4 +1291,13 @@ async function getDiscussionReply({
 async function postBroadcast(form) {
   const res = await request(POST, '/api/broadcasts', form)
   console.log(res)
+}
+
+async function getAllTeacherId()
+
+{
+  const res = await request(POST, '/api/teachers')
+  return res.data.teachers_id
+
+
 }

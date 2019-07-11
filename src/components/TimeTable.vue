@@ -1,6 +1,8 @@
 <template>
     <div class="wrapper">
+        
         <div class="header">
+            
             <!-- <dir style="font-size: 16px; font-weight: bold; letter-spacing: .7em; color: #555;">课程表</dir> -->
             <div class="nav">
                 <div style="width: 39px; border-top: 1px solid #ddd;border-left: 1px solid #ddd;"></div>
@@ -376,6 +378,19 @@
 <script>
 export default {
     name: 'TimeTable',
+    data() {
+      return {
+          semester: '',
+          year,
+            semesters : [
+          "Spring", "Autumn"
+        ],
+            years: [
+                2017, 2018, 2019
+
+            ]
+      }
+    },
     mounted() {
         this.cleanCoursetable();
         // this.setCourse(3,2,5,'fsq','fsqintro')
