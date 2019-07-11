@@ -67,8 +67,9 @@ export default {
           year:this.$store.state.classinfo.classinfo.year,
           team_name:teamName
         }
-        console.log(form)
-        
+        console.log("frontend-form:",form)
+        //
+        this.$store.dispatch('team/addTeam',form);
         // console.log(this.$store.state.classinfo.classinfo)
       }
    },

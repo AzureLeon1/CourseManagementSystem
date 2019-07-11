@@ -1129,14 +1129,14 @@ async function getMyTeamList(form) {
 
 async function addTeam(form){
   console.log("index.js awaked.")
-  const res = await request(POST, '/api/its_teams', form)
+  const res = await request(POST, '/api/team', form)
   console.log(res);
   return res;
 }
 
 async function joinTeam(form){
   console.log("index.js awaked.")
-  const res = await request(POST, '/api/its_teams', form)
+  const res = await request(POST, '/api/teams_attendance', form)
   console.log(res);
   return res;
 }

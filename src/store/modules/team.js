@@ -29,7 +29,21 @@ const actions = {
     data=data['data']['data']['teams'];
     // console.log(data);
     context.commit('setMyteam', data)
-  }
+  },
+  async addTeam(context, form) {
+    // console.log(form);
+    let data = await api.addTeam(form);
+    // data=data['data']['data']['teams'];
+    console.log(data);
+    // context.commit('setMyteam', data)
+  },
+  async joinTeam(context, form) {
+    // console.log(form);
+    let data = await api.joinTeam(form);
+    // data=data['data']['data']['teams'];
+    console.log(data);
+    // context.commit('setMyteam', data)
+  },
 }
 
 //mutation中是存放处理数据方法的集合
