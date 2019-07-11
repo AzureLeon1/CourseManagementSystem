@@ -2,7 +2,7 @@
   <div id="Message">
     <div style="display: flex; flex-direction: column; min-height: 450px;">
       <div style="padding: 15px; border: 1px solid #eee; min-height: 500px;">
-        <el-table :data="tableData" @row-click="readMsg">
+        <el-table :data="filteredData" @row-click="readMsg">
           <el-table-column prop="content" label="广播消息" min-width="200px">
             <template slot-scope="scope">
               <p class="message">{{scope.row.content}}</p>
@@ -101,10 +101,20 @@ export default {
       //all messages
       messages: null,
       tableData: Array(0),
+      filteredData: Array(0),
+      filter_value: 1,
       // tableData: Array(20).fill(simData);
     };
   },
   methods: {
+    showActMsg() {
+      this.filteredData = this.tableData.filter(ele => ele.type == 2 )
+      console.log(this.tableData);
+      console.log(this.filteredData);
+    },
+    showWorkMsg() {
+      this.filteredData = this.tableData.filter(ele => ele.type == 1 )
+    },
     //all
     initial(){
         this.tableData = new Array(0)
@@ -185,6 +195,11 @@ export default {
         this.tableData.push(this.messages[i]);
       }
 
+      if (this.position == 'class')
+      this.showActMsg()
+      else
+      this.filteredData = this.tableData
+
       console.log(this.tableData);
 
       //update pagination page_total
@@ -223,6 +238,11 @@ export default {
       // console.log(this.page_total);
 
       console.log(this.tableData);
+
+      if (this.position == 'class')
+      this.showActMsg();
+      else
+      this.filteredData = this.tableData
       })
 
 
