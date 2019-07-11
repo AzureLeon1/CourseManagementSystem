@@ -68,7 +68,7 @@
       </div>
 
       <div class="btns">
-        <template v-if="isStudent">
+        <template v-if="isStudent()">
           <el-button
             class="status_btn"
             size="primary"
@@ -171,7 +171,7 @@ export default {
   },
 
   mounted() {
-    
+
     api.getClassInfo({
       course_id: this.$route.params.class_id,
       sec_id: this.$route.params.sec_id,
