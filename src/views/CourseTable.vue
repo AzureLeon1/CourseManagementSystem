@@ -99,7 +99,7 @@ export default {
         semester:'Spring',
 
         year_options: [2017, 2018, 2019],
-        semester_options: ['Spring', 'Fall']
+        semester_options: ['Spring', 'Autumn']
         // form: {
         //     year,
         //     semester:null

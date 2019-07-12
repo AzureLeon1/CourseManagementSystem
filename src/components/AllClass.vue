@@ -34,7 +34,7 @@
           </div>
 
           <transition name="el-fade-in-linear">
-            <CreateForm ref="msc"></CreateForm>
+            <CreateForm v-if="showCreateForm" ref="msc"></CreateForm>
           </transition>
         </div>
       </div>
@@ -54,6 +54,7 @@ export default {
   props: ["person_id"],
   data() {
     return {
+      showCreateForm:'false',
       addimg: "../static/add.png"
     };
   },

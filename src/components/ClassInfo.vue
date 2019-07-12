@@ -64,7 +64,7 @@
           <i class="el-icon-tickets"></i> &nbsp; 简介
         </div>
         <br />
-        <div class="value2">{{the_class.course_description}}</div>
+        <div class="value2" style="box-sizing: border-box; padding: 0 38px 0 100px; text-align: left; text-indent: 2em;">{{the_class.course_description}}</div>
       </div>
 
       <div class="btns">
