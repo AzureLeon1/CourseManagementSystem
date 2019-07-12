@@ -6,6 +6,7 @@ import {
   Message
 } from 'element-ui';
 
+// const server = 'http://100.64.141.35:8080'
 const server = 'http://192.168.1.15:8080'
 
 const headers = {}
