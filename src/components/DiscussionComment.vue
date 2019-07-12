@@ -22,13 +22,7 @@ export default {
     },
     data () {
         return {
-            // discussion_id:1,
-            // user_id:1,
-            // user_name:'name',
-            // role:'student',
-            // content:"可能是题目有问题吧，按一种理解来的话，答案这样也可以",
-            // time: "1997-12-11 15:30",
-            // question_id:111
+
         }
     },
     props: [
@@ -44,22 +38,10 @@ export default {
     methods: {
     },
     mounted () {
-        switch (this.role) {
-        case "student":
-            this.role = "学生"
-            break
-        case "teacher_edu":
-            this.role = "教师"
-            break
-        case "teacher_manage":
-            this.role = "教务老师"
-            break
-        default:
-            this.role = "error"
-        }
+        
     },
     computed: {
-
+        
     }
 }
 </script>

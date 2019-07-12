@@ -30,6 +30,7 @@ import api from "../api"
 
 import DiscussionSketchy from "../components/DiscussionSketchy"
 import DiscussionComment from "../components/DiscussionComment"
+import { changeRole } from '../utils/util';
 
 export default {
   name: 'DiscussionDetailed',
@@ -59,9 +60,12 @@ export default {
             api.getDiscussionReply(id)
             .then(res => {
                 this.item = res
+                this.item.role = changeRole(this.item.role)
                 this.commentList = res.replys
+                for (let c of this.commentList) {
+                    c.role = changeRole(c.role)
+                }
             })
-            
         }
   },
   mounted () {
