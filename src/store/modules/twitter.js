@@ -83,6 +83,13 @@ const mutations = {
     // state.mergedTwitterItems = []
     // state.mergedTwitterItems = state.myTwitterItems.concat(state.friendTwitterItems)
     state.mergedTwitterItems = []
+    console.log(props);
+    function compare(obj1, obj2) {
+      var value1 = parseInt(obj1.time.slice(-5).slice(0,2) + obj1.time.slice(-5).slice(-2))
+      var value2 = parseInt(obj2.time.slice(-5).slice(0,2) + obj2.time.slice(-5).slice(-2))
+      return value2-value1
+    }
+    props.sort( compare )
     state.mergedTwitterItems.push(...props)
   },
   setfollowPeopleItems(state, props) {

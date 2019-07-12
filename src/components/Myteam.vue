@@ -94,7 +94,8 @@ export default {
                 type: "success",
                 message: "成功创建队伍" + value
               });
-              this.$parent.getData()
+              // this.$parent.getData()
+              this.getData()
             }
           });
         })

@@ -11,11 +11,11 @@ export default {
   data() {
     return {
       level: [1, 1, 1, 3, 7],
-      value1: 0,
-      value2: 0,
-      value3: 0,
-      value4: 0,
-      value5: 0
+      value1: 1,
+      value2: 1,
+      value3: 1,
+      value4: 3,
+      value5: 7
     };
   },
   // props: ["value1", "value2", "value3", "value4", "value5"],
