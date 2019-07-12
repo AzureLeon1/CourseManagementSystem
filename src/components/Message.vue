@@ -166,12 +166,12 @@ export default {
     },
     //pagination
     onPageChange(pagenum){
-      this.tableData=Array(0);
+      this.filteredData=Array(0);
       let start_item=(pagenum-1)*this.eachPage;
       let end_item=start_item+this.eachPage;
       end_item=this.messages.length<end_item?this.messages.length:end_item;
       for(let i=start_item;i<end_item;i++){
-        this.tableData.push(this.messages[i]);
+        this.filteredData.push(this.messages[i]);
       }
     },
 

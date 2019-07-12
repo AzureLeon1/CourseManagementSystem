@@ -119,7 +119,7 @@
             </el-upload>
           </div>
         </el-form-item>
-        <el-form-item label="学号">
+        <el-form-item label="学工号">
           <el-input v-model="userinfo.id" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="身份">
