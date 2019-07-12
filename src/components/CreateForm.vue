@@ -358,6 +358,7 @@ export default {
 
     submitForm(formName) {
       this.$store.dispatch("allpost/createClass", formName);
+      this.$parent.showCreateForm=!this.$parent.showCreateForm;
 
       console.log('这是最终提交的表单', formName);
 
